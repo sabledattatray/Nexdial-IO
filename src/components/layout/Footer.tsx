@@ -164,8 +164,13 @@ export function Footer() {
                 contact@dbsmintek.com
               </a>
               <div className="flex items-start gap-3 text-sm text-[#94A3B8]">
-                <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                Noida, Uttar Pradesh, India
+                <MapPin className="w-4 h-4 mt-1 flex-shrink-0" />
+                <div>
+                  <span className="block font-semibold text-white text-xs">Noida HQ:</span>
+                  <span className="block text-xs text-[#64748B] mt-0.5">Logix Techno Park, Tower B, Sector 127, Noida, UP</span>
+                  <span className="block font-semibold text-white text-xs mt-2">Navi Mumbai Office:</span>
+                  <span className="block text-xs text-[#64748B] mt-0.5">Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Navi Mumbai, MH 400705</span>
+                </div>
               </div>
             </div>
             <div className="flex gap-3">
