@@ -105,6 +105,34 @@ const locations: Location[] = [
     sla: "99.92%",
     latency: "19ms",
     load: "30%",
+  },
+  {
+    id: "ashoknagar",
+    city: "Ashoknagar (MP)",
+    country: "India",
+    role: "Central India Operations Node",
+    details: "Highly redundant disaster recovery center, local storage backup, 24/7 support delivery",
+    address: "Near Railway Station, Ashoknagar, Madhya Pradesh 473331",
+    coordinates: { x: 200, y: 320 },
+    servers: "Local Storage Arrays & AWS Backup",
+    agents: "120+",
+    sla: "99.90%",
+    latency: "22ms",
+    load: "18%",
+  },
+  {
+    id: "lucknow",
+    city: "Lucknow",
+    country: "India",
+    role: "North India Support & Regional Hub",
+    details: "Enterprise client support center, multi-language inbound services, training modules",
+    address: "Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010",
+    coordinates: { x: 275, y: 240 },
+    servers: "AWS Central & local replication",
+    agents: "150+",
+    sla: "99.94%",
+    latency: "16ms",
+    load: "24%",
   }
 ];
 
@@ -114,6 +142,8 @@ const connectionPaths = [
   { from: { x: 120, y: 445 }, to: { x: 280, y: 590 } }, // Mumbai -> Chennai
   { from: { x: 120, y: 445 }, to: { x: 140, y: 460 } }, // Mumbai -> Pune
   { from: { x: 120, y: 445 }, to: { x: 440, y: 350 } }, // Mumbai -> Kolkata
+  { from: { x: 120, y: 445 }, to: { x: 200, y: 320 } }, // Mumbai -> Ashoknagar
+  { from: { x: 120, y: 445 }, to: { x: 275, y: 240 } }, // Mumbai -> Lucknow
 ];
 
 export function GlobalPresence() {
