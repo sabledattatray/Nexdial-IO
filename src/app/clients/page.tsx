@@ -6,7 +6,7 @@ import { Award, ShieldCheck, Heart, Sparkles, MessageSquare } from "lucide-react
 
 const clientRoster = [
   { company: "Velo Payments", sector: "Fintech", quote: "DBS Mintek's Voice AI agent handled 45,000 billing calls during our transition with a 92% resolution rate.", author: "Marcus Vance, Director of Support" },
-  { company: "Apex Telehealth", sector: "Healthcare", quote: "The HIPAA-compliant CRM and predictive dialer tripled our scheduling efficiency inside Noida delivery teams.", author: "Dr. Sarah Lin, COO" },
+  { company: "Apex Telehealth", sector: "Healthcare", quote: "The HIPAA-compliant CRM and predictive dialer tripled our scheduling efficiency inside Navi Mumbai delivery teams.", author: "Dr. Sarah Lin, COO" },
   { company: "Zeta Retailers", sector: "E-Commerce", quote: "Omichannel WhatsApp support decreased tickets by 35% during the holiday sales rush.", author: "Clara Benson, Head of CX" }
 ];
 

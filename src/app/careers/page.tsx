@@ -9,7 +9,7 @@ const jobs = [
   {
     title: "Senior VoIP & Infrastructure Engineer",
     department: "Systems Architecture",
-    location: "Noida (HQ) / Hybrid",
+    location: "Navi Mumbai (HQ) / Hybrid",
     type: "Full-Time",
     salary: "₹18L - ₹26L / Year",
     desc: "Oversee Asterisk configurations, WebRTC cluster balancing, and Vicidial campaign route middleware integrations."

@@ -113,23 +113,15 @@ export function ContactSection() {
             </div>
 
             {/* Registered Offices */}
-            <div className="space-y-4 pt-4 border-t border-white/[0.06]">
+            <div className="space-y-3 pt-4 border-t border-white/[0.06]">
               <h4 className="text-xs uppercase font-extrabold text-[#64748B] tracking-wider ml-1">
-                Our Registered Offices
+                Official Head Office
               </h4>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <div className="p-4 rounded-xl bg-white/[0.01] border border-white/[0.04] space-y-1">
-                  <span className="text-[10px] uppercase font-bold text-[#00C2FF]">Noida HQ</span>
-                  <p className="text-xs text-[#CBD5E1] leading-relaxed">
-                    Logix Techno Park, Tower B, 5th Floor, Sector 127, Noida, Uttar Pradesh 201301
-                  </p>
-                </div>
-                <div className="p-4 rounded-xl bg-white/[0.01] border border-white/[0.04] space-y-1">
-                  <span className="text-[10px] uppercase font-bold text-[#00E5A0]">Navi Mumbai Office</span>
-                  <p className="text-xs text-[#CBD5E1] leading-relaxed">
-                    Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
-                  </p>
-                </div>
+              <div className="p-4 rounded-xl bg-white/[0.01] border border-white/[0.04] space-y-1">
+                <span className="text-[10px] uppercase font-bold text-[#00E5A0]">DBS MINTEK PVT. LTD</span>
+                <p className="text-xs text-[#CBD5E1] leading-relaxed">
+                  Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
+                </p>
               </div>
             </div>
 
