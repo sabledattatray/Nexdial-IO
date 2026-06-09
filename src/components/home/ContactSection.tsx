@@ -81,8 +81,8 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Enterprise Sales</p>
-                  <a href="mailto:sales@dbsmintek.com" className="text-sm font-bold text-white hover:text-[#00C2FF] transition-colors mt-0.5 block">
-                    sales@dbsmintek.com
+                  <a href="mailto:prithviraj.singh@dbsmintek.in" className="text-sm font-bold text-white hover:text-[#00C2FF] transition-colors mt-0.5 block">
+                    prithviraj.singh@dbsmintek.in
                   </a>
                 </div>
               </AnimatedSection>
@@ -93,8 +93,8 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Global Hotline</p>
-                  <a href="tel:+911234567890" className="text-sm font-bold text-white hover:text-[#00E5A0] transition-colors mt-0.5 block">
-                    +91 123 456 7890
+                  <a href="tel:+918308211113" className="text-sm font-bold text-white hover:text-[#00E5A0] transition-colors mt-0.5 block">
+                    +91 83082 11113
                   </a>
                 </div>
               </AnimatedSection>
@@ -105,7 +105,7 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">WhatsApp Business Support</p>
-                  <a href="https://wa.me/911234567890" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#00E5A0] hover:underline mt-0.5 block">
+                  <a href="https://wa.me/918308211113" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#00E5A0] hover:underline mt-0.5 block">
                     Chat with an AI Advisor
                   </a>
                 </div>

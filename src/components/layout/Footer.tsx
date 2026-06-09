@@ -155,13 +155,13 @@ export function Footer() {
               CX solutions.
             </p>
             <div className="space-y-3 mb-6">
-              <a href="tel:+911234567890" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
+              <a href="tel:+918308211113" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                 <Phone className="w-4 h-4" />
-                +91 123 456 7890
+                +91 83082 11113
               </a>
-              <a href="mailto:contact@dbsmintek.com" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
+              <a href="mailto:prithviraj.singh@dbsmintek.in" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                 <Mail className="w-4 h-4" />
-                contact@dbsmintek.com
+                prithviraj.singh@dbsmintek.in
               </a>
               <div className="flex items-start gap-3 text-sm text-[#94A3B8]">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
