@@ -690,21 +690,7 @@ export function HeroSection() {
                 </div>
               </div>
 
-              {/* Floating Cards (Interactive Badges) */}
-              <motion.div
-                animate={{ y: [0, -10, 0] }}
-                transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                onClick={() => setActiveTab("ai")}
-                className="absolute -right-8 top-12 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-48 border border-white/10 cursor-pointer hover:border-[#00E5A0]/40 transition-colors hidden sm:block"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-5 h-5 rounded-md bg-[#22C55E]/20 flex items-center justify-center">
-                    <Sparkles className="w-3 h-3 text-[#22C55E]" />
-                  </div>
-                  <span className="text-[10px] font-bold text-[#22C55E]">AI Insight Simulator</span>
-                </div>
-                <p className="text-[10px] text-[#94A3B8] leading-relaxed">Sentiment trending positive. Recommend loyalty data bundle upgrade.</p>
-              </motion.div>
+
 
 
             </div>
