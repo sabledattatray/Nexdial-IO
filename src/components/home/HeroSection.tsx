@@ -477,58 +477,41 @@ export function HeroSection() {
                           </div>
                         </div>
 
-                        {/* Interactive Agent List */}
-                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3">
-                          <p className="text-[10px] text-[#64748B] font-semibold uppercase tracking-wider mb-2">Live Agent Console (Click to inspect)</p>
-                          <div className="space-y-1.5">
-                            {["Sarah Chen", "Alex Kumar", "Maria Santos"].map((name, i) => (
-                              <div key={name} className="border-b border-white/[0.02] last:border-0 pb-1.5 last:pb-0">
-                                <button 
-                                  onClick={() => setExpandedAgent(expandedAgent === name ? null : name)}
-                                  className="w-full flex items-center justify-between text-left hover:bg-white/[0.02] p-1.5 rounded-lg transition-all"
-                                >
-                                  <div className="flex items-center gap-2.5">
-                                    <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${i === 0 ? "from-[#0057D9] to-[#00C2FF]" : i === 1 ? "from-[#00E5A0] to-[#00C896]" : "from-[#8B5CF6] to-[#A78BFA]"} flex items-center justify-center shadow-md`}>
-                                      <span className="text-[8.5px] font-extrabold text-white">{name.split(" ").map(n => n[0]).join("")}</span>
-                                    </div>
-                                    <span className="text-[11.5px] font-medium text-[#CBD5E1]">{name}</span>
-                                  </div>
-                                  <div className="flex items-center gap-1.5">
-                                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
-                                    <span className="text-[10px] text-[#22C55E] font-medium">On Call</span>
-                                  </div>
-                                </button>
+                        {/* Live Channels Visual Grid */}
+                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
+                          <div className="flex items-center justify-between mb-2">
+                            <span className="text-[10px] text-[#64748B] font-semibold uppercase tracking-wider">Live Call Channels</span>
+                            <span className="text-[9px] text-[#00C2FF] font-mono flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
+                              Active Nodes: 3
+                            </span>
+                          </div>
+                          
+                          <div className="space-y-2">
+                            {[
+                              { id: "ch-01", name: "Outbound VoIP Trunk 01", type: "SIP Session • Live", color: "from-[#0057D9] to-[#00C2FF]", barCount: 16, speed: 0.5 },
+                              { id: "ch-02", name: "AI Voice Bot Gateway 04", type: "Gemini voice-v1 • Streaming", color: "from-[#00E5A0] to-[#00C896]", barCount: 16, speed: 0.3 },
+                              { id: "ch-03", name: "Omnichannel Gateway 09", type: "WebRTC Endpoint • Connected", color: "from-[#8B5CF6] to-[#A78BFA]", barCount: 16, speed: 0.6 },
+                            ].map((ch) => (
+                              <div key={ch.id} className="p-2 rounded-lg bg-[#081120] border border-white/[0.04] flex items-center justify-between gap-4">
+                                <div className="space-y-0.5">
+                                  <span className="text-[10px] font-bold text-[#CBD5E1] block">{ch.name}</span>
+                                  <span className="text-[8px] text-[#64748B] uppercase tracking-widest">{ch.type}</span>
+                                </div>
                                 
-                                {expandedAgent === name && (
-                                  <motion.div 
-                                    initial={{ height: 0, opacity: 0 }}
-                                    animate={{ height: "auto", opacity: 1 }}
-                                    className="mt-2 pl-8 pr-2 py-2 rounded-lg bg-white/[0.02] border border-white/5 space-y-2 text-[10px] overflow-hidden"
-                                  >
-                                    <div className="flex items-center justify-between text-[#64748B] font-semibold">
-                                      <span>Trunk Node: Thane-Belapur C</span>
-                                      <span className="flex items-center gap-1 text-[#00E5A0]">
-                                        <Volume2 className="w-3.5 h-3.5 animate-bounce text-[#00E5A0]" />
-                                        Live Voice Stream
-                                      </span>
-                                    </div>
-                                    <div className="flex gap-0.5 h-7 items-end pb-1 px-1 border-b border-white/5">
-                                      {[...Array(24)].map((_, idx) => (
-                                        <span 
-                                          key={idx} 
-                                          className="flex-1 bg-gradient-to-t from-[#0057D9] to-[#00C2FF] rounded-sm transition-all duration-300"
-                                          style={{ 
-                                            height: `${Math.floor(Math.random() * 80) + 20}%`,
-                                            animation: `equalize ${0.4 + Math.random() * 0.4}s ease-in-out infinite alternate` 
-                                          }}
-                                        />
-                                      ))}
-                                    </div>
-                                    <p className="text-[#94A3B8] italic leading-relaxed">
-                                      "...renewal confirmed at the waived price point. Initializing CRM update now."
-                                    </p>
-                                  </motion.div>
-                                )}
+                                {/* Equalizer waveform visualizer */}
+                                <div className="flex-1 flex gap-0.5 h-6 items-end justify-end max-w-[120px]">
+                                  {[...Array(ch.barCount)].map((_, idx) => (
+                                    <span 
+                                      key={idx} 
+                                      className={`w-0.5 rounded-sm bg-gradient-to-t ${ch.color}`}
+                                      style={{ 
+                                        height: `${Math.floor(Math.random() * 80) + 20}%`,
+                                        animation: `equalize ${ch.speed + Math.random() * 0.4}s ease-in-out infinite alternate` 
+                                      }}
+                                    />
+                                  ))}
+                                </div>
                               </div>
                             ))}
                           </div>
