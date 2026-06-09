@@ -73,7 +73,6 @@ export default function DashboardView({
 }: DashboardViewProps) {
   
   // Dashboard States (For Admin Dialer Monitor)
-  const [selectedAgentId, setSelectedAgentId] = useState<string | null>('ag-2');
   const [activeListenAgentId, setActiveListenAgentId] = useState<string | null>(null);
   
   // Live Monitor Panel Simulation
@@ -82,13 +81,6 @@ export default function DashboardView({
   const [whisperSuccessMsg, setWhisperSuccessMsg] = useState('');
   const [bargeSuccessMsg, setBargeSuccessMsg] = useState('');
   const [isBarged, setIsBarged] = useState(false);
-  
-  // Selected Agent Scorecard Sliders
-  const [compliance, setCompliance] = useState(90);
-  const [softSkills, setSoftSkills] = useState(90);
-  const [productKnowledge, setProductKnowledge] = useState(90);
-  const [scriptAdherence, setScriptAdherence] = useState(90);
-  const [scorecardSaved, setScorecardSaved] = useState(false);
 
   // Auto-increment transcript scrolling turns when listening
   useEffect(() => {
@@ -100,18 +92,7 @@ export default function DashboardView({
     return () => clearInterval(interval);
   }, [activeListenAgentId]);
 
-  // Sync scorecard sliders when selectedAgent changes
-  useEffect(() => {
-    if (!selectedAgentId) return;
-    const ag = agents.find(a => a.id === selectedAgentId);
-    if (ag) {
-      setCompliance(ag.qualityScore);
-      setSoftSkills(Math.max(50, ag.qualityScore - 4));
-      setProductKnowledge(Math.min(100, ag.qualityScore + 2));
-      setScriptAdherence(ag.qualityScore);
-      setScorecardSaved(false);
-    }
-  }, [selectedAgentId, agents]);
+
 
   // Compute standard Agent Dashboard stats
   const totalLeads = contacts.length;
@@ -167,14 +148,7 @@ export default function DashboardView({
     const linePathStr = points.map(p => `${p.x},${p.y}`).join(' L ');
     const areaPathStr = `M ${points[0].x},180 L ${linePathStr} L ${points[points.length - 1].x},180 Z`;
 
-    const selectedAgent = agents.find(a => a.id === selectedAgentId) || agents[0];
-    
-    // Filter call logs for selected agent
-    const selectedAgentCallLogs = callLogs.filter(log => {
-      if (!selectedAgent) return false;
-      const firstName = selectedAgent.name.split(' ')[0].toLowerCase();
-      return log.agentName.toLowerCase().includes(firstName);
-    });
+
 
     const handleSendWhisper = (e: React.FormEvent) => {
       e.preventDefault();
@@ -215,26 +189,7 @@ export default function DashboardView({
       }
     };
 
-    const handleSaveScorecard = () => {
-      if (!selectedAgentId || !setAgents) return;
-      const weightedScore = Math.round((compliance * 0.3) + (softSkills * 0.3) + (productKnowledge * 0.25) + (scriptAdherence * 0.15));
-      
-      setAgents(prev => prev.map(a => {
-        if (a.id === selectedAgentId) {
-          return {
-            ...a,
-            qualityScore: weightedScore
-          };
-        }
-        return a;
-      }));
 
-      setScorecardSaved(true);
-      setTimeout(() => setScorecardSaved(false), 3000);
-    };
-
-    // Calculate current dynamic QA Score based on sliders
-    const currentSlidersQA = Math.round((compliance * 0.3) + (softSkills * 0.3) + (productKnowledge * 0.25) + (scriptAdherence * 0.15));
 
     return (
       <div className="space-y-6">
@@ -486,11 +441,8 @@ export default function DashboardView({
           </div>
         </div>
 
-        {/* 2-Column Supervisor Monitor split layout */}
-        <div className="grid grid-cols-1 xl:grid-cols-3 gap-6">
-          
-          {/* LEFT: Live Agents grid table & Coaching console */}
-          <div className="xl:col-span-2 space-y-6">
+        {/* Supervisor Monitor Layout */}
+        <div className="space-y-6">
             
             {/* Live Agents Grid Table */}
             <div className="bg-[#0E0E10] border border-slate-800 rounded-2xl p-5 space-y-4 shadow-xl">
@@ -499,7 +451,7 @@ export default function DashboardView({
                   <Activity className="w-4 h-4 text-[#00C2FF]" />
                   <h3 className="text-xs uppercase font-mono tracking-wider text-slate-200 font-bold">Live Representatives Extensions Monitor</h3>
                 </div>
-                <span className="text-[9px] text-slate-550 font-mono">Click agent to examine performance drilldowns</span>
+                <span className="text-[9px] text-slate-550 font-mono">Real-time status updates</span>
               </div>
 
               <div className="overflow-x-auto">
@@ -519,15 +471,11 @@ export default function DashboardView({
                     {agents.map((ag) => {
                       const isActiveCustomer = ag.status === 'On Call' || ag.status === 'Available'; // simulation contexts
                       const customerName = (ag.status === 'On Call') ? getAgentActiveCustomer(ag.id) : '—';
-                      const isSelected = selectedAgentId === ag.id;
 
                       return (
                         <tr 
                           key={ag.id} 
-                          className={`hover:bg-slate-900/35 transition-colors cursor-pointer group ${
-                            isSelected ? 'bg-indigo-950/10 border-l-2 border-indigo-500' : ''
-                          }`}
-                          onClick={() => setSelectedAgentId(ag.id)}
+                          className="hover:bg-slate-900/35 transition-colors group"
                         >
                           <td className="py-3 pr-2">
                             <div className="flex items-center gap-2.5">
@@ -786,237 +734,6 @@ export default function DashboardView({
 
               </div>
             )}
-
-          </div>
-
-          {/* RIGHT: Individual Agent Performance Analyzer Drilldown */}
-          <div className="space-y-6">
-            
-            {selectedAgent ? (
-              <div className="bg-[#0E0E10] border border-slate-800 rounded-2xl p-5 space-y-5 shadow-xl relative overflow-hidden">
-                
-                {/* Agent Profile Summary */}
-                <div className="flex items-center justify-between border-b border-slate-900 pb-3">
-                  <div className="flex items-center gap-3">
-                    <img 
-                      src={selectedAgent.avatar} 
-                      alt={selectedAgent.name}
-                      referrerPolicy="no-referrer"
-                      className="w-12 h-12 rounded-full border-2 border-indigo-500/30 object-cover shrink-0" 
-                    />
-                    <div>
-                      <h3 className="text-sm font-bold text-slate-200">{selectedAgent.name}</h3>
-                      <div className="flex items-center gap-1.5 mt-0.5">
-                        <span className="text-[10px] text-slate-500 uppercase font-mono">{selectedAgent.role.replace('_', ' ')}</span>
-                        <span className="text-[10px] text-slate-650">•</span>
-                        <span className="text-[10px] text-slate-400 font-mono">Ext {selectedAgent.id}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="text-right">
-                    <span className={`px-2 py-0.5 rounded-full text-[9px] font-bold font-mono uppercase ${
-                      selectedAgent.status === 'Available' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
-                      selectedAgent.status === 'On Call' ? 'bg-indigo-500/10 text-[#818CF8] border border-indigo-500/20' :
-                      selectedAgent.status === 'Idle' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
-                      'bg-slate-900 text-slate-500 border border-slate-800'
-                    }`}>
-                      {selectedAgent.status}
-                    </span>
-                    <p className="text-[10px] text-slate-500 mt-1 font-mono">Mood: {selectedAgent.sentiment}</p>
-                  </div>
-                </div>
-
-                {/* Scorecard updated success chimes */}
-                {scorecardSaved && (
-                  <div className="p-2.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 rounded-xl text-xs flex items-center gap-2 animate-fade-in">
-                    <CheckCircle className="w-4 h-4 shrink-0" />
-                    <span>QA Scorecard saved. Agent scorecard metrics updated.</span>
-                  </div>
-                )}
-
-                {/* Aggregated Individual Stats */}
-                <div className="grid grid-cols-2 gap-3.5">
-                  <div className="bg-[#0A0A0B] border border-slate-900 p-3.5 rounded-2xl text-center space-y-1">
-                    <span className="text-[9px] uppercase font-mono text-slate-500">Processed Calls</span>
-                    <p className="text-lg font-black text-slate-200">{selectedAgent.callsToday}</p>
-                  </div>
-                  <div className="bg-[#0A0A0B] border border-slate-900 p-3.5 rounded-2xl text-center space-y-1">
-                    <span className="text-[9px] uppercase font-mono text-slate-500">Global QA Score</span>
-                    <p className="text-lg font-black text-[#00C2FF]">{selectedAgent.qualityScore}%</p>
-                  </div>
-                </div>
-
-                {/* Custom SVG Performance Area Chart */}
-                <div className="space-y-2.5">
-                  <h4 className="text-[10px] uppercase font-mono tracking-wider font-bold text-slate-400">
-                    Call Load Distribution (Hourly)
-                  </h4>
-                  <div className="bg-[#0A0A0B] border border-slate-900 rounded-2xl p-4.5 flex flex-col justify-center">
-                    <svg viewBox="0 0 300 100" className="w-full h-24 overflow-visible">
-                      <defs>
-                        <linearGradient id="glow-area" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#00C2FF" stopOpacity="0.25"/>
-                          <stop offset="100%" stopColor="#00C2FF" stopOpacity="0"/>
-                        </linearGradient>
-                      </defs>
-                      {/* Grid Guide Lines */}
-                      <line x1="0" y1="20" x2="300" y2="20" stroke="#1E293B" strokeWidth="0.5" strokeDasharray="2 2" />
-                      <line x1="0" y1="50" x2="300" y2="50" stroke="#1E293B" strokeWidth="0.5" strokeDasharray="2 2" />
-                      <line x1="0" y1="80" x2="300" y2="80" stroke="#1E293B" strokeWidth="0.5" strokeDasharray="2 2" />
-                      
-                      {/* Area Area */}
-                      <path 
-                        d="M0,80 Q30,30 60,60 T120,20 T180,55 T240,30 T300,45 L300,100 L0,100 Z" 
-                        fill="url(#glow-area)" 
-                      />
-                      {/* Area Line */}
-                      <path 
-                        d="M0,80 Q30,30 60,60 T120,20 T180,55 T240,30 T300,45" 
-                        fill="none" 
-                        stroke="#00C2FF" 
-                        strokeWidth="1.5" 
-                        strokeLinecap="round"
-                      />
-                      {/* Active points */}
-                      <circle cx="60" cy="60" r="3" fill="#818CF8" stroke="#0A0A0B" strokeWidth="1" />
-                      <circle cx="120" cy="20" r="3" fill="#00E5B0" stroke="#0A0A0B" strokeWidth="1" />
-                      <circle cx="240" cy="30" r="3" fill="#00C2FF" stroke="#0A0A0B" strokeWidth="1" />
-                    </svg>
-                    <div className="flex justify-between items-center text-[8px] text-slate-550 font-mono mt-1 px-1">
-                      <span>09:00 AM</span>
-                      <span>12:00 PM</span>
-                      <span>03:00 PM</span>
-                      <span>06:00 PM</span>
-                    </div>
-                  </div>
-                </div>
-
-                {/* Interactive QA Scorecard Adjuster */}
-                <div className="space-y-3">
-                  <div className="flex justify-between items-center">
-                    <h4 className="text-[10px] uppercase font-mono tracking-wider font-bold text-slate-400">
-                      QA Scorecard Adjuster
-                    </h4>
-                    <span className="text-[10px] font-mono text-indigo-400 font-bold">
-                      Target: {currentSlidersQA}%
-                    </span>
-                  </div>
-
-                  <div className="bg-[#0A0A0B] border border-slate-900 rounded-2xl p-4.5 space-y-4 text-xs font-mono">
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] text-slate-500">
-                        <span>Compliance & Script Adherence (30%)</span>
-                        <span className="text-slate-300 font-bold">{compliance}%</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="30" 
-                        max="100" 
-                        value={compliance}
-                        onChange={(e) => setCompliance(Number(e.target.value))}
-                        className="w-full h-1 bg-slate-900 border border-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-500"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] text-slate-500">
-                        <span>Soft Skills & Active Listening (30%)</span>
-                        <span className="text-slate-300 font-bold">{softSkills}%</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="30" 
-                        max="100" 
-                        value={softSkills}
-                        onChange={(e) => setSoftSkills(Number(e.target.value))}
-                        className="w-full h-1 bg-slate-900 border border-slate-800 rounded-lg appearance-none cursor-pointer accent-[#00C2FF]"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] text-slate-500">
-                        <span>Product Knowledge & Accuracy (25%)</span>
-                        <span className="text-slate-300 font-bold">{productKnowledge}%</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="30" 
-                        max="100" 
-                        value={productKnowledge}
-                        onChange={(e) => setProductKnowledge(Number(e.target.value))}
-                        className="w-full h-1 bg-slate-900 border border-slate-800 rounded-lg appearance-none cursor-pointer accent-[#00E5B0]"
-                      />
-                    </div>
-
-                    <div className="space-y-1.5">
-                      <div className="flex justify-between text-[10px] text-slate-500">
-                        <span>Hold Time & Conversation Flow (15%)</span>
-                        <span className="text-slate-300 font-bold">{scriptAdherence}%</span>
-                      </div>
-                      <input 
-                        type="range" 
-                        min="30" 
-                        max="100" 
-                        value={scriptAdherence}
-                        onChange={(e) => setScriptAdherence(Number(e.target.value))}
-                        className="w-full h-1 bg-slate-900 border border-slate-800 rounded-lg appearance-none cursor-pointer accent-indigo-400"
-                      />
-                    </div>
-
-                    <button
-                      onClick={handleSaveScorecard}
-                      className="w-full mt-2 py-2 bg-indigo-600 hover:bg-indigo-500 text-white font-bold text-xs rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1.5"
-                    >
-                      <Sliders className="w-3.5 h-3.5" />
-                      <span>Update Extension Scorecard</span>
-                    </button>
-                  </div>
-                </div>
-
-                {/* Call Log History Archive for this Agent */}
-                <div className="space-y-2.5">
-                  <h4 className="text-[10px] uppercase font-mono tracking-wider font-bold text-slate-400">
-                    Recent Outbound Transcripts
-                  </h4>
-                  
-                  <div className="space-y-2">
-                    {selectedAgentCallLogs.length === 0 ? (
-                      <div className="p-4 bg-[#0A0A0B] border border-slate-900 rounded-xl text-center text-[10px] text-slate-600 font-mono">
-                        No recent archived recordings found.
-                      </div>
-                    ) : (
-                      selectedAgentCallLogs.map((log) => (
-                        <div key={log.id} className="p-3 bg-[#0A0A0B] border border-slate-900 rounded-xl space-y-2 text-xs">
-                          <div className="flex justify-between items-center text-[10px] font-mono">
-                            <span className="text-slate-200 font-bold">{log.contactName}</span>
-                            <span className="text-slate-500">{Math.round(log.duration / 60)}m {log.duration % 60}s</span>
-                          </div>
-                          <p className="text-[11px] text-slate-450 font-light leading-relaxed">
-                            {log.summary}
-                          </p>
-                          <div className="flex justify-between items-center pt-2 border-t border-slate-900/60 text-[9px] font-mono">
-                            <span className="px-1.5 py-0.2 rounded bg-slate-900 border border-slate-850 text-indigo-400 uppercase font-black">
-                              Sentiment: {log.sentiment}
-                            </span>
-                            <span className="text-[#00C2FF] font-bold">
-                              Score: {log.score}%
-                            </span>
-                          </div>
-                        </div>
-                      ))
-                    )}
-                  </div>
-                </div>
-
-              </div>
-            ) : (
-              <div className="h-full flex flex-col items-center justify-center text-center p-8 bg-[#0E0E10] border border-slate-800 rounded-2xl text-slate-500 font-light text-xs">
-                Select an active representative line to audit performance logs.
-              </div>
-            )}
-
-          </div>
 
         </div>
 
