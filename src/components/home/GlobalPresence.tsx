@@ -140,6 +140,10 @@ const connectionPaths = [
   { from: { x: 120, y: 445 }, to: { x: 140, y: 460 } }, // Mumbai -> Pune
   { from: { x: 120, y: 445 }, to: { x: 200, y: 320 } }, // Mumbai -> Ashoknagar
   { from: { x: 120, y: 445 }, to: { x: 275, y: 240 } }, // Mumbai -> Lucknow
+  { from: { x: 120, y: 445 }, to: { x: 210, y: 580 } }, // Mumbai -> Bengaluru
+  { from: { x: 120, y: 445 }, to: { x: 240, y: 480 } }, // Mumbai -> Hyderabad
+  { from: { x: 120, y: 445 }, to: { x: 280, y: 590 } }, // Mumbai -> Chennai
+  { from: { x: 120, y: 445 }, to: { x: 440, y: 350 } }, // Mumbai -> Kolkata
 ];
 
 export function GlobalPresence() {
@@ -176,7 +180,10 @@ export function GlobalPresence() {
             </div>
 
             {/* India Map Outline Graphic using SVG for responsive plotting */}
-            <div className="relative w-full aspect-[612/696] max-h-[550px] mx-auto bg-[#0a1424] rounded-xl overflow-hidden border border-white/[0.05] p-4 flex items-center justify-center shadow-inner">
+            <div 
+              className="relative w-full mx-auto bg-[#0a1424] rounded-xl overflow-hidden border border-white/[0.05] shadow-inner"
+              style={{ maxWidth: "483px", maxHeight: "550px", aspectRatio: "612/696" }}
+            >
               <svg viewBox={indiaMap.viewBox} className="w-full h-full select-none">
                 <style>{`
                   @keyframes dash {
