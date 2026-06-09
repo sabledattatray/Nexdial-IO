@@ -370,22 +370,22 @@ export function AICapabilities() {
         </AnimatedSection>
 
         <AnimatedSection delay={0.2} direction="none">
-          <div className="grid lg:grid-cols-[1fr,1.3fr] gap-8 items-start">
-            {/* Grouped Feature List */}
-            <div className="space-y-6">
+          <div className="space-y-10">
+            {/* 3 Categories in-line */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               {["Agent Productivity", "Analytics & QA", "Workforce & Growth"].map((cat) => (
-                <div key={cat} className="space-y-2.5">
-                  <h4 className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider ml-1">
+                <div key={cat} className="space-y-3 p-5 rounded-2xl bg-white/[0.01] border border-white/[0.03] backdrop-blur-sm">
+                  <h4 className="text-[11px] uppercase font-bold text-[#94A3B8] tracking-widest ml-1 border-b border-white/[0.05] pb-2 mb-3">
                     {cat}
                   </h4>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-1 gap-2">
+                  <div className="flex flex-col gap-2">
                     {aiFeatures
                       .filter((f) => f.category === cat)
                       .map((feature) => (
                         <button
                           key={feature.id}
                           onClick={() => setActiveFeature(feature)}
-                          className={`flex items-center gap-3.5 p-3 rounded-xl text-left transition-all duration-300 ${
+                          className={`flex items-center gap-3 p-2.5 rounded-xl text-left transition-all duration-300 ${
                             activeFeature.id === feature.id
                               ? "bg-white/[0.06] border border-white/[0.1] shadow-[0_0_20px_rgba(255,255,255,0.02)]"
                               : "hover:bg-white/[0.03] border border-transparent"
@@ -423,69 +423,76 @@ export function AICapabilities() {
             <AnimatePresence mode="wait">
               <motion.div
                 key={activeFeature.id}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="glass-card-strong p-8 lg:p-10 relative overflow-hidden flex flex-col justify-between"
+                className="glass-card-strong p-8 lg:p-10 relative overflow-hidden w-full"
               >
                 {/* Background Glow */}
                 <div
-                  className="absolute -top-20 -right-20 w-60 h-60 rounded-full blur-[80px] opacity-15"
+                  className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-[100px] opacity-15"
                   style={{ backgroundColor: activeFeature.color }}
                 />
 
-                <div className="relative z-10 space-y-6">
-                  <div className="flex items-center gap-4">
-                    <div
-                      className="w-14 h-14 rounded-2xl flex items-center justify-center"
-                      style={{
-                        background: `linear-gradient(135deg, ${activeFeature.color}25, ${activeFeature.color}08)`,
-                        border: `1px solid ${activeFeature.color}30`
-                      }}
-                    >
-                      <activeFeature.icon className="w-7 h-7" style={{ color: activeFeature.color }} />
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white">{activeFeature.title}</h3>
-                      <div className="flex items-center gap-1.5 mt-0.5">
-                        <Sparkles className="w-3 h-3 text-[#00E5A0]" />
-                        <span className="text-xs text-[#00E5A0] font-medium">Cognitive Engine Sandbox</span>
+                <div className="relative z-10 grid grid-cols-1 lg:grid-cols-12 gap-8 items-stretch">
+                  {/* Left Column: Info & Details (6 cols) */}
+                  <div className="lg:col-span-6 flex flex-col justify-between space-y-6">
+                    <div className="space-y-4">
+                      <div className="flex items-center gap-4">
+                        <div
+                          className="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0"
+                          style={{
+                            background: `linear-gradient(135deg, ${activeFeature.color}25, ${activeFeature.color}08)`,
+                            border: `1px solid ${activeFeature.color}30`
+                          }}
+                        >
+                          <activeFeature.icon className="w-7 h-7" style={{ color: activeFeature.color }} />
+                        </div>
+                        <div>
+                          <h3 className="text-xl font-bold text-white">{activeFeature.title}</h3>
+                          <div className="flex items-center gap-1.5 mt-0.5">
+                            <Sparkles className="w-3 h-3 text-[#00E5A0]" />
+                            <span className="text-xs text-[#00E5A0] font-medium">Cognitive Engine Sandbox</span>
+                          </div>
+                        </div>
+                      </div>
+
+                      <p className="text-[#94A3B8] text-sm leading-relaxed">
+                        {activeFeature.description}
+                      </p>
+
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-2">
+                        {activeFeature.capabilities.map((cap, i) => (
+                          <motion.div
+                            key={cap}
+                            initial={{ opacity: 0, x: -10 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.05 }}
+                            className="flex items-center gap-2.5"
+                          >
+                            <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: activeFeature.color }} />
+                            <span className="text-xs text-[#CBD5E1]">{cap}</span>
+                          </motion.div>
+                        ))}
                       </div>
                     </div>
+
+                    <div className="pt-6 border-t border-white/[0.06] flex items-center justify-between">
+                      <button className="flex items-center gap-2 text-sm font-semibold group" style={{ color: activeFeature.color }}>
+                        Explore {activeFeature.title}
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </button>
+                      <span className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest font-mono">Module Ready</span>
+                    </div>
                   </div>
 
-                  <p className="text-[#94A3B8] text-sm leading-relaxed">
-                    {activeFeature.description}
-                  </p>
-
-                  {/* Interactive Sandbox Render */}
-                  <div className="p-5 rounded-2xl bg-[#0c182c]/80 border border-white/[0.06] shadow-inner">
-                    {renderLivePreview(activeFeature.id)}
+                  {/* Right Column: Live Interactive Sandbox (6 cols) */}
+                  <div className="lg:col-span-6 flex flex-col justify-center">
+                    <div className="p-5 rounded-2xl bg-[#0c182c]/80 border border-white/[0.06] shadow-inner h-full flex flex-col justify-center">
+                      {renderLivePreview(activeFeature.id)}
+                    </div>
                   </div>
-
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-2 mt-4">
-                    {activeFeature.capabilities.map((cap, i) => (
-                      <motion.div
-                        key={cap}
-                        initial={{ opacity: 0, x: -10 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ delay: i * 0.05 }}
-                        className="flex items-center gap-2.5"
-                      >
-                        <CheckCircle2 className="w-4 h-4 flex-shrink-0" style={{ color: activeFeature.color }} />
-                        <span className="text-xs text-[#CBD5E1]">{cap}</span>
-                      </motion.div>
-                    ))}
-                  </div>
-                </div>
-
-                <div className="mt-8 pt-6 border-t border-white/[0.06] flex items-center justify-between">
-                  <button className="flex items-center gap-2 text-sm font-semibold group" style={{ color: activeFeature.color }}>
-                    Explore {activeFeature.title}
-                    <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                  <span className="text-[10px] font-semibold text-[#64748B] uppercase tracking-widest font-mono">Module Ready</span>
                 </div>
               </motion.div>
             </AnimatePresence>
