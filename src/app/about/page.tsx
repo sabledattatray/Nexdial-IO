@@ -53,36 +53,65 @@ export default function AboutPage() {
         </AnimatedSection>
 
         {/* Founder's Vision */}
-        <AnimatedSection className="mb-20 max-w-5xl mx-auto">
-          <div className="glass-card-strong p-8 lg:p-12 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl">
-            {/* Ambient Background Glow */}
-            <div className="absolute -top-20 -left-20 w-80 h-80 rounded-full bg-[#0057D9]/10 blur-[80px]" />
-            <div className="absolute -bottom-20 -right-20 w-80 h-80 rounded-full bg-[#00E5A0]/5 blur-[80px]" />
+        <AnimatedSection className="mb-20 max-w-6xl mx-auto space-y-8">
+          <div className="text-center max-w-xl mx-auto mb-10">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              Our Founders' Vision
+            </h2>
+            <p className="text-[#64748B] text-sm mt-2">
+              The leadership driving DBS Mintek's global expansion and operational success.
+            </p>
+          </div>
 
-            <div className="relative z-10 grid md:grid-cols-[1fr,2.2fr] gap-8 lg:gap-12 items-center">
-              {/* Left Column: Visual/Quote Mark */}
-              <div className="flex flex-col items-center md:items-start text-center md:text-left space-y-4">
-                <div className="w-20 h-20 rounded-2xl bg-gradient-to-tr from-[#0057D9] to-[#00C2FF] flex items-center justify-center shadow-lg shadow-[#00C2FF]/20">
-                  <Award className="w-10 h-10 text-white" />
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Founder 1: Shiv Singh */}
+            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00C2FF]/30 transition-all duration-300">
+              <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#0057D9]/5 blur-[80px]" />
+              <div className="relative z-10 space-y-6">
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <img 
+                    src="/Shiv_Singh.jpg" 
+                    alt="Shiv Singh" 
+                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
+                  />
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">Shiv Singh</h3>
+                    <p className="text-xs text-[#00C2FF] font-semibold mt-0.5">Owner & Founder</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                  </div>
                 </div>
-                <div>
-                  <h3 className="text-lg font-bold text-white">Owner & Founder</h3>
-                  <p className="text-xs text-[#00C2FF] font-semibold mt-0.5">DBS MINTEK PVT. LTD</p>
-                  <p className="text-[10px] text-[#64748B] font-mono mt-2">16+ YEARS EXPERTISE</p>
+
+                <div className="relative">
+                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
+                    As the owner of DBS MINTEK PVT. LTD, I have been leading a successful business consulting firm for over 16 years. My expertise lies in providing strategic guidance to clients across various industries, helping them navigate complex challenges and achieve their goals. Our mission is to empower businesses to grow and thrive in today&apos;s competitive landscape.
+                  </p>
                 </div>
               </div>
+            </div>
 
-              {/* Right Column: Founder's message */}
-              <div className="space-y-4">
-                <h2 className="text-2xl lg:text-3xl font-extrabold text-white leading-tight font-space-grotesk">
-                  Guiding Businesses to <span className="gradient-text">Grow & Thrive</span>
-                </h2>
+            {/* Founder 2: Prithviraj Singh */}
+            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00E5A0]/30 transition-all duration-300">
+              <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-[#00E5A0]/5 blur-[80px]" />
+              <div className="relative z-10 space-y-6">
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <img 
+                    src="/Prithvi.jpg" 
+                    alt="Prithviraj Singh" 
+                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
+                  />
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">Prithviraj Singh</h3>
+                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Co-Founder & Director</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                  </div>
+                </div>
+
                 <div className="relative">
-                  <span className="absolute -top-8 -left-6 text-7xl text-white/5 font-serif select-none">&ldquo;</span>
-                  <p className="text-sm sm:text-base text-[#CBD5E1] leading-relaxed italic relative z-10">
-                    As the owner of DBS MINTEK PVT. LTD, I have been leading a successful business consulting firm for over 16 years. My expertise lies in providing strategic guidance to clients across various industries, helping them navigate complex challenges and achieve their goals. With a strong background in international business consulting, we offer tailored solutions that cater to diverse market needs. Our mission is to empower businesses to grow and thrive in today&apos;s competitive landscape.
+                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
+                    We specialize in delivering robust BPO services and AI-driven workflow architectures tailored to global client operations. By combining direct cloud telephony integrations and predictive dialing consoles, we translate customer contacts into measurable commercial growth.
                   </p>
-                  <span className="absolute -bottom-14 -right-6 text-7xl text-white/5 font-serif select-none">&rdquo;</span>
                 </div>
               </div>
             </div>
