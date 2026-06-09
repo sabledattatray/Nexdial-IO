@@ -143,7 +143,7 @@ export function HeroSection() {
   // Campaigns Tab live simulation
   const [campaignList, setCampaignList] = useState([
     { id: 1, name: "VI Prepaid Retention", progress: 84, called: 2432, total: 3000, status: "Active" },
-    { id: 2, name: "VIP Outbound Sales", progress: 62, called: 1860, total: 3000, status: "Active" },
+    { id: 2, name: "Mahindra Collection", progress: 62, called: 1860, total: 3000, status: "Active" },
   ]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
