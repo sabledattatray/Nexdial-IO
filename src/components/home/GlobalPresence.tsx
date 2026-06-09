@@ -23,32 +23,18 @@ interface Location {
 
 const locations: Location[] = [
   {
-    id: "noida",
-    city: "Noida (HQ)",
-    country: "India",
-    role: "Global Head Office & AI Development Hub",
-    details: "1,200+ Seats, Tier-3 Data Center, 24/7 Operations, SOC2 & ISO 27001 Certified",
-    address: "Logix Techno Park, Tower B, 5th Floor, Sector 127, Noida, Uttar Pradesh 201301",
-    coordinates: { x: 195, y: 205 },
-    servers: "Primary Cloud & Local Clusters",
-    agents: "800+",
-    sla: "99.99%",
-    latency: "8ms",
-    load: "64%",
-  },
-  {
     id: "mumbai",
-    city: "Navi Mumbai",
+    city: "Navi Mumbai (HQ)",
     country: "India",
-    role: "Financial CX Center & Enterprise Relations",
-    details: "Financial-grade secure operations, PCI-DSS compliant BPO & backup nodes",
+    role: "Global Head Office & Financial CX Center",
+    details: "Financial-grade secure operations, PCI-DSS compliant BPO & primary cloud clusters",
     address: "Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705",
     coordinates: { x: 120, y: 445 },
-    servers: "AWS Mumbai (ap-south-1)",
-    agents: "450+",
-    sla: "99.98%",
-    latency: "14ms",
-    load: "48%",
+    servers: "AWS Mumbai (ap-south-1) Primary Hub",
+    agents: "650+",
+    sla: "99.99%",
+    latency: "4ms",
+    load: "58%",
   },
   {
     id: "bengaluru",
@@ -123,12 +109,11 @@ const locations: Location[] = [
 ];
 
 const connectionPaths = [
-  { from: { x: 195, y: 205 }, to: { x: 120, y: 445 } }, // Noida -> Mumbai
-  { from: { x: 195, y: 205 }, to: { x: 210, y: 580 } }, // Noida -> Bengaluru
-  { from: { x: 195, y: 205 }, to: { x: 240, y: 480 } }, // Noida -> Hyderabad
-  { from: { x: 195, y: 205 }, to: { x: 280, y: 590 } }, // Noida -> Chennai
-  { from: { x: 195, y: 205 }, to: { x: 140, y: 460 } }, // Noida -> Pune
-  { from: { x: 195, y: 205 }, to: { x: 440, y: 350 } }, // Noida -> Kolkata
+  { from: { x: 120, y: 445 }, to: { x: 210, y: 580 } }, // Mumbai -> Bengaluru
+  { from: { x: 120, y: 445 }, to: { x: 240, y: 480 } }, // Mumbai -> Hyderabad
+  { from: { x: 120, y: 445 }, to: { x: 280, y: 590 } }, // Mumbai -> Chennai
+  { from: { x: 120, y: 445 }, to: { x: 140, y: 460 } }, // Mumbai -> Pune
+  { from: { x: 120, y: 445 }, to: { x: 440, y: 350 } }, // Mumbai -> Kolkata
 ];
 
 export function GlobalPresence() {
@@ -203,10 +188,10 @@ export function GlobalPresence() {
                   ))}
                 </g>
 
-                {/* Noida HQ Radial Glow */}
-                <circle cx="195" cy="205" r="28" fill="#0057D9" opacity="0.12" className="animate-pulse" />
+                {/* Navi Mumbai HQ Radial Glow */}
+                <circle cx="120" cy="445" r="28" fill="#0057D9" opacity="0.12" className="animate-pulse" />
 
-                {/* Connection lines from Noida HQ */}
+                {/* Connection lines from Navi Mumbai HQ */}
                 <g opacity="0.6">
                   {connectionPaths.map((path, index) => (
                     <g key={index}>
@@ -232,7 +217,7 @@ export function GlobalPresence() {
               {/* Plotted Dots */}
               {locations.map((loc) => {
                 const isActive = activeLoc.id === loc.id;
-                const isHQ = loc.id === "noida";
+                const isHQ = loc.id === "mumbai";
                 const xPercent = (loc.coordinates.x / 612) * 100;
                 const yPercent = (loc.coordinates.y / 696) * 100;
                 return (
