@@ -37,48 +37,6 @@ const locations: Location[] = [
     load: "58%",
   },
   {
-    id: "bengaluru",
-    city: "Bengaluru",
-    country: "India",
-    role: "Technology Innovation & R&D Hub",
-    details: "Speech AI research, cloud telephony architecture, and system integration testing",
-    address: "Prestige Tech Park, Block B, 4th Floor, Marathahalli-Sarjapur Outer Ring Road, Bengaluru, Karnataka 560103",
-    coordinates: { x: 210, y: 580 },
-    servers: "Azure India Central (Pune/Bangalore)",
-    agents: "350+",
-    sla: "99.99%",
-    latency: "11ms",
-    load: "52%",
-  },
-  {
-    id: "hyderabad",
-    city: "Hyderabad",
-    country: "India",
-    role: "AI Model Training & KPO Center",
-    details: "Deep learning transcript optimization, agent training simulator engine support",
-    address: "Mindspace IT Park, Building 20, 8th Floor, Madhapur, Hyderabad, Telangana 500081",
-    coordinates: { x: 240, y: 480 },
-    servers: "Google Cloud Region (me-central2)",
-    agents: "300+",
-    sla: "99.97%",
-    latency: "12ms",
-    load: "41%",
-  },
-  {
-    id: "chennai",
-    city: "Chennai",
-    country: "India",
-    role: "Omnichannel Support & Regional Hub",
-    details: "Multilingual regional support, SLA tracking systems, and telecom endpoints",
-    address: "Taramani IIT Research Park, Phase II, 3rd Floor, Chennai, Tamil Nadu 600113",
-    coordinates: { x: 280, y: 590 },
-    servers: "AWS Mumbai Local Zone",
-    agents: "250+",
-    sla: "99.95%",
-    latency: "15ms",
-    load: "35%",
-  },
-  {
     id: "pune",
     city: "Pune",
     country: "India",
@@ -91,20 +49,6 @@ const locations: Location[] = [
     sla: "99.99%",
     latency: "13ms",
     load: "28%",
-  },
-  {
-    id: "kolkata",
-    city: "Kolkata",
-    country: "India",
-    role: "East India CX & Operations Hub",
-    details: "Inbound customer service, dialer campaign execution, and disaster recovery center",
-    address: "DLF IT Park 1, Tower C, 6th Floor, Major Arterial Road, New Town, Kolkata, West Bengal 700156",
-    coordinates: { x: 440, y: 350 },
-    servers: "Azure India South (Chennai/Kolkata)",
-    agents: "180+",
-    sla: "99.92%",
-    latency: "19ms",
-    load: "30%",
   },
   {
     id: "ashoknagar",
@@ -137,11 +81,7 @@ const locations: Location[] = [
 ];
 
 const connectionPaths = [
-  { from: { x: 120, y: 445 }, to: { x: 210, y: 580 } }, // Mumbai -> Bengaluru
-  { from: { x: 120, y: 445 }, to: { x: 240, y: 480 } }, // Mumbai -> Hyderabad
-  { from: { x: 120, y: 445 }, to: { x: 280, y: 590 } }, // Mumbai -> Chennai
   { from: { x: 120, y: 445 }, to: { x: 140, y: 460 } }, // Mumbai -> Pune
-  { from: { x: 120, y: 445 }, to: { x: 440, y: 350 } }, // Mumbai -> Kolkata
   { from: { x: 120, y: 445 }, to: { x: 200, y: 320 } }, // Mumbai -> Ashoknagar
   { from: { x: 120, y: 445 }, to: { x: 275, y: 240 } }, // Mumbai -> Lucknow
 ];
