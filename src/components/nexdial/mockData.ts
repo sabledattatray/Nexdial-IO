@@ -232,11 +232,36 @@ export const INITIAL_CALL_LOGS: CallLog[] = [
   }
 ];
 
+const firstNames = ['James', 'Mary', 'John', 'Patricia', 'Robert', 'Jennifer', 'Michael', 'Linda', 'William', 'Elizabeth', 'David', 'Barbara', 'Richard', 'Susan', 'Joseph', 'Jessica', 'Thomas', 'Sarah', 'Charles', 'Karen', 'Christopher', 'Nancy', 'Daniel', 'Lisa', 'Matthew', 'Betty', 'Anthony', 'Margaret', 'Mark', 'Sandra', 'Donald', 'Ashley', 'Steven', 'Kimberley', 'Paul', 'Emily', 'Andrew', 'Donna', 'Joshua', 'Michelle', 'Kenneth', 'Dorothy', 'Kevin', 'Carol', 'Brian', 'Amanda', 'George', 'Melissa', 'Timothy', 'Deborah', 'Ronald', 'Stephanie', 'Edward', 'Rebecca', 'Jason', 'Sharon', 'Jeffrey', 'Laura'];
+const lastNames = ['Smith', 'Johnson', 'Williams', 'Brown', 'Jones', 'Garcia', 'Miller', 'Davis', 'Rodriguez', 'Martinez', 'Hernandez', 'Lopez', 'Gonzalez', 'Wilson', 'Anderson', 'Thomas', 'Taylor', 'Moore', 'Jackson', 'Martin', 'Lee', 'Perez', 'Thompson', 'White', 'Harris', 'Sanchez', 'Clark', 'Ramirez', 'Lewis', 'Robinson', 'Walker', 'Young', 'Allen', 'King', 'Wright', 'Scott', 'Torres', 'Nguyen', 'Hill', 'Flores', 'Green', 'Adams', 'Nelson', 'Baker', 'Hall', 'Rivera', 'Campbell', 'Mitchell', 'Carter', 'Roberts'];
+
+// Generate 48 extra mock agents to hit 52 agents in total (Dattatray, John, Sarah, Liam + 48)
+const extraAgents: Agent[] = Array.from({ length: 48 }, (_, i) => {
+  const name = `${firstNames[i % firstNames.length]} ${lastNames[i % lastNames.length]}`;
+  const id = `ag-${i + 4}`;
+  const roles = ['agent', 'agent', 'agent', 'team_manager'];
+  const statuses = ['Available', 'On Call', 'Idle', 'Offline'];
+  const sentiments: ('Neutral' | 'Happy' | 'Tired' | 'Overwhelmed')[] = ['Happy', 'Neutral', 'Tired', 'Overwhelmed'];
+  
+  return {
+    id,
+    name,
+    role: roles[i % roles.length] as any,
+    status: statuses[i % statuses.length] as any,
+    avatar: `https://images.unsplash.com/photo-${1500000000000 + (i * 100000)}?auto=format&fit=crop&w=100&q=80`,
+    callsToday: Math.floor(Math.random() * 40) + 5,
+    talkTime: Math.floor(Math.random() * 8000) + 1000,
+    qualityScore: Math.floor(Math.random() * 20) + 80,
+    sentiment: sentiments[i % sentiments.length]
+  };
+});
+
 export const INITIAL_AGENTS: Agent[] = [
   { id: 'ag-1', name: 'Dattatray Sable', role: 'admin', status: 'Available', avatar: 'https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=100&q=80', callsToday: 48, talkTime: 9400, qualityScore: 94, sentiment: 'Happy' },
   { id: 'ag-2', name: 'John Doe', role: 'agent', status: 'On Call', avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=100&q=80', callsToday: 32, talkTime: 7200, qualityScore: 85, sentiment: 'Tired' },
   { id: 'ag-3', name: 'Sarah Smith', role: 'team_manager', status: 'Idle', avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80', callsToday: 18, talkTime: 3600, qualityScore: 92, sentiment: 'Happy' },
-  { id: 'agent-ai', name: 'Liam (AI Assistant)', role: 'agent', status: 'Available', avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=100&q=80', callsToday: 512, talkTime: 42000, qualityScore: 99, sentiment: 'Happy' }
+  { id: 'agent-ai', name: 'Liam (AI Assistant)', role: 'agent', status: 'Available', avatar: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=100&q=80', callsToday: 512, talkTime: 42000, qualityScore: 99, sentiment: 'Happy' },
+  ...extraAgents
 ];
 
 export const INITIAL_INTEGRATIONS: Integration[] = [

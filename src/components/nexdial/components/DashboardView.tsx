@@ -51,13 +51,25 @@ const SIMULATED_CONVERSATIONS: Record<string, { speaker: 'agent' | 'customer' | 
 };
 
 // Help mapping agent ID to simulated active customer
+const CUSTOMER_NAMES = [
+  'Robert Stark', 'Dr. Evelyn Martinez', 'Marcus Vance', 'Amara Okafor',
+  'Liam Neeson', 'Bruce Wayne', 'Clark Kent', 'Diana Prince', 'Peter Parker',
+  'Tony Stark', 'Steve Rogers', 'Natasha Romanoff', 'Wanda Maximoff', 'Clint Barton',
+  'Thor Odinson', 'Loki Laufeyson', 'Stephen Strange', 'T\'Challa', 'Peter Quill',
+  'Carol Danvers', 'Matt Murdock', 'Luke Cage', 'Danny Rand', 'Jessica Jones',
+  'Wade Wilson', 'Logan Howlett', 'Charles Xavier', 'Erik Lehnsherr', 'Jean Grey'
+];
+
 const getAgentActiveCustomer = (agentId: string): string => {
   switch (agentId) {
     case 'ag-1': return 'Robert Stark';
     case 'ag-2': return 'Dr. Evelyn Martinez';
     case 'ag-3': return 'Marcus Vance';
     case 'agent-ai': return 'Amara Okafor';
-    default: return '—';
+    default: {
+      const num = parseInt(agentId.replace(/\D/g, '')) || 0;
+      return CUSTOMER_NAMES[num % CUSTOMER_NAMES.length];
+    }
   }
 };
 
@@ -636,7 +648,7 @@ export default function DashboardView({
                   <p className="text-[9px] uppercase font-mono tracking-wider font-extrabold text-slate-650 mb-1">Live Dialog stream (Auto-scrolling)</p>
                   
                   {(() => {
-                    const dialogueList = SIMULATED_CONVERSATIONS[activeListenAgentId] || [];
+                    const dialogueList = SIMULATED_CONVERSATIONS[activeListenAgentId] || SIMULATED_CONVERSATIONS['ag-2'];
                     const activeTurns = dialogueList.slice(0, Math.min(dialogueList.length, transcriptIndex));
                     
                     if (activeTurns.length === 0) {
