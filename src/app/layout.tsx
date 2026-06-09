@@ -35,8 +35,8 @@ export const metadata: Metadata = {
     "call center",
     "BPO",
   ],
-  authors: [{ name: "DBS Mintek" }],
-  creator: "DBS Mintek",
+  authors: [{ name: "DBS Mintek Pvt. Ltd." }],
+  creator: "DBS Mintek Pvt. Ltd.",
   openGraph: {
     type: "website",
     locale: "en_US",

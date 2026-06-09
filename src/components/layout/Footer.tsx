@@ -274,7 +274,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <p className="text-xs text-[#475569]">
-              © {new Date().getFullYear()} DBS Mintek. All rights reserved.
+              © {new Date().getFullYear()} DBS Mintek Pvt. Ltd. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#334155] text-xs">|</span>
             <p className="text-xs text-[#475569]">
