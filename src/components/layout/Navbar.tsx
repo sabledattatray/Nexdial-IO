@@ -47,10 +47,10 @@ const navLinks = [
       {
         title: "Portals",
         items: [
-          { label: "Agent Portal", href: "/solutions#agent", icon: Headphones, desc: "AI-assisted agent workspace" },
-          { label: "Supervisor Portal", href: "/solutions#supervisor", icon: MonitorSmartphone, desc: "Live monitoring & coaching" },
-          { label: "Client Portal", href: "/solutions#client", icon: LayoutDashboard, desc: "Self-service client dashboard" },
-          { label: "Admin Panel", href: "/solutions#admin", icon: Shield, desc: "Multi-tenant system management" },
+          { label: "Agent Portal", href: "/dialer", icon: Headphones, desc: "AI-assisted agent workspace" },
+          { label: "Supervisor Portal", href: "/supervisor", icon: MonitorSmartphone, desc: "Live monitoring & coaching" },
+          { label: "Client Portal", href: "/client-portal", icon: LayoutDashboard, desc: "Self-service client dashboard" },
+          { label: "Admin Panel", href: "/admin", icon: Shield, desc: "Multi-tenant system management" },
         ],
       },
       {

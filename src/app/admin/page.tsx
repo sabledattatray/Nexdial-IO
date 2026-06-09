@@ -3,7 +3,8 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Shield, Users, Server, IndianRupee, Activity, Settings, Plus, Play, Pause, Trash2, Key, Database } from "lucide-react";
+import { Shield, Users, Server, IndianRupee, Activity, Settings, Plus, Play, Pause, Trash2, Key, Database, PhoneCall } from "lucide-react";
+import Link from "next/link";
 
 // Mock Tenant Data
 const initialTenants = [
@@ -58,11 +59,15 @@ export default function AdminDashboard() {
             <h1 className="text-3xl font-extrabold text-white mt-2">Platform Administration</h1>
           </div>
 
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4">
             <span className="px-3 py-1.5 rounded bg-[#22C55E]/10 border border-[#22C55E]/30 text-xs font-semibold text-[#22C55E] flex items-center gap-2">
               <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-ping" />
               All Systems Operational
             </span>
+            <Link href="/admin/dialer" className="px-4 py-2 rounded bg-[#0057D9] hover:bg-blue-600 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-all shadow-md shadow-[#0057D9]/15">
+              <PhoneCall className="w-4 h-4" />
+              Dialer Operations Console
+            </Link>
           </div>
         </AnimatedSection>
 
