@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Mail, Phone, MessageSquare, Calendar, Send, ShieldAlert, CheckCircle, ArrowRight } from "lucide-react";
+import { Mail, Phone, MessageSquare, Calendar, Send, ShieldAlert, CheckCircle, ArrowRight, Building, MapPin } from "lucide-react";
 
 export function ContactSection() {
   const [activeTab, setActiveTab] = useState<"message" | "demo">("message");
@@ -73,55 +73,76 @@ export function ContactSection() {
               </p>
             </AnimatedSection>
 
-            {/* Quick Contact Items */}
-            <div className="space-y-4">
-              <AnimatedSection delay={0.1} className="flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <div className="w-11 h-11 rounded-lg bg-[#0057D9]/10 border border-[#0057D9]/20 flex items-center justify-center text-[#0057D9] flex-shrink-0">
-                  <Mail className="w-5 h-5 text-[#00C2FF]" />
+            {/* Quick Contact Items - Asymmetric grid layout with premium glows & visual borders */}
+            <div className="grid sm:grid-cols-2 gap-4 relative z-10">
+              <AnimatedSection delay={0.1} className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00C2FF]/30 hover:bg-[#00C2FF]/5 hover:shadow-[0_4px_25px_rgba(0,194,255,0.06)] transition-all duration-300">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[#00C2FF]" />
+                <div className="w-11 h-11 rounded-lg bg-[#00C2FF]/10 border border-[#00C2FF]/20 flex items-center justify-center text-[#00C2FF] flex-shrink-0 transition-transform group-hover:scale-105">
+                  <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Enterprise Sales</p>
-                  <a href="mailto:prithviraj.singh@dbsmintek.in" className="text-sm font-bold text-white hover:text-[#00C2FF] transition-colors mt-0.5 block">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Enterprise Sales</p>
+                  <a href="mailto:prithviraj.singh@dbsmintek.in" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
                     prithviraj.singh@dbsmintek.in
                   </a>
                 </div>
               </AnimatedSection>
 
-              <AnimatedSection delay={0.2} className="flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <div className="w-11 h-11 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] flex-shrink-0">
-                  <Phone className="w-5 h-5 text-[#00E5A0]" />
+              <AnimatedSection delay={0.2} className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00E5A0]/30 hover:bg-[#00E5A0]/5 hover:shadow-[0_4px_25px_rgba(0,229,160,0.06)] transition-all duration-300">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[#00E5A0]" />
+                <div className="w-11 h-11 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] flex-shrink-0 transition-transform group-hover:scale-105">
+                  <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">Global Hotline</p>
-                  <a href="tel:+918308211113" className="text-sm font-bold text-white hover:text-[#00E5A0] transition-colors mt-0.5 block">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Global Hotline</p>
+                  <a href="tel:+918308211113" className="text-sm font-extrabold text-white hover:text-[#00E5A0] transition-colors mt-1 block">
                     +91 83082 11113
                   </a>
                 </div>
               </AnimatedSection>
 
-              <AnimatedSection delay={0.3} className="flex gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/[0.04]">
-                <div className="w-11 h-11 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center text-[#8B5CF6] flex-shrink-0">
-                  <MessageSquare className="w-5 h-5 text-[#8B5CF6]" />
+              <AnimatedSection delay={0.3} className="sm:col-span-2 relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-center justify-between overflow-hidden group hover:border-[#8B5CF6]/30 hover:bg-[#8B5CF6]/5 hover:shadow-[0_4px_25px_rgba(139,92,246,0.06)] transition-all duration-300">
+                <div className="absolute left-0 top-0 w-1 h-full bg-[#8B5CF6]" />
+                <div className="flex gap-4 items-center">
+                  <div className="w-11 h-11 rounded-lg bg-[#8B5CF6]/10 border border-[#8B5CF6]/20 flex items-center justify-center text-[#8B5CF6] flex-shrink-0 transition-transform group-hover:scale-105">
+                    <MessageSquare className="w-5 h-5" />
+                  </div>
+                  <div>
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B] flex items-center gap-1.5">
+                      WhatsApp Business Support
+                      <span className="flex h-2 w-2 relative">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22C55E] opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]"></span>
+                      </span>
+                    </p>
+                    <a href="https://wa.me/918308211113" target="_blank" rel="noopener noreferrer" className="text-sm font-extrabold text-[#00E5A0] hover:underline mt-1 block">
+                      Chat with an AI Advisor
+                    </a>
+                  </div>
                 </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-[#64748B]">WhatsApp Business Support</p>
-                  <a href="https://wa.me/918308211113" target="_blank" rel="noopener noreferrer" className="text-sm font-bold text-[#00E5A0] hover:underline mt-0.5 block">
-                    Chat with an AI Advisor
-                  </a>
-                </div>
+                <ArrowRight className="w-5 h-5 text-[#8B5CF6] opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all" />
               </AnimatedSection>
             </div>
 
-            {/* Registered Offices */}
-            <div className="space-y-3 pt-4 border-t border-white/[0.06]">
-              <h4 className="text-xs uppercase font-extrabold text-[#64748B] tracking-wider ml-1">
-                Official Head Office
+            {/* Corporate Headquarters Card */}
+            <div className="space-y-3 pt-6 border-t border-white/[0.06] relative z-10">
+              <h4 className="text-[10px] uppercase font-bold text-[#64748B] tracking-widest ml-1">
+                Corporate Headquarters Node
               </h4>
-              <div className="p-4 rounded-xl bg-white/[0.01] border border-white/[0.04] space-y-1">
-                <span className="text-[10px] uppercase font-bold text-[#00E5A0]">DBS MINTEK PVT. LTD</span>
-                <p className="text-xs text-[#CBD5E1] leading-relaxed">
-                  Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
-                </p>
+              <div className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00C2FF]/20 transition-all duration-300 shadow-md">
+                <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00E5A0] to-[#00C2FF]" />
+                <div className="absolute right-4 top-4 px-2 py-0.5 rounded bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-[8px] font-bold text-[#00E5A0] uppercase tracking-widest">
+                  HQ Cluster
+                </div>
+                <div className="w-11 h-11 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] flex-shrink-0">
+                  <Building className="w-5 h-5 text-[#00E5A0]" />
+                </div>
+                <div className="space-y-1">
+                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">DBS MINTEK PVT. LTD</span>
+                  <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
+                    Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
+                  </p>
+                </div>
               </div>
             </div>
 
