@@ -53,17 +53,17 @@ export default function AboutPage() {
         </AnimatedSection>
 
         {/* Founder's Vision */}
-        <AnimatedSection className="mb-20 max-w-6xl mx-auto space-y-8">
+        <AnimatedSection className="mb-20 max-w-7xl mx-auto space-y-8">
           <div className="text-center max-w-xl mx-auto mb-10">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Our Founders' Vision
+              Our Leadership Team
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
               The leadership driving DBS Mintek's global expansion and operational success.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8">
+          <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
             {/* Founder 1: Shiv Singh */}
             <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00C2FF]/30 transition-all duration-300">
               <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#0057D9]/5 blur-[80px]" />
@@ -111,6 +111,32 @@ export default function AboutPage() {
                   <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
                   <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
                     We specialize in delivering robust BPO services and AI-driven workflow architectures tailored to global client operations. By combining direct cloud telephony integrations and predictive dialing consoles, we translate customer contacts into measurable commercial growth.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Vice President: Ajay Giri */}
+            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#A855F7]/30 transition-all duration-300">
+              <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#A855F7]/5 blur-[80px]" />
+              <div className="relative z-10 space-y-6">
+                <div className="flex flex-col sm:flex-row items-center gap-6">
+                  <img 
+                    src="/ajay_giri.jpg" 
+                    alt="Ajay Giri" 
+                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
+                  />
+                  <div className="text-center sm:text-left">
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">Ajay Giri</h3>
+                    <p className="text-xs text-[#A855F7] font-semibold mt-0.5">Vice President</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                  </div>
+                </div>
+
+                <div className="relative">
+                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
+                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
+                    Our focus is on driving operational excellence and scale across our delivery units. By implementing cutting-edge quality management systems and performance tracking, we ensure our global BPO and contact center operations consistently exceed client SLAs and compliance benchmarks.
                   </p>
                 </div>
               </div>
