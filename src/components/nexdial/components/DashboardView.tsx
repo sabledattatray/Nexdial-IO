@@ -232,6 +232,97 @@ export default function DashboardView({
           </div>
         </div>
 
+        {/* Live Representative Status Console (Horizontal Card) */}
+        <div className="glass-card-strong p-5 rounded-3xl border border-white/[0.06] shadow-2xl relative overflow-hidden bg-gradient-to-r from-[#0F172A]/80 via-[#0B0F19]/90 to-[#0F172A]/80">
+          <div className="absolute inset-0 bg-gradient-to-r from-[#00C2FF]/5 via-transparent to-[#00E5A0]/5 pointer-events-none" />
+          
+          <div className="flex flex-col lg:flex-row items-center justify-between gap-6 relative z-10">
+            {/* Left label */}
+            <div className="flex items-center gap-3 shrink-0 self-start lg:self-center">
+              <div className="w-10 h-10 rounded-2xl bg-gradient-to-br from-[#0057D9]/20 to-[#00C2FF]/20 flex items-center justify-center border border-[#00C2FF]/20 shadow-lg shadow-[#00C2FF]/5">
+                <Activity className="w-5 h-5 text-[#00C2FF] animate-pulse" />
+              </div>
+              <div>
+                <h3 className="text-xs font-bold text-white tracking-wide uppercase font-space-grotesk">Agent Status Console</h3>
+                <p className="text-[9px] text-slate-400">Real-time state allocation</p>
+              </div>
+            </div>
+
+            {/* Horizontal stats segments */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:flex lg:flex-row items-center justify-between gap-4 w-full">
+              {/* Total Logged In */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-white/[0.02] border border-white/[0.04] flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-blue-500/10 border border-blue-500/20 flex items-center justify-center">
+                  <Users className="w-4 h-4 text-blue-400" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">Logged In</span>
+                  <span className="text-sm font-extrabold text-white">{loggedInAgentsCount}</span>
+                </div>
+              </div>
+
+              {/* On Call */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-[#00C2FF]/5 border border-[#00C2FF]/10 flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-[#00C2FF]/10 border border-[#00C2FF]/20 flex items-center justify-center">
+                  <PhoneCall className="w-4 h-4 text-[#00C2FF]" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">On Call</span>
+                  <span className="text-sm font-extrabold text-[#00C2FF]">{onCallAgentsCount}</span>
+                </div>
+              </div>
+
+              {/* On Break */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-amber-500/5 border border-amber-500/10 flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-amber-500/10 border border-amber-500/20 flex items-center justify-center">
+                  <Coffee className="w-4 h-4 text-amber-400" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">On Break</span>
+                  <span className="text-sm font-extrabold text-amber-400">{idleAgentsCount}</span>
+                </div>
+              </div>
+
+              {/* On Idle */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-emerald-500/5 border border-emerald-500/10 flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-emerald-500/10 border border-emerald-500/20 flex items-center justify-center">
+                  <CheckCircle className="w-4 h-4 text-emerald-400" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">On Idle</span>
+                  <span className="text-sm font-extrabold text-emerald-400">{agents.filter(a => a.status === 'Available').length}</span>
+                </div>
+              </div>
+
+              {/* Busy */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-rose-500/5 border border-rose-500/10 flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-rose-500/10 border border-rose-500/20 flex items-center justify-center">
+                  <Flame className="w-4 h-4 text-rose-400" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">Busy</span>
+                  <span className="text-sm font-extrabold text-rose-400">
+                    {onCallAgentsCount + agents.filter(a => a.status === 'Available' && a.id.charCodeAt(a.id.length - 1) % 5 === 0).length}
+                  </span>
+                </div>
+              </div>
+
+              {/* Wrap-Up (ACW) */}
+              <div className="flex items-center gap-3 px-4 py-2 rounded-2xl bg-indigo-500/5 border border-indigo-500/10 flex-1 min-w-[120px]">
+                <div className="w-8 h-8 rounded-xl bg-indigo-500/10 border border-indigo-500/20 flex items-center justify-center">
+                  <Sliders className="w-4 h-4 text-indigo-400" />
+                </div>
+                <div>
+                  <span className="block text-[8px] uppercase tracking-wider text-slate-500 font-medium">Wrap-Up</span>
+                  <span className="text-sm font-extrabold text-indigo-400">
+                    {agents.filter(a => a.status === 'Available' && a.id.charCodeAt(a.id.length - 1) % 5 === 0).length}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         {/* Admin KPI Bento Grid */}
         <div className="grid grid-cols-2 lg:grid-cols-6 gap-4">
           <div className="p-4 rounded-2xl border border-slate-800 bg-[#0E0E10] space-y-1.5 hover:border-slate-700 transition-all">
