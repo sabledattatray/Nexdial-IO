@@ -211,7 +211,7 @@ export function Navbar() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
                       >
-                        <div className="glass-card-strong p-6 min-w-[680px] shadow-2xl shadow-black/40">
+                        <div className="glass-card-strong !bg-[#0F172A] p-6 min-w-[680px] shadow-2xl shadow-black/40">
                           <div className="grid grid-cols-2 lg:grid-cols-3 gap-6">
                             {link.megaMenu.map((group) => (
                               <div key={group.title}>
