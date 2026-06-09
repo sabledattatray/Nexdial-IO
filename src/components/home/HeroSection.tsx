@@ -1,9 +1,19 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { motion } from "framer-motion";
-import { Zap, Play, ArrowRight, Sparkles } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Zap, Play, ArrowRight, Sparkles, BarChart2, Activity, Database, Volume2, Upload, RefreshCw } from "lucide-react";
 import Link from "next/link";
+
+const aiScript = [
+  { speaker: "Customer", text: "Hello, I am calling regarding my postpaid VIP account billing discrepancy.", sentiment: "neutral" },
+  { speaker: "AI Copilot", text: "Searching database. Detected double-charge on premium data pack #401. Suggestion: Approve waiver.", sentiment: "positive" },
+  { speaker: "Agent", text: "I see the double charge for last month's data pack. Let me waive that for you immediately.", sentiment: "positive" },
+  { speaker: "Customer", text: "Oh, that was quick! Thank you so much for resolving it without wait times.", sentiment: "positive" },
+  { speaker: "AI Copilot", text: "Sentiment positive (98.2%). Customer qualified for loyalty data bundle upgrade.", sentiment: "positive" },
+  { speaker: "Agent", text: "You're welcome! As a VIP customer, you also qualify for a free 10GB loyalty bonus this month.", sentiment: "positive" },
+  { speaker: "Customer", text: "Perfect! Yes, please activate it. I appreciate the excellent support.", sentiment: "positive" },
+];
 
 function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -116,6 +126,131 @@ function TypingText({ text }: { text: string }) {
 }
 
 export function HeroSection() {
+  // Mock Dashboard Interactive States
+  const [activeTab, setActiveTab] = useState<"ops" | "ai" | "campaigns">("ops");
+  const [expandedAgent, setExpandedAgent] = useState<string | null>(null);
+
+  // Operations Tab live simulation
+  const [activeCalls, setActiveCalls] = useState(847);
+  const [csat, setCsat] = useState(98.2);
+  const [revenue, setRevenue] = useState(20.145);
+  const [chartData, setChartData] = useState([55, 48, 35, 42, 38, 22, 28, 18, 22, 14, 18]);
+
+  // AI Tab live simulation
+  const [aiStep, setAiStep] = useState(0);
+  const [isPlayingAi, setIsPlayingAi] = useState(true);
+
+  // Campaigns Tab live simulation
+  const [campaignList, setCampaignList] = useState([
+    { id: 1, name: "VI Prepaid Retention", progress: 84, called: 2432, total: 3000, status: "Active" },
+    { id: 2, name: "VIP Outbound Sales", progress: 62, called: 1860, total: 3000, status: "Active" },
+  ]);
+  const [uploadProgress, setUploadProgress] = useState(0);
+  const [isUploading, setIsUploading] = useState(false);
+
+  // Periodic Operations Telemetry updates
+  useEffect(() => {
+    const interval = setInterval(() => {
+      // Fluctuate active calls
+      setActiveCalls((prev) => {
+        const change = Math.random() > 0.5 ? 1 : -1;
+        const newVal = prev + change;
+        return newVal > 860 ? 858 : newVal < 835 ? 838 : newVal;
+      });
+
+      // Slowly increment revenue
+      setRevenue((prev) => prev + 0.0002);
+
+      // Fluctuate CSAT
+      setCsat((prev) => {
+        const change = (Math.random() - 0.5) * 0.1;
+        const newVal = +(prev + change).toFixed(1);
+        return newVal > 99.0 ? 98.9 : newVal < 97.5 ? 97.6 : newVal;
+      });
+
+      // Advance chart data
+      setChartData((prev) => {
+        const nextData = [...prev.slice(1)];
+        const lastVal = prev[prev.length - 1];
+        const change = (Math.random() - 0.5) * 20;
+        let nextVal = Math.round(lastVal + change);
+        if (nextVal < 10) nextVal = 15;
+        if (nextVal > 70) nextVal = 65;
+        nextData.push(nextVal);
+        return nextData;
+      });
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  // AI Dialogue Play Loop
+  useEffect(() => {
+    if (!isPlayingAi || activeTab !== "ai") return;
+    const interval = setInterval(() => {
+      setAiStep((prev) => (prev + 1) % aiScript.length);
+    }, 4000);
+    return () => clearInterval(interval);
+  }, [isPlayingAi, activeTab]);
+
+  // Campaign progress simulation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCampaignList((prev) => 
+        prev.map((c) => {
+          if (c.progress < 100 && c.status === "Active") {
+            const nextProgress = Math.min(100, c.progress + (c.called === 0 ? 3 : 1));
+            return {
+              ...c,
+              progress: nextProgress,
+              called: Math.min(c.total, Math.round((nextProgress / 100) * c.total))
+            };
+          }
+          return c;
+        })
+      );
+    }, 3000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const triggerMockUpload = () => {
+    if (isUploading) return;
+    setIsUploading(true);
+    setUploadProgress(0);
+    
+    let prog = 0;
+    const interval = setInterval(() => {
+      prog += 10;
+      setUploadProgress(prog);
+      if (prog >= 100) {
+        clearInterval(interval);
+        setTimeout(() => {
+          setIsUploading(false);
+          setCampaignList((prev) => [
+            ...prev,
+            { 
+              id: prev.length + 1, 
+              name: `Campaign #${prev.length + 1} (Uploaded Leads)`, 
+              progress: 0, 
+              called: 0, 
+              total: 2500, 
+              status: "Active" 
+            }
+          ]);
+        }, 1000);
+      }
+    }, 150);
+  };
+
+  // Generate SVG chart path dynamically
+  const chartWidth = 300;
+  const chartHeight = 80;
+  const chartPathD = chartData.reduce((acc, val, i) => {
+    const x = (i * chartWidth) / (chartData.length - 1);
+    const y = val;
+    return acc + `${i === 0 ? "M" : "L"} ${x},${y}`;
+  }, "");
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background Layers */}
@@ -222,102 +357,385 @@ export function HeroSection() {
           >
             <div className="relative">
               {/* Main Dashboard Card */}
-              <div className="glass-card-strong p-6 rounded-2xl shadow-2xl shadow-black/30">
+              <div className="glass-card-strong p-6 rounded-2xl shadow-2xl shadow-black/30 border border-white/[0.08]">
+                {/* Browser Window Header */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex gap-1.5">
                     <div className="w-3 h-3 rounded-full bg-[#EF4444]" />
                     <div className="w-3 h-3 rounded-full bg-[#F59E0B]" />
                     <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
                   </div>
-                  <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3">
-                    <span className="text-[10px] text-[#475569]">app.dbsmintek.com/dashboard</span>
+                  <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
+                    <span className="text-[10px] text-[#64748B]">app.dbsmintek.com/dashboard</span>
                   </div>
                 </div>
 
-                {/* Mock Dashboard */}
-                <div className="space-y-4">
-                  <div className="grid grid-cols-3 gap-3">
-                    {[
-                      { label: "Active Calls", value: "847", color: "from-[#0057D9] to-[#00C2FF]", change: "+12%" },
-                      { label: "CSAT Score", value: "98.2%", color: "from-[#00E5A0] to-[#00C896]", change: "+2.1%" },
-                      { label: "Revenue", value: "₹20 Cr", color: "from-[#8B5CF6] to-[#A78BFA]", change: "+18%" },
-                    ].map((stat) => (
-                      <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3">
-                        <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
-                        <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                          {stat.value}
-                        </p>
-                        <p className="text-[10px] text-[#22C55E]">{stat.change}</p>
-                      </div>
-                    ))}
-                  </div>
+                {/* Dashboard Tab Bar */}
+                <div className="flex border-b border-white/5 mb-4 text-[11px] font-semibold text-[#64748B] w-full">
+                  <button 
+                    onClick={() => setActiveTab("ops")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "ops" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                  >
+                    <BarChart2 className="w-3.5 h-3.5 text-[#00C2FF]" />
+                    Live Ops
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab("ai")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "ai" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                  >
+                    <Activity className="w-3.5 h-3.5 text-[#00E5A0]" />
+                    AI Copilot
+                  </button>
+                  <button 
+                    onClick={() => setActiveTab("campaigns")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "campaigns" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                  >
+                    <Database className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                    Campaigns
+                  </button>
+                </div>
 
-                  {/* Mini Chart */}
-                  <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-4 h-[140px] relative overflow-hidden">
-                    <p className="text-[10px] text-[#64748B] mb-2">Call Volume (24h)</p>
-                    <svg viewBox="0 0 300 80" className="w-full h-[80px]">
-                      <defs>
-                        <linearGradient id="chartGrad" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="0%" stopColor="#0057D9" stopOpacity="0.3" />
-                          <stop offset="100%" stopColor="#0057D9" stopOpacity="0" />
-                        </linearGradient>
-                      </defs>
-                      <path d="M0,60 C30,50 60,30 90,35 C120,40 150,20 180,25 C210,30 240,10 270,15 C285,17 300,20 300,20 L300,80 L0,80 Z" fill="url(#chartGrad)" />
-                      <path d="M0,60 C30,50 60,30 90,35 C120,40 150,20 180,25 C210,30 240,10 270,15 C285,17 300,20" fill="none" stroke="#0057D9" strokeWidth="2" />
-                      <circle cx="270" cy="15" r="3" fill="#00C2FF" className="animate-pulse" />
-                    </svg>
-                  </div>
-
-                  {/* Agent List */}
-                  <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3">
-                    <p className="text-[10px] text-[#64748B] mb-2">Active Agents</p>
-                    <div className="space-y-2">
-                      {["Sarah Chen", "Alex Kumar", "Maria Santos"].map((name, i) => (
-                        <div key={name} className="flex items-center justify-between">
-                          <div className="flex items-center gap-2">
-                            <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${i === 0 ? "from-[#0057D9] to-[#00C2FF]" : i === 1 ? "from-[#00E5A0] to-[#00C896]" : "from-[#8B5CF6] to-[#A78BFA]"} flex items-center justify-center`}>
-                              <span className="text-[8px] font-bold text-white">{name.split(" ").map(n => n[0]).join("")}</span>
+                {/* Dashboard Content Container */}
+                <div className="min-h-[360px] flex flex-col justify-between">
+                  <AnimatePresence mode="wait">
+                    {activeTab === "ops" && (
+                      <motion.div
+                        key="ops-tab"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-4"
+                      >
+                        {/* Operations KPI Metrics */}
+                        <div className="grid grid-cols-3 gap-3">
+                          {[
+                            { label: "Active Calls", value: activeCalls.toString(), color: "from-[#0057D9] to-[#00C2FF]", change: "+12%" },
+                            { label: "CSAT Score", value: `${csat}%`, color: "from-[#00E5A0] to-[#00C896]", change: "+2.1%" },
+                            { label: "Revenue", value: `₹${revenue.toFixed(3)} Cr`, color: "from-[#8B5CF6] to-[#A78BFA]", change: "+18%" },
+                          ].map((stat) => (
+                            <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
+                              <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                              <p className={`text-sm sm:text-base font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                                {stat.value}
+                              </p>
+                              <p className="text-[10px] text-[#22C55E] font-semibold flex items-center gap-0.5 mt-0.5">
+                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
+                                {stat.change}
+                              </p>
                             </div>
-                            <span className="text-[11px] text-[#94A3B8]">{name}</span>
+                          ))}
+                        </div>
+
+                        {/* Crawling Line Chart */}
+                        <div className="bg-[#081120] border border-white/[0.06] rounded-xl p-3.5 h-[130px] relative overflow-hidden flex flex-col justify-between">
+                          <div className="flex items-center justify-between">
+                            <span className="text-[10px] font-semibold text-[#64748B] uppercase tracking-wider">Live Call Volume (24h)</span>
+                            <span className="text-[10px] text-[#00C2FF] font-mono flex items-center gap-1">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C2FF] animate-ping" />
+                              Real-time Telemetry
+                            </span>
                           </div>
-                          <div className="flex items-center gap-1">
-                            <div className="w-1.5 h-1.5 rounded-full bg-[#22C55E]" />
-                            <span className="text-[10px] text-[#22C55E]">On Call</span>
+                          <div className="h-[70px] relative mt-2">
+                            <svg viewBox="0 0 300 80" className="w-full h-full" preserveAspectRatio="none">
+                              <defs>
+                                <linearGradient id="liveChartGrad" x1="0" y1="0" x2="0" y2="1">
+                                  <stop offset="0%" stopColor="#0057D9" stopOpacity="0.35" />
+                                  <stop offset="100%" stopColor="#0057D9" stopOpacity="0" />
+                                </linearGradient>
+                              </defs>
+                              <style>{`
+                                @keyframes equalize {
+                                  0% { transform: scaleY(0.3); }
+                                  100% { transform: scaleY(1); }
+                                }
+                              `}</style>
+                              {/* Area under chart */}
+                              <path 
+                                d={`${chartPathD} L 300,80 L 0,80 Z`} 
+                                fill="url(#liveChartGrad)" 
+                                className="transition-all duration-1000 ease-in-out"
+                              />
+                              {/* Line */}
+                              <path 
+                                d={chartPathD} 
+                                fill="none" 
+                                stroke="#0057D9" 
+                                strokeWidth="2.5" 
+                                strokeLinecap="round"
+                                className="transition-all duration-1000 ease-in-out"
+                              />
+                              {/* End Node Pulse */}
+                              <circle 
+                                cx="300" 
+                                cy={chartData[chartData.length - 1]} 
+                                r="4" 
+                                fill="#00C2FF" 
+                                className="animate-pulse"
+                              />
+                            </svg>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                  </div>
+
+                        {/* Interactive Agent List */}
+                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3">
+                          <p className="text-[10px] text-[#64748B] font-semibold uppercase tracking-wider mb-2">Live Agent Console (Click to inspect)</p>
+                          <div className="space-y-1.5">
+                            {["Sarah Chen", "Alex Kumar", "Maria Santos"].map((name, i) => (
+                              <div key={name} className="border-b border-white/[0.02] last:border-0 pb-1.5 last:pb-0">
+                                <button 
+                                  onClick={() => setExpandedAgent(expandedAgent === name ? null : name)}
+                                  className="w-full flex items-center justify-between text-left hover:bg-white/[0.02] p-1.5 rounded-lg transition-all"
+                                >
+                                  <div className="flex items-center gap-2.5">
+                                    <div className={`w-6 h-6 rounded-full bg-gradient-to-br ${i === 0 ? "from-[#0057D9] to-[#00C2FF]" : i === 1 ? "from-[#00E5A0] to-[#00C896]" : "from-[#8B5CF6] to-[#A78BFA]"} flex items-center justify-center shadow-md`}>
+                                      <span className="text-[8.5px] font-extrabold text-white">{name.split(" ").map(n => n[0]).join("")}</span>
+                                    </div>
+                                    <span className="text-[11.5px] font-medium text-[#CBD5E1]">{name}</span>
+                                  </div>
+                                  <div className="flex items-center gap-1.5">
+                                    <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
+                                    <span className="text-[10px] text-[#22C55E] font-medium">On Call</span>
+                                  </div>
+                                </button>
+                                
+                                {expandedAgent === name && (
+                                  <motion.div 
+                                    initial={{ height: 0, opacity: 0 }}
+                                    animate={{ height: "auto", opacity: 1 }}
+                                    className="mt-2 pl-8 pr-2 py-2 rounded-lg bg-white/[0.02] border border-white/5 space-y-2 text-[10px] overflow-hidden"
+                                  >
+                                    <div className="flex items-center justify-between text-[#64748B] font-semibold">
+                                      <span>Trunk Node: Thane-Belapur C</span>
+                                      <span className="flex items-center gap-1 text-[#00E5A0]">
+                                        <Volume2 className="w-3.5 h-3.5 animate-bounce text-[#00E5A0]" />
+                                        Live Voice Stream
+                                      </span>
+                                    </div>
+                                    <div className="flex gap-0.5 h-7 items-end pb-1 px-1 border-b border-white/5">
+                                      {[...Array(24)].map((_, idx) => (
+                                        <span 
+                                          key={idx} 
+                                          className="flex-1 bg-gradient-to-t from-[#0057D9] to-[#00C2FF] rounded-sm transition-all duration-300"
+                                          style={{ 
+                                            height: `${Math.floor(Math.random() * 80) + 20}%`,
+                                            animation: `equalize ${0.4 + Math.random() * 0.4}s ease-in-out infinite alternate` 
+                                          }}
+                                        />
+                                      ))}
+                                    </div>
+                                    <p className="text-[#94A3B8] italic leading-relaxed">
+                                      "...renewal confirmed at the waived price point. Initializing CRM update now."
+                                    </p>
+                                  </motion.div>
+                                )}
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeTab === "ai" && (
+                      <motion.div
+                        key="ai-tab"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-4"
+                      >
+                        {/* Live AI Dialogue Transcript Stream */}
+                        <div className="bg-[#081120] border border-white/[0.05] rounded-xl p-3 h-[200px] overflow-y-auto space-y-2.5 flex flex-col justify-end shadow-inner relative">
+                          <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none z-10">
+                            <span className="text-[9px] font-bold text-[#64748B] uppercase tracking-widest bg-[#0a1424]/90 px-1.5 py-0.5 rounded border border-white/5">AI Speech-to-Text</span>
+                            <span className="text-[9px] text-[#00E5A0] font-mono flex items-center gap-1 bg-[#0a1424]/90 px-1.5 py-0.5 rounded border border-white/5">
+                              <span className="w-1.5 h-1.5 rounded-full bg-[#00E5A0] animate-ping" />
+                              Gemini-Voice Live
+                            </span>
+                          </div>
+
+                          <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
+                            {aiScript.slice(0, aiStep + 1).map((msg, idx) => (
+                              <div 
+                                key={idx} 
+                                className={`flex flex-col max-w-[85%] ${
+                                  msg.speaker === "Agent" 
+                                    ? "self-end items-end ml-auto" 
+                                    : msg.speaker === "Customer" 
+                                      ? "self-start items-start" 
+                                      : "self-start items-start w-full max-w-full"
+                                }`}
+                              >
+                                <span className="text-[8px] text-[#64748B] mb-0.5 font-bold uppercase tracking-wider">{msg.speaker}</span>
+                                <div className={`p-2.5 rounded-xl text-[10px] leading-relaxed shadow-sm ${
+                                  msg.speaker === "Agent" 
+                                    ? "bg-[#0057D9] text-white rounded-tr-none" 
+                                    : msg.speaker === "Customer" 
+                                      ? "bg-white/[0.04] border border-white/[0.08] text-[#CBD5E1] rounded-tl-none" 
+                                      : "bg-[#00E5A0]/5 border border-[#00E5A0]/20 text-[#00E5A0] font-medium w-full flex items-center gap-2 rounded-tl-none"
+                                }`}>
+                                  {msg.speaker === "AI Copilot" && <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0 animate-pulse" />}
+                                  <span>{msg.text}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Controls & Sentiment Telemetry */}
+                        <div className="grid grid-cols-2 gap-3">
+                          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 flex flex-col justify-between">
+                            <span className="text-[9px] uppercase font-bold text-[#64748B]">Dialogue Simulator</span>
+                            <div className="flex items-center gap-2 mt-2">
+                              <button 
+                                onClick={() => setIsPlayingAi(!isPlayingAi)}
+                                className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-semibold transition-all text-center ${
+                                  isPlayingAi 
+                                    ? "bg-white/5 hover:bg-white/10 text-white border border-white/10" 
+                                    : "bg-[#00E5A0]/20 hover:bg-[#00E5A0]/30 text-[#00E5A0] border border-[#00E5A0]/30"
+                                }`}
+                              >
+                                {isPlayingAi ? "Pause Simulation" : "Resume Simulation"}
+                              </button>
+                              <button 
+                                onClick={() => setAiStep(0)}
+                                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white"
+                                title="Replay"
+                              >
+                                <RefreshCw className="w-3.5 h-3.5" />
+                              </button>
+                            </div>
+                          </div>
+
+                          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 flex flex-col justify-between">
+                            <span className="text-[9px] uppercase font-bold text-[#64748B]">Real-Time Sentiment</span>
+                            <div className="mt-1.5 flex flex-col gap-1">
+                              <div className="flex justify-between items-center text-[10px]">
+                                <span className="text-[#64748B]">Status:</span>
+                                <span className={`font-bold uppercase tracking-wider ${
+                                  aiScript[aiStep]?.sentiment === "positive" 
+                                    ? "text-[#00E5A0]" 
+                                    : "text-[#F59E0B]"
+                                }`}>
+                                  {aiScript[aiStep]?.sentiment || "Positive"}
+                                </span>
+                              </div>
+                              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mt-1 relative">
+                                <div 
+                                  className={`h-full bg-gradient-to-r from-[#00C2FF] to-[#00E5A0] transition-all duration-1000`}
+                                  style={{ 
+                                    width: aiScript[aiStep]?.sentiment === "positive" ? "88%" : "55%" 
+                                  }} 
+                                />
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeTab === "campaigns" && (
+                      <motion.div
+                        key="campaigns-tab"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-4"
+                      >
+                        {/* Outbound Campaigns Pipeline List */}
+                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3.5 space-y-3">
+                          <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider block">Outreach Campaign Pipeline</span>
+                          <div className="space-y-3 max-h-[145px] overflow-y-auto pr-1">
+                            {campaignList.map((c) => (
+                              <div key={c.id} className="space-y-1.5">
+                                <div className="flex justify-between text-[11px] font-semibold text-[#CBD5E1]">
+                                  <span>{c.name}</span>
+                                  <span className="text-[#00C2FF] font-mono">{c.progress}%</span>
+                                </div>
+                                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                  <div 
+                                    className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-300"
+                                    style={{ width: `${c.progress}%` }}
+                                  />
+                                </div>
+                                <div className="flex justify-between text-[9px] text-[#64748B]">
+                                  <span>Called: {c.called.toLocaleString()} / {c.total.toLocaleString()} leads</span>
+                                  <span className="text-[#22C55E] uppercase font-bold tracking-wider">{c.status}</span>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+                        </div>
+
+                        {/* Interactive Lead Uploader Dropzone Area */}
+                        <div 
+                          onClick={triggerMockUpload}
+                          className="border-2 border-dashed border-white/10 hover:border-[#8B5CF6]/50 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-white/[0.01] flex flex-col items-center justify-center space-y-2 min-h-[100px] relative overflow-hidden"
+                        >
+                          {isUploading ? (
+                            <div className="w-full space-y-2">
+                              <div className="flex justify-between text-[10px] text-[#94A3B8] font-semibold">
+                                <span className="flex items-center gap-1">
+                                  <RefreshCw className="w-3 h-3 animate-spin text-[#8B5CF6]" />
+                                  Parsing leads.csv...
+                                </span>
+                                <span>{uploadProgress}%</span>
+                              </div>
+                              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                <div 
+                                  className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-150" 
+                                  style={{ width: `${uploadProgress}%` }} 
+                                />
+                              </div>
+                              <p className="text-[8px] text-[#64748B]">Compiling and assigning SIP channels...</p>
+                            </div>
+                          ) : (
+                            <>
+                              <Upload className="w-6 h-6 text-[#64748B] hover:text-[#8B5CF6] transition-colors" />
+                              <div>
+                                <p className="text-[11px] font-bold text-[#CBD5E1]">Simulate Outbound Lead Upload</p>
+                                <p className="text-[9px] text-[#64748B] mt-0.5">Click to import leads.csv and initiate campaign dialing</p>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
                 </div>
               </div>
 
-              {/* Floating Cards */}
+              {/* Floating Cards (Interactive Badges) */}
               <motion.div
                 animate={{ y: [0, -10, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
-                className="absolute -right-8 top-12 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-48"
+                onClick={() => setActiveTab("ai")}
+                className="absolute -right-8 top-12 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-48 border border-white/10 cursor-pointer hover:border-[#00E5A0]/40 transition-colors hidden sm:block"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-md bg-[#22C55E]/20 flex items-center justify-center">
                     <Sparkles className="w-3 h-3 text-[#22C55E]" />
                   </div>
-                  <span className="text-[10px] font-medium text-[#22C55E]">AI Insight</span>
+                  <span className="text-[10px] font-bold text-[#22C55E]">AI Insight Simulator</span>
                 </div>
-                <p className="text-[10px] text-[#94A3B8]">Sentiment trending positive. Recommend upsell for Account #4521.</p>
+                <p className="text-[10px] text-[#94A3B8] leading-relaxed">Sentiment trending positive. Recommend loyalty data bundle upgrade.</p>
               </motion.div>
 
               <motion.div
                 animate={{ y: [0, 12, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                className="absolute -left-6 bottom-20 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-44"
+                onClick={() => setActiveTab("campaigns")}
+                className="absolute -left-6 bottom-20 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-44 border border-white/10 cursor-pointer hover:border-[#8B5CF6]/40 transition-colors hidden sm:block"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-md bg-[#00C2FF]/20 flex items-center justify-center">
                     <Zap className="w-3 h-3 text-[#00C2FF]" />
                   </div>
-                  <span className="text-[10px] font-medium text-[#00C2FF]">Live</span>
+                  <span className="text-[10px] font-bold text-[#00C2FF]">Live Outreach</span>
                 </div>
-                <p className="text-[10px] text-[#94A3B8]">847 active calls across 12 campaigns</p>
+                <p className="text-[10px] text-[#94A3B8] leading-relaxed">Active campaigns compiling. Click to upload CSV leads.</p>
               </motion.div>
             </div>
           </motion.div>
