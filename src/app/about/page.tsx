@@ -96,13 +96,13 @@ export default function AboutPage() {
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
                   <img 
-                    src="/Prithvi.jpg" 
+                    src="/Prithvi_ex.jpg" 
                     alt="Prithviraj Singh" 
                     className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
                   />
                   <div className="text-center sm:text-left">
                     <h3 className="text-xl font-bold text-white font-space-grotesk">Prithviraj Singh</h3>
-                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Co-Founder & Director</p>
+                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Executive Head</p>
                     <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
                   </div>
                 </div>
