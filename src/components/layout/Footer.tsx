@@ -272,9 +272,23 @@ export function Footer() {
 
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-[#475569]">
-            © {new Date().getFullYear()} DBS Mintek. All rights reserved.
-          </p>
+          <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
+            <p className="text-xs text-[#475569]">
+              © {new Date().getFullYear()} DBS Mintek. All rights reserved.
+            </p>
+            <span className="hidden sm:inline text-[#334155] text-xs">|</span>
+            <p className="text-xs text-[#475569]">
+              Made with <span className="text-[#00E5A0]">✦</span> by{" "}
+              <a 
+                href="https://dattasable.com" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-[#00E5A0] hover:text-[#00C2FF] font-medium transition-colors"
+              >
+                Datta Sable
+              </a>
+            </p>
+          </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
               Privacy Policy
