@@ -77,7 +77,7 @@ export default function AdminDashboard() {
             { label: "Global Active Tenants", value: tenants.length, icon: Database, color: "#0057D9" },
             { label: "Total Managed Seats", value: tenants.reduce((acc, t) => acc + t.agents, 0), icon: Users, color: "#00C2FF" },
             { label: "Active VoIP Channels", value: "1,842 / 2,000", icon: Server, color: "#00E5A0" },
-            { label: "Monthly Recurring Revenue", value: `₹${(tenants.reduce((acc, t) => acc + parseInt(t.billing.replace(/[^0-9]/g, "")), 0)).toLocaleString()}`, icon: IndianRupee, color: "#8B5CF6" }
+            { label: "Monthly Recurring Revenue", value: `₹${(tenants.reduce((acc, t) => acc + parseInt(t.billing.replace(/[^0-9]/g, "")), 0)).toLocaleString("en-IN")}`, icon: IndianRupee, color: "#8B5CF6" }
           ].map((stat) => {
             const Icon = stat.icon;
             return (

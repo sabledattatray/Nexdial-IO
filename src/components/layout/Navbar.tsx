@@ -53,6 +53,7 @@ const navLinks = [
           { label: "Supervisor Portal", href: "/supervisor", icon: MonitorSmartphone, desc: "Live monitoring & coaching" },
           { label: "Client Portal", href: "/client-portal", icon: LayoutDashboard, desc: "Self-service client dashboard" },
           { label: "Admin Panel", href: "/admin", icon: Shield, desc: "Multi-tenant system management" },
+          { label: "Admin Dialer", href: "/admin/dialer", icon: PhoneCall, desc: "Supervisor dashboard & live monitoring" },
         ],
       },
       {
