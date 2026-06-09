@@ -706,20 +706,7 @@ export function HeroSection() {
                 <p className="text-[10px] text-[#94A3B8] leading-relaxed">Sentiment trending positive. Recommend loyalty data bundle upgrade.</p>
               </motion.div>
 
-              <motion.div
-                animate={{ y: [0, 12, 0] }}
-                transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
-                onClick={() => setActiveTab("campaigns")}
-                className="absolute -left-6 bottom-4 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-44 border border-white/10 cursor-pointer hover:border-[#8B5CF6]/40 transition-colors hidden sm:block"
-              >
-                <div className="flex items-center gap-2 mb-1">
-                  <div className="w-5 h-5 rounded-md bg-[#00C2FF]/20 flex items-center justify-center">
-                    <Zap className="w-3 h-3 text-[#00C2FF]" />
-                  </div>
-                  <span className="text-[10px] font-bold text-[#00C2FF]">Live Outreach</span>
-                </div>
-                <p className="text-[10px] text-[#94A3B8] leading-relaxed">Active campaigns compiling. Click to upload CSV leads.</p>
-              </motion.div>
+
             </div>
           </motion.div>
         </div>
