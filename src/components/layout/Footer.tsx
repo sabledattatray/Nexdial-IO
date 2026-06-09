@@ -53,6 +53,7 @@ const footerLinks = {
     { label: "AI Contact Center", href: "/ai-platform" },
     { label: "CRM Suite", href: "/solutions#crm" },
     { label: "Dialer Platform", href: "/solutions#dialer" },
+    { label: "Admin Dialer", href: "/admin/dialer" },
     { label: "Analytics Hub", href: "/solutions#analytics" },
     { label: "Agent Portal", href: "/solutions#agent" },
     { label: "Client Portal", href: "/solutions#client" },
