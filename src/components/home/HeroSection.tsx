@@ -710,7 +710,7 @@ export function HeroSection() {
                 animate={{ y: [0, 12, 0] }}
                 transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
                 onClick={() => setActiveTab("campaigns")}
-                className="absolute -left-6 bottom-20 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-44 border border-white/10 cursor-pointer hover:border-[#8B5CF6]/40 transition-colors hidden sm:block"
+                className="absolute -left-6 bottom-4 glass-card p-3 rounded-xl shadow-xl shadow-black/20 w-44 border border-white/10 cursor-pointer hover:border-[#8B5CF6]/40 transition-colors hidden sm:block"
               >
                 <div className="flex items-center gap-2 mb-1">
                   <div className="w-5 h-5 rounded-md bg-[#00C2FF]/20 flex items-center justify-center">
