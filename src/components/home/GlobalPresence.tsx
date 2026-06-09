@@ -12,6 +12,7 @@ interface Location {
   country: string;
   role: string;
   details: string;
+  address: string;
   coordinates: { x: number; y: number };
   servers: string;
   agents: string;
@@ -27,6 +28,7 @@ const locations: Location[] = [
     country: "India",
     role: "Global Head Office & AI Development Hub",
     details: "1,200+ Seats, Tier-3 Data Center, 24/7 Operations, SOC2 & ISO 27001 Certified",
+    address: "Logix Techno Park, Tower B, 5th Floor, Sector 127, Noida, Uttar Pradesh 201301",
     coordinates: { x: 195, y: 205 },
     servers: "Primary Cloud & Local Clusters",
     agents: "800+",
@@ -36,10 +38,11 @@ const locations: Location[] = [
   },
   {
     id: "mumbai",
-    city: "Mumbai",
+    city: "Navi Mumbai",
     country: "India",
     role: "Financial CX Center & Enterprise Relations",
     details: "Financial-grade secure operations, PCI-DSS compliant BPO & backup nodes",
+    address: "Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705",
     coordinates: { x: 120, y: 445 },
     servers: "AWS Mumbai (ap-south-1)",
     agents: "450+",
@@ -53,6 +56,7 @@ const locations: Location[] = [
     country: "India",
     role: "Technology Innovation & R&D Hub",
     details: "Speech AI research, cloud telephony architecture, and system integration testing",
+    address: "Prestige Tech Park, Block B, 4th Floor, Marathahalli-Sarjapur Outer Ring Road, Bengaluru, Karnataka 560103",
     coordinates: { x: 210, y: 580 },
     servers: "Azure India Central (Pune/Bangalore)",
     agents: "350+",
@@ -66,6 +70,7 @@ const locations: Location[] = [
     country: "India",
     role: "AI Model Training & KPO Center",
     details: "Deep learning transcript optimization, agent training simulator engine support",
+    address: "Mindspace IT Park, Building 20, 8th Floor, Madhapur, Hyderabad, Telangana 500081",
     coordinates: { x: 240, y: 480 },
     servers: "Google Cloud Region (me-central2)",
     agents: "300+",
@@ -79,6 +84,7 @@ const locations: Location[] = [
     country: "India",
     role: "Omnichannel Support & Regional Hub",
     details: "Multilingual regional support, SLA tracking systems, and telecom endpoints",
+    address: "Taramani IIT Research Park, Phase II, 3rd Floor, Chennai, Tamil Nadu 600113",
     coordinates: { x: 280, y: 590 },
     servers: "AWS Mumbai Local Zone",
     agents: "250+",
@@ -92,6 +98,7 @@ const locations: Location[] = [
     country: "India",
     role: "Quality Assurance & DevOps Node",
     details: "Continuous integration pipelines, WebRTC diagnostics, and 99.99% uptime control",
+    address: "EON Free Zone, Cluster A, 2nd Floor, Kharadi, Pune, Maharashtra 411014",
     coordinates: { x: 140, y: 460 },
     servers: "AWS Mumbai / Local Nodes",
     agents: "200+",
@@ -105,6 +112,7 @@ const locations: Location[] = [
     country: "India",
     role: "East India CX & Operations Hub",
     details: "Inbound customer service, dialer campaign execution, and disaster recovery center",
+    address: "DLF IT Park 1, Tower C, 6th Floor, Major Arterial Road, New Town, Kolkata, West Bengal 700156",
     coordinates: { x: 440, y: 350 },
     servers: "Azure India South (Chennai/Kolkata)",
     agents: "180+",
@@ -311,6 +319,17 @@ export function GlobalPresence() {
                   </div>
 
                   <div className="space-y-5">
+                    {/* Official Physical Address */}
+                    <div className="flex items-start gap-4">
+                      <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-4.5 h-4.5 text-[#EF4444]" />
+                      </div>
+                      <div>
+                        <p className="text-[10px] font-semibold uppercase tracking-wider text-[#64748B]">Official Address</p>
+                        <p className="text-xs text-[#CBD5E1] mt-0.5 font-medium leading-relaxed">{activeLoc.address}</p>
+                      </div>
+                    </div>
+
                     {/* Item Details */}
                     <div className="flex items-start gap-4">
                       <div className="w-10 h-10 rounded-xl bg-white/[0.03] border border-white/[0.06] flex items-center justify-center flex-shrink-0">
