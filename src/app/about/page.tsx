@@ -139,7 +139,7 @@ export default function AboutPage() {
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[#00C2FF] via-[#0057D9] to-[#00E5A0] opacity-25 group-hover:opacity-40 transition duration-500 blur-md" />
                 <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden bg-[#060D1B]">
                   <img 
-                    src="/image1.jpg" 
+                    src="/certication.jpg" 
                     alt="PAN India prepaid retention award presentation" 
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
