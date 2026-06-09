@@ -240,7 +240,7 @@ export function HeroSection() {
                     {[
                       { label: "Active Calls", value: "847", color: "from-[#0057D9] to-[#00C2FF]", change: "+12%" },
                       { label: "CSAT Score", value: "98.2%", color: "from-[#00E5A0] to-[#00C896]", change: "+2.1%" },
-                      { label: "Revenue", value: "$2.4M", color: "from-[#8B5CF6] to-[#A78BFA]", change: "+18%" },
+                      { label: "Revenue", value: "₹20 Cr", color: "from-[#8B5CF6] to-[#A78BFA]", change: "+18%" },
                     ].map((stat) => (
                       <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3">
                         <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>

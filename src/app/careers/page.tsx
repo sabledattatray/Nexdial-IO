@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Briefcase, MapPin, Clock, DollarSign, Send, ArrowRight } from "lucide-react";
+import { Briefcase, MapPin, Clock, IndianRupee, Send, ArrowRight } from "lucide-react";
 
 const jobs = [
   {
@@ -19,7 +19,7 @@ const jobs = [
     department: "AI Research Desk",
     location: "Remote (Global)",
     type: "Full-Time",
-    salary: "$110,000 - $140,000 / Year",
+    salary: "₹90L - ₹1.2Cr / Year",
     desc: "Develop and fine-tune OpenAI RAG integrations, LLM prompt engineering, and voice bot audio transcription tuning."
   },
   {
@@ -27,7 +27,7 @@ const jobs = [
     department: "Client Services",
     location: "London / Hybrid",
     type: "Full-Time",
-    salary: "£42,000 - £50,000 / Year",
+    salary: "₹45L - ₹55L / Year",
     desc: "Oversee digital omnichannel chat agents and lead outbound dialer monitoring dashboards during EMEA schedules."
   }
 ];
@@ -91,7 +91,7 @@ export default function CareersPage() {
 
                 <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto justify-between border-t border-white/[0.04] pt-4 md:border-t-0 md:pt-0">
                   <span className="text-sm font-bold text-[#00E5A0] flex items-center gap-1">
-                    <DollarSign className="w-4 h-4" />
+                    <IndianRupee className="w-4 h-4" />
                     {job.salary}
                   </span>
                   <button

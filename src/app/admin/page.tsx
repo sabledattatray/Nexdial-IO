@@ -3,13 +3,13 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Shield, Users, Server, DollarSign, Activity, Settings, Plus, Play, Pause, Trash2, Key, Database } from "lucide-react";
+import { Shield, Users, Server, IndianRupee, Activity, Settings, Plus, Play, Pause, Trash2, Key, Database } from "lucide-react";
 
 // Mock Tenant Data
 const initialTenants = [
-  { id: "t-1", name: "Apex Financial", subdomain: "apex.dbsmintek.com", agents: 240, status: "Active", billing: "$8,400/mo" },
-  { id: "t-2", name: "Zeta E-Commerce", subdomain: "zeta.dbsmintek.com", agents: 550, status: "Active", billing: "$16,500/mo" },
-  { id: "t-3", name: "Global Medtech", subdomain: "medtech.dbsmintek.com", agents: 120, status: "Paused", billing: "$4,200/mo" }
+  { id: "t-1", name: "Apex Financial", subdomain: "apex.dbsmintek.com", agents: 240, status: "Active", billing: "₹7,00,000/mo" },
+  { id: "t-2", name: "Zeta E-Commerce", subdomain: "zeta.dbsmintek.com", agents: 550, status: "Active", billing: "₹13,70,000/mo" },
+  { id: "t-3", name: "Global Medtech", subdomain: "medtech.dbsmintek.com", agents: 120, status: "Paused", billing: "₹3,50,000/mo" }
 ];
 
 export default function AdminDashboard() {
@@ -34,7 +34,7 @@ export default function AdminDashboard() {
       subdomain: `${newSubdomain}.dbsmintek.com`,
       agents: 10,
       status: "Active",
-      billing: "$450/mo"
+      billing: "₹37,500/mo"
     };
     setTenants([...tenants, newT]);
     setNewTenantName("");
@@ -72,7 +72,7 @@ export default function AdminDashboard() {
             { label: "Global Active Tenants", value: tenants.length, icon: Database, color: "#0057D9" },
             { label: "Total Managed Seats", value: tenants.reduce((acc, t) => acc + t.agents, 0), icon: Users, color: "#00C2FF" },
             { label: "Active VoIP Channels", value: "1,842 / 2,000", icon: Server, color: "#00E5A0" },
-            { label: "Monthly Recurring Revenue", value: `$${(tenants.reduce((acc, t) => acc + parseInt(t.billing.replace(/[^0-9]/g, "")), 0)).toLocaleString()}`, icon: DollarSign, color: "#8B5CF6" }
+            { label: "Monthly Recurring Revenue", value: `₹${(tenants.reduce((acc, t) => acc + parseInt(t.billing.replace(/[^0-9]/g, "")), 0)).toLocaleString()}`, icon: IndianRupee, color: "#8B5CF6" }
           ].map((stat) => {
             const Icon = stat.icon;
             return (

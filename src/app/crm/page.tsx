@@ -6,10 +6,10 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ani
 import { Users, Phone, Plus, Trash2, ArrowRight, Kanban, CheckCircle, Clock } from "lucide-react";
 
 const initialLeads = [
-  { id: "lead-1", name: "David Miller", company: "Zeta Inc.", status: "Incoming", value: "$4,500", phone: "+1 555-0199" },
-  { id: "lead-2", name: "Sarah Connor", company: "Cyberdyne", status: "Contacted", value: "$12,000", phone: "+1 555-0182" },
-  { id: "lead-3", name: "Thomas Anderson", company: "Meta Cortex", status: "Proposal", value: "$8,500", phone: "+1 555-0133" },
-  { id: "lead-4", name: "Ellen Ripley", company: "Weyland-Yutani", status: "Closed", value: "$25,000", phone: "+1 555-0104" }
+  { id: "lead-1", name: "David Miller", company: "Zeta Inc.", status: "Incoming", value: "₹3,75,000", phone: "+1 555-0199" },
+  { id: "lead-2", name: "Sarah Connor", company: "Cyberdyne", status: "Contacted", value: "₹10,00,000", phone: "+1 555-0182" },
+  { id: "lead-3", name: "Thomas Anderson", company: "Meta Cortex", status: "Proposal", value: "₹7,00,000", phone: "+1 555-0133" },
+  { id: "lead-4", name: "Ellen Ripley", company: "Weyland-Yutani", status: "Closed", value: "₹20,00,000", phone: "+1 555-0104" }
 ];
 
 const pipelines = ["Incoming", "Contacted", "Proposal", "Closed"];
@@ -28,7 +28,7 @@ export default function CRMDashboard() {
       id: `lead-${Date.now()}`,
       name,
       company,
-      value: `$${parseInt(value).toLocaleString()}`,
+      value: `₹${parseInt(value).toLocaleString("en-IN")}`,
       status,
       phone: "+1 555-0100"
     };
@@ -162,7 +162,7 @@ export default function CRMDashboard() {
               </div>
 
               <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-[#64748B]">Deals Value (USD)</label>
+                <label className="text-[10px] font-bold uppercase text-[#64748B]">Deals Value (INR)</label>
                 <input
                   type="number"
                   required

@@ -61,7 +61,7 @@ const plans = [
 ];
 
 export default function PricingPage() {
-  const [currency, setCurrency] = useState<"USD" | "INR">("USD");
+  const [currency, setCurrency] = useState<"USD" | "INR">("INR");
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
   
   // Custom Quote Calculator state

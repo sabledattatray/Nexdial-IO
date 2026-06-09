@@ -150,7 +150,7 @@ export function AICapabilities() {
               <div className="p-3 rounded-lg bg-[#0057D9]/10 border border-[#0057D9]/30 text-[#00E5A0] flex items-start gap-2.5">
                 <Sparkles className="w-4 h-4 text-[#00E5A0] mt-0.5 flex-shrink-0" />
                 <div>
-                  <span className="font-bold">AI Suggestion:</span> &ldquo;Recommend the Enterprise tier. Auto-calculate billing prorated: $420/mo additional.&rdquo;
+                  <span className="font-bold">AI Suggestion:</span> &ldquo;Recommend the Enterprise tier. Auto-calculate billing prorated: ₹35,000/mo additional.&rdquo;
                   <div className="mt-2 flex gap-2">
                     <button className="px-2 py-1 rounded bg-[#0057D9] text-[10px] text-white hover:bg-blue-600 transition">Auto-Send Quote</button>
                     <button className="px-2 py-1 rounded bg-white/5 text-[10px] text-white hover:bg-white/10 transition">Open SLA Details</button>
