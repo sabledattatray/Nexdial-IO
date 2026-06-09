@@ -74,6 +74,7 @@ export default function RootLayout({
       <body
         className="min-h-full flex flex-col"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
+        suppressHydrationWarning
       >
         <Navbar />
         <main className="flex-1">{children}</main>

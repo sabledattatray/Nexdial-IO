@@ -1,4 +1,7 @@
+"use client";
+
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import {
   Phone,
   Mail,
@@ -100,6 +103,11 @@ const badges = [
 ];
 
 export function Footer() {
+  const pathname = usePathname();
+  if (pathname && (pathname === "/dialer" || pathname === "/admin/dialer")) {
+    return null;
+  }
+
   return (
     <footer className="relative bg-[#060D1B] border-t border-white/[0.04]">
       {/* CTA Banner */}
