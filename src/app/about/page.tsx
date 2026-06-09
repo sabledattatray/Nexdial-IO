@@ -118,6 +118,69 @@ export default function AboutPage() {
           </div>
         </AnimatedSection>
 
+        {/* Award/Certification Section */}
+        <AnimatedSection className="mb-20">
+          <div className="text-center max-w-xl mx-auto mb-12">
+            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+              National Recognition & Awards
+            </h2>
+            <p className="text-[#64748B] text-sm mt-2">
+              DBS Mintek's commitment to operational excellence and delivery performance.
+            </p>
+          </div>
+
+          <div className="glass-card-strong p-8 lg:p-12 rounded-3xl border border-white/[0.06] shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#00C2FF]/5 blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#00E5A0]/5 blur-[100px] pointer-events-none" />
+            
+            <div className="grid md:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
+              {/* Image Frame */}
+              <div className="md:col-span-5 relative group">
+                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[#00C2FF] via-[#0057D9] to-[#00E5A0] opacity-25 group-hover:opacity-40 transition duration-500 blur-md" />
+                <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden bg-[#060D1B]">
+                  <img 
+                    src="/image1.jpg" 
+                    alt="PAN India prepaid retention award presentation" 
+                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
+                  />
+                </div>
+              </div>
+
+              {/* Award Content */}
+              <div className="md:col-span-7 space-y-6 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-xs font-semibold text-[#00E5A0]">
+                  <Award className="w-3.5 h-3.5" />
+                  PAN India Award
+                </div>
+                
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight font-space-grotesk">
+                  2nd Position PAN India <br />
+                  <span className="gradient-text">Prepaid Retention Process</span>
+                </h3>
+                
+                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-xs sm:text-sm text-[#94A3B8]">
+                  Awarded by <span className="text-white font-bold">Mr. Navnit Shukla</span> — SD Head Vi (Maharashtra & GOA)
+                </div>
+
+                <div className="space-y-4 text-xs sm:text-sm text-[#CBD5E1] leading-relaxed">
+                  <p>
+                    We are proud to announce that DBS MINTEK has achieved 2nd position PAN India in the Prepaid Retention Process, receiving this award from Mr. Navnit Shukla- SD Head Vi ( Maharashtra & GOA).
+                  </p>
+                  <p>
+                    This recognition reflects our team’s dedication, consistent efforts, customer-first approach, and strong focus on performance excellence.
+                  </p>
+                  <p>
+                    A big thank you to our client leadership for their trust and guidance, and heartfelt congratulations to the entire DBS MINTEK team for making this achievement possible.
+                  </p>
+                  <p className="font-semibold text-white">
+                    This is just the beginning — we will continue to work harder, perform better, and aim for the No. 1 position.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </AnimatedSection>
+
         {/* Pillars Section */}
         <AnimatedSection className="mb-20">
           <div className="text-center max-w-xl mx-auto mb-12">
