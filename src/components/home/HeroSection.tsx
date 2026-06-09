@@ -142,8 +142,8 @@ export function HeroSection() {
 
   // Campaigns Tab live simulation
   const [campaignList, setCampaignList] = useState([
-    { id: 1, name: "VI Prepaid Retention", progress: 84, called: 2432, total: 3000, status: "Active" },
-    { id: 2, name: "Mahindra Collection", progress: 62, called: 1860, total: 3000, status: "Active" },
+    { id: 1, name: "Predective dialing", progress: 84, called: 2432, total: 3000, status: "Active" },
+    { id: 2, name: "Promise to Pay (PTP) Follow-Up", progress: 62, called: 1860, total: 3000, status: "Active" },
   ]);
   const [uploadProgress, setUploadProgress] = useState(0);
   const [isUploading, setIsUploading] = useState(false);
@@ -226,17 +226,30 @@ export function HeroSection() {
         clearInterval(interval);
         setTimeout(() => {
           setIsUploading(false);
-          setCampaignList((prev) => [
-            ...prev,
-            { 
-              id: prev.length + 1, 
-              name: `Campaign #${prev.length + 1} (Uploaded Leads)`, 
-              progress: 0, 
-              called: 0, 
-              total: 2500, 
-              status: "Active" 
-            }
-          ]);
+          setCampaignList((prev) => {
+            const remaining = [
+              "Broken PTP Campaign",
+              "Settlement Offer Campaign",
+              "Skip Trace Campaign",
+              "Re-Aging Campaign",
+              "Customer Retention Collections",
+              "Deceased Account Verification",
+              "Bankruptcy Verification"
+            ];
+            const index = (prev.length - 2) % remaining.length;
+            const campaignName = index >= 0 && index < remaining.length ? remaining[index] : `Campaign #${prev.length + 1}`;
+            return [
+              ...prev,
+              { 
+                id: prev.length + 1, 
+                name: campaignName, 
+                progress: 0, 
+                called: 0, 
+                total: 2500, 
+                status: "Active" 
+              }
+            ];
+          });
         }, 1000);
       }
     }, 150);

@@ -11,12 +11,12 @@ const faqCategories = [
     name: "General & SaaS",
     items: [
       {
-        q: "What is DBS Mintek?",
-        a: "DBS Mintek is an enterprise-grade Contact Center Operating System (CCOS) combined with professional BPO services. It integrates CRM systems, outbound dialers, Voice AI agents, auto quality assurance, and multi-tenant portals into a single dashboard.",
+        q: "What is DBS Mintek®?",
+        a: "DBS Mintek® is an enterprise-grade Contact Center Operating System (CCOS) combined with professional BPO services. It integrates CRM systems, outbound dialers, Voice AI agents, auto quality assurance, and multi-tenant portals into a single dashboard.",
       },
       {
-        q: "Does DBS Mintek support multi-tenancy?",
-        a: "Yes, absolutely. DBS Mintek was designed from the ground up to support unlimited independent organizations (tenants). Each tenant gets its own configuration settings, sub-domains, branding, agent teams, dialers, and database clusters.",
+        q: "Does DBS Mintek® support multi-tenancy?",
+        a: "Yes, absolutely. DBS Mintek® was designed from the ground up to support unlimited independent organizations (tenants). Each tenant gets its own configuration settings, sub-domains, branding, agent teams, dialers, and database clusters.",
       },
       {
         q: "Can I host this on my own private cloud?",
@@ -30,7 +30,7 @@ const faqCategories = [
     items: [
       {
         q: "Which VoIP providers are supported?",
-        a: "DBS Mintek integrates directly with Asterisk, FreePBX, Vicidial, Twilio, Exotel, and any standard SIP-compliant trunk provider.",
+        a: "DBS Mintek® integrates directly with Asterisk, FreePBX, Vicidial, Twilio, Exotel, and any standard SIP-compliant trunk provider.",
       },
       {
         q: "What dialing modes are available?",
@@ -47,7 +47,7 @@ const faqCategories = [
     name: "AI & Compliance",
     items: [
       {
-        q: "Is DBS Mintek HIPAA compliant?",
+        q: "Is DBS Mintek® HIPAA compliant?",
         a: "Yes, all patient data streams, dialer campaigns, and recording repositories meet HIPAA standards with end-to-end TLS/AES encryption, BAA contracts, and database audit logs.",
       },
       {

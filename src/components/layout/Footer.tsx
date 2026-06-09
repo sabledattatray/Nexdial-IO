@@ -10,6 +10,7 @@ import {
   Award,
   Globe,
   Zap,
+  Headphones,
 } from "lucide-react";
 
 // Inline social SVGs
@@ -123,7 +124,7 @@ export function Footer() {
               </h2>
               <p className="text-[#94A3B8] text-lg mb-8 max-w-2xl mx-auto">
                 Join 500+ enterprises that have elevated their customer experience with
-                DBS Mintek&apos;s AI-powered platform.
+                DBS Mintek®&apos;s AI-powered platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/request-demo" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
@@ -145,15 +146,18 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8 lg:gap-6">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 mb-6">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center">
-                <span className="text-white font-extrabold text-lg">D</span>
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
+              <div className="relative w-10 h-10">
+                <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
+                  <Headphones className="w-5 h-5 text-white stroke-[2.5] transition-transform duration-300 group-hover:rotate-12" />
+                </div>
+                <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#0057D9]/30 to-[#00C2FF]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
-              <div>
-                <span className="text-white font-extrabold text-xl tracking-tight block leading-none">
-                  DBS Mintek
+              <div className="flex flex-col">
+                <span className="text-white font-extrabold text-xl tracking-tight leading-none">
+                  DBS Mintek®
                 </span>
-                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase">
+                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase leading-none mt-2">
                   Contact Center OS
                 </span>
               </div>
@@ -275,11 +279,11 @@ export function Footer() {
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <p className="text-xs text-[#475569]">
-              © {new Date().getFullYear()} DBS Mintek Pvt. Ltd. All rights reserved.
+              © {new Date().getFullYear()} DBS Mintek®. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#334155] text-xs">|</span>
             <p className="text-xs text-[#475569]">
-              Made with <span className="text-[#00E5A0]">✦</span> by{" "}
+              Made for <span className="text-[#00E5A0] font-medium">High Performance</span> by{" "}
               <a 
                 href="https://dattasable.com" 
                 target="_blank" 
@@ -300,7 +304,7 @@ export function Footer() {
             <Link href="/security" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
               Security
             </Link>
-            <Link href="/sitemap.xml" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
+            <Link href="/sitemap" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
               Sitemap
             </Link>
           </div>

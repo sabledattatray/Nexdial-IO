@@ -39,7 +39,7 @@ export default function BlogPage() {
         {/* Header */}
         <AnimatedSection className="text-center max-w-2xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#8B5CF6] uppercase tracking-widest px-3 py-1 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20">
-            DBS Mintek Blog
+            DBS Mintek® Blog
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white mt-6 leading-tight">
             Enterprise CX & <span className="gradient-text">AI Insights</span>

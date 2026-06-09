@@ -138,7 +138,7 @@ export function ContactSection() {
                   <Building className="w-5 h-5 text-[#00E5A0]" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">DBS MINTEK PVT. LTD</span>
+                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">DBS Mintek®</span>
                   <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
                     Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
                   </p>

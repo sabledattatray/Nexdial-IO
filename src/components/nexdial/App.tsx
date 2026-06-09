@@ -501,7 +501,7 @@ export default function App({ mode }: AppProps) {
         </>
       )}
 
-      {/* MOBILE TRIGGER HEADER (rendered only when embedded in DBS Mintek to toggle sidebar) */}
+      {/* MOBILE TRIGGER HEADER (rendered only when embedded in DBS Mintek® to toggle sidebar) */}
       {currentSection === 'applet' && mode && (
         <header className="md:hidden h-11 border-b border-slate-800 flex items-center px-4 bg-[#0E0E10] z-20">
           <button

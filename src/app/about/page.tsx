@@ -42,13 +42,13 @@ export default function AboutPage() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            About DBS Mintek
+            About DBS Mintek®
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
             Pioneering the Future of <span className="gradient-text">Customer CX</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4 leading-relaxed">
-            DBS Mintek is a global Contact Center Operating System and premium BPO provider. We merge enterprise CRM, predictive dialing, and advanced cognitive AI to streamline enterprise outreach and inbound support.
+            DBS Mintek® is a global Contact Center Operating System and premium BPO provider. We merge enterprise CRM, predictive dialing, and advanced cognitive AI to streamline enterprise outreach and inbound support.
           </p>
         </AnimatedSection>
 
@@ -59,7 +59,7 @@ export default function AboutPage() {
               Our Leadership Team
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              The leadership driving DBS Mintek's global expansion and operational success.
+              The leadership driving DBS Mintek®'s global expansion and operational success.
             </p>
           </div>
 
@@ -77,14 +77,14 @@ export default function AboutPage() {
                   <div className="text-center sm:text-left">
                     <h3 className="text-xl font-bold text-white font-space-grotesk">Shiv Singh</h3>
                     <p className="text-xs text-[#00C2FF] font-semibold mt-0.5">Owner & Founder</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
                   </div>
                 </div>
 
                 <div className="relative">
                   <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
                   <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    As the owner of DBS MINTEK PVT. LTD, I have been leading a successful business consulting firm for over 16 years. My expertise lies in providing strategic guidance to clients across various industries, helping them navigate complex challenges and achieve their goals. Our mission is to empower businesses to grow and thrive in today&apos;s competitive landscape.
+                    As the owner of DBS Mintek®, I have been leading a successful business consulting firm for over 16 years. My expertise lies in providing strategic guidance to clients across various industries, helping them navigate complex challenges and achieve their goals. Our mission is to empower businesses to grow and thrive in today&apos;s competitive landscape.
                   </p>
                 </div>
               </div>
@@ -103,7 +103,7 @@ export default function AboutPage() {
                   <div className="text-center sm:text-left">
                     <h3 className="text-xl font-bold text-white font-space-grotesk">Prithviraj Singh</h3>
                     <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Executive Head</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
                   </div>
                 </div>
 
@@ -129,7 +129,7 @@ export default function AboutPage() {
                   <div className="text-center sm:text-left">
                     <h3 className="text-xl font-bold text-white font-space-grotesk">Ajay Giri</h3>
                     <p className="text-xs text-[#A855F7] font-semibold mt-0.5">Vice President</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS MINTEK PVT. LTD</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
                   </div>
                 </div>
 
@@ -151,7 +151,7 @@ export default function AboutPage() {
               National Recognition & Awards
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              DBS Mintek's commitment to operational excellence and delivery performance.
+              DBS Mintek®'s commitment to operational excellence and delivery performance.
             </p>
           </div>
 
@@ -190,13 +190,13 @@ export default function AboutPage() {
 
                 <div className="space-y-4 text-xs sm:text-sm text-[#CBD5E1] leading-relaxed">
                   <p>
-                    We are proud to announce that DBS MINTEK has achieved 2nd position PAN India in the Prepaid Retention Process, receiving this award from Mr. Navnit Shukla- SD Head Vi ( Maharashtra & GOA).
+                    We are proud to announce that DBS Mintek® has achieved 2nd position PAN India in the Prepaid Retention Process, receiving this award from Mr. Navnit Shukla- SD Head Vi ( Maharashtra & GOA).
                   </p>
                   <p>
                     This recognition reflects our team’s dedication, consistent efforts, customer-first approach, and strong focus on performance excellence.
                   </p>
                   <p>
-                    A big thank you to our client leadership for their trust and guidance, and heartfelt congratulations to the entire DBS MINTEK team for making this achievement possible.
+                    A big thank you to our client leadership for their trust and guidance, and heartfelt congratulations to the entire DBS Mintek® team for making this achievement possible.
                   </p>
                   <p className="font-semibold text-white">
                     This is just the beginning — we will continue to work harder, perform better, and aim for the No. 1 position.
@@ -273,7 +273,7 @@ export default function AboutPage() {
         <AnimatedSection className="glass-card-strong p-8 lg:p-12 text-center">
           <h3 className="text-xl font-bold text-white mb-4">Enterprise Compliance & Security Assured</h3>
           <p className="text-[#94A3B8] text-sm max-w-2xl mx-auto mb-8">
-            DBS Mintek processes millions of calls and transactions securely every single day. We undergo continuous audit scans to meet HIPAA, GDPR, SOC2 Type II, and ISO requirements.
+            DBS Mintek® processes millions of calls and transactions securely every single day. We undergo continuous audit scans to meet HIPAA, GDPR, SOC2 Type II, and ISO requirements.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             {["SOC2 Type II Certified", "GDPR Data Sovereign", "HIPAA Health Compliance", "ISO 27001 ISMS"].map((cert) => (

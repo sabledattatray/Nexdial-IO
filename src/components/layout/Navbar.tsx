@@ -193,15 +193,15 @@ export function Navbar() {
             <Link href="/" className="flex items-center gap-3 group">
               <div className="relative w-10 h-10">
                 <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center transform group-hover:scale-110 transition-transform duration-300">
-                  <span className="text-white font-extrabold text-lg">D</span>
+                  <Headphones className="w-5 h-5 text-white stroke-[2.5] transition-transform duration-300 group-hover:rotate-12" />
                 </div>
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#0057D9]/30 to-[#00C2FF]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-extrabold text-xl tracking-tight leading-none">
-                  DBS Mintek
+                  DBS Mintek®
                 </span>
-                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase leading-none mt-0.5">
+                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase leading-none mt-2">
                   Contact Center OS
                 </span>
               </div>

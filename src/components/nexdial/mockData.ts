@@ -118,7 +118,7 @@ export const INITIAL_SCRIPTS: ScriptTemplate[] = [
 export const INITIAL_CAMPAIGNS: Campaign[] = [
   {
     id: 'cam-1',
-    name: 'Healthcare Patient Surveys Q2',
+    name: 'Predective dialing',
     type: 'AI Bot',
     status: 'Active',
     contactsCount: 1530,
@@ -130,7 +130,7 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
   },
   {
     id: 'cam-2',
-    name: 'SaaS SaaS Leads Power Dialer',
+    name: 'Promise to Pay (PTP) Follow-Up',
     type: 'Outbound',
     status: 'Active',
     contactsCount: 450,
@@ -142,7 +142,7 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
   },
   {
     id: 'cam-3',
-    name: 'Inbound Customer Escalation Service',
+    name: 'Broken PTP Campaign',
     type: 'Inbound',
     status: 'Active',
     contactsCount: 890,
@@ -154,7 +154,7 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
   },
   {
     id: 'cam-4',
-    name: 'SMS Broadcaster: Payment Reminders',
+    name: 'Settlement Offer Campaign',
     type: 'SMS',
     status: 'Completed',
     contactsCount: 2300,
@@ -163,6 +163,66 @@ export const INITIAL_CAMPAIGNS: Campaign[] = [
     scriptId: 'sc-3',
     scheduleDate: '2026-05-18',
     agentsAssigned: []
+  },
+  {
+    id: 'cam-5',
+    name: 'Skip Trace Campaign',
+    type: 'Outbound',
+    status: 'Active',
+    contactsCount: 1200,
+    calledCount: 450,
+    successRate: 58.6,
+    scriptId: 'sc-2',
+    scheduleDate: '2026-05-24',
+    agentsAssigned: ['ag-2']
+  },
+  {
+    id: 'cam-6',
+    name: 'Re-Aging Campaign',
+    type: 'Outbound',
+    status: 'Paused',
+    contactsCount: 800,
+    calledCount: 210,
+    successRate: 49.8,
+    scriptId: 'sc-2',
+    scheduleDate: '2026-05-25',
+    agentsAssigned: ['ag-3']
+  },
+  {
+    id: 'cam-7',
+    name: 'Customer Retention Collections',
+    type: 'AI Bot',
+    status: 'Active',
+    contactsCount: 1400,
+    calledCount: 650,
+    successRate: 72.1,
+    scriptId: 'sc-3',
+    scheduleDate: '2026-05-22',
+    agentsAssigned: ['agent-ai']
+  },
+  {
+    id: 'cam-8',
+    name: 'Deceased Account Verification',
+    type: 'Outbound',
+    status: 'Active',
+    contactsCount: 300,
+    calledCount: 112,
+    successRate: 85.4,
+    scriptId: 'sc-1',
+    scheduleDate: '2026-05-23',
+    agentsAssigned: ['ag-1']
+  },
+  {
+    id: 'cam-9',
+    name: 'Bankruptcy Verification',
+    type: 'Inbound',
+    status: 'Active',
+    contactsCount: 500,
+    calledCount: 490,
+    successRate: 94.2,
+    scriptId: 'sc-1',
+    scheduleDate: '2026-05-22',
+    agentsAssigned: ['ag-2', 'ag-3']
   }
 ];
 

@@ -9,7 +9,7 @@ import Link from "next/link";
 const articles = [
   {
     category: "VoIP Telephony",
-    title: "Mapping Vicidial Campaign Trunks to DBS Mintek Route queues",
+    title: "Mapping Vicidial Campaign Trunks to DBS Mintek® Route queues",
     desc: "Configure Asterisk dynamic routing priorities to distribute incoming callers to active agent groups.",
     icon: Server,
     color: "#0057D9"
@@ -56,7 +56,7 @@ export default function KnowledgeCenterPage() {
         {/* Header */}
         <AnimatedSection className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            DBS Mintek Documentation
+            DBS Mintek® Documentation
           </span>
           <h1 className="text-4xl font-extrabold text-white mt-6">
             Knowledge & <span className="gradient-text">Developer Center</span>

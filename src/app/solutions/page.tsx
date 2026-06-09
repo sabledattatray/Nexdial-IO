@@ -67,7 +67,7 @@ const solutions = [
     title: "Multi-Tenant SaaS Panel",
     subtitle: "White-Label & Sub-Domain Architecture",
     icon: Shield,
-    desc: "Deploy dbs-mintek for multiple branches, external BPOs, or re-sell it as your own SaaS platform. Independent branding, billing, users, campaigns, and databases per tenant.",
+    desc: "Deploy DBS Mintek® for multiple branches, external BPOs, or re-sell it as your own SaaS platform. Independent branding, billing, users, campaigns, and databases per tenant.",
     features: [
       "White-label branding & custom domain mapping",
       "Independent databases, Redis instances, and keys",
@@ -97,7 +97,7 @@ export default function SolutionsPage() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            DBS Mintek Solutions
+            DBS Mintek® Solutions
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
             Built for the Modern <span className="gradient-text">Enterprise Center</span>
