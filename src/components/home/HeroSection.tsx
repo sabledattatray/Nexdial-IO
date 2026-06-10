@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, Play, ArrowRight, Sparkles, BarChart2, Activity, Database, Volume2, Upload, RefreshCw } from "lucide-react";
 import Link from "next/link";
@@ -264,6 +264,24 @@ export function HeroSection() {
     return acc + `${i === 0 ? "M" : "L"} ${x},${y}`;
   }, "");
 
+  // Pre-compute stable equalizer bar values (avoids SSR/client hydration mismatch from Math.random() in JSX)
+  const equalizerBars = useMemo(() => {
+    const channels = [
+      { id: "ch-01", barCount: 16, speed: 0.5 },
+      { id: "ch-02", barCount: 16, speed: 0.3 },
+      { id: "ch-03", barCount: 16, speed: 0.6 },
+    ];
+    // Deterministic pseudo-random using a simple LCG seeded by index
+    const lcg = (seed: number) => ((seed * 1664525 + 1013904223) & 0x7fffffff) / 0x7fffffff;
+    return channels.map((ch) =>
+      Array.from({ length: ch.barCount }, (_, idx) => {
+        const h = lcg(idx * 31 + ch.barCount) * 80 + 20;
+        const s = ch.speed + lcg(idx * 17 + ch.barCount * 3) * 0.4;
+        return { height: `${Math.floor(h)}%`, duration: `${s.toFixed(4)}s` };
+      })
+    );
+  }, []);
+
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
       {/* Background Layers */}
@@ -500,11 +518,10 @@ export function HeroSection() {
                             </span>
                           </div>
                           
-                          <div className="space-y-2">
-                            {[
-                              { id: "ch-01", name: "Outbound VoIP Trunk 01", type: "SIP Session • Live", color: "from-[#0057D9] to-[#00C2FF]", barCount: 16, speed: 0.5 },
-                              { id: "ch-02", name: "AI Voice Bot Gateway 04", type: "Gemini voice-v1 • Streaming", color: "from-[#00E5A0] to-[#00C896]", barCount: 16, speed: 0.3 },
-                              { id: "ch-03", name: "Omnichannel Gateway 09", type: "WebRTC Endpoint • Connected", color: "from-[#8B5CF6] to-[#A78BFA]", barCount: 16, speed: 0.6 },
+                          <div className="spac                             {[
+                              { id: "ch-01", name: "Outbound VoIP Trunk 01", type: "SIP Session • Live", color: "from-[#0057D9] to-[#00C2FF]", barCount: 16, speed: 0.5, chIdx: 0 },
+                              { id: "ch-02", name: "AI Voice Bot Gateway 04", type: "Gemini voice-v1 • Streaming", color: "from-[#00E5A0] to-[#00C896]", barCount: 16, speed: 0.3, chIdx: 1 },
+                              { id: "ch-03", name: "Omnichannel Gateway 09", type: "WebRTC Endpoint • Connected", color: "from-[#8B5CF6] to-[#A78BFA]", barCount: 16, speed: 0.6, chIdx: 2 },
                             ].map((ch) => (
                               <div key={ch.id} className="p-2 rounded-lg bg-[#081120] border border-white/[0.04] flex items-center justify-between gap-4">
                                 <div className="space-y-0.5">
@@ -512,21 +529,21 @@ export function HeroSection() {
                                   <span className="text-[8px] text-[#64748B] uppercase tracking-widest">{ch.type}</span>
                                 </div>
                                 
-                                {/* Equalizer waveform visualizer */}
+                                {/* Equalizer waveform visualizer — stable values from useMemo */}
                                 <div className="flex-1 flex gap-0.5 h-6 items-end justify-end max-w-[120px]">
-                                  {[...Array(ch.barCount)].map((_, idx) => (
+                                  {equalizerBars[ch.chIdx].map((bar, idx) => (
                                     <span 
                                       key={idx} 
                                       className={`w-0.5 rounded-sm bg-gradient-to-t ${ch.color}`}
                                       style={{ 
-                                        height: `${Math.floor(Math.random() * 80) + 20}%`,
-                                        animation: `equalize ${ch.speed + Math.random() * 0.4}s ease-in-out infinite alternate` 
+                                        height: bar.height,
+                                        animation: `equalize ${bar.duration} ease-in-out infinite alternate` 
                                       }}
                                     />
                                   ))}
                                 </div>
                               </div>
-                            ))}
+                            ))}           ))}
                           </div>
                         </div>
                       </motion.div>

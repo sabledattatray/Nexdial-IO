@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
@@ -356,9 +357,12 @@ export function Navbar() {
                   className="flex items-center gap-2.5 bg-white/[0.03] hover:bg-white/[0.06] border border-white/[0.08] pl-2.5 pr-3.5 py-1.5 rounded-full transition-all cursor-pointer"
                 >
                   {agentAvatar ? (
-                    <img 
+                    <Image 
                       src={agentAvatar} 
                       alt={agentName} 
+                      width={28}
+                      height={28}
+                      unoptimized
                       className="w-7 h-7 rounded-full border border-[#00C2FF]/30 object-cover" 
                     />
                   ) : (
@@ -385,9 +389,12 @@ export function Navbar() {
                     <div className="absolute right-0 mt-2.5 w-64 glass-card-strong !bg-[#0F172A] border border-white/[0.08] shadow-2xl p-4 rounded-2xl z-20 space-y-3 animate-fade-in font-sans">
                       <div className="flex items-center gap-3 pb-3 border-b border-white/[0.04]">
                         {agentAvatar ? (
-                          <img 
+                          <Image 
                             src={agentAvatar} 
                             alt={agentName} 
+                            width={40}
+                            height={40}
+                            unoptimized
                             className="w-10 h-10 rounded-full border border-[#00C2FF]/30" 
                           />
                         ) : (

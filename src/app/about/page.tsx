@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
 import { Shield, Target, Award, Users, MapPin, Zap } from "lucide-react";
@@ -69,9 +70,11 @@ export default function AboutPage() {
               <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#0057D9]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <img 
+                  <Image 
                     src="/Shiv_Singh.jpg" 
                     alt="Shiv Singh" 
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
                   />
                   <div className="text-center sm:text-left">
@@ -95,9 +98,11 @@ export default function AboutPage() {
               <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-[#00E5A0]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <img 
+                  <Image 
                     src="/Prithvi_ex.jpg" 
                     alt="Prithviraj Singh" 
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
                   />
                   <div className="text-center sm:text-left">
@@ -121,9 +126,11 @@ export default function AboutPage() {
               <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#A855F7]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <img 
+                  <Image 
                     src="/ajay_giri.jpg" 
                     alt="Ajay Giri" 
+                    width={96}
+                    height={96}
                     className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
                   />
                   <div className="text-center sm:text-left">
@@ -164,9 +171,11 @@ export default function AboutPage() {
               <div className="md:col-span-5 relative group">
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[#00C2FF] via-[#0057D9] to-[#00E5A0] opacity-25 group-hover:opacity-40 transition duration-500 blur-md" />
                 <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden bg-[#060D1B]">
-                  <img 
+                  <Image 
                     src="/certication.jpg" 
                     alt="PAN India prepaid retention award presentation" 
+                    width={600}
+                    height={400}
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
                   />
                 </div>

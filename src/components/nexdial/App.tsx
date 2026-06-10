@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Image from 'next/image';
 import { 
   Users, Bot, Layers, BarChart3, ShieldCheck, Heart, Sparkles, Phone, PhoneCall, ChevronUp, ChevronDown, 
   X, Briefcase, Globe, Star, Activity, User, Server, Terminal, ExternalLink, Sun, Moon, LogOut, Key,
@@ -359,9 +360,12 @@ export default function App({ mode }: AppProps) {
                   <span className="text-slate-400 font-mono hidden xs:inline">Rep Account: </span>
                   <div className="flex items-center gap-1.5 bg-slate-900/60 pl-1.5 pr-2.5 py-0.5 rounded-full border border-slate-800">
                     {currentAgentAvatar ? (
-                      <img 
+                      <Image 
                         src={currentAgentAvatar} 
                         alt={currentAgentName} 
+                        width={14}
+                        height={14}
+                        unoptimized
                         referrerPolicy="no-referrer"
                         className="w-3.5 h-3.5 rounded-full border border-indigo-500/30" 
                       />

@@ -17,6 +17,7 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://dbs-mintek-xi.vercel.app"),
   title: {
     default: "DBS Mintek® — AI-Powered Enterprise Contact Center Platform",
     template: "%s | DBS Mintek®",
@@ -53,6 +54,20 @@ export const metadata: Metadata = {
     description:
       "Transform customer conversations into business growth with AI-powered omnichannel CX solutions.",
   },
+  icons: {
+    icon: [
+      { url: "/icon", type: "image/png", sizes: "512x512" },
+      { url: "/icon", type: "image/png", sizes: "32x32" },
+      { url: "/icon", type: "image/png", sizes: "16x16" },
+    ],
+    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
+    shortcut: "/icon",
+  },
+  manifest: "/manifest.json",
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#081120" },
+    { media: "(prefers-color-scheme: light)", color: "#4F46E5" },
+  ],
   robots: {
     index: true,
     follow: true,

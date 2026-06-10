@@ -64,13 +64,15 @@
 }
 
 @layer components {
-  /* Glassmorphism Card */
+  /* Glassmorphism Card — GPU-accelerated */
   .glass-card {
     background: var(--glass-bg);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
     border: 1px solid var(--glass-border);
     border-radius: 16px;
+    will-change: transform;
+    contain: layout style;
   }
 
   .glass-card-strong {
@@ -79,6 +81,8 @@
     -webkit-backdrop-filter: blur(40px);
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 20px;
+    will-change: transform;
+    contain: layout style;
   }
 
   /* Gradient Text */
@@ -297,6 +301,12 @@
   .text-balance {
     text-wrap: balance;
   }
+
+  /* Defer rendering of off-screen sections */
+  .content-auto {
+    content-visibility: auto;
+    contain-intrinsic-size: auto 600px;
+  }
 }
 
 /* Keyframe Animations */
@@ -409,5 +419,17 @@
 @media (max-width: 480px) {
   .section-title {
     font-size: 1.75rem;
+  }
+}
+
+/* Respect user preference — disable animations to save CPU */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
   }
 }
