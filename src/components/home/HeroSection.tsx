@@ -518,7 +518,8 @@ export function HeroSection() {
                             </span>
                           </div>
                           
-                          <div className="spac                             {[
+                          <div className="space-y-2">
+                            {[
                               { id: "ch-01", name: "Outbound VoIP Trunk 01", type: "SIP Session • Live", color: "from-[#0057D9] to-[#00C2FF]", barCount: 16, speed: 0.5, chIdx: 0 },
                               { id: "ch-02", name: "AI Voice Bot Gateway 04", type: "Gemini voice-v1 • Streaming", color: "from-[#00E5A0] to-[#00C896]", barCount: 16, speed: 0.3, chIdx: 1 },
                               { id: "ch-03", name: "Omnichannel Gateway 09", type: "WebRTC Endpoint • Connected", color: "from-[#8B5CF6] to-[#A78BFA]", barCount: 16, speed: 0.6, chIdx: 2 },
@@ -543,7 +544,7 @@ export function HeroSection() {
                                   ))}
                                 </div>
                               </div>
-                            ))}           ))}
+                            ))}
                           </div>
                         </div>
                       </motion.div>
