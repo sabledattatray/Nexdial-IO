@@ -3,7 +3,7 @@
 import { useRef, useEffect } from "react";
 import { useInView } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Users, Headphones, Clock, ThumbsUp, Server } from "lucide-react";
+import { Users, Headphones, Clock, ThumbsUp, Server, Zap } from "lucide-react";
 
 const stats = [
   {
@@ -50,6 +50,15 @@ const stats = [
     description: "Enterprise-grade uptime",
     color: "#F59E0B",
     gradient: "from-[#F59E0B] to-[#FBBF24]",
+  },
+  {
+    icon: Zap,
+    value: 50,
+    suffix: "M+",
+    label: "AI Interactions",
+    description: "Automated conversations handled",
+    color: "#EC4899",
+    gradient: "from-[#EC4899] to-[#F472B6]",
   },
 ];
 
@@ -104,7 +113,7 @@ export function LiveStatistics() {
           </p>
         </AnimatedSection>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-4 lg:gap-6">
           {stats.map((stat, index) => (
             <AnimatedSection key={stat.label} delay={index * 0.1}>
               <div className="glass-card group hover:border-white/[0.12] transition-all duration-500 p-6 text-center relative overflow-hidden h-full">
