@@ -40,7 +40,7 @@ export default function RequestDemoPage() {
                 Experience the Future of <span className="gradient-text">Omnichannel CX</span>
               </h1>
               <p className="text-[#94A3B8] text-base leading-relaxed mt-4">
-                Deploy dbs-mintek inside a secure sandbox sandbox. Test our Conversational AI agents, Predictive Dialers, and real-time dashboard analytics with demo accounts.
+                Deploy nexdial inside a secure sandbox sandbox. Test our Conversational AI agents, Predictive Dialers, and real-time dashboard analytics with demo accounts.
               </p>
             </AnimatedSection>
 

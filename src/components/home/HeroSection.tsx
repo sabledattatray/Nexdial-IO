@@ -353,12 +353,17 @@ export function HeroSection() {
               >
                 Talk To Expert
               </Link>
-              <button className="flex items-center justify-center gap-2 text-[#94A3B8] hover:text-white transition-colors group">
+              <a 
+                href="https://youtu.be/5sXT6HuV61w?si=eWL3NyNHaosjzkY0" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center justify-center gap-2 text-[#94A3B8] hover:text-white transition-colors group"
+              >
                 <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#00C2FF] group-hover:bg-[#00C2FF]/10 transition-all">
                   <Play className="w-4 h-4 ml-0.5" />
                 </div>
                 <span className="text-sm font-medium">Watch Tour</span>
-              </button>
+              </a>
             </motion.div>
 
             {/* Trust Bar */}
@@ -397,7 +402,7 @@ export function HeroSection() {
                     <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
                   </div>
                   <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
-                    <span className="text-[10px] text-[#64748B]">app.dbsmintek.com/dashboard</span>
+                    <span className="text-[10px] text-[#64748B]">app.nexdial.com/dashboard</span>
                   </div>
                 </div>
 

@@ -17,10 +17,10 @@ const spaceGrotesk = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://dbs-mintek-xi.vercel.app"),
+  metadataBase: new URL("https://nexdial-xi.vercel.app"),
   title: {
-    default: "DBS Mintek® — AI-Powered Enterprise Contact Center Platform",
-    template: "%s | DBS Mintek®",
+    default: "Nexdial — AI-Powered Enterprise Contact Center Platform",
+    template: "%s | Nexdial",
   },
   description:
     "Transform customer conversations into business growth with AI-powered omnichannel customer experience solutions. Enterprise-grade CRM, dialer, analytics, and multi-tenant SaaS platform.",
@@ -36,21 +36,21 @@ export const metadata: Metadata = {
     "call center",
     "BPO",
   ],
-  authors: [{ name: "DBS Mintek®" }],
-  creator: "DBS Mintek®",
+  authors: [{ name: "Nexdial" }],
+  creator: "Nexdial",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://dbsmintek.com",
-    siteName: "DBS Mintek®",
-    title: "DBS Mintek® — AI-Powered Enterprise Contact Center Platform",
+    url: "https://nexdial.com",
+    siteName: "Nexdial",
+    title: "Nexdial — AI-Powered Enterprise Contact Center Platform",
     description:
       "Transform customer conversations into business growth with AI-powered omnichannel customer experience solutions.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "DBS Mintek® — AI-Powered Enterprise Contact Center Platform",
+    title: "Nexdial — AI-Powered Enterprise Contact Center Platform",
     description:
       "Transform customer conversations into business growth with AI-powered omnichannel CX solutions.",
   },

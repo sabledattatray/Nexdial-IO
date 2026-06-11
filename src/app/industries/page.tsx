@@ -66,7 +66,7 @@ export default function IndustriesPage() {
             Tailored Industry <span className="gradient-text">CX Workflows</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            DBS Mintek® integrates directly into specialized vertical platforms to secure compliance and optimize operational KPIs.
+            Nexdial integrates directly into specialized vertical platforms to secure compliance and optimize operational KPIs.
           </p>
         </AnimatedSection>
 

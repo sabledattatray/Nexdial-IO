@@ -86,7 +86,7 @@ export const INITIAL_CONTACTS: Contact[] = [
     status: 'Closed_Lost',
     tags: ['Rate Dispute', 'On-Premise Wish'],
     notes: [
-      { id: 'n-7', text: 'Requires entirely on-premises Asterisk integration. NexDial cloud-only architecture not a perfect match.', timestamp: '2026-05-10T11:00:00Z', author: 'John Doe' }
+      { id: 'n-7', text: 'Requires entirely on-premises Asterisk integration. Nexdial cloud-only architecture not a perfect match.', timestamp: '2026-05-10T11:00:00Z', author: 'John Doe' }
     ],
     segment: 'Logistics',
     sentiment: 'Negative',
@@ -97,20 +97,20 @@ export const INITIAL_CONTACTS: Contact[] = [
 export const INITIAL_SCRIPTS: ScriptTemplate[] = [
   {
     id: 'sc-1',
-    title: 'NexDial Platform Standard Inbound',
-    content: 'Thank you for calling NexDial! My name is {agentName}. Are you calling for sales setup, support inquiry, or checking out our AI Calling modules today? [Pause for input] Awesome, let me get that configured for you right away. What is your registered business domain?',
+    title: 'Nexdial Platform Standard Inbound',
+    content: 'Thank you for calling Nexdial! My name is {agentName}. Are you calling for sales setup, support inquiry, or checking out our AI Calling modules today? [Pause for input] Awesome, let me get that configured for you right away. What is your registered business domain?',
     tags: ['Inbound', 'Generic', 'Onboarding']
   },
   {
     id: 'sc-2',
     title: 'Warm Lead Outbound Dialer Sheet',
-    content: 'Hi {contactName}! This is {agentName} from NexDial. I saw you recently downloaded our CRM Integration whitepaper. I wanted to check if your current call center is utilizing standard manual dialing or automated power dialers? [Objection handling: If manual -> highlight our 5x talk-time boost. If auto -> mention our AI Live Coach that guides calls in real time.]',
+    content: 'Hi {contactName}! This is {agentName} from Nexdial. I saw you recently downloaded our CRM Integration whitepaper. I wanted to check if your current call center is utilizing standard manual dialing or automated power dialers? [Objection handling: If manual -> highlight our 5x talk-time boost. If auto -> mention our AI Live Coach that guides calls in real time.]',
     tags: ['Outbound', 'Sales', 'AI Features']
   },
   {
     id: 'sc-3',
     title: 'AI Bot Screening Pitch',
-    content: 'Hello, this is Liam, your automated AI NexDial helper. This call is to confirm your request for premium API keys. If you are ready to initiate, please confirm your company name. Next, would you like a webhook test package sent via SMS or Email?',
+    content: 'Hello, this is Liam, your automated AI Nexdial helper. This call is to confirm your request for premium API keys. If you are ready to initiate, please confirm your company name. Next, would you like a webhook test package sent via SMS or Email?',
     tags: ['AI Calling', 'Automation', 'API Setup']
   }
 ];
@@ -239,14 +239,14 @@ export const INITIAL_CALL_LOGS: CallLog[] = [
     agentName: 'Dattatray',
     recordingUrl: '/recordings/rec_stark_q2.mp3',
     sentiment: 'Positive',
-    summary: 'The customer is extremely enthusiastic about replacing their current Twilio and Salesforce integration with NexDial. We mapped out an AI Suite license model. Follow-up booked for next Tuesday.',
+    summary: 'The customer is extremely enthusiastic about replacing their current Twilio and Salesforce integration with Nexdial. We mapped out an AI Suite license model. Follow-up booked for next Tuesday.',
     score: 95,
     transcription: [
-      { speaker: 'agent', text: 'Good morning Robert! This is Dattatray from NexDial.io. How are you today?', timestamp: '09:12:05' },
+      { speaker: 'agent', text: 'Good morning Robert! This is Dattatray from Nexdial.io. How are you today?', timestamp: '09:12:05' },
       { speaker: 'customer', text: 'Hey Dattatray! I am doing excellent. I was actually browsing your live dashboard preview earlier.', timestamp: '09:12:12' },
       { speaker: 'agent', text: 'That is great. We configured our dashboard to stream analytics in absolute real-time. What dialer models are you currently on?', timestamp: '09:12:20' },
       { speaker: 'customer', text: 'We use old, slow manual queues inside our custom CRM. Your power dialer looks extremely sleek. We want standard local numbers in five regions.', timestamp: '09:12:35' },
-      { speaker: 'agent', text: 'Absolutely. NexDial handles region-specific SIP trunks automatically. I will send a customized enterprise quote now.', timestamp: '09:13:40' }
+      { speaker: 'agent', text: 'Absolutely. Nexdial handles region-specific SIP trunks automatically. I will send a customized enterprise quote now.', timestamp: '09:13:40' }
     ]
   },
   {
@@ -264,7 +264,7 @@ export const INITIAL_CALL_LOGS: CallLog[] = [
     summary: 'Marcus expressed annoyance with cold calling frequency. Mentioned they already have an existing contract with Five9 for another 18 months, rendering a switch unprofitable at this point.',
     score: 68,
     transcription: [
-      { speaker: 'agent', text: 'Hello Marcus, Vance of Vance Capital Partners? This is John from NexDial.', timestamp: '15:20:02' },
+      { speaker: 'agent', text: 'Hello Marcus, Vance of Vance Capital Partners? This is John from Nexdial.', timestamp: '15:20:02' },
       { speaker: 'customer', text: 'Yes, who is this again? We are in the middle of a portfolio audit.', timestamp: '15:20:10' },
       { speaker: 'agent', text: 'I understand, quick call to preview how we help BPOs automate dialing workloads.', timestamp: '15:20:20' },
       { speaker: 'customer', text: 'Ah, cold outreach. We are heavily tied into Five9 on a multi-year enterprise lock in. Do not call this line again, thank you.', timestamp: '15:21:15' }
@@ -285,8 +285,8 @@ export const INITIAL_CALL_LOGS: CallLog[] = [
     summary: 'Inbound inquiry from Amara at Blue Horizon. Shared how their delivery logistics operations require smooth multi-channel handoff (WhatsApp automated notifications, combined with Voice callbacks). Satisfied with live webhook demonstration.',
     score: 97,
     transcription: [
-      { speaker: 'agent', text: 'NexDial Support, how can I make your global communication stellar today?', timestamp: '08:30:04' },
-      { speaker: 'customer', text: 'Hi, I need an automated routing mechanism. We have cargo drivers on the road. If they miss an alert, does NexDial auto-generate an SMS hook?', timestamp: '08:31:12' },
+      { speaker: 'agent', text: 'Nexdial Support, how can I make your global communication stellar today?', timestamp: '08:30:04' },
+      { speaker: 'customer', text: 'Hi, I need an automated routing mechanism. We have cargo drivers on the road. If they miss an alert, does Nexdial auto-generate an SMS hook?', timestamp: '08:31:12' },
       { speaker: 'agent', text: 'Absolutely. Our workflow automation systems trigger custom webhooks upon call dispositions. Let me outline our workflow builder for you.', timestamp: '08:32:00' }
     ]
   }
@@ -342,7 +342,7 @@ export const INITIAL_SYSTEM_LOGS: SystemLog[] = [
 ];
 
 export const DEFAULT_IVR_NODES: IVRNode[] = [
-  { id: 'n-start', title: 'Start Call Node', type: 'Start', x: 50, y: 150, config: { greeting: 'Welcome to NexDial! For general support press 1, for sales inquiry press 2, for developer API support press 3.' } },
+  { id: 'n-start', title: 'Start Call Node', type: 'Start', x: 50, y: 150, config: { greeting: 'Welcome to Nexdial! For general support press 1, for sales inquiry press 2, for developer API support press 3.' } },
   { id: 'n-play', title: 'Play Marketing Prompt', type: 'PlayAudio', x: 280, y: 50, config: { audioFile: 'promotions_q2_launch.wav', fallbackText: 'Check out our new AI Auto-summarize upgrade!' } },
   { id: 'n-gather', title: 'Main Dial Menu Reader', type: 'GatherInput', x: 280, y: 250, config: { allowedKeys: '1,2,3', timeout: 5 } },
   { id: 'n-queue-sales', title: 'Rings Sales Queue', type: 'RouteCall', x: 550, y: 80, config: { group: 'VIP Sales Agents', ringTime: '20s' } },

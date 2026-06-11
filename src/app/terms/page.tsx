@@ -64,7 +64,7 @@ export default function TermsPage() {
             Terms & <span className="gradient-text">Conditions</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            These Terms of Service govern your organization’s deployment and administrative usage of the DBS Mintek® Contact Center Operating System, virtual agent nodes, and outbound dialers.
+            These Terms of Service govern your organization’s deployment and administrative usage of the Nexdial Contact Center Operating System, virtual agent nodes, and outbound dialers.
           </p>
           <div className="flex items-center gap-4 mt-6 text-xs text-[#64748B] font-mono">
             <span>DOCUMENT ID: CCOS-TOS-2026-V4</span>
@@ -112,7 +112,7 @@ export default function TermsPage() {
                 1. Agreement & Services
               </h2>
               <p>
-                By provisioning an organization tenant, registering credentials, or accessing the administration cockpit of DBS Mintek®, you agree to bind your company and agents to this Agreement.
+                By provisioning an organization tenant, registering credentials, or accessing the administration cockpit of Nexdial, you agree to bind your company and agents to this Agreement.
               </p>
               <p>
                 We agree to deliver access to our cloud-hosted suite including Predictive Dialers, CRM pipelines, Speech-to-Text equalizers, and multi-tenant billing panels. We reserve the right to alter, update, or patch software parameters to maintain platform security and performance standards.
@@ -142,7 +142,7 @@ export default function TermsPage() {
                 3. Acceptable Use & DNC compliance
               </h2>
               <p>
-                DBS Mintek® provides powerful high-velocity telephony routing engines. Tenants are solely responsible for compliance with regional dialing, telesales, and consumer protection laws:
+                Nexdial provides powerful high-velocity telephony routing engines. Tenants are solely responsible for compliance with regional dialing, telesales, and consumer protection laws:
               </p>
               <div className="p-4 rounded-xl bg-[#EF4444]/10 border border-[#EF4444]/20 space-y-2 text-xs">
                 <p className="font-bold text-[#EF4444] flex items-center gap-1.5">
@@ -161,7 +161,7 @@ export default function TermsPage() {
                 4. Telephony & SMS Rules
               </h2>
               <p>
-                Tenants are prohibited from utilizing DBS Mintek® to:
+                Tenants are prohibited from utilizing Nexdial to:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li>Spoof caller ID headers or transmit false network tracking parameters.</li>
@@ -197,7 +197,7 @@ export default function TermsPage() {
                 6. Proprietary Software & Licenses
               </h2>
               <p>
-                DBS Mintek® retains all intellectual property rights in the software platform, CRM source layouts, database schemas, and AI speech classification neural networks.
+                Nexdial retains all intellectual property rights in the software platform, CRM source layouts, database schemas, and AI speech classification neural networks.
               </p>
               <p>
                 You are granted a non-exclusive, non-transferable, revocable license to access the dashboards for business operations. You may not decompile, copy, reverse engineer, or sell elements of the platform without our written consent.
@@ -211,10 +211,10 @@ export default function TermsPage() {
                 7. Limitation of Liability & Indemnification
               </h2>
               <p>
-                IN NO EVENT WILL DBS MINTEK® BE LIABLE FOR ANY INDIRECT, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF REVENUE, DATA COMPROMISE, OR TELECOM INVOICING DISPUTES.
+                IN NO EVENT WILL Nexdial® BE LIABLE FOR ANY INDIRECT, SPECIAL, OR CONSEQUENTIAL DAMAGES, INCLUDING LOSS OF REVENUE, DATA COMPROMISE, OR TELECOM INVOICING DISPUTES.
               </p>
               <p>
-                Tenants shall indemnify, defend, and hold harmless DBS Mintek® from and against any claims, losses, fines, or liabilities arising from the tenant&apos;s campaigns, regulatory TCPA/FCC violations, or caller list sourcing disputes.
+                Tenants shall indemnify, defend, and hold harmless Nexdial from and against any claims, losses, fines, or liabilities arising from the tenant&apos;s campaigns, regulatory TCPA/FCC violations, or caller list sourcing disputes.
               </p>
             </section>
 

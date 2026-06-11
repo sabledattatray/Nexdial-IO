@@ -21,7 +21,7 @@ interface DashboardViewProps {
 // Simulated active conversation transcript turns for the listening console
 const SIMULATED_CONVERSATIONS: Record<string, { speaker: 'agent' | 'customer' | 'system'; text: string; timestamp: string }[]> = {
   'ag-2': [
-    { speaker: 'agent', text: 'Thank you for calling NexDial support. This is John. How can I help you today?', timestamp: '10:02:00' },
+    { speaker: 'agent', text: 'Thank you for calling Nexdial support. This is John. How can I help you today?', timestamp: '10:02:00' },
     { speaker: 'customer', text: 'Hi John, I need to check if your voice streams support low-latency OPUS encoding.', timestamp: '10:02:10' },
     { speaker: 'agent', text: 'Yes, we use the G.711 and OPUS codecs dynamically to ensure high voice quality.', timestamp: '10:02:22' },
     { speaker: 'customer', text: 'Great, we have about 40 agents working simultaneously. Will we face bandwidth issues?', timestamp: '10:02:35' },
@@ -44,7 +44,7 @@ const SIMULATED_CONVERSATIONS: Record<string, { speaker: 'agent' | 'customer' | 
     { speaker: 'customer', text: 'Thank you. It looks like the gather-input trigger was set to a different digit key.', timestamp: '11:15:40' }
   ],
   'agent-ai': [
-    { speaker: 'agent', text: 'Welcome to NexDial. I am Liam, your AI voice receptionist. Please speak your inquiry.', timestamp: '14:20:00' },
+    { speaker: 'agent', text: 'Welcome to Nexdial. I am Liam, your AI voice receptionist. Please speak your inquiry.', timestamp: '14:20:00' },
     { speaker: 'customer', text: 'I need to connect with the billing department.', timestamp: '14:20:10' },
     { speaker: 'agent', text: 'Understood. Transferring you to Stripe Billing gateway agents queue. Hold on.', timestamp: '14:20:20' }
   ]

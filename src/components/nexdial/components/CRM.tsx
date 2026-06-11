@@ -91,7 +91,7 @@ export default function CRM({
       status: newLeadForm.status,
       tags: ['New Lead', 'Outbound'],
       notes: [
-        { id: `n-init-${Date.now()}`, text: `Lead initialized and synced to NexDial telemetry.`, timestamp: new Date().toISOString(), author: currentAgentName }
+        { id: `n-init-${Date.now()}`, text: `Lead initialized and synced to Nexdial telemetry.`, timestamp: new Date().toISOString(), author: currentAgentName }
       ],
       sentiment: 'Neutral',
       revenueValue: Number(newLeadForm.revenue)
@@ -440,7 +440,7 @@ export default function CRM({
         <div className="fixed inset-0 bg-[#0F172A]/85 backdrop-blur-sm flex items-center justify-center p-4 z-50">
           <div className="bg-[#1E293B] border border-[#334155] rounded-3xl p-8 max-w-md w-full relative">
             <h3 className="font-display font-bold text-xl text-white mb-2">Create corporate Lead</h3>
-            <p className="text-xs text-slate-400 mb-6 font-light">Add new entries to NexDial dialer queues instantly.</p>
+            <p className="text-xs text-slate-400 mb-6 font-light">Add new entries to Nexdial dialer queues instantly.</p>
 
             <form onSubmit={handleCreateSubmit} className="space-y-4 text-xs font-light">
               <div>

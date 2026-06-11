@@ -63,7 +63,7 @@ export default function SecurityPage() {
             Security <span className="gradient-text">Architecture</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            At DBS Mintek®, our security architecture is designed to protect multi-tenant cloud databases, VoIP signaling streams, and CRM client profiles with bank-grade encryption controls.
+            At Nexdial, our security architecture is designed to protect multi-tenant cloud databases, VoIP signaling streams, and CRM client profiles with bank-grade encryption controls.
           </p>
           <div className="flex items-center gap-4 mt-6 text-xs text-[#64748B] font-mono">
             <span>DOCUMENT ID: CCOS-SEC-2026-V4</span>
@@ -168,7 +168,7 @@ export default function SecurityPage() {
                 4. Database & Namespace Isolation
               </h2>
               <p>
-                DBS Mintek® leverages a multi-tenant cloud architecture that prevents cross-tenant data leaks:
+                Nexdial leverages a multi-tenant cloud architecture that prevents cross-tenant data leaks:
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Data Separation:</strong> Each tenant organization resides in an isolated logical schema or database container. Tenant routing scripts cannot execute queries across database boundaries.</li>

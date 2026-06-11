@@ -82,8 +82,8 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Enterprise Sales</p>
-                  <a href="mailto:prithviraj.singh@dbsmintek.in" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
-                    prithviraj.singh@dbsmintek.in
+                  <a href="mailto:info@nexdial.io" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
+                    info@nexdial.io
                   </a>
                 </div>
               </AnimatedSection>
@@ -95,8 +95,8 @@ export function ContactSection() {
                 </div>
                 <div>
                   <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Global Hotline</p>
-                  <a href="tel:+918308211113" className="text-sm font-extrabold text-white hover:text-[#00E5A0] transition-colors mt-1 block">
-                    +91 83082 11113
+                  <a href="tel:+918010803756" className="text-sm font-extrabold text-white hover:text-[#00E5A0] transition-colors mt-1 block">
+                    +91 8010803756
                   </a>
                 </div>
               </AnimatedSection>
@@ -115,7 +115,7 @@ export function ContactSection() {
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]"></span>
                       </span>
                     </p>
-                    <a href="https://wa.me/918308211113" target="_blank" rel="noopener noreferrer" className="text-sm font-extrabold text-[#00E5A0] hover:underline mt-1 block">
+                    <a href="https://wa.me/918010803756" target="_blank" rel="noopener noreferrer" className="text-sm font-extrabold text-[#00E5A0] hover:underline mt-1 block">
                       Chat with an AI Advisor
                     </a>
                   </div>
@@ -138,9 +138,9 @@ export function ContactSection() {
                   <Building className="w-5 h-5 text-[#00E5A0]" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">DBS Mintek®</span>
+                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">Nexdial</span>
                   <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
-                    Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705
+                    123 Innovation Boulevard, Tech District, San Francisco, CA 94105
                   </p>
                 </div>
               </div>

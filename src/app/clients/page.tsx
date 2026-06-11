@@ -5,7 +5,7 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ani
 import { Award, ShieldCheck, Heart, Sparkles, MessageSquare } from "lucide-react";
 
 const clientRoster = [
-  { company: "Velo Payments", sector: "Fintech", quote: "DBS Mintek®'s Voice AI agent handled 45,000 billing calls during our transition with a 92% resolution rate.", author: "Marcus Vance, Director of Support" },
+  { company: "Velo Payments", sector: "Fintech", quote: "Nexdial's Voice AI agent handled 45,000 billing calls during our transition with a 92% resolution rate.", author: "Marcus Vance, Director of Support" },
   { company: "Apex Telehealth", sector: "Healthcare", quote: "The HIPAA-compliant CRM and predictive dialer tripled our scheduling efficiency inside Navi Mumbai delivery teams.", author: "Dr. Sarah Lin, COO" },
   { company: "Zeta Retailers", sector: "E-Commerce", quote: "Omichannel WhatsApp support decreased tickets by 35% during the holiday sales rush.", author: "Clara Benson, Head of CX" }
 ];
@@ -27,7 +27,7 @@ export default function ClientsPage() {
             Trusted by <span className="gradient-text">500+ Companies</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            See how scaling startups and global Fortune 500 enterprises rely on DBS Mintek® for high-volume support delivery.
+            See how scaling startups and global Fortune 500 enterprises rely on Nexdial for high-volume support delivery.
           </p>
         </AnimatedSection>
 

@@ -94,13 +94,13 @@ export default function PublicPages({
     {
       id: 2,
       title: 'Mastering Outbound Campaign Compliance: SEC, TCPA & Global Rules',
-      excerpt: 'Avoid bankrupting structural fines. Learn how NexDials automated local-presence rotation and timezone-fenced scheduler maintains 100% dial compliance.',
+      excerpt: 'Avoid bankrupting structural fines. Learn how Nexdials automated local-presence rotation and timezone-fenced scheduler maintains 100% dial compliance.',
       author: 'Sarah Smith',
       date: 'May 14, 2026',
       readTime: '9 min read',
       category: 'Compliance',
       content: `Operating high-volume outbound dialers carries heavy responsibility. Global telecommunication authorities specify rigid timezone limits, spam label restrictions, and drop-rate thresholds. Failing to observe TCPA limits can result in massive litigation expenses.
-      \nNexDial.io incorporates automated safety valves:
+      \nNexdial.io incorporates automated safety valves:
       - Timezone Gating: The system parses contacts coordinates or area codes automatically, blocking calls outside certified regional hours.
       - Consent Verification: Built-in DNC (Do Not Call) list screening.
       - Dropped Call Limits: Automatic adjustment of dialing ratios to ensure dropped calls never exceed regulatory 3.0% quotas.`
@@ -114,7 +114,7 @@ export default function PublicPages({
       readTime: '12 min read',
       category: 'Developers',
       content: `Building WebRTC voice capabilities directly within custom SAAS dashboards is historically notoriously complex. Developers grapple with STUN/TURN setups, SDP negotiation delays, Web Audio context security flags, and audio channel clipping.
-      \nNexDial completely abstracts this stack by exposing unified SIP trunk connections and easy Web SDK bridges:
+      \nNexdial completely abstracts this stack by exposing unified SIP trunk connections and easy Web SDK bridges:
       - Simple Javascript calling lines
       - Native PCM format recording
       - Auto-scaling edge nodes around 12 global regions.`
@@ -130,7 +130,7 @@ export default function PublicPages({
             <Phone className="w-4 h-4 md:w-5 md:h-5 text-white" />
           </div>
           <span className="font-display font-extrabold text-lg xs:text-xl md:text-2xl tracking-tight text-white">
-            NexDial<span className="text-[#00C2FF]">.io</span>
+            Nexdial<span className="text-[#00C2FF]">.io</span>
           </span>
         </div>
 
@@ -338,7 +338,7 @@ export default function PublicPages({
               {/* Live status tag */}
               <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-slate-900/60 border border-slate-800/80 backdrop-blur-md animate-pulse-slow">
                 <span className="w-2 h-2 rounded-full bg-accent-teal animate-pulse" />
-                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-300 font-medium">NexDial Infrastructure v2.0 Live</span>
+                <span className="text-[10px] font-mono uppercase tracking-widest text-slate-300 font-medium">Nexdial Infrastructure v2.0 Live</span>
               </div>
               
               {/* Headline with ultra-premium color styling */}
@@ -509,7 +509,7 @@ export default function PublicPages({
                 <span className="text-xs uppercase tracking-wider font-mono text-accent-blue bg-accent-blue/10 px-3 py-1 rounded-full border border-accent-blue/20">Unified Softphone v2.6</span>
                 <h2 className="font-display font-bold text-3xl text-white mt-4 mb-4">Enterprise Dialer Terminal</h2>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  NexDial embeds a high-fidelity browser-based phone supporting SIP calling lines and secure STUN/TURN tunneling. Agents dial manually using our click-to-dial contacts, view live conversation wave indicators, and save immediate notes.
+                  Nexdial embeds a high-fidelity browser-based phone supporting SIP calling lines and secure STUN/TURN tunneling. Agents dial manually using our click-to-dial contacts, view live conversation wave indicators, and save immediate notes.
                 </p>
                 <div className="space-y-3 font-light text-sm text-slate-350">
                   <div className="flex items-center gap-2"><Check className="text-accent-teal w-4 h-4" /> Predictive Dialer modes boosting outgoing capacity by 4x</div>
@@ -556,7 +556,7 @@ export default function PublicPages({
                   <p className="text-xs text-slate-300 font-light italic mb-2">"Customer mentions existing Five9 contract and pricing concerns..."</p>
                   <div className="bg-[#0F172A] p-3 rounded-xl border border-[#334155]">
                     <p className="text-xs font-semibold text-[#00E5B0]">Recommended Pitch Trigger:</p>
-                    <p className="text-xs text-slate-400 font-light mt-1">Offer NexDials Dual-Trunk Buyout Program. If they switch 50+ lines, we waiver license subscription fees for 6 months.</p>
+                    <p className="text-xs text-slate-400 font-light mt-1">Offer Nexdials Dual-Trunk Buyout Program. If they switch 50+ lines, we waiver license subscription fees for 6 months.</p>
                   </div>
                 </div>
               </div>
@@ -568,7 +568,7 @@ export default function PublicPages({
                 <span className="text-xs uppercase tracking-wider font-mono text-accent-teal bg-accent-teal/10 px-3 py-1 rounded-full border border-accent-teal/20">Smart Integrations</span>
                 <h2 className="font-display font-bold text-3xl text-white mt-4 mb-4">Dynamic Omnichannel workflows</h2>
                 <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                  NexDial bridges telephony to WhatsApp, SMS, and Email pipelines effortlessly. Trigger automated SMS followups upon outbound dial wrap, push transcriptions to Slack teams, or sync recordings to cloud AWS S3 storages.
+                  Nexdial bridges telephony to WhatsApp, SMS, and Email pipelines effortlessly. Trigger automated SMS followups upon outbound dial wrap, push transcriptions to Slack teams, or sync recordings to cloud AWS S3 storages.
                 </p>
               </div>
               <div className="grid grid-cols-2 gap-4">
@@ -728,7 +728,7 @@ export default function PublicPages({
             <div className="bg-[#1E293B] p-8 rounded-2xl border border-[#334155] space-y-4">
               <span className="text-xs font-mono text-accent-teal font-extrabold bg-accent-teal/10 px-2.5 py-1 rounded-full">Healthcare</span>
               <h3 className="font-display font-bold text-xl text-white">Fully Certified HIPAA Patient Calling Lines</h3>
-              <p className="text-slate-400 text-xs leading-relaxed">NexDial enforces automatic end-to-end payload encryption. Call logs omit medical identifiers and recordings store securely on private cloud AWS S3 compartments with dedicated audit trails.</p>
+              <p className="text-slate-400 text-xs leading-relaxed">Nexdial enforces automatic end-to-end payload encryption. Call logs omit medical identifiers and recordings store securely on private cloud AWS S3 compartments with dedicated audit trails.</p>
             </div>
             
             <div className="bg-[#1E293B] p-8 rounded-2xl border border-[#334155] space-y-4">
@@ -805,7 +805,7 @@ export default function PublicPages({
       {currentTab === 'ai-voice' && (
         <section className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <span className="text-xs uppercase tracking-widest font-mono text-[#00E5B0]">NexDial Speech Labs</span>
+            <span className="text-xs uppercase tracking-widest font-mono text-[#00E5B0]">Nexdial Speech Labs</span>
             <h1 className="font-display font-black text-4xl md:text-5xl text-white mt-3">Next-Generation AI Speech Bots</h1>
             <p className="text-slate-450 mt-4 text-sm font-light">Eliminate call wait times entirely. Deploy ultra-lifelike Gemini voice recipients capable of screen answering, dynamic bookings, and automated screening logs.</p>
           </div>
@@ -846,7 +846,7 @@ export default function PublicPages({
                     <p className="text-[10px] text-slate-400">Prebuilt voice: Zephyr model</p>
                   </div>
                 </div>
-                <button onClick={() => alert("Simulating Voice Agent Liam: 'Hi! Thank you for dialing NexDial today! How can I route your corporate line?'")} className="px-4 py-2 bg-brand-primary hover:bg-brand-secondary text-xs rounded-lg font-bold">
+                <button onClick={() => alert("Simulating Voice Agent Liam: 'Hi! Thank you for dialing Nexdial today! How can I route your corporate line?'")} className="px-4 py-2 bg-brand-primary hover:bg-brand-secondary text-xs rounded-lg font-bold">
                   Play Interactive Sample
                 </button>
               </div>
@@ -859,7 +859,7 @@ export default function PublicPages({
       {currentTab === 'about' && (
         <section className="max-w-7xl mx-auto px-6 py-16">
           <div className="text-center max-w-2xl mx-auto mb-16">
-            <h1 className="font-display font-black text-4xl md:text-5xl text-white mt-3">The NexDial Story</h1>
+            <h1 className="font-display font-black text-4xl md:text-5xl text-white mt-3">The Nexdial Story</h1>
             <p className="text-slate-450 mt-4 text-sm font-light">Pioneering edge telephony from cloud clusters. Our mission is to bridge business call interfaces into unified real-time spaces with the help of artificial intelligence.</p>
           </div>
 
@@ -897,7 +897,7 @@ export default function PublicPages({
                 </span>
               </div>
               <p className="text-xs text-slate-400 leading-relaxed font-light">
-                Lead telecom systems architect who envisioned and engineered the NexDial.io platform to scale high-velocity outbound campaign operations with world-class design precision.
+                Lead telecom systems architect who envisioned and engineered the Nexdial.io platform to scale high-velocity outbound campaign operations with world-class design precision.
               </p>
               <div className="pt-2">
                 <a 
@@ -1051,7 +1051,7 @@ export default function PublicPages({
               <span className="text-xs font-mono uppercase text-brand-primary">Corporate Office Trunks</span>
               <h1 className="font-display font-black text-4xl md:text-5xl text-white mt-2 mb-4">Connect With Outpost Representatives</h1>
               <p className="text-slate-400 text-sm leading-relaxed mb-6">
-                Are you looking to replace an active telecommunication platform, inquire about bulk pricing on SIP call trunks, or partner with NexDial.io? Complete our form and receive custom-engineered proposals in 3 hours.
+                Are you looking to replace an active telecommunication platform, inquire about bulk pricing on SIP call trunks, or partner with Nexdial.io? Complete our form and receive custom-engineered proposals in 3 hours.
               </p>
               
               <div className="space-y-4 text-xs font-light text-slate-350">
@@ -1183,7 +1183,7 @@ export default function PublicPages({
                 <span className="text-xs uppercase tracking-widest font-mono text-[#00C2FF]">Developer Guild</span>
                 <h1 className="font-display font-black text-3xl text-white mt-2">Trigger SIP Calling Lines Programmatically</h1>
                 <p className="text-slate-400 text-sm mt-2">
-                  NexDial exposes clean developer endpoints. Launch cold call queues or bot receptionists dynamically with raw HTTP POST requests.
+                  Nexdial exposes clean developer endpoints. Launch cold call queues or bot receptionists dynamically with raw HTTP POST requests.
                 </p>
               </div>
 
@@ -1212,9 +1212,9 @@ export default function PublicPages({
                   <span className="font-mono text-accent-blue">ESModule</span>
                 </div>
                 <pre className="font-mono text-[11px] text-[#00E5B0] leading-relaxed overflow-x-auto whitespace-pre">
-{`import { NexDialGateway } from '@nexdial/sdk';
+{`import { NexdialGateway } from '@nexdial/sdk';
 
-const nex = new NexDialGateway({ apiKey: process.env.NEXDIAL_KEY });
+const nex = new NexdialGateway({ apiKey: process.env.NEXDIAL_KEY });
 
 // Launch automated outbound campaign block
 const dial = await nex.dialer.create({
@@ -1294,7 +1294,7 @@ console.log(\`Launched campaign with session ID: \${dial.id}\`);`}
                   <Phone className="w-4 h-4 text-white" />
                 </div>
                 <span className="font-display font-extrabold text-xl tracking-tight text-white animate-fade-in">
-                  NexDial<span className="text-[#00C2FF]">.io</span>
+                  Nexdial<span className="text-[#00C2FF]">.io</span>
                 </span>
               </div>
               <p className="text-xs text-slate-400 font-light leading-relaxed max-w-sm">
@@ -1373,10 +1373,10 @@ console.log(\`Launched campaign with session ID: \${dial.id}\`);`}
           {/* Professional Footer Bottom Bar */}
           <div className="w-full flex flex-col md:flex-row items-center justify-between pt-8 border-t border-[#1E293B] gap-4 text-xs text-slate-500 font-light">
             <div>
-              © 2026 NexDial.io Communications. Handcrafted by <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:text-brand-secondary underline transition-all font-medium">Datta Sable</a> with ultimate design precision.
+              © 2026 Nexdial.io Communications. Handcrafted by <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-brand-primary hover:text-brand-secondary underline transition-all font-medium">Datta Sable</a> with ultimate design precision.
             </div>
             <div className="flex items-center gap-6 text-slate-500 text-xs">
-              <span className="hover:text-slate-350 cursor-pointer transition-colors" onClick={() => alert("NexDial.io SLA: 99.99% uptime guarantee with multi-cloud fallback")}>99.99% SLA Uptime</span>
+              <span className="hover:text-slate-350 cursor-pointer transition-colors" onClick={() => alert("Nexdial.io SLA: 99.99% uptime guarantee with multi-cloud fallback")}>99.99% SLA Uptime</span>
               <span>•</span>
               <span className="hover:text-slate-350 cursor-pointer transition-colors" onClick={() => setTab('status')}>Global Edge Status</span>
               <span>•</span>

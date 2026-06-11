@@ -8,9 +8,9 @@ import Link from "next/link";
 
 // Mock Tenant Data
 const initialTenants = [
-  { id: "t-1", name: "Apex Financial", subdomain: "apex.dbsmintek.com", agents: 240, status: "Active", billing: "₹7,00,000/mo" },
-  { id: "t-2", name: "Zeta E-Commerce", subdomain: "zeta.dbsmintek.com", agents: 550, status: "Active", billing: "₹13,70,000/mo" },
-  { id: "t-3", name: "Global Medtech", subdomain: "medtech.dbsmintek.com", agents: 120, status: "Paused", billing: "₹3,50,000/mo" }
+  { id: "t-1", name: "Apex Financial", subdomain: "apex.nexdial.com", agents: 240, status: "Active", billing: "₹7,00,000/mo" },
+  { id: "t-2", name: "Zeta E-Commerce", subdomain: "zeta.nexdial.com", agents: 550, status: "Active", billing: "₹13,70,000/mo" },
+  { id: "t-3", name: "Global Medtech", subdomain: "medtech.nexdial.com", agents: 120, status: "Paused", billing: "₹3,50,000/mo" }
 ];
 
 export default function AdminDashboard() {
@@ -32,7 +32,7 @@ export default function AdminDashboard() {
     const newT = {
       id: `t-${Date.now()}`,
       name: newTenantName,
-      subdomain: `${newSubdomain}.dbsmintek.com`,
+      subdomain: `${newSubdomain}.nexdial.com`,
       agents: 10,
       status: "Active",
       billing: "₹37,500/mo"
@@ -183,7 +183,7 @@ export default function AdminDashboard() {
                     onChange={(e) => setNewSubdomain(e.target.value)}
                     className="w-full pl-4 pr-32 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-xs text-white placeholder-[#475569] transition-all"
                   />
-                  <span className="absolute right-3 top-3 text-[10px] text-[#64748B] font-mono">.dbsmintek.com</span>
+                  <span className="absolute right-3 top-3 text-[10px] text-[#64748B] font-mono">.nexdial.com</span>
                 </div>
               </div>
 

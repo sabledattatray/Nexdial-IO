@@ -71,7 +71,7 @@ export function CaseStudies() {
               Proven Results for <span className="gradient-text">Global Enterprises</span>
             </h2>
             <p className="text-[#64748B] text-lg">
-              Explore how leading companies use DBS Mintek® to streamline operations, cut costs, and boost customer loyalty.
+              Explore how leading companies use Nexdial to streamline operations, cut costs, and boost customer loyalty.
             </p>
           </AnimatedSection>
 

@@ -15,7 +15,7 @@ export default function HTMLSitemapPage() {
       color: "#0057D9",
       links: [
         { label: "Home Cockpit", href: "/", desc: "Main landing interface and features list" },
-        { label: "About DBS Mintek®", href: "/about", desc: "Our history, leadership, and Pan-India awards" },
+        { label: "About Nexdial", href: "/about", desc: "Our history, leadership, and Pan-India awards" },
         { label: "Omnichannel Services", href: "/services", desc: "Voice, SMS, Chat, and BPO operations" },
         { label: "Industry Solutions", href: "/solutions", desc: "Interactive modules details & SaaS portal specs" },
         { label: "Target Sectors", href: "/industries", desc: "Vertical workflows for Fintech, Healthcare & Retail" },
@@ -85,7 +85,7 @@ export default function HTMLSitemapPage() {
             HTML <span className="gradient-text">Sitemap</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            Navigate through all public pages, operational dashboards, agent softphones, support document centers, and compliance reports of the DBS Mintek® Contact Center Operating System.
+            Navigate through all public pages, operational dashboards, agent softphones, support document centers, and compliance reports of the Nexdial Contact Center Operating System.
           </p>
         </AnimatedSection>
 

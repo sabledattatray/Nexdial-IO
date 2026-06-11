@@ -64,7 +64,7 @@ export default function PrivacyPage() {
             Privacy <span className="gradient-text">Policy</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            DBS Mintek® is committed to maintaining the highest security, data isolation, and confidentiality standards. This policy governs data processing across our multi-tenant SaaS portals, predictive dialer clusters, BPO services, and AI voice copilots.
+            Nexdial is committed to maintaining the highest security, data isolation, and confidentiality standards. This policy governs data processing across our multi-tenant SaaS portals, predictive dialer clusters, BPO services, and AI voice copilots.
           </p>
           <div className="flex items-center gap-4 mt-6 text-xs text-[#64748B] font-mono">
             <span>DOCUMENT ID: CCOS-PRV-2026-V4</span>
@@ -112,10 +112,10 @@ export default function PrivacyPage() {
                 1. Introduction & Scope
               </h2>
               <p>
-                DBS Mintek® (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) provides a multi-tenant cloud-native Contact Center Operating System, Voice AI virtual agents, CRM integration adapters, and specialized Business Process Outsourcing (BPO) solutions.
+                Nexdial (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) provides a multi-tenant cloud-native Contact Center Operating System, Voice AI virtual agents, CRM integration adapters, and specialized Business Process Outsourcing (BPO) solutions.
               </p>
               <p>
-                This Privacy Policy describes how we collect, use, process, and secure user credentials, tenant databases, telephony call details, and audio data. It applies to all platforms hosted under our domains (including <code>*.dbsmintek.com</code>), administrative dashboards, agent softphone consoles, and client reporting terminals.
+                This Privacy Policy describes how we collect, use, process, and secure user credentials, tenant databases, telephony call details, and audio data. It applies to all platforms hosted under our domains (including <code>*.nexdial.com</code>), administrative dashboards, agent softphone consoles, and client reporting terminals.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-[#00E5A0]/20 flex gap-3 items-start text-xs text-[#94A3B8]">
                 <CheckCircle2 className="w-4 h-4 text-[#00E5A0] shrink-0 mt-0.5" />
@@ -174,7 +174,7 @@ export default function PrivacyPage() {
                 4. GDPR & HIPAA Sovereignty
               </h2>
               <p>
-                DBS Mintek® provides standard regulatory assurances to satisfy security and privacy rules globally:
+                Nexdial provides standard regulatory assurances to satisfy security and privacy rules globally:
               </p>
 
               <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">HIPAA & Healthcare Data</h3>
@@ -230,7 +230,7 @@ export default function PrivacyPage() {
                 Depending on your location, you have rights to access, correct, port, or request deletion of your personal data processed by our systems. Super administrators can export complete contact lists, billing receipts, and CDR tables directly from the Admin Console at any time.
               </p>
               <p>
-                If you are a customer of one of our tenants (e.g. a consumer called during an outreach campaign), you should contact that organization directly to exercise your privacy rights, as DBS Mintek® processes that data solely as a service processor under their instruction.
+                If you are a customer of one of our tenants (e.g. a consumer called during an outreach campaign), you should contact that organization directly to exercise your privacy rights, as Nexdial processes that data solely as a service processor under their instruction.
               </p>
             </section>
 
@@ -244,9 +244,9 @@ export default function PrivacyPage() {
                 For questions about our security controls, SOC2 audit sheets, or to submit data deletion requests, contact our legal and data protection team:
               </p>
               <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-2 text-xs">
-                <p className="font-bold text-white">DBS Mintek® Data Protection Office</p>
-                <p className="text-slate-400">Email: <a href="mailto:prithviraj.singh@dbsmintek.in" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">prithviraj.singh@dbsmintek.in</a></p>
-                <p className="text-slate-400">Head Office: Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705</p>
+                <p className="font-bold text-white">Nexdial Data Protection Office</p>
+                <p className="text-slate-400">Email: <a href="mailto:info@nexdial.io" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">info@nexdial.io</a></p>
+                <p className="text-slate-400">Head Office: 123 Innovation Boulevard, Tech District, San Francisco, CA 94105</p>
               </div>
             </section>
 

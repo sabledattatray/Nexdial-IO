@@ -303,7 +303,7 @@ export default function AdminPages({
         <div className="max-w-2xl mx-auto bg-[#1E293B] p-8 rounded-3xl border border-[#334155] space-y-6">
           <div className="border-b border-[#334155]/65 pb-4">
             <h3 className="font-display font-extrabold text-white text-lg">Central PSTN Telephony Gateway Config</h3>
-            <p className="text-[10px] text-slate-405 font-mono mt-0.5">Parameters linking NexDial to physical telecom providers (Twilio, FreeSWITCH trunking)</p>
+            <p className="text-[10px] text-slate-405 font-mono mt-0.5">Parameters linking Nexdial to physical telecom providers (Twilio, FreeSWITCH trunking)</p>
           </div>
 
           {sipSavesNotice && (

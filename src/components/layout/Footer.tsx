@@ -124,7 +124,7 @@ export function Footer() {
               </h2>
               <p className="text-[#94A3B8] text-lg mb-8 max-w-2xl mx-auto">
                 Join 500+ enterprises that have elevated their customer experience with
-                DBS Mintek®&apos;s AI-powered platform.
+                Nexdial&apos;s AI-powered platform.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
                 <Link href="/request-demo" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
@@ -154,11 +154,11 @@ export function Footer() {
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#0057D9]/30 to-[#00C2FF]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-extrabold text-xl tracking-tight leading-none">
-                  DBS Mintek®
+                <span className="text-white font-extrabold text-xl tracking-tight leading-none flex items-center">
+                  Nexdial<sup className="text-base font-light ml-0.5 opacity-100 mt-1">&reg;</sup>
                 </span>
-                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase leading-none mt-2">
-                  Contact Center OS
+                <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
+                  Global Contact Center
                 </span>
               </div>
             </Link>
@@ -168,19 +168,19 @@ export function Footer() {
               CX solutions.
             </p>
             <div className="space-y-3 mb-6">
-              <a href="tel:+918308211113" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
+              <a href="tel:+918010803756" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                 <Phone className="w-4 h-4" />
-                +91 83082 11113
+                +91 8010803756
               </a>
-              <a href="mailto:prithviraj.singh@dbsmintek.in" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
+              <a href="mailto:info@nexdial.io" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                 <Mail className="w-4 h-4" />
-                prithviraj.singh@dbsmintek.in
+                info@nexdial.io
               </a>
               <div className="flex items-start gap-3 text-sm text-[#94A3B8]">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
                 <div>
                   <span className="block font-semibold text-white text-xs">Official Head Office:</span>
-                  <span className="block text-xs text-[#64748B] mt-0.5">Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705</span>
+                  <span className="block text-xs text-[#64748B] mt-0.5">123 Innovation Boulevard, Tech District, San Francisco, CA 94105</span>
                 </div>
               </div>
             </div>
@@ -279,7 +279,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <p className="text-xs text-[#475569]">
-              © {new Date().getFullYear()} DBS Mintek®. All rights reserved.
+              © {new Date().getFullYear()} Nexdial. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#334155] text-xs">|</span>
             <p className="text-xs text-[#475569]">

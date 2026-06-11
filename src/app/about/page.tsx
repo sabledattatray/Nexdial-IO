@@ -43,13 +43,13 @@ export default function AboutPage() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            About DBS Mintek®
+            About Nexdial
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
             Pioneering the Future of <span className="gradient-text">Customer CX</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4 leading-relaxed">
-            DBS Mintek® is a global Contact Center Operating System and premium BPO provider. We merge enterprise CRM, predictive dialing, and advanced cognitive AI to streamline enterprise outreach and inbound support.
+            Nexdial is a global Contact Center Operating System and premium BPO provider. We merge enterprise CRM, predictive dialing, and advanced cognitive AI to streamline enterprise outreach and inbound support.
           </p>
         </AnimatedSection>
 
@@ -60,90 +60,78 @@ export default function AboutPage() {
               Our Leadership Team
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              The leadership driving DBS Mintek®'s global expansion and operational success.
+              The leadership driving Nexdial's global expansion and operational success.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-            {/* Founder 1: Shiv Singh */}
+            {/* Founder 1: John Doe */}
             <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00C2FF]/30 transition-all duration-300">
               <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#0057D9]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <Image 
-                    src="/Shiv_Singh.jpg" 
-                    alt="Shiv Singh" 
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
-                  />
+                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#0057D9]/20 flex items-center justify-center shrink-0">
+                    <span className="text-3xl text-[#00C2FF] font-bold">JD</span>
+                  </div>
                   <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">Shiv Singh</h3>
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">John Doe</h3>
                     <p className="text-xs text-[#00C2FF] font-semibold mt-0.5">Owner & Founder</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
                   </div>
                 </div>
 
                 <div className="relative">
                   <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
                   <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    As the owner of DBS Mintek®, I have been leading a successful business consulting firm for over 16 years. My expertise lies in providing strategic guidance to clients across various industries, helping them navigate complex challenges and achieve their goals. Our mission is to empower businesses to grow and thrive in today&apos;s competitive landscape.
+                    As the founder of Nexdial, my vision has always been to simplify the complex world of customer interactions. With decades of industry experience, we&apos;re building tools that empower teams to do their best work without the technical overhead.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Founder 2: Prithviraj Singh */}
+            {/* Founder 2: Jane Smith */}
             <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00E5A0]/30 transition-all duration-300">
               <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-[#00E5A0]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <Image 
-                    src="/Prithvi_ex.jpg" 
-                    alt="Prithviraj Singh" 
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
-                  />
+                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#00E5A0]/20 flex items-center justify-center shrink-0">
+                    <span className="text-3xl text-[#00E5A0] font-bold">JS</span>
+                  </div>
                   <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">Prithviraj Singh</h3>
-                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Executive Head</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">Jane Smith</h3>
+                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Chief Operating Officer</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
                   </div>
                 </div>
 
                 <div className="relative">
                   <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
                   <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    We specialize in delivering robust BPO services and AI-driven workflow architectures tailored to global client operations. By combining direct cloud telephony integrations and predictive dialing consoles, we translate customer contacts into measurable commercial growth.
+                    Operational excellence isn&apos;t just a buzzword for us; it&apos;s the foundation of everything we build. Our platforms are designed to seamlessly scale from a handful of agents to thousands without compromising on quality or performance.
                   </p>
                 </div>
               </div>
             </div>
 
-            {/* Vice President: Ajay Giri */}
+            {/* Vice President: Michael Johnson */}
             <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#A855F7]/30 transition-all duration-300">
               <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#A855F7]/5 blur-[80px]" />
               <div className="relative z-10 space-y-6">
                 <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <Image 
-                    src="/ajay_giri.jpg" 
-                    alt="Ajay Giri" 
-                    width={96}
-                    height={96}
-                    className="w-24 h-24 rounded-2xl border border-white/[0.08] object-cover object-top shadow-xl grayscale group-hover:grayscale-0 transition-all duration-500 shrink-0"
-                  />
+                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#A855F7]/20 flex items-center justify-center shrink-0">
+                    <span className="text-3xl text-[#A855F7] font-bold">MJ</span>
+                  </div>
                   <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">Ajay Giri</h3>
-                    <p className="text-xs text-[#A855F7] font-semibold mt-0.5">Vice President</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">DBS Mintek®</p>
+                    <h3 className="text-xl font-bold text-white font-space-grotesk">Michael Johnson</h3>
+                    <p className="text-xs text-[#A855F7] font-semibold mt-0.5">Chief Technology Officer</p>
+                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
                   </div>
                 </div>
 
                 <div className="relative">
                   <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
                   <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    Our focus is on driving operational excellence and scale across our delivery units. By implementing cutting-edge quality management systems and performance tracking, we ensure our global BPO and contact center operations consistently exceed client SLAs and compliance benchmarks.
+                    By integrating the latest advancements in AI and cloud architecture, we ensure our clients always stay ahead of the curve. Innovation is at the heart of our strategy, driving continuous improvements across our product suite.
                   </p>
                 </div>
               </div>
@@ -155,10 +143,10 @@ export default function AboutPage() {
         <AnimatedSection className="mb-20">
           <div className="text-center max-w-xl mx-auto mb-12">
             <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              National Recognition & Awards
+              Global Industry Excellence
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              DBS Mintek®'s commitment to operational excellence and delivery performance.
+              Recognized worldwide for innovation and operational leadership.
             </p>
           </div>
 
@@ -172,8 +160,8 @@ export default function AboutPage() {
                 <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[#00C2FF] via-[#0057D9] to-[#00E5A0] opacity-25 group-hover:opacity-40 transition duration-500 blur-md" />
                 <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden bg-[#060D1B]">
                   <Image 
-                    src="/certication.jpg" 
-                    alt="PAN India prepaid retention award presentation" 
+                    src="/dummy_award.png" 
+                    alt="Global Technology Excellence Award" 
                     width={600}
                     height={400}
                     className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
@@ -185,30 +173,30 @@ export default function AboutPage() {
               <div className="md:col-span-7 space-y-6 text-left">
                 <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-xs font-semibold text-[#00E5A0]">
                   <Award className="w-3.5 h-3.5" />
-                  PAN India Award
+                  International Recognition
                 </div>
                 
                 <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight font-space-grotesk">
-                  2nd Position PAN India <br />
-                  <span className="gradient-text">Prepaid Retention Process</span>
+                  Innovation of the Year <br />
+                  <span className="gradient-text">Customer Experience Platform</span>
                 </h3>
                 
                 <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-xs sm:text-sm text-[#94A3B8]">
-                  Awarded by <span className="text-white font-bold">Mr. Navnit Shukla</span> — SD Head Vi (Maharashtra & GOA)
+                  Awarded by <span className="text-white font-bold">Global Tech Council</span> — Enterprise Solutions
                 </div>
 
                 <div className="space-y-4 text-xs sm:text-sm text-[#CBD5E1] leading-relaxed">
                   <p>
-                    We are proud to announce that DBS Mintek® has achieved 2nd position PAN India in the Prepaid Retention Process, receiving this award from Mr. Navnit Shukla- SD Head Vi ( Maharashtra & GOA).
+                    We are honored to receive the prestigious Innovation of the Year award from the Global Tech Council for our transformative advancements in Customer Experience platforms.
                   </p>
                   <p>
-                    This recognition reflects our team’s dedication, consistent efforts, customer-first approach, and strong focus on performance excellence.
+                    This accolade represents our unwavering commitment to pushing the boundaries of AI integration, providing businesses with the ultimate toolkit for seamless communication.
                   </p>
                   <p>
-                    A big thank you to our client leadership for their trust and guidance, and heartfelt congratulations to the entire DBS Mintek® team for making this achievement possible.
+                    A sincere thanks to our visionary team and partners who share our dedication to revolutionizing digital workflows on a global scale.
                   </p>
                   <p className="font-semibold text-white">
-                    This is just the beginning — we will continue to work harder, perform better, and aim for the No. 1 position.
+                    We&apos;re building the future of connectivity, and this milestone is just one step on our journey.
                   </p>
                 </div>
               </div>
@@ -282,7 +270,7 @@ export default function AboutPage() {
         <AnimatedSection className="glass-card-strong p-8 lg:p-12 text-center">
           <h3 className="text-xl font-bold text-white mb-4">Enterprise Compliance & Security Assured</h3>
           <p className="text-[#94A3B8] text-sm max-w-2xl mx-auto mb-8">
-            DBS Mintek® processes millions of calls and transactions securely every single day. We undergo continuous audit scans to meet HIPAA, GDPR, SOC2 Type II, and ISO requirements.
+            Nexdial processes millions of calls and transactions securely every single day. We undergo continuous audit scans to meet HIPAA, GDPR, SOC2 Type II, and ISO requirements.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
             {["SOC2 Type II Certified", "GDPR Data Sovereign", "HIPAA Health Compliance", "ISO 27001 ISMS"].map((cert) => (

@@ -42,7 +42,7 @@ export default function Campaigns({
     const newSc: ScriptTemplate = {
       id,
       title: 'New Dynamic Telephony Script',
-      content: 'Greet caller: Hello {contactName}! This is {agentName} from NexDial. I am calling to discuss our latest campaigns workflows...',
+      content: 'Greet caller: Hello {contactName}! This is {agentName} from Nexdial. I am calling to discuss our latest campaigns workflows...',
       tags: ['Sales', 'Draft']
     };
     onAddScript(newSc);

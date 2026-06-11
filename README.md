@@ -1,6 +1,6 @@
-# DBS Mintek® — AI-Powered Enterprise Contact Center Operating System
+# Nexdial — AI-Powered Enterprise Contact Center Operating System
 
-DBS Mintek® is a next-generation, cloud-native **Contact Center Operating System (CCOS)** combined with premium BPO services. Built for modern enterprises, it merges advanced CRM pipelines, high-velocity predictive outbound dialers, real-time voice AI agents, auto-QA transcription, and a white-labeled multi-tenant administration cockpit into a single, unified visual dashboard.
+Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** combined with premium BPO services. Built for modern enterprises, it merges advanced CRM pipelines, high-velocity predictive outbound dialers, real-time voice AI agents, auto-QA transcription, and a white-labeled multi-tenant administration cockpit into a single, unified visual dashboard.
 
 ---
 
@@ -46,7 +46,7 @@ DBS Mintek® is a next-generation, cloud-native **Contact Center Operating Syste
 ## 📂 Project Structure
 
 ```bash
-dbs-mintek/
+nexdial/
 ├── src/
 │   ├── app/                      # Next.js page routers & layout metadata
 │   │   ├── about/                # About page (leadership and national Vi awards)
@@ -78,8 +78,8 @@ Make sure you have Node.js 18+ and npm installed.
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/sabledattatray/DBS-Mintek.git
-   cd DBS-Mintek
+   git clone https://github.com/sabledattatray/nexdial.git
+   cd nexdial
    ```
 
 2. **Install dependencies**:
@@ -103,7 +103,7 @@ Make sure you have Node.js 18+ and npm installed.
 
 ## 🔒 Security & Compliance
 
-DBS Mintek® complies with key global standards for secure communication and operations:
+Nexdial complies with key global standards for secure communication and operations:
 * **HIPAA**: Offers Business Associate Agreements (BAAs), automatic data masking, and call logs scrubbing.
 * **SOC2 Type II**: Continuous vulnerability scanning, audit logs, and secure access permissions.
 * **GDPR**: EU isolated storage clusters and local sovereignty data zones.
@@ -113,6 +113,6 @@ DBS Mintek® complies with key global standards for secure communication and ope
 
 ## 📝 License & Attribution
 
-© 2026 DBS Mintek®. All rights reserved.
+© 2026 Nexdial. All rights reserved.
 
 Made for **High Performance** by [Datta Sable](https://dattasable.com).

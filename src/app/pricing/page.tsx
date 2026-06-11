@@ -45,7 +45,7 @@ const plans = [
     name: "Multi-Tenant SaaS",
     price: { USD: 499, INR: 41000 },
     icon: Shield,
-    desc: "Deploy DBS Mintek® white-labeled for multiple sub-branches, external call centers, or customers.",
+    desc: "Deploy Nexdial white-labeled for multiple sub-branches, external call centers, or customers.",
     features: [
       "Unlimited Tenant Organizations",
       "Fully White-Labeled Platform",
@@ -90,7 +90,7 @@ export default function PricingPage() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-16">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            DBS Mintek® Pricing
+            Nexdial Pricing
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
             Predictable Plans, <span className="gradient-text">Transparent Pricing</span>

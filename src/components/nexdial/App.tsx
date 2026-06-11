@@ -505,7 +505,7 @@ export default function App({ mode }: AppProps) {
         </>
       )}
 
-      {/* MOBILE TRIGGER HEADER (rendered only when embedded in DBS Mintek® to toggle sidebar) */}
+      {/* MOBILE TRIGGER HEADER (rendered only when embedded in Nexdial to toggle sidebar) */}
       {currentSection === 'applet' && mode && (
         <header className="md:hidden h-11 border-b border-slate-800 flex items-center px-4 bg-[#0E0E10] z-20">
           <button
@@ -929,7 +929,7 @@ export default function App({ mode }: AppProps) {
           <span className="text-slate-300">API_VERSION: 1.14.2-LST</span>
         </div>
         <div className="text-center text-[9px] text-slate-450">
-          © 2026 NexDial.io platform. Handcrafted by <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 font-bold hover:underline">Datta Sable</a>. Encrypted connection stabilized securely under TLS 1.3 protocol.
+          © 2026 Nexdial.io platform. Handcrafted by <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-indigo-400 font-bold hover:underline">Datta Sable</a>. Encrypted connection stabilized securely under TLS 1.3 protocol.
         </div>
         <div className="flex items-center gap-4 text-slate-450">
           <span>HOST: AWS-US-EAST</span>

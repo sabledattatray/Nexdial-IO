@@ -199,11 +199,11 @@ export function Navbar() {
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#0057D9]/30 to-[#00C2FF]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-extrabold text-xl tracking-tight leading-none">
-                  DBS Mintek®
+                <span className="text-white font-extrabold text-xl tracking-tight leading-none flex items-center">
+                  Nexdial<sup className="text-base font-light ml-0.5 opacity-100 mt-1">&reg;</sup>
                 </span>
-                <span className="text-[10px] text-[#64748B] font-medium tracking-[0.2em] uppercase leading-none mt-2">
-                  Contact Center OS
+                <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
+                  Global Contact Center
                 </span>
               </div>
             </Link>

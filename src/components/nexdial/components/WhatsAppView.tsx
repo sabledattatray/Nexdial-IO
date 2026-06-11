@@ -37,7 +37,7 @@ export default function WhatsAppView() {
       lastMessage: 'Are the outbound campaigns rates cheaper than standard VoIP trunks?',
       time: '12m ago',
       messages: [
-        { sender: 'bot', text: 'Greeting from NexDial Business Support. Outbound dialing rates start at $0.009/minute.', time: '10:50 AM' },
+        { sender: 'bot', text: 'Greeting from Nexdial Business Support. Outbound dialing rates start at $0.009/minute.', time: '10:50 AM' },
         { sender: 'customer', text: 'Are the outbound campaigns rates cheaper than standard VoIP trunks?', time: '10:52 AM' }
       ]
     },

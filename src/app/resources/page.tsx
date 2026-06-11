@@ -6,7 +6,7 @@ import { Download, FileText, ArrowRight } from "lucide-react";
 
 const resources = [
   { title: "2026 Enterprise AI BPO Scaling Playbook", type: "PDF / Staging Manual", size: "4.8 MB" },
-  { title: "Vicidial to DBS Mintek Route Integration Schema", type: "JSON / Configuration Map", size: "1.2 MB" },
+  { title: "Vicidial to Nexdial Route Integration Schema", type: "JSON / Configuration Map", size: "1.2 MB" },
   { title: "HIPAA & GDPR Call Center Compliance Whitepaper", type: "PDF / Legal Guide", size: "3.5 MB" }
 ];
 

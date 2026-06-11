@@ -4,7 +4,6 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import { Globe, MapPin, Building, Users, Server, ShieldCheck } from "lucide-react";
-import indiaMap from "@/lib/indiaMapData";
 
 interface Location {
   id: string;
@@ -23,127 +22,129 @@ interface Location {
 
 const locations: Location[] = [
   {
-    id: "mumbai",
-    city: "Navi Mumbai (HQ)",
-    country: "India",
-    role: "Global Head Office & Financial CX Center",
-    details: "Financial-grade secure operations, PCI-DSS compliant BPO & primary cloud clusters",
-    address: "Arihant Aura, B-Tower, 6th Floor, Thane-Belapur Road, opposite Turbhe Railway Station, Turbhe MIDC, Navi Mumbai, Maharashtra 400705",
-    coordinates: { x: 120, y: 445 },
-    servers: "AWS Mumbai (ap-south-1) Primary Hub",
-    agents: "650+",
+    id: "sf",
+    city: "San Francisco (HQ)",
+    country: "USA",
+    role: "Global Head Office & Innovation Hub",
+    details: "Primary AI research, global routing architecture, and core enterprise platform",
+    address: "123 Innovation Boulevard, Tech District, San Francisco, CA 94105",
+    coordinates: { x: 80, y: 250 },
+    servers: "AWS US-West (N. California) Primary Hub",
+    agents: "450+",
     sla: "99.99%",
-    latency: "4ms",
-    load: "58%",
+    latency: "3ms",
+    load: "62%",
   },
   {
-    id: "bengaluru",
-    city: "Bengaluru",
-    country: "India",
-    role: "Technology Innovation & R&D Hub",
-    details: "Speech AI research, cloud telephony architecture, and system integration testing",
-    address: "Prestige Tech Park, Block B, 4th Floor, Marathahalli-Sarjapur Outer Ring Road, Bengaluru, Karnataka 560103",
-    coordinates: { x: 210, y: 580 },
-    servers: "Azure India Central (Pune/Bangalore)",
-    agents: "350+",
-    sla: "99.99%",
-    latency: "11ms",
-    load: "52%",
-  },
-  {
-    id: "hyderabad",
-    city: "Hyderabad",
-    country: "India",
-    role: "AI Model Training & KPO Center",
-    details: "Deep learning transcript optimization, agent training simulator engine support",
-    address: "Mindspace IT Park, Building 20, 8th Floor, Madhapur, Hyderabad, Telangana 500081",
-    coordinates: { x: 240, y: 480 },
-    servers: "Google Cloud Region (me-central2)",
+    id: "ny",
+    city: "New York",
+    country: "USA",
+    role: "East Coast Financial CX Center",
+    details: "High-frequency trading support, financial compliance operations",
+    address: "One World Trade Center, Suite 4500, New York, NY 10007",
+    coordinates: { x: 160, y: 240 },
+    servers: "AWS US-East Local Zone",
     agents: "300+",
-    sla: "99.97%",
-    latency: "12ms",
-    load: "41%",
+    sla: "99.99%",
+    latency: "8ms",
+    load: "45%",
   },
   {
-    id: "chennai",
-    city: "Chennai",
-    country: "India",
-    role: "Omnichannel Support & Regional Hub",
-    details: "Multilingual regional support, SLA tracking systems, and telecom endpoints",
-    address: "Taramani IIT Research Park, Phase II, 3rd Floor, Chennai, Tamil Nadu 600113",
-    coordinates: { x: 280, y: 590 },
-    servers: "AWS Mumbai Local Zone",
+    id: "london",
+    city: "London",
+    country: "UK",
+    role: "EMEA Operations & Compliance",
+    details: "GDPR compliant data handling, European enterprise support",
+    address: "Level 39, One Canada Square, Canary Wharf, London E14 5AB",
+    coordinates: { x: 280, y: 200 },
+    servers: "AWS EU-West (London)",
+    agents: "500+",
+    sla: "99.98%",
+    latency: "12ms",
+    load: "55%",
+  },
+  {
+    id: "frankfurt",
+    city: "Frankfurt",
+    country: "Germany",
+    role: "European Data Sovereignty Node",
+    details: "Strict data localization, high-throughput message queuing",
+    address: "Taunusanlage 8, 60329 Frankfurt am Main, Germany",
+    coordinates: { x: 310, y: 190 },
+    servers: "Azure Germany Central",
     agents: "250+",
+    sla: "99.99%",
+    latency: "9ms",
+    load: "38%",
+  },
+  {
+    id: "dubai",
+    city: "Dubai",
+    country: "UAE",
+    role: "MENA Regional Hub",
+    details: "Multilingual regional support, 24/7 global operations center",
+    address: "Dubai Internet City, Building 1, Dubai, UAE",
+    coordinates: { x: 360, y: 300 },
+    servers: "AWS Middle East (UAE)",
+    agents: "350+",
     sla: "99.95%",
     latency: "15ms",
+    load: "42%",
+  },
+  {
+    id: "singapore",
+    city: "Singapore",
+    country: "Singapore",
+    role: "APAC Gateway & Tech Hub",
+    details: "Ultra-low latency routing for Asia-Pacific, regional failover",
+    address: "Marina Bay Financial Centre Tower 1, Singapore 018981",
+    coordinates: { x: 450, y: 420 },
+    servers: "Google Cloud Region (asia-southeast1)",
+    agents: "400+",
+    sla: "99.99%",
+    latency: "11ms",
+    load: "48%",
+  },
+  {
+    id: "tokyo",
+    city: "Tokyo",
+    country: "Japan",
+    role: "East Asia Enterprise Support",
+    details: "Premium Japanese language support, automated QA processing",
+    address: "Roppongi Hills Mori Tower, Minato City, Tokyo",
+    coordinates: { x: 520, y: 220 },
+    servers: "AWS AP-Northeast (Tokyo)",
+    agents: "280+",
+    sla: "99.97%",
+    latency: "6ms",
     load: "35%",
   },
   {
-    id: "pune",
-    city: "Pune (Baner)",
-    country: "India",
-    role: "Quality Assurance & DevOps Node",
-    details: "Continuous integration pipelines, WebRTC diagnostics, and 99.99% uptime control",
-    address: "Amar Apex, 4th Floor, Baner Road, Baner, Pune, Maharashtra 411045",
-    coordinates: { x: 140, y: 460 },
-    servers: "AWS Mumbai / Local Nodes",
+    id: "sydney",
+    city: "Sydney",
+    country: "Australia",
+    role: "Oceania Operations Hub",
+    details: "ANZ market support, continuous integration pipelines",
+    address: "Barangaroo Avenue, Sydney NSW 2000, Australia",
+    coordinates: { x: 540, y: 520 },
+    servers: "Azure Australia East",
     agents: "200+",
-    sla: "99.99%",
-    latency: "13ms",
-    load: "28%",
-  },
-  {
-    id: "kolkata",
-    city: "Kolkata",
-    country: "India",
-    role: "East India CX & Operations Hub",
-    details: "Inbound customer service, dialer campaign execution, and disaster recovery center",
-    address: "DLF IT Park 1, Tower C, 6th Floor, Major Arterial Road, New Town, Kolkata, West Bengal 700156",
-    coordinates: { x: 440, y: 350 },
-    servers: "Azure India South (Chennai/Kolkata)",
-    agents: "180+",
-    sla: "99.92%",
-    latency: "19ms",
+    sla: "99.95%",
+    latency: "14ms",
     load: "30%",
-  },
-  {
-    id: "ashoknagar",
-    city: "Ashoknagar (MP)",
-    country: "India",
-    role: "Central India Operations Node",
-    details: "Highly redundant disaster recovery center, local storage backup, 24/7 support delivery",
-    address: "Near Railway Station, Ashoknagar, Madhya Pradesh 473331",
-    coordinates: { x: 200, y: 320 },
-    servers: "Local Storage Arrays & AWS Backup",
-    agents: "120+",
-    sla: "99.90%",
-    latency: "22ms",
-    load: "18%",
-  },
-  {
-    id: "lucknow",
-    city: "Lucknow",
-    country: "India",
-    role: "North India Support & Regional Hub",
-    details: "Enterprise client support center, multi-language inbound services, training modules",
-    address: "Vibhuti Khand, Gomti Nagar, Lucknow, Uttar Pradesh 226010",
-    coordinates: { x: 275, y: 240 },
-    servers: "AWS Central & local replication",
-    agents: "150+",
-    sla: "99.94%",
-    latency: "16ms",
-    load: "24%",
   }
 ];
 
 const connectionPaths = [
-  { from: { x: 120, y: 445 }, to: { x: 140, y: 460 } }, // Mumbai -> Pune
-  { from: { x: 120, y: 445 }, to: { x: 200, y: 320 } }, // Mumbai -> Ashoknagar
-  { from: { x: 120, y: 445 }, to: { x: 275, y: 240 } }, // Mumbai -> Lucknow
-  { from: { x: 120, y: 445 }, to: { x: 210, y: 580 } }, // Mumbai -> Bengaluru
-  { from: { x: 120, y: 445 }, to: { x: 240, y: 480 } }, // Mumbai -> Hyderabad
-  { from: { x: 120, y: 445 }, to: { x: 280, y: 590 } }, // Mumbai -> Chennai
-  { from: { x: 120, y: 445 }, to: { x: 440, y: 350 } }, // Mumbai -> Kolkata
+  { from: { x: 80, y: 250 }, to: { x: 160, y: 240 } },
+  { from: { x: 160, y: 240 }, to: { x: 280, y: 200 } },
+  { from: { x: 280, y: 200 }, to: { x: 310, y: 190 } },
+  { from: { x: 310, y: 190 }, to: { x: 360, y: 300 } },
+  { from: { x: 360, y: 300 }, to: { x: 450, y: 420 } },
+  { from: { x: 450, y: 420 }, to: { x: 520, y: 220 } },
+  { from: { x: 450, y: 420 }, to: { x: 540, y: 520 } },
+  { from: { x: 80, y: 250 }, to: { x: 280, y: 200 } },
+  { from: { x: 80, y: 250 }, to: { x: 520, y: 220 } },
 ];
 
 export function GlobalPresence() {
@@ -161,13 +162,13 @@ export function GlobalPresence() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6">
         <AnimatedSection className="text-center mb-16">
           <p className="text-sm font-semibold text-[#00E5A0] uppercase tracking-widest mb-4">
-            India Infrastructure
+            Global Infrastructure
           </p>
           <h2 className="section-title text-white mb-4">
-            National Scale. <span className="gradient-text">Local TRAI Compliance.</span>
+            Worldwide Scale. <span className="gradient-text">Global Compliance.</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            Operational footprint and cloud clusters strategically located across India to ensure low-latency WebRTC routing, strict telecom guidelines alignment, and active redundancy.
+            Operational footprint and cloud clusters strategically located across the globe to ensure low-latency WebRTC routing, strict regional guidelines alignment, and active redundancy.
           </p>
         </AnimatedSection>
 
@@ -176,15 +177,15 @@ export function GlobalPresence() {
           <AnimatedSection direction="none" className="relative p-6 glass-card border-white/[0.05] shadow-2xl flex flex-col justify-center">
             <div className="absolute top-4 left-4 flex items-center gap-2 px-3 py-1.5 rounded-full bg-white/[0.03] border border-white/[0.06] text-[10px] text-[#94A3B8] z-30">
               <Globe className="w-3.5 h-3.5 text-[#00C2FF] animate-spin-slow" />
-              <span>Interactive Operations Map — India</span>
+              <span>Interactive Operations Map — Worldwide</span>
             </div>
 
-            {/* India Map Outline Graphic using SVG for responsive plotting */}
+            {/* Worldwide Map Outline Graphic using SVG for responsive plotting */}
             <div 
               className="relative w-full mx-auto bg-[#0a1424] rounded-xl overflow-hidden border border-white/[0.05] shadow-inner"
               style={{ maxWidth: "483px", maxHeight: "550px", aspectRatio: "612/696" }}
             >
-              <svg viewBox={indiaMap.viewBox} className="w-full h-full select-none">
+              <svg viewBox="0 0 612 696" className="w-full h-full select-none">
                 <style>{`
                   @keyframes dash {
                     to {
@@ -206,25 +207,11 @@ export function GlobalPresence() {
                 {/* Simple grid coordinate system lines */}
                 <line x1="0" y1="348" x2="612" y2="348" stroke="rgba(255,255,255,0.02)" strokeDasharray="3" />
                 <line x1="306" y1="0" x2="306" y2="696" stroke="rgba(255,255,255,0.02)" strokeDasharray="3" />
-                
-                {/* Detailed India State paths */}
-                <g className="cursor-default">
-                  {indiaMap.locations.map((state) => (
-                    <path
-                      key={state.id}
-                      d={state.path}
-                      fill="rgba(15, 23, 42, 0.75)"
-                      stroke="rgba(0, 194, 255, 0.12)"
-                      strokeWidth="1"
-                      className="transition-colors duration-300 hover:fill-[#0057D9]/15 hover:stroke-[#00C2FF]/50"
-                    />
-                  ))}
-                </g>
 
-                {/* Navi Mumbai HQ Radial Glow */}
-                <circle cx="120" cy="445" r="28" fill="#0057D9" opacity="0.12" className="animate-pulse" />
+                {/* San Francisco HQ Radial Glow */}
+                <circle cx="80" cy="250" r="28" fill="#0057D9" opacity="0.12" className="animate-pulse" />
 
-                {/* Connection lines from Navi Mumbai HQ */}
+                {/* Connection lines from HQ */}
                 <g opacity="0.6">
                   {connectionPaths.map((path, index) => (
                     <g key={index}>
@@ -250,7 +237,7 @@ export function GlobalPresence() {
               {/* Plotted Dots */}
               {locations.map((loc) => {
                 const isActive = activeLoc.id === loc.id;
-                const isHQ = loc.id === "mumbai";
+                const isHQ = loc.id === "sf";
                 const xPercent = (loc.coordinates.x / 612) * 100;
                 const yPercent = (loc.coordinates.y / 696) * 100;
                 return (
@@ -383,7 +370,7 @@ export function GlobalPresence() {
 
                 <div className="flex items-center gap-2.5 p-3 mt-6 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/10 text-[11px] text-[#00E5A0] font-medium">
                   <ShieldCheck className="w-4 h-4 flex-shrink-0" />
-                  Guaranteed TRAI, OSP, & ISO 27001 Telecom Compliance
+                  Guaranteed Global GDPR, HIPAA, & ISO 27001 Compliance
                 </div>
               </motion.div>
             </AnimatePresence>

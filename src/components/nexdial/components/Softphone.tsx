@@ -47,7 +47,7 @@ export default function Softphone({
     const lastCustomerTurn = conversation.slice().reverse().find(s => s.speaker === 'customer')?.text || "Hello?";
     const lastAgentTurn = conversation.slice().reverse().find(s => s.speaker === 'agent')?.text || "Hi, this is Dattatray Sable.";
     
-    return `NexDial Softphone Alert:\nContact: ${contactName}\nLine Status: Connected\nDuration: ${formattedTime(seconds)}\nQA Score: ${qaScore}/100\n\nLast Customer: "${lastCustomerTurn}"\nLast Agent: "${lastAgentTurn}"\n\n- Powered by NexDial Enterprise Live Sync`;
+    return `Nexdial Softphone Alert:\nContact: ${contactName}\nLine Status: Connected\nDuration: ${formattedTime(seconds)}\nQA Score: ${qaScore}/100\n\nLast Customer: "${lastCustomerTurn}"\nLast Agent: "${lastAgentTurn}"\n\n- Powered by Nexdial Enterprise Live Sync`;
   };
 
   const handleSmsTrigger = (method: 'real-wa' | 'real-sms' | 'sim') => {
@@ -94,7 +94,7 @@ export default function Softphone({
     SaaS: [
       { speaker: 'customer', text: "Robert Stark here. Good timing, I was just checking our CRM billing integrations.", delay: 1000 },
       { speaker: 'agent', text: "Awesome Robert! Glad to connect. I wanted to see if your current outbound rates conform to TCPA guidelines?", delay: 4000 },
-      { speaker: 'customer', text: "Honestly, we struggle with spam listing warnings. Carriers tag our numbers as 'Spam Likely' constantly.", delay: 7000, coachPrompt: "Highlight NexDial's Local Presence rotation & carrier STIR/SHAKEN registration system." },
+      { speaker: 'customer', text: "Honestly, we struggle with spam listing warnings. Carriers tag our numbers as 'Spam Likely' constantly.", delay: 7000, coachPrompt: "Highlight Nexdial's Local Presence rotation & carrier STIR/SHAKEN registration system." },
       { speaker: 'customer', text: "That would be a massive savior. Does your solution connect directly in Salesforce pipelines?", delay: 11000, coachPrompt: "Reassure Salesforce integration is native. All calls auto-logged and transcription uploaded in 0.4s." },
       { speaker: 'customer', text: "Alright, let's schedule an enterprise pilot session next Tuesday.", delay: 15000, coachPrompt: "Confirm pilot. Disposition: Closed_Won." }
     ],
@@ -337,7 +337,7 @@ export default function Softphone({
 
             <div className="bg-[#0F172A] p-3.5 rounded-xl border border-slate-800 space-y-1.5 text-center">
               <p className="text-[10px] text-slate-400 leading-normal font-sans italic text-center">
-                💡 NexDial operates in a secured WebRTC sandbox. WebRTC simulation generates premium live speech transcripts, QA compliance reports, and supervisor suggestions. If you wish to trigger a real voice carrier call to your device, select "Call via Device SIM".
+                💡 Nexdial operates in a secured WebRTC sandbox. WebRTC simulation generates premium live speech transcripts, QA compliance reports, and supervisor suggestions. If you wish to trigger a real voice carrier call to your device, select "Call via Device SIM".
               </p>
             </div>
           </div>
@@ -554,7 +554,7 @@ export default function Softphone({
                       </div>
                     ) : smsSuccess ? (
                       <div className="flex flex-col gap-1 items-start animate-fade-in">
-                        <span className="text-[8px] font-mono font-bold text-indigo-400 pl-1 uppercase tracking-wider">NexDial Service • Just now</span>
+                        <span className="text-[8px] font-mono font-bold text-indigo-400 pl-1 uppercase tracking-wider">Nexdial Service • Just now</span>
                         <div className="bg-[#1E293B] text-slate-100 text-[10px] p-2.5 rounded-2xl rounded-tl-none max-w-[95%] shadow-md border border-[#334155] leading-relaxed font-mono whitespace-pre-line text-left">
                           {getSharedText()}
                         </div>

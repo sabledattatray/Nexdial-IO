@@ -176,7 +176,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
                 </h2>
               </div>
               <p className="text-xs text-slate-450">
-                Choose a Google Workspace account to grant identity credentials to NexDial telephony systems.
+                Choose a Google Workspace account to grant identity credentials to Nexdial telephony systems.
               </p>
               {!(import.meta as any).env?.VITE_GOOGLE_CLIENT_ID && (
                 <div className="p-3 mt-2 bg-indigo-950/20 border border-indigo-500/15 rounded-xl text-[11px] text-indigo-400 font-sans leading-normal">
@@ -257,7 +257,7 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
               <div className="flex items-center gap-2">
                 <div className="px-2 py-0.5 rounded bg-indigo-950/20 text-[#818CF8] border border-indigo-500/10 text-[9px] font-mono font-bold flex items-center gap-1 uppercase">
                   <Shield className="w-3 h-3" />
-                  NexDial Gate-v2.1
+                  Nexdial Gate-v2.1
                 </div>
               </div>
               <h2 className="text-xl font-extrabold text-[#818CF8] tracking-tight">

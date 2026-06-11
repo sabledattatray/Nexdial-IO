@@ -7,7 +7,7 @@ export default function AICopilotView() {
   
   const [promptInput, setPromptInput] = useState('');
   const [responseOutput, setResponseOutput] = useState<string>(
-    "Hello Agent! I am your NexDial AI Copilot. How can I assist you in routing outreach leads or countering sales objections today?"
+    "Hello Agent! I am your Nexdial AI Copilot. How can I assist you in routing outreach leads or countering sales objections today?"
   );
   const [isGenerating, setIsGenerating] = useState(false);
 
@@ -32,7 +32,7 @@ export default function AICopilotView() {
 👉 **Close Prompt:** "Could we align a dynamic 5-minute sandbox test on your patient list in the morning?"`;
       } else if (trimmedQuery.includes('pitch') || trimmedQuery.includes('saas')) {
         answer = `*AI Outreach Cold-Pitch Draft (Enterprise SaaS)*
-🎤 **Hook [0:00 - 0:10]:** "Hi, this is Dattatray with NexDial. Is your tech team currently using manual dialing or standard legacy SIP lines for inbound medical leads scheduling?"
+🎤 **Hook [0:00 - 0:10]:** "Hi, this is Dattatray with Nexdial. Is your tech team currently using manual dialing or standard legacy SIP lines for inbound medical leads scheduling?"
 🎤 **Value [0:10 - 0:25]:** "The reason I call is we pre-bundle Twilio trunk pathways to route predictive dial logs directly. It cuts wrap times by 40% and keeps latency below 12ms."
 🎤 **CTA [0:25 - 0:35]:** "I can provision a free SIP testing seat for your manager is morning, do you have 2 minutes to inspect the canvas tools?"`;
       } else {
@@ -111,7 +111,7 @@ export default function AICopilotView() {
             <div className="flex-1 overflow-y-auto custom-scrollbar py-4 font-light text-slate-300 leading-relaxed text-xs">
               {isGenerating ? (
                 <div className="h-full flex items-center justify-center text-slate-500 italic">
-                  Running sandbox rules through NexDial neural networks...
+                  Running sandbox rules through Nexdial neural networks...
                 </div>
               ) : (
                 <pre className="font-sans whitespace-pre-wrap">{responseOutput}</pre>

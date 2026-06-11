@@ -47,7 +47,7 @@ export default function LiveDialerView({
     const lastCustomerTurn = activeSpeech.slice().reverse().find(s => s.speaker === 'customer')?.text || "Hello?";
     const lastAgentTurn = activeSpeech.slice().reverse().find(s => s.speaker === 'agent')?.text || "Hi, this is Dattatray Sable.";
     
-    return `NexDial Live Call Alert:\nContact: ${contactName}\nLine Status: Connected\nDuration: ${formattedTime(duration)}\nSentiment: ${sentimentValue}\n\nLast Customer: "${lastCustomerTurn}"\nLast Agent: "${lastAgentTurn}"\n\n- Powered by NexDial Enterprise Live Sync`;
+    return `Nexdial Live Call Alert:\nContact: ${contactName}\nLine Status: Connected\nDuration: ${formattedTime(duration)}\nSentiment: ${sentimentValue}\n\nLast Customer: "${lastCustomerTurn}"\nLast Agent: "${lastAgentTurn}"\n\n- Powered by Nexdial Enterprise Live Sync`;
   };
 
   const handleSmsTrigger = (method: 'real-wa' | 'real-sms' | 'sim') => {
@@ -134,7 +134,7 @@ export default function LiveDialerView({
       setActiveSpeech([
         { speaker: 'system', text: `Connected securely to Twilio Edge Carrier node. Active codec: OPUS 48kHz HD.`, timestamp: '00:01' },
         { speaker: 'customer', text: `Hello, this is ${targetContact.name}. Who is calling?`, timestamp: '00:03' },
-        { speaker: 'agent', text: `Hi ${targetContact.name}! I am calling on behalf of NexDial outbound sweeps regarding lead acceleration workflows. How are you today?`, timestamp: '00:07' },
+        { speaker: 'agent', text: `Hi ${targetContact.name}! I am calling on behalf of Nexdial outbound sweeps regarding lead acceleration workflows. How are you today?`, timestamp: '00:07' },
         { speaker: 'customer', text: `Oh yes, we were actually looking for outbound telephony providers since our active cold rate is low. Is this predictive?`, timestamp: '00:15' }
       ]);
       setSentimentValue('Positive');
@@ -499,7 +499,7 @@ export default function LiveDialerView({
                             </div>
                           ) : smsSuccess ? (
                             <div className="flex flex-col gap-1 items-start animate-fade-in">
-                              <span className="text-[8px] font-mono font-bold text-indigo-400 pl-1 uppercase tracking-wider">NexDial Service • Just now</span>
+                              <span className="text-[8px] font-mono font-bold text-indigo-400 pl-1 uppercase tracking-wider">Nexdial Service • Just now</span>
                               <div className="bg-[#1e1e2e] text-slate-100 text-[10px] p-2.5 rounded-2xl rounded-tl-none max-w-[95%] shadow-md border border-indigo-500/15 leading-relaxed font-mono whitespace-pre-line">
                                 {getSharedText()}
                               </div>

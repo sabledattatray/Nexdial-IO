@@ -1,5 +1,5 @@
 /**
- * NexDial TypeScript Type Definitions
+ * Nexdial TypeScript Type Definitions
  */
 
 export type UserRole = 'super_admin' | 'tenant_admin' | 'team_leader' | 'agent' | 'anonymous';
