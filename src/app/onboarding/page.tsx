@@ -1117,7 +1117,7 @@ function OnboardingContent() {
             </div>
 
             {/* Pricing Tiers */}
-            <div className="mt-4 grid grid-cols-2 gap-2">
+            <div className="mt-4 grid grid-cols-3 gap-2">
               <div className="bg-[#050A15] border border-[#00C2FF]/20 rounded-xl p-3">
                 <p className="text-[9px] uppercase tracking-wider text-[#00C2FF] font-bold">Small Business</p>
                 <p className="text-xl font-black text-white mt-1">₹499<span className="text-xs font-normal text-slate-400">/mo</span></p>
@@ -1127,6 +1127,11 @@ function OnboardingContent() {
                 <p className="text-[9px] uppercase tracking-wider text-purple-400 font-bold">Medium Business</p>
                 <p className="text-xl font-black text-white mt-1">₹599<span className="text-xs font-normal text-slate-400">/mo</span></p>
                 <p className="text-[9px] text-slate-400 mt-0.5">11 — 50 Users</p>
+              </div>
+              <div className="bg-[#050A15] border border-[#00E5A0]/20 rounded-xl p-3">
+                <p className="text-[9px] uppercase tracking-wider text-[#00E5A0] font-bold">Large Business</p>
+                <p className="text-xl font-black text-white mt-1">₹999<span className="text-xs font-normal text-slate-400">/mo</span></p>
+                <p className="text-[9px] text-slate-400 mt-0.5">50+ Users</p>
               </div>
             </div>
 
