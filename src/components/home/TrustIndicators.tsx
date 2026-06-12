@@ -1,7 +1,6 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import { motion, useAnimation } from "framer-motion";
+import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import { 
   Home, Megaphone, GraduationCap, Stethoscope, Shield, Scale, Compass, Calendar, 
@@ -35,22 +34,6 @@ const trustBadges = [
 ];
 
 export function TrustIndicators() {
-  const controls = useAnimation();
-  const started = useRef(false);
-
-  useEffect(() => {
-    if (started.current) return;
-    started.current = true;
-
-    const isMobile = window.innerWidth <= 768;
-    const duration = isMobile ? 12 : 28;
-
-    controls.start({
-      x: ["0%", "-50%"],
-      transition: { duration, repeat: Infinity, ease: "linear" },
-    });
-  }, [controls]);
-
   return (
     <section className="relative py-20 border-y border-white/[0.04] overflow-hidden">
       {/* Premium ambient backdrop */}
@@ -76,10 +59,7 @@ export function TrustIndicators() {
           <div className="absolute right-0 top-0 bottom-0 w-24 sm:w-48 bg-gradient-to-l from-[#081120] to-transparent z-10 pointer-events-none" />
 
           <div className="overflow-hidden py-4">
-            <motion.div
-              animate={controls}
-              className="flex gap-4 sm:gap-6 items-center whitespace-nowrap"
-            >
+            <div className="animate-marquee hover-pause flex gap-4 sm:gap-6 items-center whitespace-nowrap">
               {[...clientTypes, ...clientTypes].map((client, i) => {
                 const IconComponent = client.icon;
                 return (
@@ -99,7 +79,7 @@ export function TrustIndicators() {
                   </div>
                 );
               })}
-            </motion.div>
+            </div>
           </div>
         </div>
 
