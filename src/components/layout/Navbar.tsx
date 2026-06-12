@@ -22,6 +22,8 @@ import {
   Zap,
   LogIn,
   LayoutDashboard,
+  Shield,
+  Handshake,
 } from "lucide-react";
 
 const navLinks = [
@@ -69,9 +71,17 @@ const navLinks = [
       {
         title: "About",
         items: [
-          { label: "About Us", href: "/about", icon: Building2, desc: "Our mission & story" },
-          { label: "Contact", href: "/contact", icon: Mail, desc: "Get in touch with us" },
-          { label: "Careers", href: "/careers", icon: Briefcase, desc: "Join our team" },
+          { label: "About Us", href: "/about", icon: Building2, desc: "Our story, mission & locations" },
+          { label: "Contact Us", href: "/contact", icon: Mail, desc: "Get in touch with support & sales" },
+          { label: "Careers", href: "/careers", icon: Briefcase, desc: "Open positions in India & remote" },
+        ],
+      },
+      {
+        title: "Relations",
+        items: [
+          { label: "Client Roster", href: "/clients", icon: Users, desc: "Trusted by 1,000+ businesses" },
+          { label: "Partners", href: "/partners", icon: Handshake, desc: "Platform integrators & partners" },
+          { label: "Security & Trust", href: "/security", icon: Shield, desc: "Data compliance & security standards" },
         ],
       },
     ],
