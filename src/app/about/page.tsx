@@ -3,215 +3,131 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Shield, Target, Award, Users, MapPin, Zap } from "lucide-react";
+import { Shield, Target, Award, Users, Inbox, Brain, Sparkles } from "lucide-react";
 
 const pillars = [
   {
-    icon: Target,
-    title: "Operational Excellence",
-    desc: "Providing premium BPO services with continuous metric optimization, high first-contact-resolution rates, and elite agent training workflows.",
+    icon: Inbox,
+    title: "Unified Workspace",
+    desc: "Consolidating phone calls, WhatsApp messages, website form submissions, and manual entries into a single feed to eliminate communication clutter.",
     color: "#0057D9"
   },
   {
-    icon: Zap,
-    title: "AI-First Technology",
-    desc: "Developing next-generation AI agents, predictive scoring tools, and LLM automation to augment human capacity and reduce overhead.",
-    color: "#00C2FF"
+    icon: Brain,
+    title: "AI-Driven Action",
+    desc: "Integrating self-learning suggestions, next-best-action alerts, and predictive revenue forecasting models to guide sales teams constructively.",
+    color: "#8B5CF6"
   },
   {
     icon: Shield,
-    title: "Sovereign Compliance",
-    desc: "Upholding peak security benchmarks. Fully aligned with SOC2 Type II, HIPAA, ISO 27001, and regional GDPR policies.",
+    title: "Security & Privacy",
+    desc: "Upholding industry-standard data encryption, secure local backups, and absolute privacy safeguards to keep customer data safe.",
     color: "#00E5A0"
   }
 ];
 
-const leaders = [
-  { name: "Vikram Dev", role: "Chief Executive Officer", desc: "Ex-Genesys Lead Architect, 20+ years of telecom and CRM engineering experience." },
-  { name: "Dr. Ananya Roy", role: "VP of Artificial Intelligence", desc: "PhD in NLP & Deep Learning. Oversees our Voice AI nodes and transcript models." },
-  { name: "Marcus Stone", role: "Head of Global Support Operations", desc: "Oversees 1,200+ agents across APAC, Europe, and North American delivery hubs." }
+const team = [
+  {
+    name: "Datta Sable",
+    role: "Founder & Lead Architect",
+    desc: "Full-stack software architect with a vision to eliminate communication chaos for small businesses. Oversees core product engineering and AI research.",
+    initials: "DS",
+    color: "#0057D9"
+  },
+  {
+    name: "Rahul K.",
+    role: "Head of Customer Success",
+    desc: "Dedicated to helping businesses successfully transition away from messy spreadsheets and adopt structured sales automation workflows.",
+    initials: "RK",
+    color: "#8B5CF6"
+  },
+  {
+    name: "Nisha P.",
+    role: "Head of Operations",
+    desc: "Ensures seamless onboarding, reliable API webhooks, robust system configurations, and round-the-clock platform availability.",
+    initials: "NP",
+    color: "#00E5A0"
+  }
 ];
 
 export default function AboutPage() {
   return (
     <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden">
       <div className="absolute inset-0 noise-overlay pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00C2FF]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#0057D9]/5 rounded-full blur-[150px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[600px] h-[600px] bg-[#00E5A0]/5 rounded-full blur-[150px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6">
         
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            About Nexdial
+            About NexDial
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
-            Pioneering the Future of <span className="gradient-text">Customer CX</span>
+            Simplifying Customer <span className="gradient-text">Conversations</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4 leading-relaxed">
-            Nexdial is a global Contact Center Operating System and premium BPO provider. We merge enterprise CRM, predictive dialing, and advanced cognitive AI to streamline enterprise outreach and inbound support.
+            NexDial is a unified business communication inbox and lightweight CRM built for small businesses. We replace fragmented apps and disjointed spreadsheets with a fast, structured, and intelligent sales execution platform.
           </p>
         </AnimatedSection>
 
-        {/* Founder's Vision */}
-        <AnimatedSection className="mb-20 max-w-7xl mx-auto space-y-8">
-          <div className="text-center max-w-xl mx-auto mb-10">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Our Leadership Team
+        {/* Vision & Team Story */}
+        <AnimatedSection className="mb-24 max-w-7xl mx-auto">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-white font-space-grotesk">
+              Our Visionary Leadership
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              The leadership driving Nexdial's global expansion and operational success.
+              Meet the small, dedicated team building the next generation of sales and communication workspace tools.
             </p>
           </div>
 
           <div className="grid lg:grid-cols-3 md:grid-cols-2 gap-8">
-            {/* Founder 1: John Doe */}
-            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00C2FF]/30 transition-all duration-300">
-              <div className="absolute -top-20 -left-20 w-60 h-60 rounded-full bg-[#0057D9]/5 blur-[80px]" />
-              <div className="relative z-10 space-y-6">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#0057D9]/20 flex items-center justify-center shrink-0">
-                    <span className="text-3xl text-[#00C2FF] font-bold">JD</span>
+            {team.map((member) => (
+              <div 
+                key={member.name} 
+                className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00C2FF]/30 transition-all duration-300 h-full"
+              >
+                <div 
+                  className="absolute -top-20 -left-20 w-60 h-60 rounded-full blur-[80px] opacity-0 group-hover:opacity-10 transition-opacity" 
+                  style={{ backgroundColor: member.color }}
+                />
+                
+                <div className="relative z-10 space-y-6">
+                  <div className="flex items-center gap-4">
+                    <div 
+                      className="w-16 h-16 rounded-2xl border border-white/[0.08] flex items-center justify-center shrink-0 text-xl font-bold text-white"
+                      style={{ background: `linear-gradient(135deg, ${member.color}25, ${member.color}08)` }}
+                    >
+                      {member.initials}
+                    </div>
+                    <div>
+                      <h3 className="text-lg font-bold text-white font-space-grotesk">{member.name}</h3>
+                      <p className="text-xs font-semibold mt-0.5" style={{ color: member.color }}>{member.role}</p>
+                    </div>
                   </div>
-                  <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">John Doe</h3>
-                    <p className="text-xs text-[#00C2FF] font-semibold mt-0.5">Owner & Founder</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
-                  </div>
-                </div>
 
-                <div className="relative">
-                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
-                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    As the founder of Nexdial, my vision has always been to simplify the complex world of customer interactions. With decades of industry experience, we&apos;re building tools that empower teams to do their best work without the technical overhead.
-                  </p>
+                  <div className="relative">
+                    <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
+                    <p className="text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
+                      {member.desc}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-
-            {/* Founder 2: Jane Smith */}
-            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#00E5A0]/30 transition-all duration-300">
-              <div className="absolute -bottom-20 -right-20 w-60 h-60 rounded-full bg-[#00E5A0]/5 blur-[80px]" />
-              <div className="relative z-10 space-y-6">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#00E5A0]/20 flex items-center justify-center shrink-0">
-                    <span className="text-3xl text-[#00E5A0] font-bold">JS</span>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">Jane Smith</h3>
-                    <p className="text-xs text-[#00E5A0] font-semibold mt-0.5">Chief Operating Officer</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
-                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    Operational excellence isn&apos;t just a buzzword for us; it&apos;s the foundation of everything we build. Our platforms are designed to seamlessly scale from a handful of agents to thousands without compromising on quality or performance.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            {/* Vice President: Michael Johnson */}
-            <div className="glass-card-strong p-8 relative overflow-hidden rounded-3xl border border-white/[0.06] shadow-2xl flex flex-col justify-between group hover:border-[#A855F7]/30 transition-all duration-300">
-              <div className="absolute -top-20 -right-20 w-60 h-60 rounded-full bg-[#A855F7]/5 blur-[80px]" />
-              <div className="relative z-10 space-y-6">
-                <div className="flex flex-col sm:flex-row items-center gap-6">
-                  <div className="w-24 h-24 rounded-2xl border border-white/[0.08] bg-[#A855F7]/20 flex items-center justify-center shrink-0">
-                    <span className="text-3xl text-[#A855F7] font-bold">MJ</span>
-                  </div>
-                  <div className="text-center sm:text-left">
-                    <h3 className="text-xl font-bold text-white font-space-grotesk">Michael Johnson</h3>
-                    <p className="text-xs text-[#A855F7] font-semibold mt-0.5">Chief Technology Officer</p>
-                    <p className="text-[10px] text-[#64748B] font-mono mt-1">Nexdial</p>
-                  </div>
-                </div>
-
-                <div className="relative">
-                  <span className="absolute -top-6 -left-4 text-5xl text-white/5 font-serif select-none">&ldquo;</span>
-                  <p className="text-xs sm:text-sm text-[#CBD5E1] leading-relaxed italic relative z-10 pl-2">
-                    By integrating the latest advancements in AI and cloud architecture, we ensure our clients always stay ahead of the curve. Innovation is at the heart of our strategy, driving continuous improvements across our product suite.
-                  </p>
-                </div>
-              </div>
-            </div>
+            ))}
           </div>
         </AnimatedSection>
 
-        {/* Award/Certification Section */}
-        <AnimatedSection className="mb-20">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Global Industry Excellence
-            </h2>
-            <p className="text-[#64748B] text-sm mt-2">
-              Recognized worldwide for innovation and operational leadership.
-            </p>
-          </div>
-
-          <div className="glass-card-strong p-8 lg:p-12 rounded-3xl border border-white/[0.06] shadow-2xl relative overflow-hidden">
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#00C2FF]/5 blur-[100px] pointer-events-none" />
-            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#00E5A0]/5 blur-[100px] pointer-events-none" />
-            
-            <div className="grid md:grid-cols-12 gap-8 lg:gap-12 items-center relative z-10">
-              {/* Image Frame */}
-              <div className="md:col-span-5 relative group">
-                <div className="absolute -inset-1 rounded-2xl bg-gradient-to-br from-[#00C2FF] via-[#0057D9] to-[#00E5A0] opacity-25 group-hover:opacity-40 transition duration-500 blur-md" />
-                <div className="relative rounded-2xl border border-white/[0.08] overflow-hidden bg-[#060D1B]">
-                  <Image 
-                    src="/dummy_award.png" 
-                    alt="Global Technology Excellence Award" 
-                    width={600}
-                    height={400}
-                    className="w-full h-auto object-cover transform group-hover:scale-105 transition-transform duration-700"
-                  />
-                </div>
-              </div>
-
-              {/* Award Content */}
-              <div className="md:col-span-7 space-y-6 text-left">
-                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-xs font-semibold text-[#00E5A0]">
-                  <Award className="w-3.5 h-3.5" />
-                  International Recognition
-                </div>
-                
-                <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight font-space-grotesk">
-                  Innovation of the Year <br />
-                  <span className="gradient-text">Customer Experience Platform</span>
-                </h3>
-                
-                <div className="p-4 rounded-2xl bg-white/[0.02] border border-white/[0.04] text-xs sm:text-sm text-[#94A3B8]">
-                  Awarded by <span className="text-white font-bold">Global Tech Council</span> — Enterprise Solutions
-                </div>
-
-                <div className="space-y-4 text-xs sm:text-sm text-[#CBD5E1] leading-relaxed">
-                  <p>
-                    We are honored to receive the prestigious Innovation of the Year award from the Global Tech Council for our transformative advancements in Customer Experience platforms.
-                  </p>
-                  <p>
-                    This accolade represents our unwavering commitment to pushing the boundaries of AI integration, providing businesses with the ultimate toolkit for seamless communication.
-                  </p>
-                  <p>
-                    A sincere thanks to our visionary team and partners who share our dedication to revolutionizing digital workflows on a global scale.
-                  </p>
-                  <p className="font-semibold text-white">
-                    We&apos;re building the future of connectivity, and this milestone is just one step on our journey.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
-
-        {/* Pillars Section */}
-        <AnimatedSection className="mb-20">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
+        {/* Operational Pillars Section */}
+        <AnimatedSection className="mb-24">
+          <div className="text-center max-w-xl mx-auto mb-16">
+            <h2 className="text-3xl font-extrabold text-white font-space-grotesk">
               Our Operational Pillars
             </h2>
             <p className="text-[#64748B] text-sm mt-2">
-              The core principles driving our technology development and service delivery globally.
+              The core principles driving our product engineering and customer commitment.
             </p>
           </div>
 
@@ -237,45 +153,49 @@ export default function AboutPage() {
           </StaggerContainer>
         </AnimatedSection>
 
-        {/* Leadership Team */}
-        <AnimatedSection className="mb-20">
-          <div className="text-center max-w-xl mx-auto mb-12">
-            <h2 className="text-2xl sm:text-3xl font-extrabold text-white">
-              Executive Leadership
-            </h2>
-            <p className="text-[#64748B] text-[#64748B] text-sm mt-2">
-              Meet the industry architects driving our global customer experience strategy.
-            </p>
-          </div>
+        {/* Recognition Spotlight */}
+        <AnimatedSection className="mb-24">
+          <div className="glass-card-strong p-8 lg:p-12 rounded-3xl border border-white/[0.06] shadow-2xl relative overflow-hidden">
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-[#00C2FF]/5 blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-20 -left-20 w-80 h-80 rounded-full bg-[#00E5A0]/5 blur-[100px] pointer-events-none" />
+            
+            <div className="flex flex-col lg:flex-row items-center gap-8 lg:gap-12 relative z-10">
+              <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] shrink-0">
+                <Award className="w-8 h-8 lg:w-10 lg:h-10" />
+              </div>
 
-          <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={0.06}>
-            {leaders.map((leader) => (
-              <StaggerItem key={leader.name}>
-                <div className="glass-card p-6 h-full border-white/[0.04] flex flex-col justify-between">
-                  <div>
-                    <h3 className="text-base font-bold text-white">{leader.name}</h3>
-                    <p className="text-xs font-semibold text-[#00C2FF] mt-0.5">{leader.role}</p>
-                    <p className="text-xs text-[#94A3B8] leading-relaxed mt-4">{leader.desc}</p>
-                  </div>
-                  <div className="mt-6 pt-4 border-t border-white/[0.04] flex gap-2">
-                    <span className="text-[10px] text-[#64748B] font-mono">Expertise: Telephony, AI Systems</span>
-                  </div>
+              <div className="space-y-4 text-left">
+                <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-xs font-semibold text-[#00E5A0]">
+                  <Sparkles className="w-3.5 h-3.5" />
+                  Product Excellence
                 </div>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
+                
+                <h3 className="text-2xl sm:text-3xl font-extrabold text-white leading-tight font-space-grotesk">
+                  Recognized for <span className="gradient-text">SMB Software Innovation</span>
+                </h3>
+                
+                <p className="text-sm sm:text-base text-[#CBD5E1] leading-relaxed">
+                  NexDial was founded with a singular purpose: to make professional communication tools accessible to growing businesses without the complex overhead of enterprise-level software. By focusing on speed, clarity, and explainable AI heuristics, we ensure your team can focus on what matters most — closing deals and serving customers.
+                </p>
+
+                <p className="text-xs text-[#64748B]">
+                  Dedicated to engineering clean workspaces, custom webhook triggers, and secure customer timelines.
+                </p>
+              </div>
+            </div>
+          </div>
         </AnimatedSection>
 
-        {/* Security certification showcase */}
+        {/* Core Uptime & Privacy Showcase */}
         <AnimatedSection className="glass-card-strong p-8 lg:p-12 text-center">
-          <h3 className="text-xl font-bold text-white mb-4">Enterprise Compliance & Security Assured</h3>
+          <h3 className="text-xl font-bold text-white mb-4">Uptime & Privacy Assured</h3>
           <p className="text-[#94A3B8] text-sm max-w-2xl mx-auto mb-8">
-            Nexdial processes millions of calls and transactions securely every single day. We undergo continuous audit scans to meet HIPAA, GDPR, SOC2 Type II, and ISO requirements.
+            NexDial operates on high-speed servers with daily automated database backups, ensuring your business records are always safe and available whenever you need them.
           </p>
           <div className="flex flex-wrap justify-center gap-6">
-            {["SOC2 Type II Certified", "GDPR Data Sovereign", "HIPAA Health Compliance", "ISO 27001 ISMS"].map((cert) => (
-              <div key={cert} className="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-xs font-semibold text-white flex items-center gap-2">
-                <Award className="w-4 h-4 text-[#00E5A0]" />
+            {["99.9% Scheduled Uptime", "Secure Local Backups", "100% Data Ownership", "Encrypted Form Submissions"].map((cert) => (
+              <div key={cert} className="px-4 py-2 rounded-full bg-white/[0.03] border border-white/[0.06] text-xs font-semibold text-[#CBD5E1] flex items-center gap-2">
+                <div className="w-1.5 h-1.5 rounded-full bg-[#00E5A0]" />
                 {cert}
               </div>
             ))}
