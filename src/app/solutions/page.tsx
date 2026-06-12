@@ -13,71 +13,71 @@ import Link from "next/link";
 const solutions = [
   {
     id: "crm",
-    title: "Enterprise CRM Suite",
+    title: "Lightweight CRM Suite",
     subtitle: "Lead & Contact Management",
     icon: Users,
-    desc: "A fully integrated customer relationship management system specifically built for contact centers. Get a unified 360-degree customer profile with real-time sync across call events, tickets, and automated pipelines.",
+    desc: "A simple, fast lead management system designed to set up in 5 minutes. Replaces scattered spreadsheets with an intuitive dashboard to organize, search, and track customer profiles.",
     features: [
-      "AI-driven lead prioritization & scoring",
-      "Dynamic lead distribution rules & queues",
-      "Interactive pipeline & opportunity tracker",
-      "Omnichannel chat history (Email, SMS, WhatsApp)",
-      "Automated appointment booking & calendar sync",
-      "Custom contact fields & document attachments"
+      "Drag-and-drop Kanban pipeline stages",
+      "Interactive interaction history timelines",
+      "Bulk CSV lead imports with column mapping",
+      "Automatic duplicate lead detection & warning flags",
+      "Custom contact fields for specific business data",
+      "Centralized client notes and follow-up logging"
     ],
     color: "#0057D9",
-    metric: "35% Increase in Conversion"
+    metric: "35% Increase in Deal Velocity"
   },
   {
-    id: "dialer",
-    title: "Next-Gen Dialer Engine",
-    subtitle: "Outbound Outreach Acceleration",
-    icon: PhoneCall,
-    desc: "Power, progressive, predictive, and preview dialing options engineered to maximize agent talk time. Instantly integrates with Asterisk, Vicidial, Twilio, and regional SIP trunks.",
+    id: "inbox",
+    title: "Unified WhatsApp Inbox",
+    subtitle: "Conversational Outreach",
+    icon: Headphones,
+    desc: "Consolidate your customer conversations into a single, clean workspace. Direct click-to-message triggering using customizable follow-up templates mapped to lead data.",
     features: [
-      "Predictive algorithm based on agent availability",
-      "Answering Machine Detection (AMD) accuracy >98%",
-      "Custom IVR builder with drag-and-drop nodes",
-      "Voicemail Drop & smart callbacks scheduling",
-      "DNC list scrubbing & local regulatory compliance",
-      "In-browser WebRTC calling with crystal-clear voice"
+      "Click-to-message template launching",
+      "Automatic lead data variables merging (name, details)",
+      "Website contact form lead capture webhooks",
+      "Direct phone call outcomes logging in 1-click",
+      "Assignee tracking for clear lead ownership",
+      "Centralized conversation history logs per client"
     ],
     color: "#00C2FF",
-    metric: "4x Agent Talk Time Boost"
+    metric: "2.5x Faster Response Times"
   },
   {
-    id: "portals",
-    title: "Agent & Supervisor Portals",
-    subtitle: "Unified Workspace & Coaching",
-    icon: Headphones,
-    desc: "Empower front-line agents with AI copilot scripts and give managers complete visibility into live call streams, whispers, and scheduling.",
+    id: "ai",
+    title: "AI Priority Engine",
+    subtitle: "Intelligent Recommendations",
+    icon: Zap,
+    desc: "Let AI organize your day. Our Priority Engine continuously evaluates interaction history to recommend the exact next step to move deals forward.",
     features: [
-      "AI-assisted response scripting & QA coaching",
-      "Live call listening, whispering, and barge-in",
-      "Gamified agent leaderboards & achievements",
-      "Shift planning & workforce management",
-      "Wrap-up notes, disposition tracking, and tags",
-      "Built-in internal team collaboration & chat"
+      "Next Best Action dynamic recommendation queue",
+      "Lead Health Score indices (0-100) based on activity",
+      "Automated follow-up reminders and notifications",
+      "Stale lead detection and cold warnings",
+      "High-intent lead tagging and hot badges",
+      "Distraction-free Daily Execution Mode workspace"
     ],
     color: "#8B5CF6",
-    metric: "92% Agent Satisfaction Score"
+    metric: "40% Higher Conversion Rate"
   },
   {
-    id: "tenant-saas",
-    title: "Multi-Tenant SaaS Panel",
-    subtitle: "White-Label & Sub-Domain Architecture",
-    icon: Shield,
-    desc: "Deploy Nexdial for multiple branches, external BPOs, or re-sell it as your own SaaS platform. Independent branding, billing, users, campaigns, and databases per tenant.",
+    id: "analytics",
+    title: "Analytics & Performance",
+    subtitle: "Visual Conversion Insights",
+    icon: BarChart3,
+    desc: "Track conversion rates, team speed, lead source effectiveness, and sales performance in real-time.",
     features: [
-      "White-label branding & custom domain mapping",
-      "Independent databases, Redis instances, and keys",
-      "Super admin subscription & billing manager (Stripe)",
-      "Role-Based Access Control (RBAC) with audit logs",
-      "Dedicated SIP trunk mapping & call routing rules",
-      "Tenant-specific AI configurations & prompts"
+      "Interactive stage-by-stage conversion funnels",
+      "Follow-up completion rate telemetry",
+      "Lead source ROI & acquisition effectiveness",
+      "Agent velocity & logging activity charts",
+      "Excel and CSV custom report exports",
+      "Multi-user role permissions administration"
     ],
     color: "#00E5A0",
-    metric: "100% Data Isolation SLA"
+    metric: "100% Sales Process Transparency"
   }
 ];
 
@@ -100,10 +100,10 @@ export default function SolutionsPage() {
             Nexdial Solutions
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
-            Built for the Modern <span className="gradient-text">Enterprise Center</span>
+            Designed for High-Velocity <span className="gradient-text">Sales Teams</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            Explore our modules. From individual CRM and dialers to an all-in-one multi-tenant SaaS deployment, our technology adapts to your scale.
+            Explore our modules. From a unified WhatsApp inbox to our AI priority recommendation engine, NexDial CRM is built to maximize conversions.
           </p>
         </AnimatedSection>
 
@@ -146,15 +146,15 @@ export default function SolutionsPage() {
               <p className="text-[#94A3B8] text-base leading-relaxed">
                 {activeSol.desc}
               </p>
-
+ 
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-white/[0.03] border border-white/[0.06] text-sm font-bold text-white">
                 <span className="w-2 h-2 rounded-full" style={{ backgroundColor: activeSol.color }} />
                 Proven Impact: {activeSol.metric}
               </div>
 
               <div className="flex gap-4 pt-4">
-                <Link href="/request-demo" className="btn-primary text-sm !py-3 !px-6 flex items-center gap-2">
-                  Request Demo
+                <Link href="/signup" className="btn-primary text-sm !py-3 !px-6 flex items-center gap-2">
+                  Start Free Trial
                   <ArrowRight className="w-4 h-4" />
                 </Link>
                 <Link href="/contact" className="btn-secondary text-sm !py-3 !px-6">
@@ -188,16 +188,16 @@ export default function SolutionsPage() {
           <div className="glass-card p-8 lg:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
             <div className="flex items-center gap-4">
               <div className="w-12 h-12 rounded-xl bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center flex-shrink-0">
-                <Server className="w-6 h-6 text-[#00E5A0]" />
+                <Zap className="w-6 h-6 text-[#00E5A0]" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-white">Hybrid Cloud Deployment Options</h3>
-                <p className="text-sm text-[#64748B] mt-1">Deploy locally on-premise, inside your private Azure VPC, or use our fully managed hosting clusters.</p>
+                <h3 className="text-lg font-bold text-white">Get Started in Under 5 Minutes</h3>
+                <p className="text-sm text-[#64748B] mt-1">Import your existing leads database via CSV, configure WhatsApp Web templates, and start executing your campaigns immediately.</p>
               </div>
             </div>
             <div className="flex gap-3 flex-shrink-0 w-full md:w-auto">
-              <Link href="/technology" className="btn-secondary text-sm !py-3 !px-6 text-center w-full md:w-auto block">
-                Technical Architecture
+              <Link href="/signup" className="btn-primary text-sm !py-3 !px-6 text-center w-full md:w-auto block">
+                Start Free Trial
               </Link>
             </div>
           </div>

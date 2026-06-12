@@ -7,37 +7,37 @@ import { Server, Database, Code, Cpu, ShieldCheck, Terminal, GitBranch, Share2 }
 const techStack = [
   {
     category: "Frontend Layer",
-    techs: ["Next.js 15 (App Router)", "TypeScript", "Tailwind CSS", "ShadCN UI", "Framer Motion / GSAP", "Zustand State Store"],
+    techs: ["Next.js 16 (App Router)", "React 19 Core Framework", "Tailwind CSS v4 & custom glassmorphism", "Lucide React Icons", "Framer Motion Animations", "Zustand State Store"],
     icon: Code,
     color: "#00C2FF",
   },
   {
     category: "Backend Services",
-    techs: ["NestJS Framework", "Node.js cluster instances", "GraphQL & REST APIs", "WebSockets (Socket.io)", "JWT & OAuth 2.0 Auth"],
+    techs: ["Next.js Route Handlers", "Node.js execution environment", "REST & JSON APIs", "Secure API Middleware Routing", "JWT & OAuth 2.0 Auth"],
     icon: Terminal,
     color: "#8B5CF6",
   },
   {
-    category: "Data & Caching",
-    techs: ["PostgreSQL (Relational data)", "Redis (Session & socket state)", "Elasticsearch (Call summaries)", "Prisma ORM integration"],
+    category: "Data & Persistence",
+    techs: ["PostgreSQL (Supabase relational data)", "Prisma ORM Integration", "Supabase Connection Pooler", "Database performance indexing"],
     icon: Database,
     color: "#00E5A0",
   },
   {
-    category: "Telephony & VoIP",
-    techs: ["Asterisk PBX / FreePBX", "Vicidial campaigns integrator", "Twilio / Exotel Voice API", "SIP trunks / WebRTC endpoints"],
+    category: "WhatsApp & Communications",
+    techs: ["Custom WhatsApp Web template generator", "WhatsApp Business API integrations", "Twilio Voice & SMS capabilities", "SMTP mailers & custom webhooks"],
     icon: Server,
     color: "#0057D9",
   },
   {
-    category: "DevOps & Cloud Clusters",
-    techs: ["Microsoft Azure Cloud", "Azure Blob / AWS S3 buckets", "Docker & Kubernetes (K8s)", "Prometheus & Grafana monitors"],
+    category: "DevOps & Hosting",
+    techs: ["Vercel Edge Network hosting", "Supabase Managed Cloud Postgres", "Automatic Git CI/CD deployments", "Next.js Static Site Generation (SSG)"],
     icon: GitBranch,
     color: "#EF4444",
   },
   {
     category: "Cognitive AI Integrations",
-    techs: ["OpenAI API (GPT-4o)", "Anthropic Claude API", "Google Gemini Flash API", "Whisper Transcription Engine"],
+    techs: ["OpenAI API (GPT-4o integrations)", "Anthropic Claude API connectors", "Google Gemini Flash priority engines", "AI Recommendation algorithms"],
     icon: Cpu,
     color: "#F59E0B",
   }
@@ -57,10 +57,10 @@ export default function TechnologyPage() {
             Technical Architecture
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
-            Developer-First <span className="gradient-text">CX Infrastructure</span>
+            Developer-First <span className="gradient-text">CRM Architecture</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            Engineered for 99.99% system availability, low-latency WebRTC, white-label Multi-Tenancy, and plug-and-play API triggers.
+            Engineered for high performance, rapid-load lead indices, secure multi-user environments, and seamless WhatsApp integrations.
           </p>
         </AnimatedSection>
 
@@ -105,9 +105,9 @@ export default function TechnologyPage() {
           <div className="grid lg:grid-cols-[1.3fr,1fr] gap-12 items-center">
             <div>
               <span className="text-xs font-semibold text-[#00E5A0] uppercase tracking-wider block mb-2">Omnichannel Integration Hub</span>
-              <h3 className="text-2xl font-bold text-white">Direct CRM & Dialer Hook Middleware</h3>
+              <h3 className="text-2xl font-bold text-white">Direct CRM Lead Webhook Capture</h3>
               <p className="text-sm text-[#94A3B8] leading-relaxed mt-3">
-                Our webhook engine sends real-time payload updates (JSON format) directly to Salesforce, HubSpot, and Zoho. Connect dialers directly to SIP trunk providers with minimal latency using our optimized WebRTC browser-call architecture.
+                Our webhook engine ingests new lead payloads dynamically. Connect web forms, ad platforms, or landing pages to instantly route leads into your unified inbox. Duplicate scanning and AI scoring trigger immediately upon ingestion.
               </p>
               <div className="flex gap-4 mt-6">
                 <button className="px-4 py-2 text-xs font-bold text-white rounded bg-white/[0.04] border border-white/[0.08] hover:bg-white/[0.08] flex items-center gap-2">
@@ -118,13 +118,13 @@ export default function TechnologyPage() {
             </div>
 
             <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.05] font-mono text-xs text-[#CBD5E1] space-y-2">
-              <p className="text-[#64748B]"># Webhook WebRTC Call Trigger</p>
-              <p className="text-[#00E5A0]">POST <span className="text-white">/api/v1/calls/initiate</span></p>
+              <p className="text-[#64748B]"># Webhook Lead Ingestion Trigger</p>
+              <p className="text-[#00E5A0]">POST <span className="text-white">/api/leads</span></p>
               <p className="text-[#8B5CF6]">{`{`}</p>
-              <p className="pl-4"><span className="text-[#00C2FF]">&quot;campaignId&quot;</span>: <span className="text-white">&quot;cmp_9281a&quot;</span>,</p>
-              <p className="pl-4"><span className="text-[#00C2FF]">&quot;phoneNumber&quot;</span>: <span className="text-white">&quot;+15550199&quot;</span>,</p>
-              <p className="pl-4"><span className="text-[#00C2FF]">&quot;aiCopilotEnabled&quot;</span>: <span className="text-white">true</span>,</p>
-              <p className="pl-4"><span className="text-[#00C2FF]">&quot;tenantSubdomain&quot;</span>: <span className="text-white">&quot;acme-support&quot;</span></p>
+              <p className="pl-4"><span className="text-[#00C2FF]">&quot;name&quot;</span>: <span className="text-white">&quot;Arjun Mehta&quot;</span>,</p>
+              <p className="pl-4"><span className="text-[#00C2FF]">&quot;phone&quot;</span>: <span className="text-white">&quot;+919876543210&quot;</span>,</p>
+              <p className="pl-4"><span className="text-[#00C2FF]">&quot;source&quot;</span>: <span className="text-white">&quot;WhatsApp&quot;</span>,</p>
+              <p className="pl-4"><span className="text-[#00C2FF]">&quot;email&quot;</span>: <span className="text-white">&quot;arjun@example.com&quot;</span></p>
               <p className="text-[#8B5CF6]">{`}`}</p>
             </div>
           </div>

@@ -8,44 +8,44 @@ import Link from "next/link";
 const detailedServices = [
   {
     icon: Phone,
-    title: "Inbound Customer Support",
-    desc: "Deliver 24/7 client care across all regions. Our agents integrate with your custom CRM and ERP databases, powered by real-time AI knowledge assistants to resolve tier-1 and tier-2 calls instantly.",
-    bullets: ["Customer Inquiry Management", "Account Setup & Activation", "Billing, Invoice & Payments", "Order Status & Shipment Tracking"],
+    title: "Lead Automation Setup",
+    desc: "Connect your web forms, landing pages, ad networks, and lead databases to NexDial in minutes. We provide standard webhook capture templates and APIs to route incoming leads straight to your unified inbox.",
+    bullets: ["Web Form Integrations", "Custom API Webhook setups", "Real-time Lead Syncing", "Automatic Assignee Routing"],
     color: "#0057D9"
   },
   {
-    icon: PhoneOutgoing,
-    title: "Outbound Sales & Telemarketing",
-    desc: "Accelerate pipeline development and close more deals. Combined with our Predictive Dialer engine, our sales specialists call pre-scored leads to maximize acquisition rates.",
-    bullets: ["Cold & Warm Outreach Campaigns", "Product Upgrades & Cross-selling", "Contract Renewal Outreach", "Lead Qualification & Nurturing"],
+    icon: MessageSquare,
+    title: "WhatsApp Outreach Templates",
+    desc: "Format and deploy personalized outreach messages that pull customer variables (names, product details, budgets) dynamically. Enable agents to click a button and launch chats instantly.",
+    bullets: ["Personalized Variable Merging", "Custom Template Libraries", "One-Click WhatsApp Launching", "Follow-up Response Tracking"],
     color: "#00C2FF"
   },
   {
     icon: Wrench,
-    title: "Technical Support Operations",
-    desc: "In-depth technical problem solving for hardware, software, and SaaS setups. Our agents undergo specialized training to handle Tier 1-3 helpdesk queries.",
-    bullets: ["Troubleshooting & Device Configuration", "Software Installation Support", "SaaS Technical Account Management", "System Status Outage Resolution"],
+    title: "AI Recommendation Tuning",
+    desc: "Tweak the Priority Engine variables to match your business logic. Optimize the Next Best Action rules and Lead Health Scores based on your unique conversion cycles.",
+    bullets: ["Next Best Action Customization", "Lead Health Score parameters", "Daily Execution Mode setup", "AI Priority Index auditing"],
     color: "#8B5CF6"
   },
   {
     icon: Database,
-    title: "Back Office & KPO Operations",
-    desc: "Outsource complex non-voice workflows to specialized professionals. We process data, verify IDs, manage documentation, and audit records with strict quality standards.",
-    bullets: ["KYC & Identity Verification", "Data Entry, Validation & Sync", "Claims & Invoice Auditing", "Contract & SOP Management"],
+    title: "CSV Database Migration",
+    desc: "Safely migrate your legacy spreadsheets, Excel contact lists, and customer data sheets. We clean, format, and structure your records while scanning for duplicates.",
+    bullets: ["Legacy Data Cleanups", "CSV Column Field Mapping", "Duplicate Scan Warnings", "Bulk Lead Import Processing"],
     color: "#00E5A0"
   },
   {
     icon: Shield,
-    title: "Collections & Debt Recovery",
-    desc: "Ethical, legally-compliant collections operations. We leverage automated outbound messaging, IVR queues, and professional negotiating agents to secure overdue accounts.",
-    bullets: ["Early-stage reminder calls", "Payment Arrangement setups", "Skip Tracing and Audits", "FDCPA & TCPA Compliant workflows"],
+    title: "Team Workspace Provisioning",
+    desc: "Configure secure workspaces for multiple team members, sales managers, or customer support reps. Administer permissions, lead visibility, and role-based access rules.",
+    bullets: ["Role-Based Access Control", "Collaborative Shared Inbox", "Team Performance Analytics", "Secure Data Compartments"],
     color: "#EF4444"
   },
   {
-    icon: MessageSquare,
-    title: "Omnichannel Digital CX",
-    desc: "Coordinate client chats over email, web chat, and WhatsApp Business API. Live agents and conversational bots collaborate seamlessly to resolve digital inquiries.",
-    bullets: ["WhatsApp & SMS Business Chat", "In-App/Web Chat Support", "AI Email Drafting & Routing", "Social Media Community Care"],
+    icon: Mail,
+    title: "Omnichannel Communications Integration",
+    desc: "Coordinate client follow-ups across email, SMS, and direct WhatsApp links. Ensure your communication history is fully indexed under a single client card timeline.",
+    bullets: ["Email Integration Adapters", "SMS Gateway setups", "Chronological Contact History", "Client Profile Card tracking"],
     color: "#F59E0B"
   }
 ];
@@ -62,13 +62,13 @@ export default function ServicesPage() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-3xl mx-auto mb-20">
           <span className="text-xs font-semibold text-[#00E5A0] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20">
-            Enterprise BPO & Call Center Services
+            Platform Capabilities & Services
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-6xl font-extrabold text-white mt-6 leading-tight">
-            Next-Gen Customer Support <span className="gradient-text">At Global Scale</span>
+            Comprehensive CRM Services <span className="gradient-text">For Growing Teams</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            Discover our comprehensive suite of customer engagement, telemarketing, data verification, and technical support services.
+            Discover how NexDial CRM streamlines lead capturing, WhatsApp template campaigns, team routing, and AI-driven conversion intelligence.
           </p>
         </AnimatedSection>
 

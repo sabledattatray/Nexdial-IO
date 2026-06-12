@@ -7,28 +7,28 @@ import { Briefcase, MapPin, Clock, IndianRupee, Send, ArrowRight } from "lucide-
 
 const jobs = [
   {
-    title: "Senior VoIP & Infrastructure Engineer",
-    department: "Systems Architecture",
+    title: "Senior CRM Developer (Next.js & Supabase)",
+    department: "Software Engineering",
     location: "Navi Mumbai (HQ) / Hybrid",
     type: "Full-Time",
     salary: "₹18L - ₹26L / Year",
-    desc: "Oversee Asterisk configurations, WebRTC cluster balancing, and Vicidial campaign route middleware integrations."
+    desc: "Lead the design of our high-speed Next.js and Supabase backend, including real-time lead inbox queues and PostgreSQL database indexing."
   },
   {
-    title: "Conversational NLP Specialist",
+    title: "NLP & Conversational AI Specialist",
     department: "AI Research Desk",
     location: "Remote (Global)",
     type: "Full-Time",
     salary: "₹24L - ₹36L / Year",
-    desc: "Develop and fine-tune OpenAI RAG integrations, LLM prompt engineering, and voice bot audio transcription tuning."
+    desc: "Develop and fine-tune OpenAI and Google Gemini RAG recommendation pipelines, and lead priority automation algorithms."
   },
   {
-    title: "Support Operations Shift Supervisor",
-    department: "Client Services",
+    title: "Product Designer (SaaS & CRM)",
+    department: "Product Design",
     location: "London / Hybrid",
     type: "Full-Time",
-    salary: "₹8L - ₹14L / Year",
-    desc: "Oversee digital omnichannel chat agents and lead outbound dialer monitoring dashboards during EMEA schedules."
+    salary: "₹12L - ₹18L / Year",
+    desc: "Craft premium visual elements, Kanban boards, conversation feeds, and custom dashboards for high-velocity sales teams."
   }
 ];
 
@@ -36,7 +36,7 @@ export default function CareersPage() {
   const [appliedJob, setAppliedJob] = useState<string | null>(null);
   const [applicantName, setApplicantName] = useState("");
   const [applicantEmail, setApplicantEmail] = useState("");
-
+ 
   const handleApply = (e: React.FormEvent) => {
     e.preventDefault();
     alert(`Application submitted successfully for: ${appliedJob}`);
@@ -61,7 +61,7 @@ export default function CareersPage() {
             Build the Future of <span className="gradient-text">Customer CX</span>
           </h1>
           <p className="text-[#94A3B8] text-lg mt-4">
-            Help us shape the next generation of conversational AI nodes, predictive telephony clusters, and multi-tenant SaaS panels.
+            Help us shape the next generation of conversational AI recommendation engines, visual sales pipelines, and high-velocity inbox hubs.
           </p>
         </AnimatedSection>
 

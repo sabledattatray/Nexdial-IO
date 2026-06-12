@@ -5,9 +5,9 @@ import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/ani
 import { Download, FileText, ArrowRight } from "lucide-react";
 
 const resources = [
-  { title: "2026 Enterprise AI BPO Scaling Playbook", type: "PDF / Staging Manual", size: "4.8 MB" },
-  { title: "Vicidial to Nexdial Route Integration Schema", type: "JSON / Configuration Map", size: "1.2 MB" },
-  { title: "HIPAA & GDPR Call Center Compliance Whitepaper", type: "PDF / Legal Guide", size: "3.5 MB" }
+  { title: "2026 Small Business CRM Scaling Playbook", type: "PDF / Scaling Manual", size: "4.8 MB" },
+  { title: "Lead CSV Import Template & Configuration Map", type: "CSV / Schema Template", size: "0.2 MB" },
+  { title: "WhatsApp Follow-up Templates & Conversion Guide", type: "PDF / Conversion Playbook", size: "2.1 MB" }
 ];
 
 export default function ResourcesPage() {
