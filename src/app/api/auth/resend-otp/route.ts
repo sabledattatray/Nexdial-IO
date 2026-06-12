@@ -25,11 +25,14 @@ export async function POST(req: Request) {
     const otp = Math.floor(100000 + Math.random() * 900000).toString();
     const expires = new Date(Date.now() + 15 * 60 * 1000); // 15 mins
 
-    // Upsert the token
-    await prisma.verificationToken.upsert({
+    // Delete any existing tokens for this email
+    await prisma.verificationToken.deleteMany({
       where: { identifier: email.toLowerCase() },
-      update: { token: otp, expires },
-      create: { identifier: email.toLowerCase(), token: otp, expires },
+    });
+
+    // Create the new token
+    await prisma.verificationToken.create({
+      data: { identifier: email.toLowerCase(), token: otp, expires },
     });
 
     // In production, send via email provider
