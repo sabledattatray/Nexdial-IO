@@ -137,7 +137,7 @@ export function ContactSection() {
                 <div className="space-y-1">
                   <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">NexDial HQ</span>
                   <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
-                    Pune, Maharashtra, India
+                    Badlapur East, Maharashtra, India 421503
                   </p>
                 </div>
               </div>
