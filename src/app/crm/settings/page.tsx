@@ -260,6 +260,22 @@ export default function SettingsPage() {
       if (res.ok) {
         const body = await res.json();
         setDbTeamMembers(body.data || []);
+        
+        // Find current user and set their phone and job title
+        if (session?.user && body.data) {
+          const userSession = session.user as any;
+          const me = body.data.find((u: any) => u.id === userSession.id);
+          if (me) {
+            if (me.phone) {
+              setOwnerMobile(me.phone);
+              localStorage.setItem("nexdial_owner_mobile", me.phone);
+            }
+            if (me.jobTitle) {
+              setJobTitle(me.jobTitle);
+              localStorage.setItem("nexdial_job_title", me.jobTitle);
+            }
+          }
+        }
       }
     } catch (err) {
       console.error("Error fetching team users:", err);
@@ -319,7 +335,9 @@ export default function SettingsPage() {
           name,
           email,
           currentPassword,
-          newPassword
+          newPassword,
+          phone: ownerMobile,
+          jobTitle
         })
       });
 

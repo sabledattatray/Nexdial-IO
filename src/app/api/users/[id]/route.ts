@@ -15,7 +15,7 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json().catch(() => ({}));
-    const { name, email, currentPassword, newPassword, role } = body;
+    const { name, email, currentPassword, newPassword, role, phone, jobTitle } = body;
 
     // Check if user exists
     const user = await prisma.user.findUnique({
@@ -29,6 +29,8 @@ export async function PATCH(
     const updateData: any = {};
     if (name) updateData.name = name;
     if (email) updateData.email = email.toLowerCase();
+    if (phone) updateData.phone = phone;
+    if (jobTitle) updateData.jobTitle = jobTitle;
     
     if (role) {
       let dbRole: any = "SALES";

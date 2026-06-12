@@ -1,14 +1,16 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import { Users, LogIn, Pause, Search, User, Mail, Plus, ChevronDown, ChevronUp, Briefcase, Target, Filter } from "lucide-react";
-import { formatDistanceToNow } from "date-fns";
+import { Users, LogIn, Pause, Search, User, Mail, Plus, ChevronDown, ChevronUp, Briefcase, Target, Filter, MessageCircle, CreditCard, Phone, CalendarClock } from "lucide-react";
+import { formatDistanceToNow, format } from "date-fns";
 
 type WorkspaceOwner = {
   id: string;
   name: string | null;
   email: string | null;
   image: string | null;
+  phone?: string | null;
+  jobTitle?: string | null;
 };
 
 type Workspace = {
@@ -150,8 +152,11 @@ export default function AdminClientsPage() {
                                 </div>
                               )}
                               <div className="flex flex-col">
-                                <span className="text-xs font-medium text-slate-300">{owner.name || "Unnamed"}</span>
-                                <span className="text-[10px] text-slate-500">{owner.email}</span>
+                                <span className="text-xs font-medium text-slate-300">
+                                  {owner.name || "Unnamed"} {owner.jobTitle ? <span className="text-[10px] text-slate-500 ml-1">({owner.jobTitle})</span> : null}
+                                </span>
+                                <span className="text-[10px] text-slate-500 flex items-center gap-1"><Mail className="w-2.5 h-2.5" /> {owner.email}</span>
+                                {owner.phone && <span className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5"><Phone className="w-2.5 h-2.5" /> {owner.phone}</span>}
                               </div>
                             </div>
                           ) : (
@@ -166,6 +171,12 @@ export default function AdminClientsPage() {
                             <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${w.status === 'ACTIVE' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
                               {w.status}
                             </span>
+                            {w.plan === 'TRIAL' && w.trialEndsAt && (
+                              <span className="text-[9px] text-slate-400 flex items-center gap-1 mt-1">
+                                <CalendarClock className="w-3 h-3 text-yellow-500" />
+                                {format(new Date(w.trialEndsAt), "MMM d, yyyy")}
+                              </span>
+                            )}
                           </div>
                         </td>
                         <td className="p-4">
@@ -286,6 +297,39 @@ export default function AdminClientsPage() {
                                       )}
                                     </div>
                                   </div>
+                                </div>
+                                
+                                {/* QUICK ACTIONS BAR */}
+                                <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center gap-3">
+                                  {owner?.phone && (
+                                    <a 
+                                      href={`https://wa.me/${owner.phone.replace(/[^0-9]/g, '')}`} 
+                                      target="_blank" 
+                                      rel="noreferrer"
+                                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/30 rounded text-xs font-bold transition-colors"
+                                    >
+                                      <MessageCircle className="w-3.5 h-3.5" />
+                                      WhatsApp Client
+                                    </a>
+                                  )}
+                                  {owner?.email && (
+                                    <a 
+                                      href={`mailto:${owner.email}?subject=NexDial%20Subscription%20Reminder`}
+                                      className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded text-xs font-bold transition-colors"
+                                    >
+                                      <CreditCard className="w-3.5 h-3.5" />
+                                      Payment Reminder
+                                    </a>
+                                  )}
+                                  {w.plan === 'TRIAL' && (
+                                    <button 
+                                      className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00C2FF]/10 hover:bg-[#00C2FF]/20 text-[#00C2FF] border border-[#00C2FF]/30 rounded text-xs font-bold transition-colors"
+                                      onClick={() => alert('Trial extension endpoint pending integration.')}
+                                    >
+                                      <CalendarClock className="w-3.5 h-3.5" />
+                                      Extend Trial
+                                    </button>
+                                  )}
                                 </div>
                               </div>
                             ) : (

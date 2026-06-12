@@ -99,6 +99,8 @@ model User {
   role          Role      @default(VIEWER)
   onboarded     Boolean   @default(false)
   industry      String?
+  phone         String?
+  jobTitle      String?   @map("job_title")
 
   workspaceId String?    @map("workspace_id")
   workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)

@@ -18,6 +18,8 @@ export async function GET() {
         role: true,
         onboarded: true,
         industry: true,
+        phone: true,
+        jobTitle: true,
         createdAt: true,
       },
       orderBy: { createdAt: "asc" }
