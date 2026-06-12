@@ -1182,23 +1182,41 @@ function OnboardingContent() {
               onClick={handleRazorpaySetup}
               disabled={loadingPayment || !termsAccepted}
               title={!termsAccepted ? "Please accept the Terms & Conditions to continue" : ""}
-              className={`flex-[2] py-3 text-xs font-bold text-white rounded-xl transition-all flex items-center justify-center gap-2 ${
+              className={`w-full py-3.5 text-sm font-black tracking-wide rounded-xl transition-all flex items-center justify-center gap-2 ${
                 termsAccepted
-                  ? "bg-[#0057D9] hover:bg-[#0057D9]/90 shadow-lg shadow-[#0057D9]/25 cursor-pointer"
-                  : "bg-white/5 border border-white/10 cursor-not-allowed opacity-60"
+                  ? "bg-[#0057D9] hover:bg-[#0057D9]/90 text-white shadow-lg shadow-[#0057D9]/25 cursor-pointer"
+                  : "bg-white/5 border border-white/10 text-slate-500 cursor-not-allowed"
               }`}
             >
               {loadingPayment ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin text-white" />
+                  <Loader2 className="w-5 h-5 animate-spin text-white" />
                   <span>Processing...</span>
                 </>
               ) : (
                 <>
-                  <CreditCard className="w-4 h-4" />
-                  <span>Setup Mandate (₹1)</span>
+                  <CreditCard className="w-5 h-5" />
+                  <span>Authorize & Start 15-Day Trial</span>
                 </>
               )}
+            </button>
+
+            {/* Dev Mode Payment Bypass */}
+            {process.env.NODE_ENV === "development" && (
+              <button
+                onClick={submitOnboardingConfig}
+                className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
+              >
+                <span>Skip Payment (Dev Mode)</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </button>
+            )}
+
+            <button
+              onClick={() => setStep(5)}
+              className="w-full py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
             </button>
           </div>
         </div>

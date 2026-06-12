@@ -1274,7 +1274,7 @@ export default function SettingsPage() {
                       <div className="space-y-1">
                         <span className="text-[9px] uppercase font-bold text-slate-500">Website URL</span>
                         <input 
-                          type="url"
+                          type="text"
                           value={channels.websiteUrl}
                           onChange={(e) => setChannels({...channels, websiteUrl: e.target.value})}
                           placeholder="e.g. https://mycompany.com"
