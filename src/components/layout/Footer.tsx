@@ -141,7 +141,7 @@ export function Footer() {
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 lg:gap-6">
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
-            <Link href="/" className="flex items-center gap-3 group">
+            <Link href="/" className="flex items-center gap-3 mb-6 group">
               <div className="relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
                 <LogoIcon className="w-8 h-8" />
               </div>
