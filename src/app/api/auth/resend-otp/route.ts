@@ -40,6 +40,12 @@ export async function POST(req: Request) {
     // Send email using Resend (falls back to mock if no API key is provided)
     const emailResult = await sendVerificationEmail(email.toLowerCase(), otp);
 
+    if (!emailResult.success) {
+      return NextResponse.json({ 
+        error: `Email delivery failed: ${emailResult.error?.message || "Unknown error"}` 
+      }, { status: 500 });
+    }
+
     return NextResponse.json({ 
       success: true, 
       message: "OTP resent successfully",
