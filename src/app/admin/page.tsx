@@ -87,7 +87,7 @@ export default function AdminDashboard() {
   };
 
   const calculateMRR = () => {
-    const rates: Record<string, number> = { TRIAL: 0, SMALL: 2500, MEDIUM: 5000, LARGE: 10000 };
+    const rates: Record<string, number> = { TRIAL: 0, SMALL: 2500, MEDIUM: 5000, PRO: 7500, LARGE: 10000 };
     return workspaces.reduce((acc, ws) => acc + (rates[ws.plan] || 0), 0);
   };
 
