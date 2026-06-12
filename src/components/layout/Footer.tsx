@@ -277,6 +277,26 @@ export function Footer() {
           </div>
         </div>
       </div>
+
+      {/* Floating WhatsApp Chat Button */}
+      <a
+        href="https://wa.me/918010803756?text=Hi%20NexDial%20Team,%20I%20would%20like%20to%20learn%20more%20about%20your%20services."
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 flex items-center gap-2 bg-[#25D366] text-white p-3.5 rounded-full shadow-2xl hover:bg-[#20ba5a] active:scale-95 transition-all duration-300 group hover:shadow-[#25D366]/30 hover:shadow-xl cursor-pointer"
+        aria-label="Chat on WhatsApp"
+      >
+        <span className="max-w-0 overflow-hidden whitespace-nowrap group-hover:max-w-xs transition-all duration-500 ease-in-out text-xs font-bold pl-1">
+          Chat with Us
+        </span>
+        <svg
+          className="w-6 h-6 fill-current transition-transform duration-300 group-hover:scale-110 group-hover:rotate-6"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946C.06 5.348 5.397.01 12.008.01c3.202.001 6.212 1.246 8.477 3.514 2.266 2.268 3.507 5.28 3.505 8.484-.004 6.657-5.34 11.997-11.953 11.997-2.005-.001-3.973-.502-5.724-1.457L0 24zm6.59-4.846c1.66.986 3.298 1.448 5.356 1.449 5.483 0 9.944-4.461 9.947-9.948.002-2.659-1.036-5.158-2.92-7.046C17.15 1.722 14.656.682 12 0 .682 6.561 0 12.02.003 17.503c.002 2.059.463 3.697 1.453 5.358L2.43 21.222l4.217.932zm12.307-5.355c-.33-.165-1.951-.963-2.253-1.074-.302-.11-.522-.165-.741.165-.22.33-.85.85-1.042 1.074-.192.224-.384.247-.714.082-.33-.165-1.393-.513-2.653-1.637-.98-.874-1.641-1.953-1.833-2.282-.192-.33-.02-.508.145-.671.149-.147.33-.384.495-.578.165-.192.22-.33.33-.55.11-.22.055-.412-.028-.577-.082-.165-.741-1.786-1.014-2.446-.267-.64-.537-.55-.741-.56h-.632c-.22 0-.577.082-.88.412-.302.33-1.154 1.127-1.154 2.746 0 1.62 1.181 3.187 1.346 3.406.165.22 2.325 3.55 5.632 4.978.787.34 1.4.54 1.88.692.79.25 1.5.21 2.07.13.63-.09 1.95-.8 2.225-1.57.275-.77.275-1.43.192-1.57-.082-.14-.302-.22-.632-.385z"/>
+        </svg>
+      </a>
     </footer>
   );
 }
