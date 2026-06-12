@@ -13,7 +13,12 @@ if (typeof window === "undefined") {
   const connectionString = process.env.DATABASE_URL;
 
   if (!globalForPrisma.prisma) {
-    const pool = new Pool({ connectionString });
+    const pool = new Pool({ 
+      connectionString,
+      max: 3, // Limit connections to prevent EMAXCONNSESSION
+      idleTimeoutMillis: 5000, // Disconnect idle clients quickly
+      connectionTimeoutMillis: 2000 // Fail fast if connection cannot be established
+    });
     const adapter = new PrismaPg(pool);
     globalForPrisma.pool = pool;
     globalForPrisma.prisma = new PrismaClient({
