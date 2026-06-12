@@ -18,6 +18,13 @@ export async function GET(req: Request) {
       leadFilters.assignedToId = user.id;
     }
 
+    // CRITICAL: ENFORCE WORKSPACE ISOLATION
+    const dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+    if (!dbUser?.workspaceId) {
+      return NextResponse.json({ error: "No workspace assigned" }, { status: 400 });
+    }
+    leadFilters.workspaceId = dbUser.workspaceId;
+
     const now = new Date();
     const twentyFourHoursAgo = new Date(Date.now() - 24 * 60 * 60 * 1000);
     const todayStart = new Date();

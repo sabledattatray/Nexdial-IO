@@ -59,6 +59,13 @@ export async function GET(req: Request) {
       where.assignedToId = assignedToId;
     }
 
+    // CRITICAL: ENFORCE WORKSPACE ISOLATION
+    const dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+    if (!dbUser?.workspaceId) {
+      return NextResponse.json({ error: "No workspace assigned" }, { status: 400 });
+    }
+    where.workspaceId = dbUser.workspaceId;
+
     console.log("[DEBUG API leads] User:", user.email, "Role:", user.role, "Filters:", JSON.stringify(where));
 
     const leads = await prisma.lead.findMany({
