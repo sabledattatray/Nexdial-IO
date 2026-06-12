@@ -14,6 +14,8 @@ function VerifyEmailContent() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [resending, setResending] = useState(false);
+  const [resendMessage, setResendMessage] = useState("");
 
   const handleVerify = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -48,6 +50,37 @@ function VerifyEmailContent() {
     }
   };
 
+  const handleResend = async () => {
+    setError("");
+    setResendMessage("");
+    setResending(true);
+    
+    try {
+      const res = await fetch("/api/auth/resend-otp", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email: emailParam }),
+      });
+
+      const data = await res.json();
+      
+      if (!res.ok) {
+        throw new Error(data.error || "Failed to resend OTP");
+      }
+
+      // If we are in mock mode (no email provider), show the OTP directly for easy testing
+      if (data.mockOtp) {
+        setResendMessage(`[TEST MODE] Your OTP is: ${data.mockOtp}`);
+      } else {
+        setResendMessage("A new verification code has been sent to your email.");
+      }
+    } catch (err: any) {
+      setError(err.message);
+    } finally {
+      setResending(false);
+    }
+  };
+
   return (
     <div className="relative w-full max-w-md bg-[#0F172A]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden transition-all duration-300">
       {/* Decorative gradients */}
@@ -75,6 +108,13 @@ function VerifyEmailContent() {
           <div className="px-4 py-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-xl text-xs flex items-start gap-2.5">
             <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
             <span>{error}</span>
+          </div>
+        )}
+
+        {resendMessage && !success && (
+          <div className="px-4 py-3 bg-blue-500/10 border border-blue-500/20 text-blue-400 rounded-xl text-xs flex items-start gap-2.5">
+            <AlertCircle className="w-4.5 h-4.5 shrink-0 mt-0.5" />
+            <span>{resendMessage}</span>
           </div>
         )}
 
@@ -116,6 +156,19 @@ function VerifyEmailContent() {
                   <span>Confirm Code</span>
                   <ArrowRight className="w-4 h-4" />
                 </>
+              )}
+            </button>
+
+            <button
+              type="button"
+              onClick={handleResend}
+              disabled={resending || loading}
+              className="w-full py-2.5 bg-transparent border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            >
+              {resending ? (
+                <Loader2 className="w-4 h-4 animate-spin text-slate-400" />
+              ) : (
+                <span>Resend OTP</span>
               )}
             </button>
           </form>
