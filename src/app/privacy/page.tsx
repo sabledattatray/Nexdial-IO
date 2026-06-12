@@ -75,7 +75,7 @@ export default function PrivacyPage() {
         <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
 
           {/* Left Sticky Sidebar */}
-          <aside className="hidden lg:block sticky top-28 bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
+          <aside className="hidden lg:block sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
             <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-white/[0.06] pb-3">
               Table of Contents
             </h3>
