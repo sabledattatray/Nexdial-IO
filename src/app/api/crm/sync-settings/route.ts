@@ -35,9 +35,7 @@ export async function POST(req: Request) {
       data: {
         onboardingData: {
           ...existingData,
-          companyName: body.companyName || existingData.companyName,
-          leadSources: body.leadSources || existingData.leadSources,
-          goals: body.goals || existingData.goals,
+          ...body
         }
       }
     });

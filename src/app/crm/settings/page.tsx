@@ -201,20 +201,48 @@ export default function SettingsPage() {
         if (res.ok) {
           const data = await res.json();
           if (data.onboardingData) {
-            const { companyName, goals, leadSources } = data.onboardingData;
+            const ob = data.onboardingData;
             
-            if (companyName) {
-              setCompanyName(companyName);
-              localStorage.setItem("nexdial_company_name", companyName);
-            }
-            if (goals && Array.isArray(goals)) {
-              setGoals(goals);
-              localStorage.setItem("nexdial_goals", JSON.stringify(goals));
-            }
-            if (leadSources && Array.isArray(leadSources)) {
-              setLeadSources(leadSources);
-              localStorage.setItem("nexdial_lead_sources", JSON.stringify(leadSources));
-            }
+            // Helper to set both React state and localStorage
+            const setAndSave = (key: string, val: any, setter?: Function) => {
+              if (val === undefined || val === null) return;
+              if (setter) setter(val);
+              if (typeof val === 'object') {
+                localStorage.setItem(`nexdial_${key}`, JSON.stringify(val));
+              } else {
+                localStorage.setItem(`nexdial_${key}`, String(val));
+              }
+            };
+
+            setAndSave('company_name', ob.companyName, setCompanyName);
+            setAndSave('business_type', ob.businessType, setBusinessType);
+            setAndSave('industry', ob.industry, setIndustry);
+            setAndSave('company_website', ob.companyWebsite, setCompanyWebsite);
+            setAndSave('company_size', ob.companySize, setCompanySize);
+            setAndSave('location', ob.location, setLocation);
+            setAndSave('timezone', ob.timeZone, setTimeZone);
+            setAndSave('business_phone', ob.businessPhone, setBusinessPhone);
+            setAndSave('brand_name', ob.brandName, setBrandName);
+            setAndSave('brand_tagline', ob.brandTagline, setBrandTagline);
+            setAndSave('brand_color', ob.brandColor, setBrandColor);
+
+            setAndSave('goals', ob.goals, setGoals);
+            setAndSave('lead_sources', ob.leadSources, setLeadSources);
+            setAndSave('monthly_leads', ob.monthlyLeads, setMonthlyLeads);
+            setAndSave('current_crm', ob.currentCrm, setCurrentCrm);
+            setAndSave('hear_about_us', ob.hearAboutUs, setHearAboutUs);
+
+            setAndSave('pipeline_name', ob.pipelineName, setPipelineName);
+            setAndSave('pipeline_stages', ob.pipelineStages, setPipelineStages);
+
+            setAndSave('channels', ob.channels, setChannels);
+
+            setAndSave('ai_features', ob.aiFeatures, setAiFeatures);
+            setAndSave('alert_channels', ob.alertChannels, setAlertChannels);
+            setAndSave('daily_summary', ob.dailySummary, setDailySummary);
+            setAndSave('weekly_report', ob.weeklyReport, setWeeklyReport);
+            setAndSave('webhook_url', ob.webhookUrl, setWebhookUrl);
+            setAndSave('lead_routing', ob.leadRouting, setLeadRouting);
           }
         }
       } catch (err) {
@@ -369,17 +397,25 @@ export default function SettingsPage() {
     triggerToast("Goals and lead sources saved!");
   };
 
-  const handlePipelineSave = (e: React.FormEvent) => {
+  const handlePipelineSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
     localStorage.setItem("nexdial_pipeline_name", pipelineName);
     localStorage.setItem("nexdial_pipeline_stages", JSON.stringify(pipelineStages));
 
-    setTimeout(() => {
-      setIsSaving(false);
-      triggerToast("Pipeline configurations saved!");
-    }, 800);
+    try {
+      await fetch("/api/crm/sync-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ pipelineName, pipelineStages })
+      });
+    } catch (e) {
+      console.error("Failed to sync pipeline to db", e);
+    }
+
+    setIsSaving(false);
+    triggerToast("Pipeline configurations saved!");
   };
 
   const handleAddStage = (e: React.MouseEvent) => {
@@ -401,19 +437,27 @@ export default function SettingsPage() {
     setPipelineStages((prev) => prev.filter((s) => s !== stageName));
   };
 
-  const handleChannelsSave = (e: React.FormEvent) => {
+  const handleChannelsSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
     localStorage.setItem("nexdial_channels", JSON.stringify(channels));
 
-    setTimeout(() => {
-      setIsSaving(false);
-      triggerToast("Communication channels saved!");
-    }, 800);
+    try {
+      await fetch("/api/crm/sync-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ channels })
+      });
+    } catch (e) {
+      console.error("Failed to sync channels to db", e);
+    }
+
+    setIsSaving(false);
+    triggerToast("Communication channels saved!");
   };
 
-  const handleAiAlertsSave = (e: React.FormEvent) => {
+  const handleAiAlertsSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
@@ -424,10 +468,18 @@ export default function SettingsPage() {
     localStorage.setItem("nexdial_webhook_url", webhookUrl);
     localStorage.setItem("nexdial_lead_routing", leadRouting);
 
-    setTimeout(() => {
-      setIsSaving(false);
-      triggerToast("AI and Alerts configurations saved!");
-    }, 800);
+    try {
+      await fetch("/api/crm/sync-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ aiFeatures, alertChannels, dailySummary, weeklyReport, webhookUrl, leadRouting })
+      });
+    } catch (e) {
+      console.error("Failed to sync AI settings to db", e);
+    }
+
+    setIsSaving(false);
+    triggerToast("AI and Alerts configurations saved!");
   };
 
   // Add DB team member

@@ -226,33 +226,64 @@ export default function AdminClientsPage() {
                             </div>
                             
                             {w.onboardingData ? (
-                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                                <div>
-                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Registered Company Name</span>
-                                  <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.companyName || "Not provided"}</span>
-                                </div>
-                                <div>
-                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Filter className="w-3 h-3" /> Lead Sources</span>
-                                  <div className="flex flex-wrap gap-1.5">
-                                    {w.onboardingData.leadSources && w.onboardingData.leadSources.length > 0 ? (
-                                      w.onboardingData.leadSources.map((source, i) => (
-                                        <span key={i} className="text-[10px] bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full">{source}</span>
-                                      ))
-                                    ) : (
-                                      <span className="text-xs text-slate-500 italic">None selected</span>
-                                    )}
+                              <div className="space-y-6">
+                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Registered Company Name</span>
+                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.companyName || "Not provided"}</span>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Industry & Type</span>
+                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.industry || "N/A"} - {w.onboardingData.businessType || "N/A"}</span>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Company Website</span>
+                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block truncate max-w-[200px]">{w.onboardingData.companyWebsite || "N/A"}</span>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Location & Timezone</span>
+                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block truncate max-w-[200px]">{w.onboardingData.location || "N/A"} ({w.onboardingData.timeZone || "N/A"})</span>
                                   </div>
                                 </div>
-                                <div>
-                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Target className="w-3 h-3" /> Core Goals</span>
-                                  <div className="flex flex-col gap-1.5">
-                                    {w.onboardingData.goals && w.onboardingData.goals.length > 0 ? (
-                                      w.onboardingData.goals.map((goal, i) => (
-                                        <span key={i} className="text-xs text-slate-300 bg-emerald-500/5 border border-emerald-500/10 px-2 py-1 rounded">{goal}</span>
-                                      ))
-                                    ) : (
-                                      <span className="text-xs text-slate-500 italic">None selected</span>
-                                    )}
+
+                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/5">
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Filter className="w-3 h-3" /> Lead Sources</span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {w.onboardingData.leadSources && w.onboardingData.leadSources.length > 0 ? (
+                                        w.onboardingData.leadSources.map((source, i) => (
+                                          <span key={i} className="text-[10px] bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full">{source}</span>
+                                        ))
+                                      ) : (
+                                        <span className="text-xs text-slate-500 italic">None selected</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Target className="w-3 h-3" /> Core Goals</span>
+                                    <div className="flex flex-wrap gap-1.5">
+                                      {w.onboardingData.goals && w.onboardingData.goals.length > 0 ? (
+                                        w.onboardingData.goals.map((goal, i) => (
+                                          <span key={i} className="text-[10px] text-slate-300 bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded-full">{goal}</span>
+                                        ))
+                                      ) : (
+                                        <span className="text-xs text-slate-500 italic">None selected</span>
+                                      )}
+                                    </div>
+                                  </div>
+                                  <div>
+                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1">Communication Channels</span>
+                                    <div className="flex flex-col gap-1">
+                                      {w.onboardingData.channels ? (
+                                        <>
+                                          {w.onboardingData.channels.whatsappNumber && <span className="text-xs text-slate-400">WhatsApp: <span className="text-white">{w.onboardingData.channels.whatsappNumber}</span></span>}
+                                          {w.onboardingData.channels.supportEmail && <span className="text-xs text-slate-400">Support: <span className="text-white">{w.onboardingData.channels.supportEmail}</span></span>}
+                                          {w.onboardingData.channels.callingNumber && <span className="text-xs text-slate-400">Calling: <span className="text-white">{w.onboardingData.channels.callingNumber}</span></span>}
+                                        </>
+                                      ) : (
+                                        <span className="text-xs text-slate-500 italic">No channels configured</span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>

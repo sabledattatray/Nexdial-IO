@@ -30,15 +30,13 @@ export async function POST(req: Request) {
       },
     });
 
-    // Save onboarding metadata permanently to the workspace
+    // Save ALL onboarding metadata permanently to the workspace
     if (updatedUser.workspaceId) {
       await prisma.workspace.update({
         where: { id: updatedUser.workspaceId },
         data: {
           onboardingData: {
-            companyName: companyName || "",
-            leadSources: leadSources || [],
-            goals: goals || [],
+            ...body,
             teamSize: team ? team.length : 0
           }
         }
