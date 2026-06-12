@@ -1,5 +1,9 @@
+import { NextRequest } from "next/server";
 import middleware from "next-auth/middleware";
-export default middleware;
+
+export function proxy(req: NextRequest, event: any) {
+  return middleware(req as any, event);
+}
 
 export const config = {
   matcher: [
