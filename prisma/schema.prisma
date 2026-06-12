@@ -271,6 +271,7 @@ model Integration {
   provider    String    // "facebook", "instagram", "tiktok", "custom"
   status      String    @default("ACTIVE") // ACTIVE, ERROR, PAUSED
   secretKey   String?   @unique @map("secret_key")
+  credentials Json?     // To store { accessToken, pageId, etc }
   leadsCount  Int       @default(0) @map("leads_count")
   lastSyncAt  DateTime? @map("last_sync_at")
   createdAt   DateTime  @default(now()) @map("created_at")

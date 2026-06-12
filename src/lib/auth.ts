@@ -78,13 +78,14 @@ export const authOptions: NextAuthOptions = {
         token.role = (user as any).role;
         token.id = user.id;
         token.onboarded = (user as any).onboarded;
-      } else if (token.id) {
-        // Query database directly to get the freshest onboarded status and role
+      } else if (token.email) {
+        // Query database by email in case older cookies lack token.id
         const dbUser = await prisma.user.findUnique({
-          where: { id: token.id as string },
-          select: { onboarded: true, role: true },
+          where: { email: token.email },
+          select: { id: true, onboarded: true, role: true },
         });
         if (dbUser) {
+          token.id = dbUser.id;
           token.onboarded = dbUser.onboarded;
           token.role = dbUser.role;
         }

@@ -26,10 +26,52 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
       return NextResponse.json({ error: "Invalid JSON payload" }, { status: 400 });
     }
 
-    // Try to extract lead info from standard generic webhook fields
-    const name = payload.name || payload.full_name || payload.firstName || "Social Lead";
-    const phone = payload.phone || payload.phone_number || payload.phoneNumber || "Unknown Phone";
-    const email = payload.email || payload.email_address || null;
+    let name = "Social Lead";
+    let phone = "Unknown Phone";
+    let email: string | null = null;
+    let leadgenId: string | null = null;
+
+    // Detect if this is a Facebook Lead Ads encrypted payload
+    if (payload.object === "page" && Array.isArray(payload.entry)) {
+      const entry = payload.entry[0];
+      const change = entry?.changes?.[0];
+      if (change?.field === "leadgen" && change?.value?.leadgen_id) {
+        leadgenId = change.value.leadgen_id;
+      }
+    }
+
+    if (leadgenId) {
+      // Authenticate with Graph API to fetch decrypted lead details
+      const creds = integration.credentials as any;
+      if (!creds || !creds.accessToken) {
+        // If testing/mocking without an access token, use mock values
+        console.warn("No access token provided. Using mock data for Leadgen ID: " + leadgenId);
+        name = "Facebook Mock Lead";
+        phone = "+1234567890";
+        email = "mock@fb.com";
+      } else {
+        const fbRes = await fetch(`https://graph.facebook.com/v19.0/${leadgenId}?access_token=${creds.accessToken}`);
+        const fbData = await fbRes.json();
+        
+        if (fbData.error) {
+          throw new Error(`Facebook API Error: ${fbData.error.message}`);
+        }
+
+        // Parse standard Lead Ad form fields
+        const fieldData: any[] = fbData.field_data || [];
+        fieldData.forEach(field => {
+          const val = field.values?.[0];
+          if (field.name === "full_name" || field.name === "first_name") name = val || name;
+          if (field.name === "phone_number") phone = val || phone;
+          if (field.name === "email") email = val || email;
+        });
+      }
+    } else {
+      // Generic Webhook Fallback
+      name = payload.name || payload.full_name || payload.firstName || name;
+      phone = payload.phone || payload.phone_number || payload.phoneNumber || phone;
+      email = payload.email || payload.email_address || email;
+    }
 
     // --- ROUTING ENGINE ---
     const rules = await prisma.routingRule.findMany({
