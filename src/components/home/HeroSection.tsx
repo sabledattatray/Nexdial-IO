@@ -218,7 +218,7 @@ export function HeroSection() {
           >
             <div className="relative">
               {/* Main Dashboard Card */}
-              <div className="glass-card-strong p-6 rounded-2xl shadow-2xl shadow-black/30 border border-white/[0.08]">
+              <div className="glass-card-strong w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/30 border border-white/[0.08]">
                 {/* Browser Window Header */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex gap-1.5">
