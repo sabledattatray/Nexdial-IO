@@ -32,7 +32,8 @@ const team = [
     role: "Founder & Lead Architect",
     desc: "Full-stack software architect with a vision to eliminate communication chaos for small businesses. Oversees core product engineering and AI research.",
     initials: "DS",
-    color: "#0057D9"
+    color: "#0057D9",
+    image: "/author.png"
   },
   {
     name: "Rahul K.",
@@ -96,12 +97,23 @@ export default function AboutPage() {
                 
                 <div className="relative z-10 space-y-6">
                   <div className="flex items-center gap-4">
-                    <div 
-                      className="w-16 h-16 rounded-2xl border border-white/[0.08] flex items-center justify-center shrink-0 text-xl font-bold text-white"
-                      style={{ background: `linear-gradient(135deg, ${member.color}25, ${member.color}08)` }}
-                    >
-                      {member.initials}
-                    </div>
+                    {member.image ? (
+                      <div className="relative w-16 h-16 rounded-2xl border border-white/[0.08] overflow-hidden shrink-0">
+                        <Image
+                          src={member.image}
+                          alt={member.name}
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                    ) : (
+                      <div 
+                        className="w-16 h-16 rounded-2xl border border-white/[0.08] flex items-center justify-center shrink-0 text-xl font-bold text-white"
+                        style={{ background: `linear-gradient(135deg, ${member.color}25, ${member.color}08)` }}
+                      >
+                        {member.initials}
+                      </div>
+                    )}
                     <div>
                       <h3 className="text-lg font-bold text-white font-space-grotesk">{member.name}</h3>
                       <p className="text-xs font-semibold mt-0.5" style={{ color: member.color }}>{member.role}</p>
