@@ -132,11 +132,7 @@ export function HeroSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-          >
+          <div className="animate-fade-in-up">
             {/* Badge */}
             <motion.div
               initial={{ opacity: 0, scale: 0.9 }}
@@ -207,7 +203,7 @@ export function HeroSection() {
               <div className="w-px h-4 bg-white/10" />
               <div>No Credit Card</div>
             </motion.div>
-          </motion.div>
+          </div>
 
           {/* Right — CRM Inbox Preview */}
           <motion.div
@@ -292,7 +288,7 @@ export function HeroSection() {
                             return (
                               <div 
                                 key={lead.name} 
-                                className={`p-3 rounded-xl border transition-all duration-500 ${
+                                className={`p-3 rounded-xl border transition-colors duration-500 ${
                                   idx === highlightedLead 
                                     ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
                                     : "bg-white/[0.02] border-white/[0.05]"

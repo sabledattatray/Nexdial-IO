@@ -257,6 +257,7 @@ export function ContactSection() {
                         <label className="text-xs font-semibold text-[#94A3B8]">Interest</label>
                         <select
                           name="interest"
+                          aria-label="Select your interest"
                           value={formData.interest}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-[#94A3B8] transition-all"
