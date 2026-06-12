@@ -24,6 +24,9 @@ import {
   LayoutDashboard,
   Shield,
   Handshake,
+  FileText,
+  Award,
+  Download,
 } from "lucide-react";
 
 const navLinks = [
@@ -60,6 +63,14 @@ const navLinks = [
           { label: "Blog", href: "/blog", icon: BookOpen, desc: "Tips & insights for small businesses" },
           { label: "Knowledge Center", href: "/knowledge-center", icon: BookOpen, desc: "Guides & documentation" },
           { label: "FAQs", href: "/faqs", icon: HelpCircle, desc: "Common questions answered" },
+        ],
+      },
+      {
+        title: "Library",
+        items: [
+          { label: "Case Studies", href: "/case-studies", icon: FileText, desc: "Real metrics & conversion studies" },
+          { label: "Success Stories", href: "/success-stories", icon: Award, desc: "Customer testimonials & wins" },
+          { label: "Downloads Desk", href: "/resources", icon: Download, desc: "E-Books, playbooks & guides" },
         ],
       },
     ],
