@@ -48,3 +48,34 @@ export async function POST(req: Request) {
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
   }
 }
+
+export async function GET(req: Request) {
+  try {
+    const session = await getAuthenticatedSession();
+    if (!session || !session.user) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const sessionUser = session.user as any;
+    
+    if (!sessionUser.workspaceId) {
+      return NextResponse.json({ error: "Workspace not found" }, { status: 404 });
+    }
+
+    const currentWorkspace = await prisma.workspace.findUnique({
+      where: { id: sessionUser.workspaceId },
+    });
+
+    if (!currentWorkspace) {
+      return NextResponse.json({ error: "Workspace not found" }, { status: 404 });
+    }
+
+    return NextResponse.json({ 
+      success: true, 
+      workspace: currentWorkspace,
+      onboardingData: currentWorkspace.onboardingData || {}
+    });
+  } catch (error) {
+    console.error("Fetch Settings Error:", error);
+    return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });
+  }
+}

@@ -194,23 +194,34 @@ export default function SettingsPage() {
     // Fetch live team database members
     fetchTeamMembers();
 
-    // FORCE SYNC: Push legacy localStorage data to the backend database so the Admin can see it
-    setTimeout(() => {
+    // Sync with database to fetch persistent onboarding data
+    const fetchPersistentSettings = async () => {
       try {
-        const payload = {
-          companyName: localStorage.getItem("nexdial_company_name"),
-          leadSources: JSON.parse(localStorage.getItem("nexdial_lead_sources") || "[]"),
-          goals: JSON.parse(localStorage.getItem("nexdial_goals") || "[]"),
-        };
-        fetch("/api/crm/sync-settings", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload)
-        });
-      } catch (e) {
-        console.error("Silent sync failed", e);
+        const res = await fetch("/api/crm/sync-settings");
+        if (res.ok) {
+          const data = await res.json();
+          if (data.onboardingData) {
+            const { companyName, goals, leadSources } = data.onboardingData;
+            
+            if (companyName) {
+              setCompanyName(companyName);
+              localStorage.setItem("nexdial_company_name", companyName);
+            }
+            if (goals && Array.isArray(goals)) {
+              setGoals(goals);
+              localStorage.setItem("nexdial_goals", JSON.stringify(goals));
+            }
+            if (leadSources && Array.isArray(leadSources)) {
+              setLeadSources(leadSources);
+              localStorage.setItem("nexdial_lead_sources", JSON.stringify(leadSources));
+            }
+          }
+        }
+      } catch (err) {
+        console.error("Failed to fetch persistent settings", err);
       }
-    }, 2000);
+    };
+    fetchPersistentSettings();
 
   }, [session]);
 
@@ -303,7 +314,7 @@ export default function SettingsPage() {
     }
   };
 
-  const handleCompanySave = (e: React.FormEvent) => {
+  const handleCompanySave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
@@ -320,13 +331,21 @@ export default function SettingsPage() {
     localStorage.setItem("nexdial_brand_color", brandColor);
     localStorage.setItem("nexdial_logo_uploaded", logoUploaded ? "true" : "false");
 
-    setTimeout(() => {
-      setIsSaving(false);
-      triggerToast("Company and branding configs saved!");
-    }, 800);
+    try {
+      await fetch("/api/crm/sync-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ companyName })
+      });
+    } catch (e) {
+      console.error("Failed to sync company name to db", e);
+    }
+
+    setIsSaving(false);
+    triggerToast("Company and branding configs saved!");
   };
 
-  const handleGoalsSourcesSave = (e: React.FormEvent) => {
+  const handleGoalsSourcesSave = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSaving(true);
 
@@ -336,10 +355,18 @@ export default function SettingsPage() {
     localStorage.setItem("nexdial_current_crm", currentCrm);
     localStorage.setItem("nexdial_hear_about_us", hearAboutUs);
 
-    setTimeout(() => {
-      setIsSaving(false);
-      triggerToast("Goals and lead sources saved!");
-    }, 800);
+    try {
+      await fetch("/api/crm/sync-settings", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ goals, leadSources })
+      });
+    } catch (e) {
+      console.error("Failed to sync goals to db", e);
+    }
+
+    setIsSaving(false);
+    triggerToast("Goals and lead sources saved!");
   };
 
   const handlePipelineSave = (e: React.FormEvent) => {
