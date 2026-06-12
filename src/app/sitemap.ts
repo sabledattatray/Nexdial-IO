@@ -1,7 +1,7 @@
 import { MetadataRoute } from "next";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const baseUrl = "https://nexdial.com";
+  const baseUrl = "https://nexdial.io";
   const routes = [
     "",
     "/about",
