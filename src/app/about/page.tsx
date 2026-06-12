@@ -40,14 +40,16 @@ const team = [
     role: "Head of Customer Success",
     desc: "Dedicated to helping businesses successfully transition away from messy spreadsheets and adopt structured sales automation workflows.",
     initials: "RK",
-    color: "#8B5CF6"
+    color: "#8B5CF6",
+    image: "/rahul.png"
   },
   {
     name: "Nisha P.",
     role: "Head of Operations",
     desc: "Ensures seamless onboarding, reliable API webhooks, robust system configurations, and round-the-clock platform availability.",
     initials: "NP",
-    color: "#00E5A0"
+    color: "#00E5A0",
+    image: "/nisha.png"
   }
 ];
 
