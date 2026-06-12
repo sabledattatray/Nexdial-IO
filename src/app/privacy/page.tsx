@@ -2,20 +2,21 @@
 
 import { useState, useEffect } from "react";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Shield, Lock, Eye, FileText, CheckCircle2, ChevronRight } from "lucide-react";
+import { Shield, Lock, Eye, FileText, CheckCircle2, ChevronRight, Database, Globe, Mail } from "lucide-react";
+import Link from "next/link";
 
 export default function PrivacyPage() {
   const [activeSection, setActiveSection] = useState("introduction");
 
   const sections = [
-    { id: "introduction", label: "1. Introduction & Scope" },
-    { id: "data-collection", label: "2. Information We Collect" },
-    { id: "data-usage", label: "3. How We Use Data" },
-    { id: "compliance-gdpr", label: "4. GDPR & HIPAA Sovereignty" },
-    { id: "data-sharing", label: "5. Third-Party Disclosures" },
-    { id: "retention", label: "6. Data Retention & Disposal" },
-    { id: "user-rights", label: "7. Your Rights & Access" },
-    { id: "contact", label: "8. Contact & Officer" },
+    { id: "introduction",    label: "1. Who We Are & Scope" },
+    { id: "data-collection", label: "2. What We Collect" },
+    { id: "data-usage",      label: "3. How We Use Your Data" },
+    { id: "data-sharing",    label: "4. Who We Share Data With" },
+    { id: "storage",         label: "5. Data Storage & Security" },
+    { id: "retention",       label: "6. Retention & Deletion" },
+    { id: "user-rights",     label: "7. Your Rights" },
+    { id: "contact",         label: "8. Contact Us" },
   ];
 
   useEffect(() => {
@@ -39,10 +40,7 @@ export default function PrivacyPage() {
   const scrollToSection = (id: string) => {
     const el = document.getElementById(id);
     if (el) {
-      window.scrollTo({
-        top: el.offsetTop - 120,
-        behavior: "smooth",
-      });
+      window.scrollTo({ top: el.offsetTop - 120, behavior: "smooth" });
       setActiveSection(id);
     }
   };
@@ -53,30 +51,30 @@ export default function PrivacyPage() {
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0057D9]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1400px] mx-auto px-6">
-        
+
         {/* Page Header */}
         <AnimatedSection className="max-w-3xl mb-16">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20 flex items-center gap-2 w-fit">
             <Shield className="w-3.5 h-3.5" />
-            Compliance & Privacy Desk
+            Privacy &amp; Data Policy
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white mt-6 leading-tight">
             Privacy <span className="gradient-text">Policy</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            Nexdial is committed to maintaining the highest security, data isolation, and confidentiality standards. This policy governs data processing across our multi-tenant SaaS portals, predictive dialer clusters, BPO services, and AI voice copilots.
+            NexDial is committed to protecting your personal data and your customers&apos; data. This policy explains what we collect, why we collect it, and how we keep it safe — in plain language, without legal jargon.
           </p>
           <div className="flex items-center gap-4 mt-6 text-xs text-[#64748B] font-mono">
-            <span>DOCUMENT ID: CCOS-PRV-2026-V4</span>
+            <span>DOCUMENT ID: NEXDIAL-PRV-2026-V1</span>
             <span>•</span>
-            <span>LAST UPDATED: JUNE 09, 2026</span>
+            <span>LAST UPDATED: JUNE 12, 2026</span>
           </div>
         </AnimatedSection>
 
         {/* Content Body Grid */}
         <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
-          
-          {/* Left Sticky Sidebar (Table of Contents) */}
+
+          {/* Left Sticky Sidebar */}
           <aside className="hidden lg:block sticky top-28 bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
             <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-white/[0.06] pb-3">
               Table of Contents
@@ -93,62 +91,94 @@ export default function PrivacyPage() {
                     }`}
                   >
                     <span>{section.label}</span>
-                    <ChevronRight className={`w-3.5 h-3.5 transition-transform duration-200 ${
-                      activeSection === section.id ? "translate-x-0.5" : "opacity-0"
-                    }`} />
+                    <ChevronRight className={`w-3.5 h-3.5 transition-transform duration-200 ${activeSection === section.id ? "translate-x-0.5" : "opacity-0"}`} />
                   </button>
                 </li>
               ))}
             </ul>
+            <div className="mt-6 pt-4 border-t border-white/[0.05]">
+              <Link href="/terms" className="text-xs text-[#00C2FF] hover:underline flex items-center gap-1">
+                <FileText className="w-3 h-3" /> Terms of Service →
+              </Link>
+            </div>
           </aside>
 
-          {/* Right Scrollable Policy Content (Unified Document Card) */}
+          {/* Right Policy Content */}
           <div className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed space-y-10">
-            
+
             {/* 1. Introduction */}
             <section id="introduction" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
-                1. Introduction & Scope
+                1. Who We Are &amp; Scope of This Policy
               </h2>
               <p>
-                Nexdial (&quot;we&quot;, &quot;us&quot;, or &quot;our&quot;) provides a multi-tenant cloud-native Contact Center Operating System, Voice AI virtual agents, CRM integration adapters, and specialized Business Process Outsourcing (BPO) solutions.
+                NexDial (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a SaaS CRM platform designed for Indian small and medium businesses. We provide lead management, WhatsApp inbox, sales pipeline, call logging, and AI-powered follow-up tools.
               </p>
               <p>
-                This Privacy Policy describes how we collect, use, process, and secure user credentials, tenant databases, telephony call details, and audio data. It applies to all platforms hosted under our domains (including <code>*.nexdial.com</code>), administrative dashboards, agent softphone consoles, and client reporting terminals.
+                This Privacy Policy applies to all users of NexDial — including business owners who sign up (&quot;Workspace Admins&quot;), their team members (&quot;Agents&quot;), and the leads/contacts stored within the platform (&quot;End Contacts&quot;). It covers all data processed through our website, onboarding flow, CRM dashboard, and APIs.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-[#00E5A0]/20 flex gap-3 items-start text-xs text-[#94A3B8]">
                 <CheckCircle2 className="w-4 h-4 text-[#00E5A0] shrink-0 mt-0.5" />
-                <span>By provisioning tenant credentials or using the platform channels, you acknowledge data mapping practices in accordance with GDPR, HIPAA, and regional telecom rules.</span>
+                <span>By using NexDial, you agree to the data practices described in this policy. If you do not agree, please do not use the Service.</span>
               </div>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 2. Information We Collect */}
+            {/* 2. What We Collect */}
             <section id="data-collection" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Eye className="w-5 h-5 text-[#00C2FF]" />
-                2. Information We Collect
+                2. What Data We Collect
               </h2>
-              <p>
-                To deliver enterprise-grade predictive dialing and AI quality scoring, we collect three distinct tiers of data:
-              </p>
-              
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">A. Tenant Configuration & Profile Data</h3>
-              <p>
-                This includes corporate organization details, business mailing addresses, SIP trunk gateway credentials, payment tokens (managed securely via Stripe), custom subdomain parameters, and employee login profiles (roles, names, and emails).
-              </p>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider">B. Telephony Logs & CRM Records</h3>
-              <p>
-                In the course of campaigns, we process Call Detail Records (CDRs) containing timestamp markers, destination telephone numbers, trunk route carriers, connection durations, call dispositions (AMD classifications), and lead information (names, emails, account IDs, and balance parameters).
-              </p>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-2">A. Account & Profile Data</h3>
+              <p>When you sign up, we collect:</p>
+              <ul className="list-disc pl-6 space-y-1.5">
+                <li>Full name, work email address, mobile number</li>
+                <li>Company name, business type, industry, company size</li>
+                <li>Job title, time zone, business location</li>
+                <li>Profile avatar (if uploaded)</li>
+                <li>Google OAuth profile data (if you sign in with Google)</li>
+              </ul>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider">C. Audio Streams & AI Transcriptions</h3>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">B. Onboarding Configuration Data</h3>
+              <p>During onboarding we collect workspace preferences:</p>
+              <ul className="list-disc pl-6 space-y-1.5">
+                <li>Business goals and selected lead sources (WhatsApp, Website, Facebook, etc.)</li>
+                <li>Sales pipeline stage names</li>
+                <li>WhatsApp Business number(s) and support email addresses</li>
+                <li>AI & alert notification preferences</li>
+              </ul>
+
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">C. CRM & Lead Data</h3>
               <p>
-                We capture live WebRTC audio streams, telephone voice recordings (WAV/MP3 files for audit and QA scoring), and real-time speech-to-text transcriptions generated by our conversational AI engines.
+                Data you or your team enters into NexDial about your business contacts (leads):
               </p>
+              <ul className="list-disc pl-6 space-y-1.5">
+                <li>Contact name, phone number, email, company, tags</li>
+                <li>Lead status, pipeline stage, assigned agent</li>
+                <li>Call logs, activity timeline, notes, follow-up reminders</li>
+                <li>WhatsApp conversation history (displayed in inbox)</li>
+              </ul>
+
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">D. Payment & Billing Data</h3>
+              <p>
+                We do <strong>not</strong> store your card number, bank account details, or UPI credentials. All payment processing is handled by <strong>Razorpay</strong> (PCI-DSS compliant). We only store:
+              </p>
+              <ul className="list-disc pl-6 space-y-1.5">
+                <li>Razorpay Order ID and Payment ID (for verification and receipts)</li>
+                <li>Mandate status and subscription plan</li>
+                <li>Billing history (plan, amount, date)</li>
+              </ul>
+
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">E. Technical & Usage Data</h3>
+              <ul className="list-disc pl-6 space-y-1.5">
+                <li>IP address, browser type, device information</li>
+                <li>Pages visited, features used, session duration</li>
+                <li>Error logs and crash reports (for debugging)</li>
+              </ul>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
@@ -157,111 +187,133 @@ export default function PrivacyPage() {
             <section id="data-usage" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00C2FF]" />
-                3. How We Use Data
+                3. How We Use Your Data
               </h2>
-              <p>
-                Our processing of tenant data is governed strictly by service agreements. We use collected information to:
-              </p>
+              <p>We use your data strictly to provide and improve the NexDial service:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Route telephony packets, manage SIP audio streams, and trigger predictive dialing queues.</li>
-                <li>Generate real-time AI transcription prompts, live whispering responses, and QA scoring matrices.</li>
-                <li>Process billing, compute telecom minute outlays, and monitor usage limits.</li>
-                <li>Compile analytical reports, SVG data frequency charts, and tenant logs.</li>
-                <li>Prevent fraudulent calls, secure API endpoints, and monitor system health indicators.</li>
+                <li><strong>Deliver the Service:</strong> Power your CRM dashboard, lead inbox, pipeline, and team features.</li>
+                <li><strong>Authentication:</strong> Verify your identity on login via NextAuth (email/password or Google OAuth).</li>
+                <li><strong>Billing:</strong> Process your ₹1 mandate authorization and monthly subscription renewals via Razorpay.</li>
+                <li><strong>AI Features:</strong> Use your lead interaction data to generate AI-powered follow-up suggestions and lead scores. This processing happens within our platform — your data is never shared with external AI providers for training.</li>
+                <li><strong>Notifications:</strong> Send you email alerts for follow-up reminders, payment receipts, and trial expiry warnings.</li>
+                <li><strong>Support:</strong> Respond to your help requests and diagnose technical issues.</li>
+                <li><strong>Product Improvement:</strong> Analyze aggregated, anonymized usage patterns to improve the platform.</li>
               </ul>
+              <p>We do <strong>not</strong> use your data for advertising, profiling for third-party marketing, or selling to data brokers.</p>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 4. Compliance, GDPR & HIPAA */}
-            <section id="compliance-gdpr" className="space-y-4 scroll-mt-28">
-              <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
-                <Shield className="w-5 h-5 text-[#00C2FF]" />
-                4. GDPR & HIPAA Sovereignty
-              </h2>
-              <p>
-                Nexdial provides standard regulatory assurances to satisfy security and privacy rules globally:
-              </p>
-
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">HIPAA & Healthcare Data</h3>
-              <p>
-                For tenants operating in healthcare and medical sectors, we establish Business Associate Agreements (BAAs). Data fields are configured to support automatic scrubbing of Protected Health Information (PHI) from log indexes, and recordings are encrypted with tenant-specific hardware keys.
-              </p>
-
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider">GDPR & Sovereignty</h3>
-              <p>
-                We maintain isolated database zones and storage clusters. European Union (EU) tenant records are stored strictly within designated European data centers (Azure/AWS) and do not cross international borders without authorized transfer safeguards.
-              </p>
-            </section>
-
-            <div className="h-px bg-white/[0.06]" />
-
-            {/* 5. Third-Party Disclosures */}
+            {/* 4. Third-Party Sharing */}
             <section id="data-sharing" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
-                <FileText className="w-5 h-5 text-[#00C2FF]" />
-                5. Third-Party Disclosures
+                <Globe className="w-5 h-5 text-[#00C2FF]" />
+                4. Who We Share Your Data With
               </h2>
               <p>
-                We do not sell, rent, or trade client directories or voice records. Information is shared only with authorized partners necessary to operate core features:
+                We do not sell or rent your data. We share data only with trusted service providers who help operate NexDial, under strict data processing agreements:
+              </p>
+              <ul className="list-disc pl-6 space-y-3">
+                <li>
+                  <strong>Supabase / PostgreSQL (Database):</strong> Your workspace data, leads, and CRM records are stored in a secure PostgreSQL database hosted on Supabase (AWS infrastructure, ap-southeast-1 region).
+                </li>
+                <li>
+                  <strong>Razorpay (Payments):</strong> Payment processing and e-mandate management. Razorpay is PCI-DSS Level 1 certified and RBI regulated. We share only the minimum data required to create and manage your subscription.
+                </li>
+                <li>
+                  <strong>Google (OAuth):</strong> If you use &quot;Sign in with Google,&quot; Google shares your name, email, and profile picture with us. We do not share your NexDial data back with Google beyond standard OAuth tokens.
+                </li>
+                <li>
+                  <strong>Vercel (Hosting):</strong> Our application is deployed on Vercel&apos;s edge network. Vercel may process request logs containing IP addresses per their own privacy policy.
+                </li>
+                <li>
+                  <strong>Meta / WhatsApp Business API:</strong> When you connect a WhatsApp Business number, messages flow through Meta&apos;s API. Message content is subject to Meta&apos;s privacy policy.
+                </li>
+              </ul>
+              <p>We disclose data to authorities only if required by law, court order, or to protect NexDial from fraud.</p>
+            </section>
+
+            <div className="h-px bg-white/[0.06]" />
+
+            {/* 5. Data Storage & Security */}
+            <section id="storage" className="space-y-4 scroll-mt-28">
+              <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
+                <Database className="w-5 h-5 text-[#00C2FF]" />
+                5. Data Storage &amp; Security
+              </h2>
+              <p>
+                All NexDial data is stored in India or AWS ap-southeast-1 (Singapore) region. We implement the following security measures:
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Telephony Carriers:</strong> Standard SIP carriers (e.g., Twilio, Exotel) receive outbound phone numbers to establish VoIP routing lines.</li>
-                <li><strong>AI Models:</strong> Real-time audio segments may be processed via secure API endpoints of cognitive partners (e.g., OpenAI, Microsoft Azure AI) under strictly non-training contracts where data is deleted post-inference.</li>
-                <li><strong>Payment Processors:</strong> Credit card invoicing and recurring subscriptions are processed securely by Stripe under PCI-DSS compliance.</li>
+                <li><strong>Encryption in Transit:</strong> All data between your browser and NexDial servers is encrypted via HTTPS/TLS 1.3.</li>
+                <li><strong>Encryption at Rest:</strong> Database storage is encrypted at rest by Supabase.</li>
+                <li><strong>Password Security:</strong> Passwords are hashed using bcrypt (never stored in plain text).</li>
+                <li><strong>Access Control:</strong> Role-based access control (ADMIN / AGENT) ensures team members only access data relevant to their role.</li>
+                <li><strong>No Card Storage:</strong> We never store your payment card details — all payment data is handled by Razorpay&apos;s PCI-certified vault.</li>
               </ul>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 6. Data Retention & Disposal */}
+            {/* 6. Retention & Deletion */}
             <section id="retention" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00C2FF]" />
-                6. Data Retention & Disposal
+                6. Data Retention &amp; Deletion
               </h2>
-              <p>
-                We retain tenant data for the duration of the active subscription period, or in accordance with custom compliance rules set by the tenant administrator:
-              </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Call Recordings:</strong> Retained for 90 days by default, after which they are permanently deleted or archived to cold storage based on your selected tier.</li>
-                <li><strong>Telephony Transcripts:</strong> Purged from active indexes within 30 days unless pinned to specific CRM customer tickets.</li>
-                <li><strong>System Logs:</strong> Stored for 365 days to support compliance audits and security tracking.</li>
+                <li><strong>Active subscription:</strong> Your workspace data (leads, contacts, pipeline, call logs) is retained for the duration of your active subscription.</li>
+                <li><strong>After cancellation:</strong> We retain your data for 30 days after subscription cancellation, giving you time to export. After 30 days, workspace data is permanently deleted.</li>
+                <li><strong>Inactive trial accounts:</strong> If no subscription is started after the 15-day trial, your account data is deleted after 60 days of inactivity.</li>
+                <li><strong>Activity logs &amp; system logs:</strong> Retained for 90 days for debugging and security purposes, then purged.</li>
+                <li><strong>Billing records:</strong> Invoices and payment references are retained for 7 years as required by Indian GST and accounting regulations.</li>
               </ul>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 7. Your Rights & Access */}
+            {/* 7. Your Rights */}
             <section id="user-rights" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Eye className="w-5 h-5 text-[#00C2FF]" />
-                7. Your Rights & Access
+                7. Your Data Rights
               </h2>
               <p>
-                Depending on your location, you have rights to access, correct, port, or request deletion of your personal data processed by our systems. Super administrators can export complete contact lists, billing receipts, and CDR tables directly from the Admin Console at any time.
+                Under Indian IT Act and global best practices, you have the following rights regarding your personal data:
               </p>
+              <ul className="list-disc pl-6 space-y-2">
+                <li><strong>Access:</strong> Request a copy of all personal data we hold about you.</li>
+                <li><strong>Correction:</strong> Update or correct inaccurate data via your Settings page or by emailing us.</li>
+                <li><strong>Deletion:</strong> Request full deletion of your account and all associated data. We will process deletion within 7 business days.</li>
+                <li><strong>Export:</strong> Request an export of your lead and contact data in CSV format from the CRM Settings page.</li>
+                <li><strong>Withdraw Consent:</strong> Cancel your subscription and Razorpay mandate at any time. Withdrawal does not affect data already processed.</li>
+              </ul>
               <p>
-                If you are a customer of one of our tenants (e.g. a consumer called during an outreach campaign), you should contact that organization directly to exercise your privacy rights, as Nexdial processes that data solely as a service processor under their instruction.
+                To exercise any of these rights, visit your <strong>CRM Settings → Account</strong> page or contact us at <a href="mailto:privacy@nexdial.io" className="text-[#00C2FF] hover:underline">privacy@nexdial.io</a>. We will respond within 7 business days.
               </p>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 8. Contact & Officer */}
+            {/* 8. Contact */}
             <section id="contact" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
-                <Shield className="w-5 h-5 text-[#00C2FF]" />
-                8. Contact & Data Officer
+                <Mail className="w-5 h-5 text-[#00C2FF]" />
+                8. Contact Us
               </h2>
               <p>
-                For questions about our security controls, SOC2 audit sheets, or to submit data deletion requests, contact our legal and data protection team:
+                If you have any questions, concerns, or requests about this Privacy Policy or how your data is handled, please contact us:
               </p>
               <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.04] space-y-2 text-xs">
-                <p className="font-bold text-white">Nexdial Data Protection Office</p>
-                <p className="text-slate-400">Email: <a href="mailto:info@nexdial.io" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">info@nexdial.io</a></p>
-                <p className="text-slate-400">Head Office: 123 Innovation Boulevard, Tech District, San Francisco, CA 94105</p>
+                <p className="font-bold text-white">NexDial Data &amp; Privacy Team</p>
+                <p className="text-slate-400">General Support: <a href="mailto:support@nexdial.io" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">support@nexdial.io</a></p>
+                <p className="text-slate-400">Privacy Requests: <a href="mailto:privacy@nexdial.io" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">privacy@nexdial.io</a></p>
+                <p className="text-slate-400">Billing Queries: <a href="mailto:billing@nexdial.io" className="text-[#00E5A0] hover:text-[#00C2FF] transition-colors">billing@nexdial.io</a></p>
+                <p className="text-slate-400">Location: India — Maharashtra</p>
               </div>
+              <p className="text-xs text-[#64748B]">
+                We may update this Privacy Policy from time to time. We will notify you of significant changes via email or a notice in your NexDial dashboard.
+              </p>
             </section>
 
           </div>

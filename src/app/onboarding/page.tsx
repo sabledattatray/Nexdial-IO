@@ -67,6 +67,7 @@ function OnboardingContent() {
   const [step, setStep] = useState(1); // Steps 1 to 7
   const [error, setError] = useState("");
   const [loadingPayment, setLoadingPayment] = useState(false);
+  const [termsAccepted, setTermsAccepted] = useState(false);
 
   // Form State
   const [companyName, setCompanyName] = useState("");
@@ -1127,10 +1128,33 @@ function OnboardingContent() {
             </div>
           </div>
 
-          <div className="text-center py-2 space-y-2">
-            <p className="text-[11px] text-slate-450 leading-relaxed max-w-md mx-auto">
-              We process a fully-refundable **₹1 authorization charge** to establish the secure auto-pay e-mandate via Razorpay. No further charges will occur until your trial ends.
-            </p>
+          {/* T&C Acceptance Gate */}
+          <div className="bg-[#050A15] border border-white/10 rounded-xl p-4 space-y-3">
+            <label className="flex items-start gap-3 cursor-pointer group" htmlFor="terms-checkbox">
+              <div className="relative mt-0.5 flex-shrink-0">
+                <input
+                  id="terms-checkbox"
+                  type="checkbox"
+                  checked={termsAccepted}
+                  onChange={(e) => setTermsAccepted(e.target.checked)}
+                  className="sr-only"
+                />
+                <div className={`w-4 h-4 rounded border-2 flex items-center justify-center transition-all ${
+                  termsAccepted
+                    ? "bg-[#00E5A0] border-[#00E5A0]"
+                    : "border-white/20 group-hover:border-white/40"
+                }`}>
+                  {termsAccepted && <Check className="w-2.5 h-2.5 text-[#050A15]" strokeWidth={3} />}
+                </div>
+              </div>
+              <p className="text-[10.5px] text-slate-400 leading-relaxed">
+                I have read and agree to the{" "}
+                <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline font-semibold">Terms &amp; Conditions</a>{" "}
+                and{" "}
+                <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline font-semibold">Privacy Policy</a>.
+                I understand that <strong className="text-white">₹1 will be charged today</strong> as a Razorpay mandate authorization, and my plan will <strong className="text-white">auto-renew after the 15-day free trial</strong> at my selected plan rate. I can cancel anytime.
+              </p>
+            </label>
           </div>
 
           <div className="flex gap-4">
@@ -1142,8 +1166,13 @@ function OnboardingContent() {
             </button>
             <button
               onClick={handleRazorpaySetup}
-              disabled={loadingPayment}
-              className="flex-[2] py-3 bg-[#0057D9] hover:bg-[#0057D9]/90 text-xs font-bold text-white rounded-xl transition-all shadow-lg shadow-[#0057D9]/25 cursor-pointer flex items-center justify-center gap-2"
+              disabled={loadingPayment || !termsAccepted}
+              title={!termsAccepted ? "Please accept the Terms & Conditions to continue" : ""}
+              className={`flex-[2] py-3 text-xs font-bold text-white rounded-xl transition-all flex items-center justify-center gap-2 ${
+                termsAccepted
+                  ? "bg-[#0057D9] hover:bg-[#0057D9]/90 shadow-lg shadow-[#0057D9]/25 cursor-pointer"
+                  : "bg-white/5 border border-white/10 cursor-not-allowed opacity-60"
+              }`}
             >
               {loadingPayment ? (
                 <>
