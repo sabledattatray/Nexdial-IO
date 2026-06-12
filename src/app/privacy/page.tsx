@@ -46,7 +46,7 @@ export default function PrivacyPage() {
   };
 
   return (
-    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden">
+    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-x-hidden">
       <div className="absolute inset-0 noise-overlay pointer-events-none" />
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-[#0057D9]/5 rounded-full blur-[120px] pointer-events-none" />
 
