@@ -21,7 +21,7 @@ const posts = [
     slug: "whatsapp-crm-alternative",
     excerpt: "Discover why tracking leads in scattered WhatsApp threads and Excel sheets slows sales down, and how a unified inbox drives conversions.",
     date: "June 10, 2026",
-    author: "Vikram Dev",
+    author: "Datta Sable",
     category: "Lead Tracking",
     readTime: "5 min read"
   },
@@ -30,7 +30,7 @@ const posts = [
     slug: "crm-for-small-business",
     excerpt: "A lightweight checklist of CRM features small business teams actually use, avoiding enterprise bloat and saving hours of manual admin.",
     date: "June 06, 2026",
-    author: "Dr. Ananya Roy",
+    author: "Rahul K.",
     category: "Small Business",
     readTime: "8 min read"
   },
@@ -39,8 +39,35 @@ const posts = [
     slug: "lead-tracking-software-india",
     excerpt: "How small businesses in India utilize mobile-friendly unified customer inboxes to track leads, schedule call logs, and secure follow-ups.",
     date: "May 30, 2026",
-    author: "Marcus Stone",
+    author: "Nisha P.",
     category: "Sales Strategy",
+    readTime: "6 min read"
+  },
+  {
+    title: "How to Build a Seamless Lead Intake Process via Webhooks",
+    slug: "lead-intake-webhooks",
+    excerpt: "Connect external landing pages, Facebook lead ads, and contact forms straight to your inbox using secure webhook API endpoints.",
+    date: "May 18, 2026",
+    author: "Datta Sable",
+    category: "API & Webhooks",
+    readTime: "5 min read"
+  },
+  {
+    title: "Never Miss a Client: The Psychology of Quick Follow-Ups",
+    slug: "psychology-quick-follow-ups",
+    excerpt: "Studies show response time is the single biggest factor in lead conversion. Learn simple tactics to respond in under two minutes.",
+    date: "May 12, 2026",
+    author: "Rahul K.",
+    category: "Sales Strategy",
+    readTime: "7 min read"
+  },
+  {
+    title: "How We Scaled Our CRM Uptime and Local Backups Strategy",
+    slug: "crm-uptime-local-backups",
+    excerpt: "Behind the scenes of NexDial's technical stack: database replicas, daily automated backups, and low-latency cloud synchronization.",
+    date: "May 02, 2026",
+    author: "Nisha P.",
+    category: "Engineering",
     readTime: "6 min read"
   }
 ];

@@ -20,7 +20,7 @@ const ARTICLES: Record<string, {
     description: "Discover why tracking leads in scattered WhatsApp threads and Excel sheets slows sales down, and how a unified inbox drives conversions.",
     keywords: ["WhatsApp CRM alternative", "customer inbox CRM", "lead tracking system India", "Excel vs CRM"],
     date: "June 10, 2026",
-    author: "Vikram Dev",
+    author: "Datta Sable",
     category: "Lead Tracking",
     readTime: "5 min read",
     schemaImage: "https://nexdial.io/blog-whatsapp-crm.png",
@@ -71,7 +71,7 @@ const ARTICLES: Record<string, {
     description: "A lightweight checklist of CRM features small business teams actually use, avoiding enterprise bloat and saving hours of manual admin.",
     keywords: ["CRM for small business", "lead management software", "small business CRM", "lightweight CRM"],
     date: "June 06, 2026",
-    author: "Dr. Ananya Roy",
+    author: "Rahul K.",
     category: "Small Business",
     readTime: "8 min read",
     schemaImage: "https://nexdial.io/blog-small-business-crm.png",
@@ -122,7 +122,7 @@ const ARTICLES: Record<string, {
     description: "How small businesses in India utilize mobile-friendly unified customer inboxes to track leads, schedule call logs, and secure follow-ups.",
     keywords: ["lead tracking software India", "lead tracking system", "follow-up management", "India sales CRM"],
     date: "May 30, 2026",
-    author: "Marcus Stone",
+    author: "Nisha P.",
     category: "Sales Strategy",
     readTime: "6 min read",
     schemaImage: "https://nexdial.io/blog-lead-tracking-india.png",
@@ -166,6 +166,72 @@ const ARTICLES: Record<string, {
             Get Started Free
           </Link>
         </div>
+      </>
+    )
+  },
+  "lead-intake-webhooks": {
+    title: "How to Build a Seamless Lead Intake Process via Webhooks",
+    description: "Connect external landing pages, Facebook lead ads, and contact forms straight to your inbox using secure webhook API endpoints.",
+    keywords: ["lead webhooks", "CRM API integration", "Facebook lead ads webhook", "automated lead capture"],
+    date: "May 18, 2026",
+    author: "Datta Sable",
+    category: "API & Webhooks",
+    readTime: "5 min read",
+    schemaImage: "https://nexdial.io/blog-webhooks.png",
+    content: (
+      <>
+        <p>For modern small businesses, capturing leads immediately from their source is the key to winning sales. Copying and pasting customer information manually wastes time and introduces human error.</p>
+        <h2>What is a Webhook?</h2>
+        <p>A webhook is a lightweight mechanism that allows one application to send real-time data to another as soon as an event happens. For example, when a customer fills out a Facebook Lead Form or a custom website inquiry, a webhook sends that lead details instantly to NexDial.</p>
+        <h2>How to Setup Webhooks in NexDial</h2>
+        <p>Setting up your integration is simple:</p>
+        <ol>
+          <li>Navigate to your CRM settings tab.</li>
+          <li>Copy your unique NexDial webhook intake URL.</li>
+          <li>Paste this URL into your form provider (like Elementor, Typeform, Zapier, or Facebook Ads Manager).</li>
+          <li>Send a test payload to map your name, phone, and email fields.</li>
+        </ol>
+        <p>Once connected, every new signup lands in your Unified Inbox in under a second, ready for immediate follow-up.</p>
+      </>
+    )
+  },
+  "psychology-quick-follow-ups": {
+    title: "Never Miss a Client: The Psychology of Quick Follow-Ups",
+    description: "Studies show response time is the single biggest factor in lead conversion. Learn simple tactics to respond in under two minutes.",
+    keywords: ["speed to lead", "follow-up psychology", "sales responsiveness", "closing leads"],
+    date: "May 12, 2026",
+    author: "Rahul K.",
+    category: "Sales Strategy",
+    readTime: "7 min read",
+    schemaImage: "https://nexdial.io/blog-followups.png",
+    content: (
+      <>
+        <p>In sales, timing is everything. Studies consistently show that businesses that contact a lead within five minutes of submission are 100 times more likely to get in touch compared to those responding after 30 minutes.</p>
+        <h2>The 'Speed-to-Lead' Factor</h2>
+        <p>When a prospect fills out a form or messages you, they are actively thinking about their problem. If you call them immediately, they are engaged and ready to talk. If you wait until tomorrow, they have already moved on, forgotten their inquiry, or signed up with a competitor who got back to them first.</p>
+        <h2>Tactic 1: Centralize Your Inboxes</h2>
+        <p>You cannot respond quickly if you have to log into three different email accounts, check WhatsApp Web, and download CSVs from Facebook. Centralizing your notifications in a single CRM dashboard is step number one.</p>
+        <h2>Tactic 2: Clear Reminders & Urgency Badges</h2>
+        <p>Use visual indicators like NexDial's overdue follow-up tags and Today banners. Setting immediate reminders for callbacks keeps your sales reps focused on hot prospects before they turn cold.</p>
+      </>
+    )
+  },
+  "crm-uptime-local-backups": {
+    title: "How We Scaled Our CRM Uptime and Local Backups Strategy",
+    description: "Behind the scenes of NexDial's technical stack: database replicas, daily automated backups, and low-latency cloud synchronization.",
+    keywords: ["CRM uptime database", "Prisma Postgres synchronization", "secure cloud backups", "software resilience"],
+    date: "May 02, 2026",
+    author: "Nisha P.",
+    category: "Engineering",
+    readTime: "6 min read",
+    schemaImage: "https://nexdial.io/blog-engineering.png",
+    content: (
+      <>
+        <p>As a CRM and Unified Inbox, NexDial is the lifeblood of our customers' sales pipelines. If the system is offline, sales representatives cannot access leads, call logs fail, and messages are delayed. Uptime is not just a dev metric; it is business continuity.</p>
+        <h2>Our Server Architecture</h2>
+        <p>We deploy NexDial across regional cloud clusters with automatic failovers. If one node encounters high load or memory leakage, traffic is dynamically routed to a hot replica to ensure zero disruption to live agents.</p>
+        <h2>Database Redundancy & Daily Backups</h2>
+        <p>Using Prisma and PostgreSQL, we enforce strict indexing and database replication. Every transaction is synced in real-time, and daily backups are encrypted and saved securely. In the event of a catastrophic regional cloud failure, we can restore full service with minimal RPO.</p>
       </>
     )
   }
