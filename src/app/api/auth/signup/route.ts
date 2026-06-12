@@ -37,13 +37,23 @@ export async function POST(req: Request) {
     // Hash password
     const hashedPassword = await bcrypt.hash(password, 12);
 
-    // Create user as ADMIN
+    // 1. Create the Workspace first
+    const workspace = await prisma.workspace.create({
+      data: {
+        name: `${name}'s Workspace`,
+        plan: "TRIAL",
+        status: "ACTIVE",
+      }
+    });
+
+    // 2. Create user as ADMIN and link to Workspace
     const user = await prisma.user.create({
       data: {
         name,
         email: email.toLowerCase(),
         password: hashedPassword,
         role: "ADMIN",
+        workspaceId: workspace.id,
       },
     });
 
