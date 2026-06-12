@@ -104,6 +104,7 @@ export default function AboutPage() {
                           alt={member.name}
                           fill
                           className="object-cover"
+                          style={{ objectPosition: "center 20%" }}
                         />
                       </div>
                     ) : (
