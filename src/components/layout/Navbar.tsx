@@ -132,6 +132,13 @@ const navLinks = [
 
 export function Navbar() {
   const pathname = usePathname();
+  const isConsolePage = pathname?.startsWith("/crm") || 
+                        pathname?.startsWith("/admin") || 
+                        pathname?.startsWith("/supervisor") || 
+                        pathname?.startsWith("/client-portal") || 
+                        pathname?.startsWith("/dialer");
+  if (isConsolePage) return null;
+
   const isDialerPage = pathname === "/dialer" || pathname === "/admin/dialer";
 
   const [scrolled, setScrolled] = useState(false);

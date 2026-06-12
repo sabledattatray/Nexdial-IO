@@ -1,84 +1,115 @@
-"use client";
+import type { Metadata } from "next";
+import Link from "next/link";
+import { Calendar, User, ArrowRight, BookOpen } from "lucide-react";
 
-import { motion } from "framer-motion";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Calendar, User, ArrowRight } from "lucide-react";
+export const metadata: Metadata = {
+  title: "NexDial Blog — CRM for Small Businesses & WhatsApp Alternatives",
+  description:
+    "Expert insights, guides, and articles about lead tracking systems, WhatsApp CRM alternatives, and maximizing sales conversions for small businesses.",
+  keywords: [
+    "CRM for small business",
+    "WhatsApp CRM alternative",
+    "lead tracking software India",
+    "customer inbox CRM",
+    "sales follow up guide",
+  ],
+};
 
 const posts = [
   {
-    title: "How Answering Machine Detection (AMD) Speeds Agent Pipelines",
-    excerpt: "Learn how mathematical frequency checks filter out 98% of machine responses in under 2 seconds.",
-    date: "June 08, 2026",
+    title: "WhatsApp CRM Alternatives: Why Spreadsheets are Killing Your Conversions",
+    slug: "whatsapp-crm-alternative",
+    excerpt: "Discover why tracking leads in scattered WhatsApp threads and Excel sheets slows sales down, and how a unified inbox drives conversions.",
+    date: "June 10, 2026",
     author: "Vikram Dev",
-    category: "VoIP Telephony"
+    category: "Lead Tracking",
+    readTime: "5 min read"
   },
   {
-    title: "Setting Up RAG Pipelines for Support Agent Screen suggestions",
-    excerpt: "A look at embedding knowledge base documents inside local LLMs for low-latency copilot script matches.",
-    date: "June 04, 2026",
+    title: "The Ultimate Guide to CRM for Small Businesses in 2026",
+    slug: "crm-for-small-business",
+    excerpt: "A lightweight checklist of CRM features small business teams actually use, avoiding enterprise bloat and saving hours of manual admin.",
+    date: "June 06, 2026",
     author: "Dr. Ananya Roy",
-    category: "Conversational AI"
+    category: "Small Business",
+    readTime: "8 min read"
   },
   {
-    title: "Top HIPAA Requirements for Telehealth Dialers & Recording systems",
-    excerpt: "Essential steps to encrypt patient data and mask recording segments to ensure compliance.",
-    date: "May 29, 2026",
+    title: "Best Lead Tracking Software in India: Streamlining Local Business Sales",
+    slug: "lead-tracking-software-india",
+    excerpt: "How small businesses in India utilize mobile-friendly unified customer inboxes to track leads, schedule call logs, and secure follow-ups.",
+    date: "May 30, 2026",
     author: "Marcus Stone",
-    category: "Compliance Desk"
+    category: "Sales Strategy",
+    readTime: "6 min read"
   }
 ];
 
 export default function BlogPage() {
   return (
-    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden">
-      <div className="absolute inset-0 noise-overlay pointer-events-none" />
+    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden font-sans">
+      {/* Background gradients */}
+      <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
       <div className="absolute top-1/4 left-1/4 w-[500px] h-[500px] bg-[#00C2FF]/5 rounded-full blur-[120px] pointer-events-none" />
+      <div className="absolute bottom-1/4 right-1/4 w-[500px] h-[500px] bg-[#0057D9]/5 rounded-full blur-[120px] pointer-events-none" />
 
       <div className="relative z-10 max-w-[1200px] mx-auto px-6">
         
         {/* Header */}
-        <AnimatedSection className="text-center max-w-2xl mx-auto mb-20">
-          <span className="text-xs font-semibold text-[#8B5CF6] uppercase tracking-widest px-3 py-1 rounded-full bg-[#8B5CF6]/10 border border-[#8B5CF6]/20">
-            Nexdial Blog
+        <header className="text-center max-w-2xl mx-auto mb-16">
+          <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3.5 py-1.5 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
+            Insights & Guides
           </span>
           <h1 className="text-4xl sm:text-5xl font-extrabold text-white mt-6 leading-tight">
-            Enterprise CX & <span className="gradient-text">AI Insights</span>
+            Grow Your Business with <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#0057D9] to-[#00C2FF]">Smart CRM Insights</span>
           </h1>
-        </AnimatedSection>
+          <p className="text-sm text-slate-400 mt-4 leading-relaxed">
+            Simple, practical tips to manage lead pipelines, replace messy spreadsheets, and close deals faster.
+          </p>
+        </header>
 
         {/* Posts Grid */}
-        <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={0.06}>
+        <main className="grid md:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <StaggerItem key={post.title}>
-              <div className="glass-card-strong p-6 h-full flex flex-col justify-between group hover:border-white/[0.1] transition-all">
-                <div className="space-y-4">
-                  <div className="flex justify-between items-center text-[10px] uppercase font-bold text-[#64748B]">
-                    <span>{post.category}</span>
-                    <span className="flex items-center gap-1">
-                      <Calendar className="w-3 h-3" />
-                      {post.date}
-                    </span>
-                  </div>
-                  
-                  <h3 className="text-base font-bold text-white group-hover:text-[#00C2FF] transition-colors leading-snug">
-                    {post.title}
-                  </h3>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed">
-                    {post.excerpt}
-                  </p>
-                </div>
-
-                <div className="mt-8 pt-4 border-t border-white/[0.04] flex items-center justify-between text-xs font-semibold text-[#0057D9] group-hover:text-[#00C2FF] transition-colors">
-                  <span className="flex items-center gap-1">
-                    <User className="w-3.5 h-3.5" />
-                    By {post.author}
+            <article 
+              key={post.slug} 
+              className="bg-[#0A1628]/45 border border-white/5 rounded-2xl p-6 h-full flex flex-col justify-between group hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/80 transition-all duration-300 shadow-xl hover:shadow-2xl shadow-black/10"
+            >
+              <div className="space-y-4">
+                <div className="flex justify-between items-center text-[10px] uppercase font-bold text-slate-500">
+                  <span className="text-[#00C2FF] bg-[#00C2FF]/5 px-2 py-0.5 rounded border border-[#00C2FF]/10">{post.category}</span>
+                  <span className="flex items-center gap-1 font-mono">
+                    <Calendar className="w-3.5 h-3.5" />
+                    {post.date}
                   </span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </div>
+                
+                <h3 className="text-lg font-bold text-white group-hover:text-[#00C2FF] transition-colors duration-200 leading-snug">
+                  <Link href={`/blog/${post.slug}`} className="hover:underline">
+                    {post.title}
+                  </Link>
+                </h3>
+                <p className="text-xs text-slate-400 leading-relaxed">
+                  {post.excerpt}
+                </p>
               </div>
-            </StaggerItem>
+
+              <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-slate-400">
+                <span className="flex items-center gap-1.5">
+                  <User className="w-3.5 h-3.5 text-slate-500" />
+                  {post.author}
+                </span>
+                <Link 
+                  href={`/blog/${post.slug}`}
+                  className="flex items-center gap-1 text-[#00C2FF] group-hover:text-white transition-colors duration-200 font-bold"
+                >
+                  Read Post 
+                  <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
+            </article>
           ))}
-        </StaggerContainer>
+        </main>
 
       </div>
     </div>

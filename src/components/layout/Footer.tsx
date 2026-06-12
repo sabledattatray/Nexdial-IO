@@ -106,9 +106,12 @@ const badges = [
 
 export function Footer() {
   const pathname = usePathname();
-  if (pathname && (pathname === "/dialer" || pathname === "/admin/dialer")) {
-    return null;
-  }
+  const isConsolePage = pathname?.startsWith("/crm") || 
+                        pathname?.startsWith("/admin") || 
+                        pathname?.startsWith("/supervisor") || 
+                        pathname?.startsWith("/client-portal") || 
+                        pathname?.startsWith("/dialer");
+  if (isConsolePage) return null;
 
   return (
     <footer className="relative bg-[#060D1B] border-t border-white/[0.04]">

@@ -1,0 +1,169 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String?
+  email     String   @unique
+  password  String?
+  role      Role     @default(VIEWER)
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+  calls         Call[]
+  activities    Activity[]
+  assignedLeads Lead[]     @relation("AssignedLeads")
+
+  @@map("users")
+}
+
+enum Role {
+  ADMIN
+  SALES
+  VIEWER
+}
+
+model Lead {
+  id           String     @id @default(uuid()) @db.Uuid
+  name         String
+  phone        String
+  email        String?
+  source       LeadSource @default(MANUAL)
+  status       LeadStatus @default(NEW)
+  tags         String[]
+  assignedToId String?    @map("assigned_to_id")
+  assignedTo   User?      @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
+  followUpDate DateTime?  @map("follow_up_date")
+  notes        String[]
+  createdAt    DateTime   @default(now()) @map("created_at")
+  updatedAt    DateTime   @updatedAt @map("updated_at")
+
+  // Relations
+  calls              Call[]
+  activities         Activity[]
+  followUps          FollowUp[]
+  aiRecommendations  AIRecommendation[]
+
+  // Performance Indexes
+  @@index([status])
+  @@index([assignedToId])
+  @@index([followUpDate])
+  @@index([createdAt])
+  @@index([phone])
+  @@index([email])
+  @@map("leads")
+}
+
+enum LeadSource {
+  WHATSAPP
+  CALL
+  FORM
+  MANUAL
+  CSV
+  WEBSITE
+}
+
+enum LeadStatus {
+  NEW
+  CONTACTED
+  IN_PROGRESS
+  INTERESTED
+  CONVERTED
+  LOST
+}
+
+model Call {
+  id          String      @id @default(cuid())
+  leadId      String      @map("lead_id") @db.Uuid
+  type        CallType
+  outcome     CallOutcome
+  notes       String?
+  timestamp   DateTime    @default(now())
+  createdById String?     @map("created_by_id")
+
+  // Relations
+  lead Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@index([timestamp])
+  @@map("calls")
+}
+
+enum CallType {
+  INCOMING
+  OUTGOING
+  MISSED
+}
+
+enum CallOutcome {
+  NO_ANSWER
+  INTERESTED
+  NOT_INTERESTED
+  CALLBACK
+  CONVERTED
+  LEFT_VOICEMAIL
+}
+
+model Activity {
+  id          String   @id @default(cuid())
+  leadId      String   @map("lead_id") @db.Uuid
+  type        String
+  description String
+  createdById String?  @map("created_by_id")
+  timestamp   DateTime @default(now())
+
+  // Relations
+  lead Lead  @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  user User? @relation(fields: [createdById], references: [id], onDelete: SetNull)
+
+  @@index([leadId])
+  @@index([timestamp])
+  @@map("activities")
+}
+
+model FollowUp {
+  id          String         @id @default(cuid())
+  leadId      String         @map("lead_id") @db.Uuid
+  scheduledAt DateTime       @map("scheduled_at")
+  status      FollowUpStatus @default(PENDING)
+  notes       String?
+  createdAt   DateTime       @default(now()) @map("created_at")
+  updatedAt   DateTime       @updatedAt @map("updated_at")
+
+  // Relations
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@index([scheduledAt])
+  @@index([status])
+  @@index([leadId])
+  @@map("follow_ups")
+}
+
+enum FollowUpStatus {
+  PENDING
+  COMPLETED
+  CANCELLED
+}
+
+model AIRecommendation {
+  id             String   @id @default(cuid())
+  leadId         String   @map("lead_id") @db.Uuid
+  recommendation String
+  category       String
+  status         String   @default("PENDING") // PENDING, FOLLOWED, SKIPPED, SNOOZED
+  reasoning      String[]
+  weightModifier Float    @default(0.0)
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+
+  @@map("ai_recommendations")
+}

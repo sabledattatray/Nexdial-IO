@@ -4,7 +4,6 @@ import { HeroSection } from "@/components/home/HeroSection";
 import { TrustIndicators } from "@/components/home/TrustIndicators";
 import { LiveStatistics } from "@/components/home/LiveStatistics";
 import { ServicesShowcase } from "@/components/home/ServicesShowcase";
-import { AICapabilities } from "@/components/home/AICapabilities";
 import { PlatformOverview } from "@/components/home/PlatformOverview";
 
 /* ── Below-the-fold sections: lazy-loaded to reduce initial JS bundle ── */
@@ -35,9 +34,6 @@ export default function Home() {
       {/* Below-the-fold — deferred rendering via content-visibility */}
       <section className="content-auto">
         <ServicesShowcase />
-      </section>
-      <section className="content-auto">
-        <AICapabilities />
       </section>
       <section className="content-auto">
         <PlatformOverview />

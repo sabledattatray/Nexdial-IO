@@ -3,6 +3,8 @@ import { Inter, Space_Grotesk } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
+import { QueryProvider } from "@/components/providers/QueryProvider";
+import { AuthProvider } from "@/components/providers/AuthProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -19,40 +21,37 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   metadataBase: new URL("https://nexdial-xi.vercel.app"),
   title: {
-    default: "Nexdial — AI-Powered Enterprise Contact Center Platform",
-    template: "%s | Nexdial",
+    default: "NexDial — Unified Business Communication Inbox & CRM",
+    template: "%s | NexDial",
   },
   description:
-    "Transform customer conversations into business growth with AI-powered omnichannel customer experience solutions. Enterprise-grade CRM, dialer, analytics, and multi-tenant SaaS platform.",
+    "The simplest and fastest way for small businesses to never lose a customer conversation again. A lightweight CRM and unified customer inbox replacing scattered WhatsApp and Excel workflows.",
   keywords: [
-    "contact center",
-    "AI platform",
-    "CRM",
-    "dialer",
-    "customer experience",
-    "omnichannel",
-    "SaaS",
-    "enterprise",
-    "call center",
-    "BPO",
+    "CRM for small business",
+    "lead management software",
+    "WhatsApp CRM alternative",
+    "unified customer inbox",
+    "small business CRM",
+    "lead tracking system",
+    "follow-up management",
   ],
-  authors: [{ name: "Nexdial" }],
-  creator: "Nexdial",
+  authors: [{ name: "NexDial" }],
+  creator: "NexDial",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://nexdial.com",
-    siteName: "Nexdial",
-    title: "Nexdial — AI-Powered Enterprise Contact Center Platform",
+    url: "https://nexdial.io",
+    siteName: "NexDial",
+    title: "NexDial — Unified Business Communication Inbox & CRM",
     description:
-      "Transform customer conversations into business growth with AI-powered omnichannel customer experience solutions.",
+      "A lightweight CRM and unified customer inbox replacing scattered WhatsApp and Excel workflows for small businesses.",
     images: [{ url: "/og-image.png", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Nexdial — AI-Powered Enterprise Contact Center Platform",
+    title: "NexDial — Unified Business Communication Inbox & CRM",
     description:
-      "Transform customer conversations into business growth with AI-powered omnichannel CX solutions.",
+      "A lightweight CRM and unified customer inbox replacing scattered WhatsApp and Excel workflows.",
   },
   icons: {
     icon: [
@@ -64,15 +63,18 @@ export const metadata: Metadata = {
     shortcut: "/icon",
   },
   manifest: "/manifest.json",
-  themeColor: [
-    { media: "(prefers-color-scheme: dark)", color: "#081120" },
-    { media: "(prefers-color-scheme: light)", color: "#4F46E5" },
-  ],
   robots: {
     index: true,
     follow: true,
     googleBot: { index: true, follow: true },
   },
+};
+
+export const viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: dark)", color: "#081120" },
+    { media: "(prefers-color-scheme: light)", color: "#4F46E5" },
+  ],
 };
 
 export default function RootLayout({
@@ -91,9 +93,13 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
         suppressHydrationWarning
       >
-        <Navbar />
-        <main className="flex-1">{children}</main>
-        <Footer />
+        <AuthProvider>
+          <QueryProvider>
+            <Navbar />
+            <main className="flex-1">{children}</main>
+            <Footer />
+          </QueryProvider>
+        </AuthProvider>
       </body>
     </html>
   );
