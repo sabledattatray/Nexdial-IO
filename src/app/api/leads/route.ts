@@ -59,6 +59,8 @@ export async function GET(req: Request) {
       where.assignedToId = assignedToId;
     }
 
+    console.log("[DEBUG API leads] User:", user.email, "Role:", user.role, "Filters:", JSON.stringify(where));
+
     const leads = await prisma.lead.findMany({
       where,
       orderBy: {
@@ -84,6 +86,7 @@ export async function GET(req: Request) {
     });
 
     const total = await prisma.lead.count({ where });
+    console.log("[DEBUG API leads] Leads fetched count:", leads.length, "Total in DB matching filters:", total);
 
     // Check for duplicates
     const phones = leads.map(l => l.phone).filter(Boolean);
