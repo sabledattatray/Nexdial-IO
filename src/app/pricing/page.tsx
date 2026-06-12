@@ -8,6 +8,22 @@ import Link from "next/link";
 
 const plans = [
   {
+    name: "15-Day Trial",
+    price: { USD: 0, INR: 1 },
+    icon: Inbox,
+    desc: "Test drive the full Starter Inbox experience for 15 days. Cancel anytime.",
+    features: [
+      "1 Unified Inbox (WhatsApp & Web Forms)",
+      "Core Lead Management",
+      "Manual Follow-Up Reminders",
+      "Single Agent Seat included",
+      "Auto-renews at ₹499/mo after 15 days"
+    ],
+    color: "#00E5A0",
+    popular: false,
+    trial: true
+  },
+  {
     name: "Starter Inbox",
     price: { USD: 6, INR: 499 },
     icon: Inbox,
@@ -22,7 +38,7 @@ const plans = [
     ],
     color: "#0057D9",
     popular: false,
-    trial: true
+    trial: false
   },
   {
     name: "Professional CRM",
@@ -150,7 +166,7 @@ export default function PricingPage() {
         </AnimatedSection>
 
         {/* Pricing Cards Grid */}
-        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mb-20" staggerDelay={0.06}>
+        <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-20" staggerDelay={0.06}>
           {plans.map((plan) => {
             const Icon = plan.icon;
             const rawPrice = plan.price[currency];
@@ -200,11 +216,10 @@ export default function PricingPage() {
                       <span className="text-4xl font-extrabold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                         {symbol}{displayPrice.toLocaleString()}
                       </span>
-                      <span className="text-xs text-[#64748B]">/ month</span>
-                      {plan.trial && (
-                        <span className="ml-2 text-[10px] font-bold text-[#00E5A0] bg-[#00E5A0]/10 border border-[#00E5A0]/20 px-2 py-0.5 rounded-full">
-                          after trial
-                        </span>
+                      {plan.trial ? (
+                        <span className="text-xs text-[#64748B]">/ 15 days</span>
+                      ) : (
+                        <span className="text-xs text-[#64748B]">/ month</span>
                       )}
                     </div>
 
