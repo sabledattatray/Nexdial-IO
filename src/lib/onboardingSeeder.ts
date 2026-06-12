@@ -496,6 +496,13 @@ export async function seedOnboardingData(
 
   console.log(`[Onboarding Seeder] Seeding leads for user: ${userId}, industry: ${industry}`);
 
+  const user = await prisma.user.findUnique({ where: { id: userId } });
+  if (!user || !user.workspaceId) {
+    console.error("User or workspace not found for seeding");
+    return;
+  }
+  const workspaceId = user.workspaceId;
+
   // Create team members if provided in payload and collect their user IDs
   const userIdsForDistribution = [userId];
 
@@ -569,6 +576,7 @@ export async function seedOnboardingData(
     // 1. Create Lead record
     const lead = await prisma.lead.create({
       data: {
+        workspaceId,
         name: data.name,
         phone: data.phone,
         email: data.email,

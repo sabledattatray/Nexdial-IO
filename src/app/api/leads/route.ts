@@ -174,8 +174,14 @@ export async function POST(req: Request) {
     const validSources = ["WHATSAPP", "CALL", "FORM", "MANUAL", "CSV", "WEBSITE"];
     const source = validSources.includes(normalizedSource) ? normalizedSource : "MANUAL";
 
+    const dbUser = await prisma.user.findUnique({ where: { id: user.id } });
+    if (!dbUser?.workspaceId) {
+      return NextResponse.json({ error: "No workspace" }, { status: 400 });
+    }
+
     const lead = await prisma.lead.create({
       data: {
+        workspaceId: dbUser.workspaceId,
         name: body.name || "Unknown Lead",
         phone: body.phone || "",
         email: body.email || null,

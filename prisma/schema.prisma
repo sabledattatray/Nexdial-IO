@@ -74,6 +74,7 @@ model Workspace {
 
   users User[]
   leads Lead[]
+  integrations Integration[]
 
   @@map("workspaces")
 }
@@ -254,6 +255,38 @@ model AIRecommendation {
 
   lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
-  @@index([leadId])
   @@map("ai_recommendations")
+}
+
+model Integration {
+  id          String    @id @default(cuid())
+  workspaceId String    @map("workspace_id")
+  provider    String    // "facebook", "instagram", "tiktok", "custom"
+  status      String    @default("ACTIVE") // ACTIVE, ERROR, PAUSED
+  secretKey   String?   @unique @map("secret_key")
+  leadsCount  Int       @default(0) @map("leads_count")
+  lastSyncAt  DateTime? @map("last_sync_at")
+  createdAt   DateTime  @default(now()) @map("created_at")
+  updatedAt   DateTime  @updatedAt @map("updated_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  webhookLogs WebhookLog[]
+
+  @@index([workspaceId])
+  @@index([provider])
+  @@map("integrations")
+}
+
+model WebhookLog {
+  id            String   @id @default(cuid())
+  integrationId String   @map("integration_id")
+  payload       Json
+  status        String   // "SUCCESS", "ERROR"
+  errorMessage  String?  @map("error_message")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  integration Integration @relation(fields: [integrationId], references: [id], onDelete: Cascade)
+
+  @@index([integrationId])
+  @@map("webhook_logs")
 }

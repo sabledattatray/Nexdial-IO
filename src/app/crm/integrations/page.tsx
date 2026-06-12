@@ -15,14 +15,14 @@ import {
   SlidersHorizontal
 } from "lucide-react";
 
-// Components for Tabs (will be created next)
-import DashboardTab from "@/components/crm/integrations/DashboardTab";
-import MarketplaceTab from "@/components/crm/integrations/MarketplaceTab";
-import RoutingTab from "@/components/crm/integrations/RoutingTab";
-import WebhooksTab from "@/components/crm/integrations/WebhooksTab";
-import FormBuilderTab from "@/components/crm/integrations/FormBuilderTab";
-import SyncLogsTab from "@/components/crm/integrations/SyncLogsTab";
-import ApiCenterTab from "@/components/crm/integrations/ApiCenterTab";
+// Components for Tabs
+import DashboardTab from "../../../components/crm/integrations/DashboardTab";
+import MarketplaceTab from "../../../components/crm/integrations/MarketplaceTab";
+import RoutingTab from "../../../components/crm/integrations/RoutingTab";
+import WebhooksTab from "../../../components/crm/integrations/WebhooksTab";
+import FormBuilderTab from "../../../components/crm/integrations/FormBuilderTab";
+import SyncLogsTab from "../../../components/crm/integrations/SyncLogsTab";
+import ApiCenterTab from "../../../components/crm/integrations/ApiCenterTab";
 
 export default function IntegrationsPlatformPage() {
   const [activeTab, setActiveTab] = useState("dashboard");
@@ -55,7 +55,7 @@ export default function IntegrationsPlatformPage() {
 
       <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Main Sidebar Navigation */}
-        <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto w-full lg:w-[280px] lg:sticky lg:top-24 z-10 pb-2 lg:pb-0 custom-scrollbar shrink-0">
+        <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto w-full lg:w-[280px] pb-2 lg:pb-0 custom-scrollbar shrink-0 relative z-30">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
