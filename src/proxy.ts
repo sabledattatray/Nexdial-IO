@@ -3,9 +3,8 @@ import { NextResponse } from "next/server";
 
 const middleware = withAuth(
   function middleware(req) {
-    if (req.nextUrl.pathname.startsWith("/admin") && req.nextauth.token?.role !== "ADMIN") {
-      return NextResponse.redirect(new URL("/crm", req.url));
-    }
+    // Only check authentication at the edge.
+    // Role-based authorization is handled by the server layouts to ensure fresh DB data.
   },
   {
     callbacks: {
