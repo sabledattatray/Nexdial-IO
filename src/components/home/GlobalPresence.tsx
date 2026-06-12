@@ -165,7 +165,7 @@ export function GlobalPresence() {
   const [activeLoc, setActiveLoc] = useState<Location>(locations[0]);
 
   return (
-    <section className="relative pt-20 lg:pt-32 pb-10 lg:pb-16 overflow-hidden">
+    <section className="relative pt-20 lg:pt-32 pb-0 overflow-hidden">
       <div className="absolute inset-0 bg-[#081120]" />
       
       {/* Background Decorative Rings */}

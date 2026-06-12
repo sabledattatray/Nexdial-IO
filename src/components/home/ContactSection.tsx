@@ -49,7 +49,7 @@ export function ContactSection() {
   const [demoBooked, setDemoBooked] = useState(false);
 
   return (
-    <section className="relative pt-10 lg:pt-16 pb-20 lg:pb-32 overflow-hidden" id="contact">
+    <section className="relative pt-0 pb-20 lg:pb-32 overflow-hidden" id="contact">
       <div className="absolute inset-0 bg-[#081120]" />
       
       {/* Glow Effects */}
