@@ -1,12 +1,14 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
 import { Shield, BookOpen, AlertCircle, FileText, CheckCircle2, ChevronRight, CreditCard, RefreshCw, MessageSquare } from "lucide-react";
 import Link from "next/link";
 
 export default function TermsPage() {
   const [activeSection, setActiveSection] = useState("agreement");
+  const placeholderRef = useRef<HTMLDivElement>(null);
+  const [sidebarLeft, setSidebarLeft] = useState<number | null>(null);
 
   const sections = [
     { id: "agreement",        label: "1. Agreement & Services" },
@@ -20,6 +22,15 @@ export default function TermsPage() {
   ];
 
   useEffect(() => {
+    const updateSidebarPos = () => {
+      if (placeholderRef.current) {
+        const rect = placeholderRef.current.getBoundingClientRect();
+        setSidebarLeft(rect.left);
+      }
+    };
+    updateSidebarPos();
+    window.addEventListener("resize", updateSidebarPos);
+
     const handleScroll = () => {
       const scrollPosition = window.scrollY + 200;
       for (const section of sections) {
@@ -34,7 +45,10 @@ export default function TermsPage() {
       }
     };
     window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    return () => {
+      window.removeEventListener("resize", updateSidebarPos);
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
   const scrollToSection = (id: string) => {
@@ -74,8 +88,23 @@ export default function TermsPage() {
         {/* Content Body Grid */}
         <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
 
-          {/* Left Sticky Sidebar */}
-          <aside className="hidden lg:block sticky top-28 self-start max-h-[calc(100vh-8rem)] overflow-y-auto bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
+          {/* Placeholder: reserves grid column space for the fixed sidebar */}
+          <div ref={placeholderRef} className="hidden lg:block w-[280px] shrink-0" />
+
+          {/* Fixed TOC Sidebar */}
+          {sidebarLeft !== null && (
+            <aside
+              className="hidden lg:block bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md"
+              style={{
+                position: "fixed",
+                top: "7rem",
+                left: sidebarLeft,
+                width: 260,
+                maxHeight: "calc(100vh - 8rem)",
+                overflowY: "auto",
+                zIndex: 40,
+              }}
+            >
             <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-white/[0.06] pb-3">
               Table of Contents
             </h3>
@@ -102,6 +131,7 @@ export default function TermsPage() {
               </Link>
             </div>
           </aside>
+          )}
 
           {/* Right Policy Content */}
           <div className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed space-y-10">
