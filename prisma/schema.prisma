@@ -6,16 +6,98 @@ datasource db {
   provider = "postgresql"
 }
 
-model User {
-  id        String   @id @default(cuid())
-  name      String?
-  email     String   @unique
-  password  String?
-  role      Role     @default(VIEWER)
-  onboarded Boolean  @default(false)
-  industry  String?
+// =======================
+// NEXTAUTH REQUIRED MODELS
+// =======================
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String  @map("user_id")
+  type              String
+  provider          String
+  providerAccountId String  @map("provider_account_id")
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+  @@map("accounts")
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique @map("session_token")
+  userId       String   @map("user_id")
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("sessions")
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+  @@map("verification_tokens")
+}
+
+// =======================
+// APPLICATION MODELS
+// =======================
+
+model Workspace {
+  id           String  @id @default(cuid())
+  name         String
+  tagline      String?
+  primaryColor String? @default("#0057D9")
+  logoUrl      String?
+
+  // Settings
+  whatsappNumber String?
+  supportEmail   String?
+
+  // Billing
+  plan        String    @default("TRIAL") // TRIAL, SMALL, MEDIUM, LARGE
+  razorpayId  String?
+  trialEndsAt DateTime?
+
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
+
+  users User[]
+  leads Lead[]
+
+  @@map("workspaces")
+}
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime? @map("email_verified")
+  image         String?
+  password      String?
+  role          Role      @default(VIEWER)
+  onboarded     Boolean   @default(false)
+  industry      String?
+
+  workspaceId String?    @map("workspace_id")
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // NextAuth
+  accounts Account[]
+  sessions Session[]
 
   // Relations
   calls         Call[]
@@ -32,28 +114,33 @@ enum Role {
 }
 
 model Lead {
-  id           String     @id @default(uuid()) @db.Uuid
-  name         String
-  phone        String
-  email        String?
-  source       LeadSource @default(MANUAL)
-  status       LeadStatus @default(NEW)
-  tags         String[]
-  assignedToId String?    @map("assigned_to_id")
-  assignedTo   User?      @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
-  followUpDate DateTime?  @map("follow_up_date")
+  id     String     @id @default(uuid()) @db.Uuid
+  name   String
+  phone  String
+  email  String?
+  source LeadSource @default(MANUAL)
+  status LeadStatus @default(NEW)
+  tags   String[]
+
+  workspaceId String    @map("workspace_id")
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  assignedToId String?   @map("assigned_to_id")
+  assignedTo   User?     @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
+  followUpDate DateTime? @map("follow_up_date")
   notes        String[]
-  createdAt    DateTime   @default(now()) @map("created_at")
-  updatedAt    DateTime   @updatedAt @map("updated_at")
+  createdAt    DateTime  @default(now()) @map("created_at")
+  updatedAt    DateTime  @updatedAt @map("updated_at")
 
   // Relations
-  calls              Call[]
-  activities         Activity[]
-  followUps          FollowUp[]
-  aiRecommendations  AIRecommendation[]
+  calls             Call[]
+  activities        Activity[]
+  followUps         FollowUp[]
+  aiRecommendations AIRecommendation[]
 
   // Performance Indexes
   @@index([status])
+  @@index([workspaceId])
   @@index([assignedToId])
   @@index([followUpDate])
   @@index([createdAt])
@@ -165,7 +252,7 @@ model AIRecommendation {
   createdAt      DateTime @default(now()) @map("created_at")
   updatedAt      DateTime @updatedAt @map("updated_at")
 
-  lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  lead Lead @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
   @@index([leadId])
   @@map("ai_recommendations")
