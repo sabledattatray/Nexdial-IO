@@ -13,8 +13,8 @@ export default function RequestDemoPage() {
     email: "",
     phone: "",
     company: "",
-    teamSize: "10-50",
-    useCase: "AI Dialer",
+    teamSize: "5-20",
+    useCase: "Lightweight CRM",
   });
 
   const handleSubmit = (e: React.FormEvent) => {
@@ -37,20 +37,20 @@ export default function RequestDemoPage() {
                 Sandbox Environment Demo
               </span>
               <h1 className="text-4xl lg:text-5xl font-extrabold text-white mt-6 leading-tight">
-                Experience the Future of <span className="gradient-text">Omnichannel CX</span>
+                Experience the Power of <span className="gradient-text">NexDial CRM</span>
               </h1>
               <p className="text-[#94A3B8] text-base leading-relaxed mt-4">
-                Deploy nexdial inside a secure sandbox sandbox. Test our Conversational AI agents, Predictive Dialers, and real-time dashboard analytics with demo accounts.
+                Deploy a sandbox instance of NexDial in seconds. Test our unified lead inbox, WhatsApp follow-up templates, pipelines, and AI recommendation priority engines with pre-loaded mock data.
               </p>
             </AnimatedSection>
 
             {/* Bullet points */}
             <div className="space-y-4">
               {[
-                "Deploy Voice AI Agents with custom prompts inside 5 minutes",
-                "Explore multi-tenant BPO white-label administrative panels",
-                "Integrate simulated Asterisk VoIP endpoints in your web browser",
-                "Review automated transcriptions, sentiment analysis, and QA scorecards"
+                "Explore the visual Kanban drag-and-drop pipelines",
+                "Trigger personalized WhatsApp message follow-ups in 1-click",
+                "See the AI Priority Engine recommend 'Next Best Actions'",
+                "Test CSV lead importing with automated duplicate warning flags"
               ].map((bullet, i) => (
                 <AnimatedSection key={bullet} delay={i * 0.08} className="flex items-center gap-3">
                   <div className="w-5 h-5 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/30 flex items-center justify-center text-[#00E5A0] flex-shrink-0">
@@ -131,30 +131,30 @@ export default function RequestDemoPage() {
 
                 <div className="grid sm:grid-cols-2 gap-4">
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[#94A3B8]">Agent Seats</label>
+                    <label className="text-xs font-semibold text-[#94A3B8]">Team Size</label>
                     <select
                       value={formData.teamSize}
                       onChange={(e) => setFormData({...formData, teamSize: e.target.value})}
                       className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-[#94A3B8] transition-all"
                     >
-                      <option value="10-50" className="bg-[#0f172a] text-white">10 - 50 Seats</option>
-                      <option value="50-200" className="bg-[#0f172a] text-white">50 - 200 Seats</option>
-                      <option value="200-1000" className="bg-[#0f172a] text-white">200 - 1000 Seats</option>
-                      <option value="1000+" className="bg-[#0f172a] text-white">1000+ Seats (Enterprise)</option>
+                      <option value="1-5" className="bg-[#0f172a] text-white">1 - 5 Users</option>
+                      <option value="5-20" className="bg-[#0f172a] text-white">5 - 20 Users</option>
+                      <option value="20-100" className="bg-[#0f172a] text-white">20 - 100 Users</option>
+                      <option value="100+" className="bg-[#0f172a] text-white">100+ Users</option>
                     </select>
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-xs font-semibold text-[#94A3B8]">Primary Module</label>
+                    <label className="text-xs font-semibold text-[#94A3B8]">Primary Interest</label>
                     <select
                       value={formData.useCase}
                       onChange={(e) => setFormData({...formData, useCase: e.target.value})}
                       className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-[#94A3B8] transition-all"
                     >
-                      <option value="AI Dialer" className="bg-[#0f172a] text-white">Predictive AI Dialer</option>
-                      <option value="Voice Agents" className="bg-[#0f172a] text-white">Autonomous Voice AI</option>
-                      <option value="Multi-Tenant SaaS" className="bg-[#0f172a] text-white">Multi-Tenant Tenant Panel</option>
-                      <option value="Omnichannel CRM" className="bg-[#0f172a] text-white">Omnichannel Digital CRM</option>
+                      <option value="Lightweight CRM" className="bg-[#0f172a] text-white">Lightweight CRM Suite</option>
+                      <option value="WhatsApp Outreach" className="bg-[#0f172a] text-white">WhatsApp Unified Inbox</option>
+                      <option value="AI Priority Engine" className="bg-[#0f172a] text-white">AI Priority Recommendations</option>
+                      <option value="Analytics" className="bg-[#0f172a] text-white">Sales Pipeline Analytics</option>
                     </select>
                   </div>
                 </div>
