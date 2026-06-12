@@ -142,10 +142,8 @@ export function Footer() {
           {/* Brand Column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2">
             <Link href="/" className="flex items-center gap-3 group">
-              <div className="relative w-10 h-10 flex items-center justify-center rounded-xl bg-white/[0.04] border border-white/[0.15] shadow-inner backdrop-blur-md group-hover:bg-white/[0.08] group-hover:border-white/[0.25] transition-all duration-500 overflow-hidden">
-                <div className="absolute inset-0 bg-gradient-to-tr from-white/[0.02] to-white/[0.1] opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <div className="absolute -inset-2 rounded-xl bg-white/20 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                <LogoIcon className="relative z-10 w-6 h-6 transition-transform duration-500 group-hover:scale-110" />
+              <div className="relative flex items-center justify-center transition-transform duration-500 group-hover:scale-110">
+                <LogoIcon className="w-8 h-8" />
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-bold text-xl tracking-tighter leading-none flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>

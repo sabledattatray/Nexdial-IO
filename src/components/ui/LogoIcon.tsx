@@ -6,7 +6,7 @@ export function LogoIcon({ className }: { className?: string }) {
       viewBox="0 0 24 24"
       fill="none"
       stroke="currentColor"
-      strokeWidth="2"
+      strokeWidth="2.5"
       strokeLinecap="round"
       strokeLinejoin="round"
       className={className}
@@ -19,18 +19,19 @@ export function LogoIcon({ className }: { className?: string }) {
         <mask id="cutout">
           <rect x="0" y="0" width="24" height="24" fill="white" />
           {/* Mask out the top right area for the arrow */}
-          <circle cx="18" cy="6" r="6" fill="black" />
+          <circle cx="17.5" cy="6.5" r="7.5" fill="black" />
         </mask>
       </defs>
 
       <g mask="url(#cutout)">
         {/* Speech bubble tail and circle */}
-        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" stroke="url(#logo-gradient)" strokeWidth="2.5" />
+        <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z" stroke="url(#logo-gradient)" />
       </g>
 
       {/* Inbound Arrow */}
-      <path d="M22 2L11 13" stroke="url(#logo-gradient)" strokeWidth="2.5" />
-      <path d="M19 13H11V5" stroke="url(#logo-gradient)" strokeWidth="2.5" />
+      {/* Arrow points inwards. Starting further out and ending at center */}
+      <path d="M21 3L11 13" stroke="url(#logo-gradient)" />
+      <path d="M18 13H11V6" stroke="url(#logo-gradient)" />
     </svg>
   );
 }
