@@ -130,7 +130,6 @@ export default function TermsPage() {
                 maxHeight: `calc(100vh - ${computedTop}px - 1rem)`,
                 overflowY: "auto",
                 zIndex: 40,
-                transition: "top 0.15s ease",
               }}
             >
             <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-white/[0.06] pb-3">
