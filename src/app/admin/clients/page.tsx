@@ -21,6 +21,7 @@ type Workspace = {
   healthScore: number;
   lastLoginAt: string | null;
   createdAt: string;
+  trialEndsAt?: string | null;
   users: WorkspaceOwner[]; // Fetched from our API update
   onboardingData: {
     companyName?: string;

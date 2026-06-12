@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
     // Update the admin's workspace pointer
     await prisma.user.update({
-      where: { id: session.user.id },
+      where: { id: (session.user as any).id },
       data: { workspaceId }
     });
 
@@ -31,9 +31,9 @@ export async function POST(req: Request) {
     await prisma.auditLog.create({
       data: {
         action: "IMPERSONATION_STARTED",
-        adminId: session.user.id,
+        adminId: (session.user as any).id,
         workspaceId,
-        details: { adminEmail: session.user.email, targetWorkspaceName: workspace.name }
+        details: { adminEmail: (session.user as any).email, targetWorkspaceName: workspace.name }
       }
     });
 
