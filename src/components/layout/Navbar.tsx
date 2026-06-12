@@ -21,6 +21,7 @@ import {
   Briefcase,
   Zap,
   LogIn,
+  LayoutDashboard,
 } from "lucide-react";
 
 const navLinks = [
@@ -40,6 +41,7 @@ const navLinks = [
       {
         title: "Tools",
         items: [
+          { label: "CRM Workspace", href: "/crm", icon: LayoutDashboard, desc: "Interactive sales CRM dashboard" },
           { label: "Call Logging", href: "/solutions#calls", icon: PhoneCall, desc: "Track every call with outcomes" },
           { label: "Smart Dashboard", href: "/crm/dashboard", icon: BarChart3, desc: "Actionable business insights" },
         ],
