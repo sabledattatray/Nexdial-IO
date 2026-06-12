@@ -12,7 +12,7 @@ export async function GET() {
 
     // Note: In production, check if session.user is SUPER_ADMIN
     // For now, return all workspaces
-    const workspaces = await prisma.workspace.findMany({
+    const rawWorkspaces = await prisma.workspace.findMany({
       include: {
         _count: {
           select: {
@@ -23,6 +23,38 @@ export async function GET() {
         }
       },
       orderBy: { createdAt: "desc" }
+    });
+
+    // AI Churn Detection & Dynamic Health Scoring
+    const workspaces = rawWorkspaces.map(ws => {
+      let score = 100;
+      
+      // Rule 1: No integrations connected
+      if (ws._count.integrations === 0) score -= 25;
+      
+      // Rule 2: No lead activity
+      if (ws._count.leads === 0) score -= 25;
+      
+      // Rule 3: No login for 30 days
+      const daysSinceLogin = ws.lastLoginAt 
+        ? (Date.now() - new Date(ws.lastLoginAt).getTime()) / (1000 * 60 * 60 * 24)
+        : (Date.now() - new Date(ws.createdAt).getTime()) / (1000 * 60 * 60 * 24);
+      if (daysSinceLogin > 30) score -= 40;
+      else if (daysSinceLogin > 14) score -= 20;
+
+      // Rule 4: Trial ending soon
+      if (ws.plan === "TRIAL" && ws.trialEndsAt) {
+        const daysToTrialEnd = (new Date(ws.trialEndsAt).getTime() - Date.now()) / (1000 * 60 * 60 * 24);
+        if (daysToTrialEnd <= 3 && daysToTrialEnd > 0) score -= 20;
+      }
+
+      // Bound score between 0 and 100
+      const finalScore = Math.max(0, Math.min(100, score));
+
+      return {
+        ...ws,
+        healthScore: finalScore, // Override DB field with live computed score
+      };
     });
 
     return NextResponse.json(workspaces);

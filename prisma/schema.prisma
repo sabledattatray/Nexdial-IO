@@ -81,6 +81,7 @@ model Workspace {
   leads Lead[]
   integrations Integration[]
   routingRules RoutingRule[]
+  auditLogs    AuditLog[]
 
   @@map("workspaces")
 }
@@ -313,4 +314,33 @@ model RoutingRule {
   @@index([workspaceId])
   @@index([priority])
   @@map("routing_rules")
+}
+
+model AuditLog {
+  id          String   @id @default(cuid())
+  action      String   // e.g., "PLAN_UPGRADE", "WORKSPACE_SUSPENDED", "IMPERSONATION_STARTED"
+  adminId     String?  @map("admin_id") // ID of the super admin who performed the action
+  workspaceId String?  @map("workspace_id")
+  details     Json?    // Optional payload describing the action
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+
+  @@index([workspaceId])
+  @@index([adminId])
+  @@index([createdAt])
+  @@map("audit_logs")
+}
+
+model Announcement {
+  id          String   @id @default(cuid())
+  title       String
+  message     String   @db.Text
+  type        String   @default("INFO") // INFO, WARNING, SUCCESS, ERROR
+  isPublished Boolean  @default(false) @map("is_published")
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  @@index([isPublished])
+  @@map("announcements")
 }
