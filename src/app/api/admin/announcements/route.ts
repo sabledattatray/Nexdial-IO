@@ -1,8 +1,13 @@
 import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getAuthenticatedSession } from "@/lib/auth";
 
 export async function GET() {
   try {
+    const session = await getAuthenticatedSession();
+    if (!session?.user || (session.user as any).role !== "ADMIN") {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
     const announcements = await prisma.announcement.findMany({
       orderBy: { createdAt: "desc" }
     });
@@ -15,6 +20,11 @@ export async function GET() {
 
 export async function POST(req: Request) {
   try {
+    const session = await getAuthenticatedSession();
+    if (!session?.user || (session.user as any).role !== "ADMIN") {
+      return new NextResponse("Unauthorized", { status: 401 });
+    }
+
     const body = await req.json();
     const announcement = await prisma.announcement.create({
       data: {
