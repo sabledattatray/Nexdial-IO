@@ -45,6 +45,16 @@ export default function MarketplaceTab() {
 
   const categories = [
     {
+      title: "Popular Integrations",
+      description: "The most widely used connections by NexDial users.",
+      items: [
+        { name: "WhatsApp Business", desc: "Official Meta API sync", icon: MessageSquare, color: "text-[#25D366]", bg: "bg-[#25D366]/10", border: "hover:border-[#25D366]/50", status: "COMING SOON" },
+        { name: "Facebook Lead Ads", desc: "Sync FB page leads", icon: Users, color: "text-[#1877F2]", bg: "bg-[#1877F2]/10", border: "hover:border-[#1877F2]/50", status: "OFFICIAL" },
+        { name: "Instagram Business", desc: "Sync IG forms", icon: Camera, color: "text-[#E1306C]", bg: "bg-[#E1306C]/10", border: "hover:border-[#E1306C]/50", status: "OFFICIAL" },
+        { name: "Embedded Form", desc: "Drop-in HTML form", icon: Code, color: "text-[#00C2FF]", bg: "bg-[#00C2FF]/10", border: "hover:border-[#00C2FF]/50", status: "OFFICIAL" },
+      ]
+    },
+    {
       title: "Social Media",
       description: "Capture leads from social ads and campaigns.",
       items: [
