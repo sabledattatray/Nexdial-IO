@@ -118,7 +118,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
       {/* Desktop Sidebar */}
       <aside className="hidden md:flex flex-col w-64 border-r border-white/10 bg-[#0A1628]">
         <div className="h-16 flex items-center px-6 border-b border-white/10">
-          <Link href="/crm" className="text-2xl font-extrabold text-white tracking-tighter flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
+          <Link href="/crm" className="text-xl font-bold text-white tracking-tighter flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
             Nexdial<sup className="inline-flex items-center justify-center w-[12px] h-[12px] ml-0.5 rounded-full border border-[#00C2FF] text-[#00C2FF] text-[8px] font-light shadow-[0_0_8px_rgba(0,194,255,0.2)]">R</sup>
             <span className="ml-2 text-[10px] uppercase tracking-widest text-[#00C2FF] bg-[#00C2FF]/10 px-1.5 py-0.5 rounded border border-[#00C2FF]/20">
               CRM
@@ -165,7 +165,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)} />
           <aside className="relative w-64 bg-[#0A1628] border-r border-white/10 flex flex-col">
             <div className="h-16 flex items-center justify-between px-6 border-b border-white/10">
-              <span className="text-2xl font-extrabold text-white tracking-tighter flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
+              <span className="text-xl font-bold text-white tracking-tighter flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
                 Nexdial<sup className="inline-flex items-center justify-center w-[12px] h-[12px] ml-0.5 rounded-full border border-[#00C2FF] text-[#00C2FF] text-[8px] font-light shadow-[0_0_8px_rgba(0,194,255,0.2)]">R</sup>
               </span>
               <button onClick={() => setIsMobileMenuOpen(false)} className="text-slate-400 hover:text-white">
