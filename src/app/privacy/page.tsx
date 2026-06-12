@@ -9,8 +9,10 @@ export default function PrivacyPage() {
   const [activeSection, setActiveSection] = useState("introduction");
   const placeholderRef = useRef<HTMLDivElement>(null);
   const gridRef = useRef<HTMLDivElement>(null);
+  const sidebarRef = useRef<HTMLElement>(null);
   const [sidebarLeft, setSidebarLeft] = useState<number | null>(null);
   const [sidebarTop, setSidebarTop] = useState<number>(112);
+  const [computedTop, setComputedTop] = useState<number>(112);
 
   const sections = [
     { id: "introduction",    label: "1. Who We Are & Scope" },
@@ -31,13 +33,31 @@ export default function PrivacyPage() {
       }
       if (gridRef.current) {
         const gridRect = gridRef.current.getBoundingClientRect();
-        setSidebarTop(gridRect.top + window.scrollY - window.scrollY);
+        const top = gridRect.top + window.scrollY - window.scrollY;
+        setSidebarTop(top);
+        setComputedTop(top);
       }
     };
     updateSidebarPos();
     window.addEventListener("resize", updateSidebarPos);
 
+    const clampSidebar = () => {
+      if (!gridRef.current || !sidebarRef.current) return;
+      const gridBottom = gridRef.current.getBoundingClientRect().bottom;
+      const sidebarHeight = sidebarRef.current.offsetHeight;
+      const gap = 24;
+      setSidebarTop((initTop) => {
+        let top = initTop;
+        if (top + sidebarHeight + gap > gridBottom) {
+          top = gridBottom - sidebarHeight - gap;
+        }
+        setComputedTop(Math.max(0, top));
+        return initTop;
+      });
+    };
+
     const handleScroll = () => {
+      clampSidebar();
       const scrollPosition = window.scrollY + 200;
       for (const section of sections) {
         const el = document.getElementById(section.id);
@@ -100,15 +120,17 @@ export default function PrivacyPage() {
           {/* Fixed TOC Sidebar */}
           {sidebarLeft !== null && (
             <aside
+              ref={sidebarRef}
               className="hidden lg:block bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md"
               style={{
                 position: "fixed",
-                top: sidebarTop,
+                top: computedTop,
                 left: sidebarLeft,
                 width: 260,
-                maxHeight: `calc(100vh - ${sidebarTop}px - 1rem)`,
+                maxHeight: `calc(100vh - ${computedTop}px - 1rem)`,
                 overflowY: "auto",
                 zIndex: 40,
+                transition: "top 0.15s ease",
               }}
             >
             <h3 className="text-xs font-bold text-white uppercase tracking-wider mb-4 border-b border-white/[0.06] pb-3">
