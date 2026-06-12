@@ -138,7 +138,7 @@ export function Footer() {
               </div>
               <div className="flex flex-col">
                 <span className="text-white font-extrabold text-xl tracking-tight leading-none flex items-center">
-                  Nexdial<sup className="text-base font-light ml-0.5 opacity-100 mt-1">&reg;</sup>
+                  Nexdial<sup className="inline-flex items-center justify-center w-[14px] h-[14px] ml-0.5 rounded-full border border-[#00C2FF] text-[#00C2FF] text-[9px] font-light shadow-[0_0_8px_rgba(0,194,255,0.2)]">R</sup>
                 </span>
                 <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
                   Unified Communication Inbox
