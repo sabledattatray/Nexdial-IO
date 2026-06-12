@@ -25,6 +25,7 @@ type Workspace = {
     leadSources?: string[];
     goals?: string[];
     teamSize?: number;
+    [key: string]: any;
   } | null;
   _count: {
     users: number;
