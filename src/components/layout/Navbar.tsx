@@ -193,34 +193,44 @@ export function Navbar() {
                   <AnimatePresence>
                     {link.megaMenu && activeMenu === link.label && (
                       <motion.div
-                        initial={{ opacity: 0, y: 10, scale: 0.98 }}
+                        initial={{ opacity: 0, y: 12, scale: 0.97 }}
                         animate={{ opacity: 1, y: 0, scale: 1 }}
-                        exit={{ opacity: 0, y: 10, scale: 0.98 }}
-                        transition={{ duration: 0.2, ease: "easeOut" }}
+                        exit={{ opacity: 0, y: 12, scale: 0.97 }}
+                        transition={{ type: "spring", damping: 16, stiffness: 140 }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
                       >
-                        <div className="glass-card-strong !bg-[#0F172A] p-5 min-w-[560px] shadow-2xl shadow-black/40">
-                          <div className={`grid ${link.megaMenu.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-5`}>
-                            {link.megaMenu.map((group) => (
-                              <div key={group.title}>
-                                <h4 className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-2 px-2">
-                                  {group.title}
-                                </h4>
+                        <div className="glass-card-strong !bg-[#070d19]/95 border border-white/[0.08] p-5 min-w-[620px] rounded-2xl shadow-[0_25px_60px_-15px_rgba(0,0,0,0.7)] backdrop-blur-3xl relative overflow-hidden">
+                          {/* Radial Glows */}
+                          <div className="absolute top-0 right-0 w-40 h-40 bg-[#0057D9]/10 rounded-full blur-[50px] pointer-events-none" />
+                          <div className="absolute bottom-0 left-0 w-32 h-32 bg-[#00C2FF]/5 rounded-full blur-[45px] pointer-events-none" />
+                          
+                          <div className={`grid ${link.megaMenu.length > 1 ? 'grid-cols-2 divide-x divide-white/[0.05]' : 'grid-cols-1'} gap-4 relative z-10`}>
+                            {link.megaMenu.map((group, groupIdx) => (
+                              <div key={group.title} className={link.megaMenu.length > 1 && groupIdx === 1 ? 'pl-5' : 'pr-1'}>
+                                {/* Header */}
+                                <div className="flex items-center gap-2 mb-3 px-2">
+                                  <span className="w-1 h-3 rounded-full bg-gradient-to-b from-[#0057D9] to-[#00C2FF]" />
+                                  <h4 className="text-[10px] font-bold text-[#64748B] tracking-widest uppercase">
+                                    {group.title}
+                                  </h4>
+                                </div>
+                                
+                                {/* Items */}
                                 <div className="space-y-0.5">
                                   {group.items.map((item) => (
                                     <Link
                                       key={item.label}
                                       href={item.href}
-                                      className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/[0.04] transition-colors group/item"
+                                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/[0.03] border border-transparent hover:border-white/[0.04] transition-all duration-300 group/item"
                                     >
-                                      <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#0057D9]/20 to-[#00C2FF]/10 flex items-center justify-center flex-shrink-0 group-hover/item:from-[#0057D9]/30 group-hover/item:to-[#00C2FF]/20 transition-all">
-                                        <item.icon className="w-4.5 h-4.5 text-[#00C2FF]" />
+                                      <div className="w-9 h-9 rounded-xl bg-white/[0.02] border border-white/[0.06] flex items-center justify-center flex-shrink-0 group-hover/item:bg-[#0057D9]/15 group-hover/item:border-[#00C2FF]/30 text-[#00C2FF] group-hover/item:text-white transition-all duration-300 group-hover/item:scale-105">
+                                        <item.icon className="w-4.5 h-4.5" />
                                       </div>
                                       <div>
-                                        <span className="text-sm font-medium text-white block leading-tight">
+                                        <span className="text-sm font-semibold text-slate-200 group-hover/item:text-white transition-colors block leading-tight">
                                           {item.label}
                                         </span>
-                                        <span className="text-xs text-[#64748B] leading-snug">
+                                        <span className="text-xs text-[#64748B] group-hover/item:text-slate-400 transition-colors block leading-snug mt-0.5">
                                           {item.desc}
                                         </span>
                                       </div>
