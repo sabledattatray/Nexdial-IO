@@ -56,7 +56,7 @@ export default function HTMLSitemapPage() {
       color: "#EF4444",
       links: [
         { label: "Knowledge Center", href: "/knowledge-center", desc: "Vicidial configurations and OAuth integration guides" },
-        { label: "Frequently Asked FAQs", href: "/faqs", desc: "Questions regarding HIPAA, multi-tenant billing & hosting" },
+        { label: "Frequently Asked FAQs", href: "/faqs", desc: "Questions regarding WhatsApp integration, CSV import, and AI recommendations" },
         { label: "Contact Hotline Team", href: "/contact", desc: "Office maps, WhatsApp advisor, and support email" },
         { label: "Request Demo System", href: "/request-demo", desc: "Deploy sandbox test dialers and CRM instances" },
         { label: "Book Consultation Slot", href: "/book-consultation", desc: "Solutions architecture scoping sessions" },
@@ -85,7 +85,7 @@ export default function HTMLSitemapPage() {
             HTML <span className="gradient-text">Sitemap</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            Navigate through all public pages, operational dashboards, agent softphones, support document centers, and compliance reports of the Nexdial Contact Center Operating System.
+            Navigate through all public pages, sales pipelines, CRM dashboards, WhatsApp configurations, support document centers, and settings of the NexDial CRM platform.
           </p>
         </AnimatedSection>
 

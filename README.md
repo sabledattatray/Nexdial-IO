@@ -54,7 +54,7 @@ nexdial/
 │   │   ├── blog/                 # Platform articles
 │   │   ├── clients/              # Client roster metrics
 │   │   ├── dialer/               # Unified agent dialer portal
-│   │   ├── faqs/                 # HIPAA & multi-tenant FAQs
+│   │   ├── faqs/                 # General & CRM FAQs
 │   │   ├── pricing/              # Interactive outlay quote estimators (Rupee formatted)
 │   │   ├── privacy/              # GDPR compliance documents (Table of Contents)
 │   │   ├── security/             # SRTP, TLS & namespace security outlines
