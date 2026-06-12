@@ -11,7 +11,12 @@ import {
   CheckCircle2, 
   ExternalLink,
   ChevronRight,
-  Share2
+  Share2,
+  Facebook,
+  Instagram,
+  Linkedin,
+  Twitter,
+  Video
 } from "lucide-react";
 
 export default function IntegrationsPage() {
@@ -347,18 +352,65 @@ export default function IntegrationsPage() {
                   </div>
                 </div>
 
-                <div className="bg-[#020610]/80 border border-pink-500/20 rounded-xl p-6 mb-6">
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center shrink-0">
-                      <ExternalLink className="w-5 h-5 text-pink-500" />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+                  {/* Facebook */}
+                  <div className="bg-[#020610]/80 border border-white/5 hover:border-[#1877F2]/50 rounded-xl p-5 transition-colors group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#1877F2]/10 flex items-center justify-center">
+                        <Facebook className="w-5 h-5 text-[#1877F2]" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-wider text-green-400 bg-green-400/10 px-2 py-1 rounded">OFFICIAL</span>
                     </div>
-                    <div>
-                      <h3 className="text-sm font-semibold text-white mb-1">Official Meta Business App Integration</h3>
-                      <p className="text-sm text-slate-400 mb-4">To sync leads directly from your Facebook Page or Instagram Business account, you need to authenticate with Meta.</p>
-                      <button className="bg-[#1877F2] hover:bg-[#1877F2]/90 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors">
-                        Connect with Facebook
-                      </button>
+                    <h3 className="text-sm font-semibold text-white mb-1">Facebook Lead Ads</h3>
+                    <p className="text-xs text-slate-400 mb-4 line-clamp-2">Sync leads instantly from your FB Page campaigns.</p>
+                    <button className="w-full bg-white/5 hover:bg-[#1877F2] text-white py-2 rounded-lg text-xs font-semibold transition-colors">
+                      Connect
+                    </button>
+                  </div>
+
+                  {/* Instagram */}
+                  <div className="bg-[#020610]/80 border border-white/5 hover:border-[#E1306C]/50 rounded-xl p-5 transition-colors group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-[#F56040] to-[#E1306C] flex items-center justify-center opacity-80">
+                        <Instagram className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-wider text-green-400 bg-green-400/10 px-2 py-1 rounded">OFFICIAL</span>
                     </div>
+                    <h3 className="text-sm font-semibold text-white mb-1">Instagram Business</h3>
+                    <p className="text-xs text-slate-400 mb-4 line-clamp-2">Capture leads straight from Instagram forms.</p>
+                    <button className="w-full bg-white/5 hover:bg-gradient-to-r hover:from-[#F56040] hover:to-[#E1306C] text-white py-2 rounded-lg text-xs font-semibold transition-all">
+                      Connect
+                    </button>
+                  </div>
+
+                  {/* LinkedIn */}
+                  <div className="bg-[#020610]/80 border border-white/5 hover:border-[#0A66C2]/50 rounded-xl p-5 transition-colors group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#0A66C2]/10 flex items-center justify-center">
+                        <Linkedin className="w-5 h-5 text-[#0A66C2]" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-wider text-slate-400 bg-white/5 px-2 py-1 rounded">COMING SOON</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-white mb-1">LinkedIn Gen Forms</h3>
+                    <p className="text-xs text-slate-400 mb-4 line-clamp-2">Perfect for B2B pipeline growth and tracking.</p>
+                    <button disabled className="w-full bg-white/5 text-slate-500 py-2 rounded-lg text-xs font-semibold cursor-not-allowed">
+                      Connect
+                    </button>
+                  </div>
+
+                  {/* TikTok */}
+                  <div className="bg-[#020610]/80 border border-white/5 hover:border-[#00F2FE]/50 rounded-xl p-5 transition-colors group">
+                    <div className="flex items-center justify-between mb-4">
+                      <div className="w-10 h-10 rounded-lg bg-[#000000] border border-white/10 flex items-center justify-center">
+                        <Video className="w-5 h-5 text-white" />
+                      </div>
+                      <span className="text-[10px] font-bold tracking-wider text-slate-400 bg-white/5 px-2 py-1 rounded">COMING SOON</span>
+                    </div>
+                    <h3 className="text-sm font-semibold text-white mb-1">TikTok Lead Generation</h3>
+                    <p className="text-xs text-slate-400 mb-4 line-clamp-2">Sync your viral campaign signups instantly.</p>
+                    <button disabled className="w-full bg-white/5 text-slate-500 py-2 rounded-lg text-xs font-semibold cursor-not-allowed">
+                      Connect
+                    </button>
                   </div>
                 </div>
 
