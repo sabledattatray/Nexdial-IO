@@ -140,12 +140,12 @@ export function Footer() {
                 <span className="text-white font-bold text-xl tracking-tighter leading-none flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
                   Nexdial<sup className="inline-flex items-center justify-center w-[14px] h-[14px] ml-0.5 rounded-full border border-[#00C2FF] text-[#00C2FF] text-[9px] font-light shadow-[0_0_8px_rgba(0,194,255,0.2)]">R</sup>
                 </span>
-                <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
+                <span className="text-[8.5px] text-[#94A3B8] font-medium tracking-widest uppercase leading-none mt-1.5">
                   Unified Communication Inbox
                 </span>
               </div>
             </Link>
-            <p className="text-[#64748B] text-sm leading-relaxed mb-6 max-w-sm">
+            <p className="text-[#94A3B8] text-sm leading-relaxed mb-6 max-w-sm">
               The simplest CRM for small businesses who manage customers via
               WhatsApp, calls, and forms. Track every lead, automate follow-ups,
               and close more deals.
@@ -161,7 +161,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-3 text-sm text-[#94A3B8]">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="text-xs text-[#64748B]">Badlapur East, Dist- Thane, Maharashtra, India- 421503</span>
+                <span className="text-xs text-[#94A3B8]">Badlapur East, Dist- Thane, Maharashtra, India- 421503</span>
               </div>
             </div>
             <div className="flex gap-3">
@@ -170,7 +170,7 @@ export function Footer() {
                   key={social.label}
                   href={social.href}
                   aria-label={social.label}
-                  className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[#64748B] hover:text-[#00C2FF] hover:border-[#00C2FF]/30 hover:bg-[#00C2FF]/5 transition-all"
+                  className="w-9 h-9 rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center text-[#94A3B8] hover:text-[#00C2FF] hover:border-[#00C2FF]/30 hover:bg-[#00C2FF]/5 transition-all"
                 >
                   <social.icon className="w-4 h-4" />
                 </a>
@@ -180,13 +180,13 @@ export function Footer() {
 
           {/* Link Columns */}
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
               Product
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {footerLinks.product.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-[#64748B] hover:text-[#00C2FF] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -195,13 +195,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
               Resources
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-[#64748B] hover:text-[#00C2FF] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                     {link.label}
                   </Link>
                 </li>
@@ -210,13 +210,13 @@ export function Footer() {
           </div>
 
           <div>
-            <h4 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
+            <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
               Company
-            </h4>
+            </h3>
             <ul className="space-y-2.5">
               {footerLinks.company.map((link) => (
                 <li key={link.label}>
-                  <Link href={link.href} className="text-sm text-[#64748B] hover:text-[#00C2FF] transition-colors">
+                  <Link href={link.href} className="text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
                     {link.label}
                   </Link>
                 </li>

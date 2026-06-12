@@ -288,7 +288,7 @@ export function HeroSection() {
                             return (
                               <div 
                                 key={lead.name} 
-                                className={`p-3 rounded-xl border transition-colors duration-500 ${
+                                className={`p-3 rounded-xl border ${
                                   idx === highlightedLead 
                                     ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
                                     : "bg-white/[0.02] border-white/[0.05]"
