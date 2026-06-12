@@ -84,11 +84,7 @@ const badges = [
 
 export function Footer() {
   const pathname = usePathname();
-  const [currentYear, setCurrentYear] = useState(2026);
-
-  useEffect(() => {
-    setCurrentYear(new Date().getFullYear());
-  }, []);
+  const [currentYear] = useState(() => new Date().getFullYear());
 
   const isConsolePage = pathname?.startsWith("/crm") || 
                         pathname?.startsWith("/admin") || 

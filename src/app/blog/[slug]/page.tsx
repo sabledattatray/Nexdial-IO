@@ -4,6 +4,12 @@ import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, CheckCircle } from "lucide-react";
 import { BlogClient } from "@/components/blog/BlogClient";
 
+export function generateStaticParams() {
+  return Object.keys(ARTICLES).map((slug) => ({
+    slug: slug,
+  }));
+}
+
 // Local database of SEO-optimized articles
 const ARTICLES: Record<string, {
   title: string;

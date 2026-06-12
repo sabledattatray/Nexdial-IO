@@ -18,7 +18,6 @@ export function BlogClient({
   const gridRef = useRef<HTMLDivElement>(null);
   const sidebarRef = useRef<HTMLElement>(null);
   const [sidebarLeft, setSidebarLeft] = useState<number | null>(null);
-  const [sidebarTop, setSidebarTop] = useState<number>(112);
   const [computedTop, setComputedTop] = useState<number>(112);
 
   useEffect(() => {
