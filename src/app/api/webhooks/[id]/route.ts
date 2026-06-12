@@ -81,3 +81,39 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
     return NextResponse.json({ error: error.message }, { status: 500 });
   }
 }
+
+// Facebook/Meta Webhook Challenge Verification
+export async function GET(req: Request, context: { params: Promise<{ id: string }> }) {
+  const { id } = await context.params;
+  const url = new URL(req.url);
+  
+  // Facebook sends hub.mode, hub.challenge, and hub.verify_token
+  const mode = url.searchParams.get("hub.mode");
+  const challenge = url.searchParams.get("hub.challenge");
+  const verify_token = url.searchParams.get("hub.verify_token");
+  const secret = url.searchParams.get("secret"); // our generic secret logic
+
+  // If this is a Facebook verification request
+  if (mode === "subscribe" && challenge) {
+    const integration = await prisma.integration.findUnique({
+      where: { id }
+    });
+    
+    if (!integration) {
+      return new NextResponse("Webhook not found", { status: 404 });
+    }
+
+    // Verify the token matches either our URL secret or the integration's secret key
+    if (verify_token === integration.secretKey || verify_token === secret) {
+      // Facebook expects a raw integer response with the challenge code
+      return new NextResponse(challenge, {
+        status: 200,
+        headers: { "Content-Type": "text/plain" }
+      });
+    } else {
+      return new NextResponse("Forbidden: Invalid verify token", { status: 403 });
+    }
+  }
+
+  return new NextResponse("Method Not Allowed", { status: 405 });
+}
