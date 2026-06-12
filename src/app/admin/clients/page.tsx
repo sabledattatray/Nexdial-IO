@@ -220,6 +220,11 @@ export default function AdminClientsPage() {
                               <Mail className="w-4 h-4" />
                             </a>
                           )}
+                          {owner?.phone && (
+                            <a href={`https://wa.me/${owner.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="inline-block p-2 rounded-lg bg-white/5 hover:bg-[#25D366]/20 hover:text-[#25D366] text-slate-400 transition-colors" title="WhatsApp Client">
+                              <MessageCircle className="w-4 h-4" />
+                            </a>
+                          )}
                           <button onClick={() => handleImpersonate(w.id)} className="p-2 rounded-lg bg-white/5 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-400 transition-colors" title="Login As Client">
                             <LogIn className="w-4 h-4" />
                           </button>
