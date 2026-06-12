@@ -13,7 +13,7 @@ export async function POST(req: Request) {
     const sessionUser = session.user as any;
 
     const body = await req.json();
-    const { name, industry, seedDemoData } = body;
+    const { name, industry, seedDemoData, companyName, team, leadSources, goals } = body;
 
     if (!industry) {
       return NextResponse.json({ error: "Industry is required." }, { status: 400 });
@@ -32,7 +32,12 @@ export async function POST(req: Request) {
     // Seed onboarding demo data if requested
     if (seedDemoData) {
       try {
-        await seedOnboardingData(sessionUser.id, industry);
+        await seedOnboardingData(sessionUser.id, industry, {
+          companyName,
+          team,
+          leadSources,
+          goals
+        });
       } catch (seedError) {
         console.error("Failed to seed onboarding data during wizard:", seedError);
         // We continue because the user was successfully onboarded/marked onboarded

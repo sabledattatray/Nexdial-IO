@@ -9,16 +9,36 @@ import {
   CheckCircle2, 
   Loader2, 
   ArrowRight, 
+  ArrowLeft,
   ShieldCheck, 
   Sparkles, 
   HelpCircle,
   Smartphone,
-  Check
+  Check,
+  Plus,
+  Trash2,
+  UploadCloud,
+  Mail,
+  Phone,
+  Globe,
+  Settings,
+  Bot,
+  Bell,
+  Palette,
+  ChevronRight,
+  User as UserIcon,
+  Activity,
+  Award,
+  MessageSquare
 } from "lucide-react";
 
 // Load Razorpay SDK Script dynamically
 const loadRazorpayScript = () => {
   return new Promise((resolve) => {
+    if ((window as any).Razorpay) {
+      resolve(true);
+      return;
+    }
     const script = document.createElement("script");
     script.src = "https://checkout.razorpay.com/v1/checkout.js";
     script.onload = () => resolve(true);
@@ -27,62 +47,140 @@ const loadRazorpayScript = () => {
   });
 };
 
+interface TeamMember {
+  name: string;
+  email: string;
+  role: string;
+}
+
 function OnboardingContent() {
-  const { data: session, update } = useSession();
+  const { data: session, status, update } = useSession();
   const router = useRouter();
 
-  const [step, setStep] = useState(1); // 1: Profile/Industry, 2: Payment, 3: Seeding Progress
-  const [name, setName] = useState("");
-  const [industry, setIndustry] = useState("real_estate");
-  const [seedDemoData, setSeedDemoData] = useState(true);
+  // Redirect to login if user is not authenticated
+  useEffect(() => {
+    if (status === "unauthenticated") {
+      router.replace("/login?callbackUrl=/onboarding");
+    }
+  }, [status, router]);
 
-  // Payment states
-  const [loadingPayment, setLoadingPayment] = useState(false);
-  const [showMockRazorpay, setShowMockRazorpay] = useState(false);
-  const [mockPaymentMethod, setMockPaymentMethod] = useState<"upi" | "card">("upi");
-  const [upiId, setUpiId] = useState("");
-  const [cardNumber, setCardNumber] = useState("");
-  const [cardExpiry, setCardExpiry] = useState("");
-  const [cardCvv, setCardCvv] = useState("");
-  const [mockOrderData, setMockOrderData] = useState<any>(null);
-  const [otpSent, setOtpSent] = useState(false);
-  const [otpCode, setOtpCode] = useState("");
+  const [step, setStep] = useState(1); // Steps 1 to 7
   const [error, setError] = useState("");
+  const [loadingPayment, setLoadingPayment] = useState(false);
 
-  // Seeding progress states
+  // Form State
+  const [companyName, setCompanyName] = useState("");
+  const [businessType, setBusinessType] = useState("Agency");
+  const [industry, setIndustry] = useState("real_estate");
+  const [companyWebsite, setCompanyWebsite] = useState("");
+  const [companySize, setCompanySize] = useState("2–10 Employees");
+  const [location, setLocation] = useState("India");
+  const [timeZone, setTimeZone] = useState("GMT+5:30 (IST)");
+  const [businessPhone, setBusinessPhone] = useState("");
+
+  const [ownerName, setOwnerName] = useState("");
+  const [ownerEmail, setOwnerEmail] = useState("");
+  const [ownerMobile, setOwnerMobile] = useState("");
+  const [jobTitle, setJobTitle] = useState("");
+
+  // Step 2: Goals & Sources
+  const [goals, setGoals] = useState<string[]>(["Lead Management", "Sales Pipeline"]);
+  const [leadSources, setLeadSources] = useState<string[]>(["Website", "WhatsApp"]);
+  const [monthlyLeads, setMonthlyLeads] = useState("0–100");
+  const [currentCrm, setCurrentCrm] = useState("None");
+  const [hearAboutUs, setHearAboutUs] = useState("Google");
+
+  // Step 3: Channels & Branding
+  const [channels, setChannels] = useState({
+    whatsappNumber: "",
+    whatsappHasAccount: "No",
+    supportEmail: "",
+    salesEmail: "",
+    callingNumber: "",
+    callingSystem: "None",
+    websiteUrl: "",
+    websiteHasForm: "No",
+  });
+  const [brandName, setBrandName] = useState("");
+  const [brandTagline, setBrandTagline] = useState("");
+  const [brandColor, setBrandColor] = useState("#0057D9");
+  const [logoUploaded, setLogoUploaded] = useState(false);
+
+  // Step 4: Pipeline & Team Setup
+  const [pipelineName, setPipelineName] = useState("Sales Pipeline");
+  const [pipelineStages, setPipelineStages] = useState<string[]>([
+    "New Lead", "Contacted", "Qualified", "Proposal Sent", "Negotiation", "Won", "Lost"
+  ]);
+  const [teamMembers, setTeamMembers] = useState<TeamMember[]>([]);
+  const [newMemberName, setNewMemberName] = useState("");
+  const [newMemberEmail, setNewMemberEmail] = useState("");
+  const [newMemberRole, setNewMemberRole] = useState("Sales Executive");
+
+  // Step 5: AI & Notifications
+  const [aiFeatures, setAiFeatures] = useState<string[]>(["AI Lead Scoring", "AI Follow-up Suggestions"]);
+  const [alertChannels, setAlertChannels] = useState<string[]>(["Email"]);
+  const [dailySummary, setDailySummary] = useState("Yes");
+  const [weeklyReport, setWeeklyReport] = useState("Yes");
+
+  // Step 7: Loader State
   const [progress, setProgress] = useState(0);
   const [progressStatus, setProgressStatus] = useState("Initializing setup...");
+  const [completedActions, setCompletedActions] = useState<string[]>([]);
 
-  // Sync initial user name from session
+  // Sync initial user details from session
   useEffect(() => {
-    if (session?.user?.name) {
-      setName(session.user.name);
+    if (session?.user) {
+      if (session.user.name && !ownerName) {
+        setOwnerName(session.user.name);
+      }
+      if (session.user.email && !ownerEmail) {
+        setOwnerEmail(session.user.email);
+      }
     }
-  }, [session]);
+  }, [session, ownerName, ownerEmail]);
 
-  // Handle Seeding Progress Bar Simulation
+  // Seeding simulation logs for Step 7
   useEffect(() => {
-    if (step !== 3) return;
+    if (step !== 7) return;
+
+    const actions = [
+      "Create your CRM workspace",
+      "Generate your sales pipeline",
+      "Configure AI lead scoring",
+      "Set up team permissions",
+      "Enable reporting dashboard",
+      "Prepare communication inbox"
+    ];
 
     const interval = setInterval(() => {
       setProgress((prev) => {
         const next = prev + 1;
-        if (next <= 25) {
-          setProgressStatus("Authenticating auto-pay mandate with bank...");
-        } else if (next <= 50) {
-          setProgressStatus("Provisioning isolated CRM database namespaces...");
-        } else if (next <= 80) {
-          const formattedIndustryName = industry.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase());
-          setProgressStatus(`Ingesting and allocating ${formattedIndustryName} sample leads...`);
-        } else if (next < 100) {
-          setProgressStatus("Configuring voice AI representative scripts...");
-        } else {
+        if (next <= 15) {
+          setProgressStatus("Configuring company workspace attributes...");
+        } else if (next === 20) {
+          setCompletedActions((c) => [...c, actions[0]]);
+        } else if (next <= 40) {
+          setProgressStatus(`Building custom pipeline: "${pipelineName}" with ${pipelineStages.length} stages...`);
+        } else if (next === 45) {
+          setCompletedActions((c) => [...c, actions[1]]);
+        } else if (next <= 60) {
+          setProgressStatus("Activating AI Lead Scoring models...");
+        } else if (next === 65) {
+          setCompletedActions((c) => [...c, actions[2]]);
+        } else if (next <= 75) {
+          setProgressStatus(`Provisioning ${teamMembers.length + 1} user security contexts...`);
+        } else if (next === 80) {
+          setCompletedActions((c) => [...c, actions[3]]);
+          setCompletedActions((c) => [...c, actions[4]]);
+        } else if (next <= 95) {
+          setProgressStatus("Setting up communication gateways (Email & WhatsApp)...");
+        } else if (next === 99) {
+          setCompletedActions((c) => [...c, actions[5]]);
+        } else if (next >= 100) {
           clearInterval(interval);
-          setProgressStatus("Setup completed! Opening dashboard...");
-          // Trigger redirect
+          setProgressStatus("Setup completed! Redirecting to CRM dashboard...");
           setTimeout(async () => {
-            // Force session JWT update so next-auth gets the new onboarded status
-            await update();
+            await update(); // Force session token update
             router.push("/crm");
           }, 800);
         }
@@ -91,192 +189,303 @@ function OnboardingContent() {
     }, 45);
 
     return () => clearInterval(interval);
-  }, [step, industry, router, update]);
+  }, [step, pipelineName, pipelineStages, teamMembers, router, update]);
 
-  // Initialize Payment Setup
-  const handlePaymentInitiate = async () => {
+  // Toggle checklist utilities
+  const toggleGoal = (goal: string) => {
+    setGoals((prev) => 
+      prev.includes(goal) ? prev.filter((g) => g !== goal) : [...prev, goal]
+    );
+  };
+
+  const toggleLeadSource = (src: string) => {
+    setLeadSources((prev) => 
+      prev.includes(src) ? prev.filter((s) => s !== src) : [...prev, src]
+    );
+  };
+
+  const toggleAiFeature = (feat: string) => {
+    setAiFeatures((prev) => 
+      prev.includes(feat) ? prev.filter((f) => f !== feat) : [...prev, feat]
+    );
+  };
+
+  const toggleAlertChannel = (ch: string) => {
+    setAlertChannels((prev) => 
+      prev.includes(ch) ? prev.filter((c) => c !== ch) : [...prev, ch]
+    );
+  };
+
+  // Add team member inline
+  const addTeamMember = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!newMemberName.trim() || !newMemberEmail.trim()) {
+      setError("Please fill in both name and email for the team member.");
+      return;
+    }
+    if (!newMemberEmail.includes("@")) {
+      setError("Please enter a valid email address.");
+      return;
+    }
+    setError("");
+    setTeamMembers((prev) => [
+      ...prev,
+      { name: newMemberName, email: newMemberEmail, role: newMemberRole }
+    ]);
+    setNewMemberName("");
+    setNewMemberEmail("");
+  };
+
+  const deleteTeamMember = (idx: number) => {
+    setTeamMembers((prev) => prev.filter((_, i) => i !== idx));
+  };
+
+  // Trigger Razorpay Standard Checkout Setup
+  const handleRazorpaySetup = async () => {
     setError("");
     setLoadingPayment(true);
 
     try {
+      // Create the order on the backend
       const res = await fetch("/api/onboarding/payment", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
       });
 
       if (!res.ok) {
-        throw new Error("Failed to create billing order.");
+        throw new Error("Failed to create onboarding subscription order.");
       }
 
       const orderData = await res.json();
-      setMockOrderData(orderData);
 
-      if (orderData.simulated) {
-        // Show simulated Razorpay Modal
-        setLoadingPayment(false);
-        setShowMockRazorpay(true);
-      } else {
-        // Load real Razorpay SDK
-        const scriptLoaded = await loadRazorpayScript();
-        if (!scriptLoaded) {
-          throw new Error("Razorpay SDK failed to load. Check network connection.");
-        }
-
-        const options = {
-          key: orderData.keyId,
-          amount: orderData.amount,
-          currency: orderData.currency,
-          name: "NexDial CCOS",
-          description: "15-day Trial Mandate Setup (₹1 Auth)",
-          order_id: orderData.orderId,
-          handler: async function (response: any) {
-            // Razorpay checkout success handler
-            await completeOnboarding();
-          },
-          prefill: {
-            name: session?.user?.name || "",
-            email: session?.user?.email || "",
-          },
-          theme: {
-            color: "#528FF0",
-          },
-        };
-
-        setLoadingPayment(false);
-        const rzp = new (window as any).Razorpay(options);
-        rzp.open();
+      // Load SDK
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) {
+        throw new Error("Razorpay payment script failed to load. Please verify connection.");
       }
+
+      const options = {
+        key: orderData.keyId,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "NexDial CCOS",
+        description: "15-day Trial Authorization (₹1 Auth)",
+        order_id: orderData.orderId,
+        handler: async function (response: any) {
+          // Signature Verification
+          try {
+            setLoadingPayment(true);
+            const verifyRes = await fetch("/api/verify-payment", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify({
+                razorpay_order_id: response.razorpay_order_id,
+                razorpay_payment_id: response.razorpay_payment_id,
+                razorpay_signature: response.razorpay_signature
+              })
+            });
+
+            if (!verifyRes.ok) {
+              const errData = await verifyRes.json().catch(() => ({}));
+              throw new Error(errData.error || "Mandate authentication failed.");
+            }
+
+            const verifyData = await verifyRes.json();
+            if (!verifyData.success) {
+              throw new Error("Payment signature verification failed.");
+            }
+
+            // Payment verified, trigger onboarding save
+            await submitOnboardingConfig();
+          } catch (err: any) {
+            setError(err.message || "Verification failed.");
+            setLoadingPayment(false);
+          }
+        },
+        prefill: {
+          name: ownerName || session?.user?.name || "NexDial Admin",
+          email: ownerEmail || session?.user?.email || "admin@nexdial.io",
+          contact: ownerMobile || ""
+        },
+        theme: {
+          color: "#0057D9"
+        }
+      };
+
+      setLoadingPayment(false);
+      const rzp = new (window as any).Razorpay(options);
+      rzp.open();
     } catch (err: any) {
-      setError(err.message || "An error occurred initiating checkout.");
+      setError(err.message || "An unexpected error occurred during subscription setup.");
       setLoadingPayment(false);
     }
   };
 
-  // Submit Mock payment
-  const handleMockPaymentSubmit = () => {
-    if (mockPaymentMethod === "upi" && !upiId.includes("@")) {
-      setError("Please enter a valid UPI ID (e.g. user@okhdfcbank)");
-      return;
-    }
-    if (mockPaymentMethod === "card") {
-      if (cardNumber.replace(/\s+/g, "").length < 16) {
-        setError("Invalid card number. Must be 16 digits.");
-        return;
-      }
-      if (cardExpiry.length < 5) {
-        setError("Invalid expiry date (MM/YY).");
-        return;
-      }
-      if (cardCvv.length < 3) {
-        setError("Invalid CVV.");
-        return;
-      }
-    }
-
-    setError("");
-    setLoadingPayment(true);
-
-    if (mockPaymentMethod === "card" && !otpSent) {
-      // Send mock OTP code
-      setTimeout(() => {
-        setOtpSent(true);
-        setLoadingPayment(false);
-      }, 1500);
-    } else {
-      // Complete simulated payment
-      setTimeout(async () => {
-        setShowMockRazorpay(false);
-        await completeOnboarding();
-      }, 2000);
-    }
-  };
-
-  // Call onboarding completion API
-  const completeOnboarding = async () => {
+  // Submit complete onboarding configs
+  const submitOnboardingConfig = async () => {
     setLoadingPayment(true);
     try {
+      const payload = {
+        name: ownerName,
+        industry,
+        seedDemoData: true,
+        companyName,
+        businessType,
+        companyWebsite,
+        companySize,
+        location,
+        timeZone,
+        businessPhone,
+        ownerEmail,
+        ownerMobile,
+        jobTitle,
+        goals,
+        leadSources,
+        monthlyLeads,
+        currentCrm,
+        hearAboutUs,
+        channels,
+        brandName,
+        brandTagline,
+        brandColor,
+        team: teamMembers,
+        aiFeatures,
+        alertChannels,
+        dailySummary,
+        weeklyReport
+      };
+
       const res = await fetch("/api/onboarding", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, industry, seedDemoData }),
+        body: JSON.stringify(payload)
       });
 
       if (!res.ok) {
-        const data = await res.json();
-        throw new Error(data.error || "Failed to finalize onboarding setup.");
+        const errData = await res.json().catch(() => ({}));
+        throw new Error(errData.error || "Failed to save workspace configurations.");
       }
 
-      setStep(3); // Go to Seeding Progress screen
+      // Save complete payload to localStorage for Settings integration
+      localStorage.setItem("nexdial_company_name", companyName);
+      localStorage.setItem("nexdial_business_type", businessType);
+      localStorage.setItem("nexdial_industry", industry);
+      localStorage.setItem("nexdial_company_website", companyWebsite);
+      localStorage.setItem("nexdial_company_size", companySize);
+      localStorage.setItem("nexdial_location", location);
+      localStorage.setItem("nexdial_timezone", timeZone);
+      localStorage.setItem("nexdial_business_phone", businessPhone);
+      localStorage.setItem("nexdial_brand_name", brandName);
+      localStorage.setItem("nexdial_brand_tagline", brandTagline);
+      localStorage.setItem("nexdial_brand_color", brandColor);
+      localStorage.setItem("nexdial_logo_uploaded", logoUploaded ? "true" : "false");
+      localStorage.setItem("nexdial_channels", JSON.stringify(channels));
+      localStorage.setItem("nexdial_ai_features", JSON.stringify(aiFeatures));
+      localStorage.setItem("nexdial_alert_channels", JSON.stringify(alertChannels));
+      localStorage.setItem("nexdial_daily_summary", dailySummary);
+      localStorage.setItem("nexdial_weekly_report", weeklyReport);
+      
+      localStorage.setItem("nexdial_owner_mobile", ownerMobile);
+      localStorage.setItem("nexdial_job_title", jobTitle);
+      localStorage.setItem("nexdial_goals", JSON.stringify(goals));
+      localStorage.setItem("nexdial_lead_sources", JSON.stringify(leadSources));
+      localStorage.setItem("nexdial_monthly_leads", monthlyLeads);
+      localStorage.setItem("nexdial_current_crm", currentCrm);
+      localStorage.setItem("nexdial_hear_about_us", hearAboutUs);
+
+      localStorage.setItem("nexdial_pipeline_name", pipelineName);
+      localStorage.setItem("nexdial_pipeline_stages", JSON.stringify(pipelineStages));
+
+      setStep(7); // Proceed to loaders progress bar
     } catch (err: any) {
-      setError(err.message || "Onboarding completion failed.");
-      setStep(2); // Retain on payment page
+      setError(err.message || "Failed to complete onboarding.");
     } finally {
       setLoadingPayment(false);
     }
   };
 
   return (
-    <div className="relative w-full max-w-xl bg-[#0F172A]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl overflow-hidden transition-all duration-300">
-      {/* Background blobs */}
-      <div className="absolute top-0 right-0 w-40 h-40 bg-[#0057D9]/15 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-0 left-0 w-40 h-40 bg-[#00E5A0]/10 rounded-full blur-3xl pointer-events-none" />
+    <div className="relative w-full max-w-2xl bg-[#0F172A]/75 backdrop-blur-2xl border border-white/10 rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden transition-all duration-500">
+      
+      {/* Background Orbs */}
+      <div className="absolute top-0 right-0 w-48 h-48 bg-[#0057D9]/10 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute bottom-0 left-0 w-48 h-48 bg-[#00E5A0]/10 rounded-full blur-3xl pointer-events-none" />
 
-      {/* Title */}
-      <div className="text-center mb-8">
-        <h1 className="text-2xl font-extrabold text-white tracking-tight">Configure Your Workspace</h1>
-        <p className="text-xs text-slate-400 mt-1">Get started with NexDial CCOS in just 3 quick steps.</p>
-        
-        {/* Step indicator bubbles */}
-        <div className="flex items-center justify-center gap-3 mt-6">
-          {[1, 2, 3].map((s) => (
-            <div key={s} className="flex items-center">
-              <div className={`w-6 h-6 rounded-full flex items-center justify-center text-[10px] font-bold transition-all duration-300 ${
-                step >= s ? "bg-[#00E5A0] text-[#081120]" : "bg-white/5 text-slate-500 border border-white/10"
-              }`}>
-                {step > s ? <Check className="w-3.5 h-3.5 stroke-[3]" /> : s}
-              </div>
-              {s < 3 && (
-                <div className={`w-8 h-px ml-3 ${step > s ? "bg-[#00E5A0]" : "bg-white/10"}`} />
-              )}
+      {/* Header (Steps 1-6) */}
+      {step < 7 && (
+        <div className="mb-6">
+          <div className="flex items-center justify-between gap-4">
+            <div>
+              <span className="text-[9px] uppercase tracking-widest font-mono text-[#00C2FF] font-bold">
+                Setup Wizard
+              </span>
+              <h1 className="text-xl font-bold tracking-tight text-white mt-1">
+                Configure Your Workspace
+              </h1>
             </div>
-          ))}
+            <span className="text-xs font-mono text-slate-400 bg-white/5 px-2.5 py-1 rounded border border-white/5">
+              Step {step} of 6
+            </span>
+          </div>
+
+          {/* Progress bar indicator */}
+          <div className="w-full h-1 bg-white/5 rounded-full mt-4 overflow-hidden">
+            <div 
+              className="h-full bg-gradient-to-r from-[#00C2FF] to-[#00E5A0] rounded-full transition-all duration-300"
+              style={{ width: `${(step / 6) * 100}%` }}
+            />
+          </div>
         </div>
-      </div>
+      )}
 
       {error && (
-        <div className="mb-6 p-4 bg-red-500/10 border border-red-500/20 text-red-400 text-xs rounded-xl flex items-start gap-2.5">
+        <div className="mb-5 p-3.5 bg-red-500/10 border border-red-500/20 text-red-400 text-xs rounded-xl flex items-start gap-2.5">
           <CheckCircle2 className="w-4 h-4 shrink-0 mt-0.5 rotate-180 text-red-400" />
           <span>{error}</span>
         </div>
       )}
 
-      {/* Step 1: Customize Profile & Industry */}
+      {/* STEP 1: Company & Owner Profile */}
       {step === 1 && (
-        <div className="space-y-6">
-          <div className="space-y-1.5">
-            <label className="text-[10px] uppercase tracking-wider text-slate-400 pl-1 font-semibold">
-              Administrator Name
-            </label>
-            <input
-              type="text"
-              required
-              placeholder="Enter your name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2.5 bg-[#081120] border border-white/10 text-slate-100 text-xs rounded-xl focus:outline-none focus:border-[#00C2FF] transition-colors"
-            />
-          </div>
+        <div className="space-y-5">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2">
+            <Building2 className="w-4 h-4 text-[#00C2FF]" /> Company Information
+          </h2>
 
-          <div className="space-y-1.5">
-            <label className="text-[10px] uppercase tracking-wider text-slate-400 pl-1 font-semibold">
-              Select Your Industry
-            </label>
-            <div className="relative">
-              <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
-              <select
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Company Name *</label>
+              <input 
+                type="text" 
+                required 
+                value={companyName}
+                onChange={(e) => setCompanyName(e.target.value)}
+                placeholder="e.g. Apex Realty"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Business Type *</label>
+              <select 
+                value={businessType}
+                onChange={(e) => setBusinessType(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              >
+                <option value="Agency">Agency</option>
+                <option value="SaaS">SaaS/Product</option>
+                <option value="Enterprise">Enterprise</option>
+                <option value="Healthcare">Healthcare Provider</option>
+                <option value="Consulting">Consulting/Education</option>
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Industry *</label>
+              <select 
                 value={industry}
                 onChange={(e) => setIndustry(e.target.value)}
-                className="w-full pl-10 pr-8 py-2.5 bg-[#081120] border border-white/10 text-slate-100 text-xs rounded-xl focus:outline-none focus:border-[#00C2FF] transition-colors appearance-none cursor-pointer"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
               >
                 <option value="real_estate">Real Estate Agencies</option>
                 <option value="marketing">Marketing Agencies</option>
@@ -285,41 +494,599 @@ function OnboardingContent() {
                 <option value="insurance">Insurance Brokers</option>
               </select>
             </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Company Website</label>
+              <input 
+                type="url" 
+                value={companyWebsite}
+                onChange={(e) => setCompanyWebsite(e.target.value)}
+                placeholder="https://apexrealty.com"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Company Size</label>
+              <select 
+                value={companySize}
+                onChange={(e) => setCompanySize(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              >
+                <option value="Solo">Solo Practitioner</option>
+                <option value="2–10 Employees">2–10 Employees</option>
+                <option value="11–50 Employees">11–50 Employees</option>
+                <option value="51–200 Employees">51–200 Employees</option>
+                <option value="200+">200+ Employees</option>
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Time Zone *</label>
+              <input 
+                type="text" 
+                required
+                value={timeZone}
+                onChange={(e) => setTimeZone(e.target.value)}
+                placeholder="GMT+5:30 (IST)"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
           </div>
 
-          <div className="flex items-start gap-3 pl-1 bg-[#00E5A0]/5 border border-[#00E5A0]/10 rounded-xl p-3">
-            <input
-              type="checkbox"
-              id="seedData"
-              checked={seedDemoData}
-              onChange={(e) => setSeedDemoData(e.target.checked)}
-              className="w-4 h-4 rounded border-white/10 bg-[#081120] text-[#00C2FF] focus:ring-[#00C2FF] focus:ring-opacity-25 transition-all cursor-pointer mt-0.5"
-            />
-            <div>
-              <label htmlFor="seedData" className="text-[11px] font-bold text-white select-none cursor-pointer">
-                Pre-populate with sample workspace leads
-              </label>
-              <p className="text-[10px] text-slate-400 mt-0.5 leading-relaxed">
-                Check this option to inject 7 tailored leads, call outcomes, follow-ups, and AI recommendations into your dashboard so you can test all features immediately.
-              </p>
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2 pt-2">
+            <UserIcon className="w-4 h-4 text-[#00E5A0]" /> Account Owner Details
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Full Name *</label>
+              <input 
+                type="text" 
+                required 
+                value={ownerName}
+                onChange={(e) => setOwnerName(e.target.value)}
+                placeholder="Your name"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Work Email *</label>
+              <input 
+                type="email" 
+                required 
+                value={ownerEmail}
+                onChange={(e) => setOwnerEmail(e.target.value)}
+                placeholder="you@company.com"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Mobile Number *</label>
+              <input 
+                type="tel" 
+                required 
+                value={ownerMobile}
+                onChange={(e) => setOwnerMobile(e.target.value)}
+                placeholder="+91 99999 99999"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Job Title</label>
+              <input 
+                type="text" 
+                value={jobTitle}
+                onChange={(e) => setJobTitle(e.target.value)}
+                placeholder="e.g. Sales Director"
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              />
             </div>
           </div>
 
           <button
-            onClick={() => setStep(2)}
-            disabled={!name.trim()}
-            className="w-full py-3 mt-4 bg-[#00E5A0] hover:bg-[#00E5A0]/80 disabled:opacity-50 text-xs font-bold text-[#081120] rounded-xl transition-all shadow-md shadow-[#00E5A0]/25 cursor-pointer flex items-center justify-center gap-2"
+            onClick={() => {
+              if (!companyName.trim() || !ownerName.trim() || !ownerEmail.trim() || !ownerMobile.trim()) {
+                setError("Please fill in all required fields marked with *.");
+                return;
+              }
+              setError("");
+              setStep(2);
+            }}
+            className="w-full py-3 mt-3 bg-[#00E5A0] hover:bg-[#00E5A0]/80 text-xs font-bold text-[#081120] rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#00E5A0]/25 cursor-pointer"
           >
-            <span>Proceed to Billing Setup</span>
+            <span>Continue</span>
             <ArrowRight className="w-4 h-4" />
           </button>
         </div>
       )}
 
-      {/* Step 2: Payment & Mandate Setup */}
+      {/* STEP 2: Goals & Sources */}
       {step === 2 && (
+        <div className="space-y-5">
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2">
+              <Activity className="w-4 h-4 text-[#00C2FF]" /> Business Goals
+            </h2>
+            <p className="text-[10px] text-slate-400 mt-1">What would you like NexDial to help with?</p>
+            <div className="grid grid-cols-2 gap-2 mt-3">
+              {[
+                "Lead Management", "Sales Pipeline", "Customer Support",
+                "WhatsApp Communication", "Team Collaboration", "Appointment Booking",
+                "CRM & Contact Management", "Revenue Tracking"
+              ].map((g) => (
+                <button
+                  key={g}
+                  onClick={() => toggleGoal(g)}
+                  className={`px-3 py-2.5 rounded-xl border text-left text-xs font-medium transition-all ${
+                    goals.includes(g) 
+                      ? "bg-[#0057D9]/20 border-[#00C2FF] text-white" 
+                      : "bg-[#060D1A] border-white/10 text-slate-400 hover:border-white/20"
+                  }`}
+                >
+                  <div className="flex items-center gap-2">
+                    <div className={`w-3.5 h-3.5 rounded border flex items-center justify-center ${goals.includes(g) ? "bg-[#00C2FF] border-[#00C2FF]" : "border-slate-500"}`}>
+                      {goals.includes(g) && <Check className="w-3 h-3 text-slate-900 stroke-[3]" />}
+                    </div>
+                    <span>{g}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2 pt-2">
+              <Globe className="w-4 h-4 text-[#00E5A0]" /> Lead Sources
+            </h2>
+            <p className="text-[10px] text-slate-400 mt-1">Where do your leads come from?</p>
+            <div className="grid grid-cols-3 gap-2 mt-3">
+              {[
+                "Website", "WhatsApp", "Facebook", "Instagram",
+                "Google Ads", "LinkedIn", "Referrals", "Cold Calling", "Other"
+              ].map((src) => (
+                <button
+                  key={src}
+                  onClick={() => toggleLeadSource(src)}
+                  className={`px-3 py-2 rounded-lg border text-center text-xs transition-all ${
+                    leadSources.includes(src) 
+                      ? "bg-[#00E5A0]/10 border-[#00E5A0] text-[#00E5A0]" 
+                      : "bg-[#060D1A] border-white/10 text-slate-400 hover:border-white/20"
+                  }`}
+                >
+                  {src}
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Monthly Leads</label>
+              <select 
+                value={monthlyLeads}
+                onChange={(e) => setMonthlyLeads(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              >
+                <option value="0–100">0–100</option>
+                <option value="101–500">101–500</option>
+                <option value="501–1000">501–1000</option>
+                <option value="1000+">1000+</option>
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Current CRM</label>
+              <select 
+                value={currentCrm}
+                onChange={(e) => setCurrentCrm(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              >
+                <option value="None">None / Spreadsheets</option>
+                <option value="HubSpot">HubSpot</option>
+                <option value="Zoho">Zoho CRM</option>
+                <option value="Salesforce">Salesforce</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Referral Source</label>
+              <select 
+                value={hearAboutUs}
+                onChange={(e) => setHearAboutUs(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
+              >
+                <option value="Google">Google Search</option>
+                <option value="YouTube">YouTube</option>
+                <option value="Referral">Referral / Word of Mouth</option>
+                <option value="Social Media">Social Media</option>
+                <option value="Other">Other</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-3">
+            <button
+              onClick={() => setStep(1)}
+              className="flex-1 py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={() => {
+                if (goals.length === 0) {
+                  setError("Please select at least one business goal.");
+                  return;
+                }
+                setError("");
+                setStep(3);
+              }}
+              className="flex-[2] py-3 bg-[#00E5A0] hover:bg-[#00E5A0]/80 text-xs font-bold text-[#081120] rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#00E5A0]/25 cursor-pointer"
+            >
+              <span>Continue</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 3: Channels & Branding */}
+      {step === 3 && (
+        <div className="space-y-5">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2">
+            <Smartphone className="w-4 h-4 text-[#00C2FF]" /> Communication Channels
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-1.5 p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+              <label className="text-[10px] uppercase font-bold text-slate-300 flex items-center gap-1"><MessageSquare className="w-3.5 h-3.5 text-green-400" /> WhatsApp Integration</label>
+              <input 
+                type="tel"
+                value={channels.whatsappNumber}
+                onChange={(e) => setChannels({...channels, whatsappNumber: e.target.value})}
+                placeholder="WhatsApp Number"
+                className="w-full px-3 py-1.5 bg-[#060D1A] border border-white/10 rounded-lg text-xs text-white"
+              />
+              <div className="flex items-center justify-between text-[10px] pt-1">
+                <span className="text-slate-400">Has WhatsApp Business account?</span>
+                <select 
+                  value={channels.whatsappHasAccount}
+                  onChange={(e) => setChannels({...channels, whatsappHasAccount: e.target.value})}
+                  className="bg-[#060D1A] text-white border border-white/10 rounded px-1.5 py-0.5"
+                >
+                  <option value="No">No</option>
+                  <option value="Yes">Yes</option>
+                </select>
+              </div>
+            </div>
+
+            <div className="space-y-1.5 p-3 bg-white/[0.02] border border-white/5 rounded-xl">
+              <label className="text-[10px] uppercase font-bold text-slate-300 flex items-center gap-1"><Mail className="w-3.5 h-3.5 text-[#00C2FF]" /> Email Setup</label>
+              <input 
+                type="email"
+                value={channels.salesEmail}
+                onChange={(e) => setChannels({...channels, salesEmail: e.target.value})}
+                placeholder="Sales Email (e.g. sales@company.com)"
+                className="w-full px-3 py-1.5 bg-[#060D1A] border border-white/10 rounded-lg text-xs text-white"
+              />
+              <input 
+                type="email"
+                value={channels.supportEmail}
+                onChange={(e) => setChannels({...channels, supportEmail: e.target.value})}
+                placeholder="Support Email (e.g. support@company.com)"
+                className="w-full px-3 py-1.5 bg-[#060D1A] border border-white/10 rounded-lg text-xs text-white"
+              />
+            </div>
+          </div>
+
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2 pt-2">
+            <Palette className="w-4 h-4 text-[#00E5A0]" /> Workspace Branding
+          </h2>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="space-y-3">
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-slate-400">Brand Name</label>
+                <input 
+                  type="text"
+                  value={brandName}
+                  onChange={(e) => setBrandName(e.target.value)}
+                  placeholder="Brand / Display Name"
+                  className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs"
+                />
+              </div>
+
+              <div className="space-y-1">
+                <label className="text-[10px] uppercase font-bold text-slate-400">Tagline / Motto</label>
+                <input 
+                  type="text"
+                  value={brandTagline}
+                  onChange={(e) => setBrandTagline(e.target.value)}
+                  placeholder="Your brand tagline"
+                  className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs"
+                />
+              </div>
+            </div>
+
+            {/* Logo upload simulator & Brand color picker */}
+            <div className="flex flex-col justify-between p-3.5 bg-white/[0.02] border border-white/5 rounded-xl gap-3">
+              <div className="flex items-center justify-between text-xs">
+                <span className="text-slate-400">Primary Brand Color</span>
+                <div className="flex items-center gap-2">
+                  <input 
+                    type="color" 
+                    value={brandColor} 
+                    onChange={(e) => setBrandColor(e.target.value)}
+                    className="w-6 h-6 border-none cursor-pointer rounded-full overflow-hidden" 
+                  />
+                  <span className="font-mono text-[10px] text-slate-300">{brandColor.toUpperCase()}</span>
+                </div>
+              </div>
+
+              <div 
+                onClick={() => setLogoUploaded(true)}
+                className={`border border-dashed rounded-xl p-3 flex flex-col items-center justify-center cursor-pointer transition-colors ${logoUploaded ? 'border-green-500/30 bg-green-500/5 text-green-400' : 'border-white/10 hover:border-white/20 text-slate-400'}`}
+              >
+                <UploadCloud className="w-5 h-5 mb-1" />
+                <span className="text-[10.5px] font-bold">
+                  {logoUploaded ? "Company Logo Uploaded" : "Upload Company Logo"}
+                </span>
+                <span className="text-[8px] text-slate-500 mt-0.5">Supports PNG, JPG, SVG up to 2MB</span>
+              </div>
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-3">
+            <button
+              onClick={() => setStep(2)}
+              className="flex-1 py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={() => setStep(4)}
+              className="flex-[2] py-3 bg-[#00E5A0] hover:bg-[#00E5A0]/80 text-xs font-bold text-[#081120] rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#00E5A0]/25 cursor-pointer"
+            >
+              <span>Continue</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 4: Pipeline & Team Setup */}
+      {step === 4 && (
+        <div className="space-y-5">
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2">
+            <Settings className="w-4 h-4 text-[#00C2FF]" /> Sales Pipeline Settings
+          </h2>
+
+          <div className="space-y-3">
+            <div className="space-y-1">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Pipeline Name</label>
+              <input 
+                type="text" 
+                value={pipelineName}
+                onChange={(e) => setPipelineName(e.target.value)}
+                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs"
+              />
+            </div>
+            
+            <div className="space-y-1.5">
+              <label className="text-[10px] uppercase font-bold text-slate-400">Default Stages</label>
+              <div className="flex flex-wrap gap-1.5">
+                {pipelineStages.map((stage) => (
+                  <span 
+                    key={stage} 
+                    className="px-2.5 py-1 bg-[#060D1A] border border-white/5 rounded-lg text-[10.5px] text-slate-300 flex items-center gap-1"
+                  >
+                    <span>{stage}</span>
+                  </span>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2 pt-2">
+            <UserIcon className="w-4 h-4 text-[#00E5A0]" /> Team Setup (Add members)
+          </h2>
+
+          {/* Add team member card */}
+          <div className="bg-[#060D1A] border border-white/5 p-4 rounded-2xl space-y-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <input 
+                type="text"
+                placeholder="Full Name"
+                value={newMemberName}
+                onChange={(e) => setNewMemberName(e.target.value)}
+                className="px-3 py-2 bg-[#0A1628] border border-white/10 rounded-lg text-xs"
+              />
+              <input 
+                type="email"
+                placeholder="Email Address"
+                value={newMemberEmail}
+                onChange={(e) => setNewMemberEmail(e.target.value)}
+                className="px-3 py-2 bg-[#0A1628] border border-white/10 rounded-lg text-xs"
+              />
+              <select
+                value={newMemberRole}
+                onChange={(e) => setNewMemberRole(e.target.value)}
+                className="px-3 py-2 bg-[#0A1628] border border-white/10 rounded-lg text-xs"
+              >
+                <option value="Admin">Admin</option>
+                <option value="Manager">Manager</option>
+                <option value="Sales Executive">Sales Executive</option>
+                <option value="Support Agent">Support Agent</option>
+                <option value="Marketing">Marketing</option>
+              </select>
+            </div>
+            <button 
+              onClick={addTeamMember}
+              className="px-4 py-2 bg-[#0057D9] hover:bg-[#0057D9]/90 text-white text-[11px] font-bold rounded-lg transition-colors flex items-center gap-1"
+            >
+              <Plus className="w-3.5 h-3.5" /> Add Team Member
+            </button>
+          </div>
+
+          {/* Added team members list */}
+          {teamMembers.length > 0 && (
+            <div className="space-y-1.5">
+              <p className="text-[10px] uppercase font-bold text-slate-400">Designated Team ({teamMembers.length})</p>
+              <div className="divide-y divide-white/5 border border-white/10 rounded-xl overflow-hidden bg-white/[0.01]">
+                {teamMembers.map((member, idx) => (
+                  <div key={idx} className="px-4 py-2.5 flex items-center justify-between text-xs">
+                    <div>
+                      <p className="font-bold text-white">{member.name}</p>
+                      <p className="text-[10px] text-slate-400">{member.email}</p>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <span className="px-2 py-0.5 bg-[#00C2FF]/10 text-[#00C2FF] rounded text-[9px] uppercase font-mono font-bold">
+                        {member.role}
+                      </span>
+                      <button 
+                        onClick={() => deleteTeamMember(idx)}
+                        className="text-red-400 hover:text-red-350 p-1 rounded hover:bg-red-500/10 transition-all cursor-pointer"
+                      >
+                        <Trash2 className="w-3.5 h-3.5" />
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          )}
+
+          <div className="flex gap-4 pt-3">
+            <button
+              onClick={() => setStep(3)}
+              className="flex-1 py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={() => setStep(5)}
+              className="flex-[2] py-3 bg-[#00E5A0] hover:bg-[#00E5A0]/80 text-xs font-bold text-[#081120] rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#00E5A0]/25 cursor-pointer"
+            >
+              <span>Continue</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 5: AI Config & Alerts */}
+      {step === 5 && (
+        <div className="space-y-5">
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2">
+              <Bot className="w-4 h-4 text-[#00C2FF]" /> AI Configuration
+            </h2>
+            <p className="text-[10px] text-slate-400 mt-1">Select AI Features to Enable</p>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-2.5 mt-3">
+              {[
+                "AI Lead Scoring", "AI Follow-up Suggestions", "AI Revenue Forecasting",
+                "AI Contact Summaries", "AI Priority Alerts"
+              ].map((feat) => (
+                <button
+                  key={feat}
+                  onClick={() => toggleAiFeature(feat)}
+                  className={`px-3 py-2.5 rounded-xl border text-left text-xs transition-all ${
+                    aiFeatures.includes(feat) 
+                      ? "bg-[#00C2FF]/10 border-[#00C2FF] text-white" 
+                      : "bg-[#060D1A] border-white/10 text-slate-450"
+                  }`}
+                >
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-2">
+                      <Sparkles className={`w-4 h-4 ${aiFeatures.includes(feat) ? "text-[#00C2FF]" : "text-slate-500"}`} />
+                      <span>{feat}</span>
+                    </div>
+                    {aiFeatures.includes(feat) && <Check className="w-3.5 h-3.5 text-[#00E5A0]" />}
+                  </div>
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <h2 className="text-xs font-bold uppercase tracking-wider text-slate-300 flex items-center gap-1.5 border-b border-white/5 pb-2 pt-2">
+              <Bell className="w-4 h-4 text-[#00E5A0]" /> Alerts & Reporting
+            </h2>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-3">
+              
+              <div className="space-y-2">
+                <label className="text-[10px] uppercase font-bold text-slate-400 pl-1">Receive Alerts Via</label>
+                <div className="flex flex-col gap-2">
+                  {["Email", "WhatsApp", "Browser Notifications"].map((ch) => (
+                    <button
+                      key={ch}
+                      onClick={() => toggleAlertChannel(ch)}
+                      className={`px-3 py-1.5 rounded-lg border text-left text-[11px] transition-all ${
+                        alertChannels.includes(ch) 
+                          ? "bg-[#00E5A0]/10 border-[#00E5A0] text-[#00E5A0]" 
+                          : "bg-[#060D1A] border-white/10 text-slate-450"
+                      }`}
+                    >
+                      {ch}
+                    </button>
+                  ))}
+                </div>
+              </div>
+
+              <div className="space-y-3 bg-white/[0.01] border border-white/5 p-3 rounded-xl flex flex-col justify-center">
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Daily Summary Report</span>
+                  <select 
+                    value={dailySummary}
+                    onChange={(e) => setDailySummary(e.target.value)}
+                    className="bg-[#060D1A] text-white border border-white/10 rounded px-1.5 py-0.5"
+                  >
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+
+                <div className="flex items-center justify-between text-xs">
+                  <span className="text-slate-400">Weekly Performance Report</span>
+                  <select 
+                    value={weeklyReport}
+                    onChange={(e) => setWeeklyReport(e.target.value)}
+                    className="bg-[#060D1A] text-white border border-white/10 rounded px-1.5 py-0.5"
+                  >
+                    <option value="Yes">Yes</option>
+                    <option value="No">No</option>
+                  </select>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          <div className="flex gap-4 pt-3">
+            <button
+              onClick={() => setStep(4)}
+              className="flex-1 py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
+            >
+              <ArrowLeft className="w-4 h-4" /> Back
+            </button>
+            <button
+              onClick={() => setStep(6)}
+              className="flex-[2] py-3 bg-[#00E5A0] hover:bg-[#00E5A0]/80 text-xs font-bold text-[#081120] rounded-xl transition-all flex items-center justify-center gap-1.5 shadow-md shadow-[#00E5A0]/25 cursor-pointer"
+            >
+              <span>Continue</span>
+              <ArrowRight className="w-4 h-4" />
+            </button>
+          </div>
+        </div>
+      )}
+
+      {/* STEP 6: Secure Mandate Verification */}
+      {step === 6 && (
         <div className="space-y-6">
-          {/* Plan Info Card */}
           <div className="bg-[#0A1628] border border-white/10 rounded-2xl p-5 relative overflow-hidden">
             <div className="absolute top-0 right-0 w-24 h-24 bg-[#0057D9]/20 rounded-full blur-2xl pointer-events-none" />
             <div className="flex items-center justify-between">
@@ -329,13 +1096,27 @@ function OnboardingContent() {
                 </span>
                 <h3 className="text-base font-bold text-white mt-2">15-Day Free Trial Period</h3>
                 <p className="text-[10.5px] text-slate-400 mt-1 leading-relaxed">
-                  Start testing NexDial with full access. After the 15-day trial, auto-renewal begins at the standard package rate.
+                  Start testing NexDial with full access. After the trial, auto-renewal begins at your selected plan rate.
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-xs text-slate-500 line-through">₹4,999</p>
+                <p className="text-[9px] text-slate-500 uppercase tracking-wide mb-1">Auth Charge</p>
                 <p className="text-2xl font-black text-white">₹1</p>
-                <p className="text-[9px] text-[#00E5A0] font-bold">Verification Auth</p>
+                <p className="text-[9px] text-[#00E5A0] font-bold">Verification Only</p>
+              </div>
+            </div>
+
+            {/* Pricing Tiers */}
+            <div className="mt-4 grid grid-cols-2 gap-2">
+              <div className="bg-[#050A15] border border-[#00C2FF]/20 rounded-xl p-3">
+                <p className="text-[9px] uppercase tracking-wider text-[#00C2FF] font-bold">Small Business</p>
+                <p className="text-xl font-black text-white mt-1">₹499<span className="text-xs font-normal text-slate-400">/mo</span></p>
+                <p className="text-[9px] text-slate-400 mt-0.5">Solo — 10 Users</p>
+              </div>
+              <div className="bg-[#050A15] border border-purple-500/20 rounded-xl p-3">
+                <p className="text-[9px] uppercase tracking-wider text-purple-400 font-bold">Medium Business</p>
+                <p className="text-xl font-black text-white mt-1">₹599<span className="text-xs font-normal text-slate-400">/mo</span></p>
+                <p className="text-[9px] text-slate-400 mt-0.5">11 — 50 Users</p>
               </div>
             </div>
 
@@ -347,22 +1128,22 @@ function OnboardingContent() {
           </div>
 
           <div className="text-center py-2 space-y-2">
-            <p className="text-[11px] text-slate-400 leading-relaxed max-w-md mx-auto">
+            <p className="text-[11px] text-slate-450 leading-relaxed max-w-md mx-auto">
               We process a fully-refundable **₹1 authorization charge** to establish the secure auto-pay e-mandate via Razorpay. No further charges will occur until your trial ends.
             </p>
           </div>
 
           <div className="flex gap-4">
             <button
-              onClick={() => setStep(1)}
-              className="flex-1 py-3 border border-white/15 hover:border-white/30 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer"
+              onClick={() => setStep(5)}
+              className="flex-1 py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
             >
-              Back
+              <ArrowLeft className="w-4 h-4" /> Back
             </button>
             <button
-              onClick={handlePaymentInitiate}
+              onClick={handleRazorpaySetup}
               disabled={loadingPayment}
-              className="flex-[2] py-3 bg-[#528FF0] hover:bg-[#528FF0]/90 text-xs font-bold text-white rounded-xl transition-all shadow-lg shadow-[#528FF0]/20 cursor-pointer flex items-center justify-center gap-2"
+              className="flex-[2] py-3 bg-[#0057D9] hover:bg-[#0057D9]/90 text-xs font-bold text-white rounded-xl transition-all shadow-lg shadow-[#0057D9]/25 cursor-pointer flex items-center justify-center gap-2"
             >
               {loadingPayment ? (
                 <>
@@ -380,211 +1161,57 @@ function OnboardingContent() {
         </div>
       )}
 
-      {/* Step 3: Seeding / Setting up Workspace Progress */}
-      {step === 3 && (
+      {/* STEP 7: Loader & Final Submit Provisioner */}
+      {step === 7 && (
         <div className="space-y-8 py-6 text-center">
           <div className="relative w-20 h-20 mx-auto">
-            {/* Circular glowing aura */}
             <div className="absolute inset-0 bg-[#00E5A0]/20 rounded-full blur-lg animate-pulse" />
             <div className="absolute inset-0 border-2 border-[#00E5A0]/20 rounded-full" />
             <div className="absolute inset-0 border-2 border-t-[#00E5A0] rounded-full animate-spin" />
             <div className="absolute inset-2 bg-[#081120] rounded-full flex items-center justify-center">
-              <span className="text-base font-bold text-[#00E5A0]">{progress}%</span>
+              <span className="text-sm font-bold text-[#00E5A0]">{progress}%</span>
             </div>
           </div>
 
           <div className="space-y-2 max-w-sm mx-auto">
-            <h3 className="text-base font-bold text-white">Customizing Your Workspace</h3>
-            <p className="text-xs text-slate-400 leading-normal animate-pulse min-h-[36px]">
+            <h3 className="text-base font-bold text-white">Welcome to NexDial 🚀</h3>
+            <p className="text-xs text-slate-400 font-medium">Your workspace is being prepared.</p>
+            <p className="text-[10.5px] text-[#00C2FF] leading-normal animate-pulse min-h-[30px] mt-2 font-mono">
               {progressStatus}
             </p>
           </div>
 
-          {/* Linear progress bar */}
+          {/* Action checkboxes */}
+          <div className="max-w-sm mx-auto bg-white/[0.01] border border-white/5 rounded-2xl p-4 text-left space-y-2 text-xs">
+            <p className="text-[9.5px] uppercase font-bold text-slate-500 mb-2.5">NexDial Ingestion Pipeline</p>
+            {[
+              "Create your CRM workspace",
+              "Generate your sales pipeline",
+              "Configure AI lead scoring",
+              "Set up team permissions",
+              "Enable reporting dashboard",
+              "Prepare communication inbox"
+            ].map((action) => {
+              const isDone = completedActions.includes(action);
+              return (
+                <div key={action} className="flex items-center gap-2.5 py-0.5">
+                  <div className={`w-4 h-4 rounded-full flex items-center justify-center border transition-all ${isDone ? 'bg-[#00E5A0] border-[#00E5A0] text-slate-900' : 'border-white/10 bg-white/5'}`}>
+                    {isDone ? <Check className="w-2.5 h-2.5 stroke-[3]" /> : <div className="w-1 h-1 bg-white/20 rounded-full" />}
+                  </div>
+                  <span className={`text-[11px] ${isDone ? 'text-white font-medium' : 'text-slate-500'}`}>
+                    {action}
+                  </span>
+                </div>
+              );
+            })}
+          </div>
+
+          {/* Progress bar */}
           <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
             <div 
               className="h-full bg-gradient-to-r from-[#00C2FF] to-[#00E5A0] rounded-full transition-all duration-300"
               style={{ width: `${progress}%` }}
             />
-          </div>
-        </div>
-      )}
-
-      {/* Simulated Razorpay Checkout Modal Overlay */}
-      {showMockRazorpay && (
-        <div className="fixed inset-0 bg-black/80 backdrop-blur-sm flex items-center justify-center z-50 p-4 transition-all duration-300">
-          <div className="bg-[#1A263B] border border-white/10 rounded-2xl w-full max-w-sm shadow-2xl overflow-hidden text-xs text-slate-350">
-            {/* Razorpay signature header */}
-            <div className="bg-[#2B3B54] p-4 text-white flex items-center justify-between border-b border-white/5">
-              <div className="flex items-center gap-2.5">
-                <div className="w-7 h-7 rounded bg-[#528FF0] flex items-center justify-center text-white font-black text-sm select-none shadow">
-                  R
-                </div>
-                <div>
-                  <h3 className="font-bold text-xs">Razorpay Secure Checkout</h3>
-                  <p className="text-[9px] text-[#A5B8D0] mt-0.5">NexDial CCOS Onboarding</p>
-                </div>
-              </div>
-              <div className="text-right">
-                <p className="text-[9px] text-[#A5B8D0] uppercase tracking-wider">Amount</p>
-                <p className="font-bold text-sm text-[#00E5A0]">₹1.00</p>
-              </div>
-            </div>
-
-            {/* Simulated Payment Area */}
-            <div className="p-5 space-y-4">
-              <div className="bg-[#131D30] border border-white/5 p-3 rounded-xl flex items-center justify-between">
-                <span className="text-[10px] text-slate-400 font-semibold uppercase tracking-wider">Recurring Mandate Auth</span>
-                <span className="px-2 py-0.5 bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-[#00E5A0] text-[8px] font-bold rounded-full uppercase">15-Day Trial</span>
-              </div>
-
-              {/* Payment Methods tabs */}
-              <div className="grid grid-cols-2 gap-2 border-b border-white/5 pb-3">
-                <button
-                  onClick={() => setMockPaymentMethod("upi")}
-                  className={`py-2 text-center rounded-lg font-bold border transition-colors ${
-                    mockPaymentMethod === "upi"
-                      ? "bg-[#528FF0]/10 border-[#528FF0] text-white"
-                      : "bg-[#131D30] border-transparent hover:border-white/10 text-slate-450"
-                  }`}
-                >
-                  UPI Autopay
-                </button>
-                <button
-                  onClick={() => setMockPaymentMethod("card")}
-                  className={`py-2 text-center rounded-lg font-bold border transition-colors ${
-                    mockPaymentMethod === "card"
-                      ? "bg-[#528FF0]/10 border-[#528FF0] text-white"
-                      : "bg-[#131D30] border-transparent hover:border-white/10 text-slate-450"
-                  }`}
-                >
-                  Card Mandate
-                </button>
-              </div>
-
-              {mockPaymentMethod === "upi" ? (
-                <div className="space-y-3">
-                  <div className="space-y-1">
-                    <label className="text-[10px] text-slate-400 font-semibold">Enter UPI ID</label>
-                    <input
-                      type="text"
-                      placeholder="e.g. name@okhdfcbank"
-                      value={upiId}
-                      onChange={(e) => setUpiId(e.target.value)}
-                      className="w-full px-3 py-2 bg-[#131D30] border border-white/10 text-white rounded-lg placeholder-slate-600 focus:outline-none focus:border-[#528FF0]"
-                    />
-                  </div>
-                  <div className="p-3 bg-white/[0.02] border border-white/[0.04] rounded-lg">
-                    <p className="text-[9.5px] leading-relaxed text-slate-400">
-                      We will initiate a ₹1 e-mandate authentication request in your UPI application. Approve it to start your trial.
-                    </p>
-                  </div>
-                </div>
-              ) : (
-                <div className="space-y-3">
-                  {!otpSent ? (
-                    <>
-                      <div className="space-y-1">
-                        <label className="text-[10px] text-slate-400 font-semibold">Card Number</label>
-                        <input
-                          type="text"
-                          placeholder="4111 2222 3333 4444"
-                          maxLength={19}
-                          value={cardNumber}
-                          onChange={(e) => {
-                            // Simple auto space formatter
-                            const val = e.target.value.replace(/\s+/g, "").replace(/[^0-9]/gi, "");
-                            const matches = val.match(/\d{4,16}/g);
-                            const match = (matches && matches[0]) || "";
-                            const parts = [];
-                            for (let i = 0, len = match.length; i < len; i += 4) {
-                              parts.push(match.substring(i, i + 4));
-                            }
-                            setCardNumber(parts.length > 0 ? parts.join(" ") : val);
-                          }}
-                          className="w-full px-3 py-2 bg-[#131D30] border border-white/10 text-white rounded-lg placeholder-slate-650 focus:outline-none focus:border-[#528FF0]"
-                        />
-                      </div>
-                      <div className="grid grid-cols-2 gap-3">
-                        <div className="space-y-1">
-                          <label className="text-[10px] text-slate-400 font-semibold">Expiry (MM/YY)</label>
-                          <input
-                            type="text"
-                            placeholder="12/28"
-                            maxLength={5}
-                            value={cardExpiry}
-                            onChange={(e) => {
-                              const val = e.target.value.replace(/[^0-9]/g, "");
-                              if (val.length >= 2 && !e.target.value.includes("/")) {
-                                setCardExpiry(`${val.substring(0, 2)}/${val.substring(2, 4)}`);
-                              } else {
-                                setCardExpiry(e.target.value);
-                              }
-                            }}
-                            className="w-full px-3 py-2 bg-[#131D30] border border-white/10 text-white rounded-lg placeholder-slate-650 focus:outline-none focus:border-[#528FF0] text-center"
-                          />
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-[10px] text-slate-400 font-semibold">CVV</label>
-                          <input
-                            type="password"
-                            placeholder="***"
-                            maxLength={3}
-                            value={cardCvv}
-                            onChange={(e) => setCardCvv(e.target.value.replace(/[^0-9]/g, ""))}
-                            className="w-full px-3 py-2 bg-[#131D30] border border-white/10 text-white rounded-lg placeholder-slate-650 focus:outline-none focus:border-[#528FF0] text-center"
-                          />
-                        </div>
-                      </div>
-                    </>
-                  ) : (
-                    <div className="space-y-3 text-center py-2">
-                      <p className="text-[10px] text-[#00E5A0] font-bold">3D-Secure Authentication Required</p>
-                      <p className="text-[10.5px] text-slate-400">
-                        Enter the simulated 6-digit OTP code sent to your phone number for validation.
-                      </p>
-                      <input
-                        type="text"
-                        placeholder="123456"
-                        maxLength={6}
-                        value={otpCode}
-                        onChange={(e) => setOtpCode(e.target.value.replace(/[^0-9]/g, ""))}
-                        className="w-24 px-3 py-2 bg-[#131D30] border border-white/10 text-white text-center rounded-lg tracking-widest text-sm focus:outline-none focus:border-[#528FF0] mx-auto block"
-                      />
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Razorpay Footer controls */}
-            <div className="p-4 bg-[#131D30] border-t border-white/5 flex gap-3">
-              <button
-                onClick={() => {
-                  setShowMockRazorpay(false);
-                  setOtpSent(false);
-                  setOtpCode("");
-                }}
-                disabled={loadingPayment}
-                className="flex-1 py-2.5 border border-white/10 hover:border-white/20 text-slate-400 hover:text-white rounded-lg font-semibold transition-all cursor-pointer text-center"
-              >
-                Cancel
-              </button>
-              <button
-                onClick={handleMockPaymentSubmit}
-                disabled={loadingPayment || (otpSent && otpCode.length < 6)}
-                className="flex-[2] py-2.5 bg-[#528FF0] hover:bg-[#528FF0]/90 disabled:opacity-50 text-white rounded-lg font-bold transition-all cursor-pointer flex items-center justify-center gap-1.5 shadow-md shadow-[#528FF0]/10"
-              >
-                {loadingPayment ? (
-                  <Loader2 className="w-3.5 h-3.5 animate-spin text-white" />
-                ) : (
-                  <>
-                    <ShieldCheck className="w-3.5 h-3.5 text-[#00E5A0]" />
-                    <span>{otpSent ? "Verify OTP" : "Authorise ₹1"}</span>
-                  </>
-                )}
-              </button>
-            </div>
           </div>
         </div>
       )}

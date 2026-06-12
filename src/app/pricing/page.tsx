@@ -9,7 +9,7 @@ import Link from "next/link";
 const plans = [
   {
     name: "Starter Inbox",
-    price: { USD: 19, INR: 1500 },
+    price: { USD: 6, INR: 499 },
     icon: Inbox,
     desc: "Perfect for solopreneurs or micro-businesses looking to organize customer inquiries in one place.",
     features: [
@@ -21,11 +21,12 @@ const plans = [
       "Standard Email Support"
     ],
     color: "#0057D9",
-    popular: false
+    popular: false,
+    trial: true
   },
   {
     name: "Professional CRM",
-    price: { USD: 39, INR: 3200 },
+    price: { USD: 8, INR: 599 },
     icon: Zap,
     desc: "For growing teams that want to automate follow-ups and track leads in a visual pipeline.",
     features: [
@@ -38,11 +39,12 @@ const plans = [
       "Daily Performance Analytics Dashboard"
     ],
     color: "#8B5CF6",
-    popular: true
+    popular: true,
+    trial: false
   },
   {
     name: "Growth Engine",
-    price: { USD: 79, INR: 6500 },
+    price: { USD: 12, INR: 999 },
     icon: Brain,
     desc: "For businesses wanting to leverage self-learning AI recommendations and advanced pipeline forecasting.",
     features: [
@@ -55,7 +57,8 @@ const plans = [
       "Custom Webhook & API Integrations"
     ],
     color: "#00E5A0",
-    popular: false
+    popular: false,
+    trial: false
   }
 ];
 
@@ -64,19 +67,22 @@ export default function PricingPage() {
   const [billingPeriod, setBillingPeriod] = useState<"monthly" | "yearly">("monthly");
   
   // Custom Quote Calculator state
-  const [users, setUsers] = useState(5);
-  const [leads, setLeads] = useState(1000);
+  const [agents, setAgents] = useState(3);
+  const [waNumbers, setWaNumbers] = useState(1);
+  const [leads, setLeads] = useState(500);
 
   const calculateCustomQuote = () => {
-    const basePrice = 15;
-    const perUser = 10;
-    const perLead = 0.005;
-    const rawUSD = basePrice + (users * perUser) + (leads * perLead);
-    const multiplier = billingPeriod === "yearly" ? 0.8 : 1; // 20% discount
-    const finalUSD = Math.round(rawUSD * multiplier);
-    return currency === "USD" 
-      ? `$${finalUSD.toLocaleString("en-US")}` 
-      : `₹${Math.round(finalUSD * 83).toLocaleString("en-IN")}`;
+    // INR-native pricing
+    const perAgent = 299;       // ₹299 per sales agent/month
+    const perWANumber = 199;    // ₹199 per WhatsApp channel/month
+    const perLead = 0.5;        // ₹0.50 per lead tracked/month
+    const basePlatform = 199;   // ₹199 base platform fee
+    const rawINR = basePlatform + (agents * perAgent) + (waNumbers * perWANumber) + (leads * perLead);
+    const multiplier = billingPeriod === "yearly" ? 0.8 : 1;
+    const finalINR = Math.round(rawINR * multiplier);
+    return currency === "USD"
+      ? `$${Math.round(finalINR / 84).toLocaleString("en-US")}`
+      : `₹${finalINR.toLocaleString("en-IN")}`;
   };
 
   return (
@@ -162,6 +168,18 @@ export default function PricingPage() {
                     </div>
                   )}
 
+                  {/* Trial Badge for Starter Inbox */}
+                  {plan.trial && (
+                    <div className="absolute top-4 right-4 flex flex-col items-end gap-1">
+                      <div className="px-2.5 py-1 rounded-full bg-[#00E5A0]/15 border border-[#00E5A0]/30 text-[9px] font-extrabold uppercase tracking-wider text-[#00E5A0] flex items-center gap-1">
+                        <span>🎉</span> 15-Day Free Trial
+                      </div>
+                      <div className="px-2.5 py-1 rounded-full bg-[#0057D9]/20 border border-[#0057D9]/30 text-[9px] font-bold text-[#60A5FA]">
+                        Only ₹1 to start
+                      </div>
+                    </div>
+                  )}
+
                   {/* Top */}
                   <div className="space-y-6">
                     <div className="flex items-center gap-3">
@@ -182,7 +200,12 @@ export default function PricingPage() {
                       <span className="text-4xl font-extrabold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                         {symbol}{displayPrice.toLocaleString()}
                       </span>
-                      <span className="text-xs text-[#64748B]">/ user / month</span>
+                      <span className="text-xs text-[#64748B]">/ month</span>
+                      {plan.trial && (
+                        <span className="ml-2 text-[10px] font-bold text-[#00E5A0] bg-[#00E5A0]/10 border border-[#00E5A0]/20 px-2 py-0.5 rounded-full">
+                          after trial
+                        </span>
+                      )}
                     </div>
 
                     {/* Features List */}
@@ -197,16 +220,23 @@ export default function PricingPage() {
                   </div>
 
                   {/* Bottom Action */}
-                  <div className="pt-8">
+                  <div className="pt-8 space-y-2">
+                    {plan.trial && (
+                      <div className="w-full py-2 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-center text-[10px] text-[#00E5A0] font-bold">
+                        🎉 Try FREE for 15 Days — Pay just ₹1 today
+                      </div>
+                    )}
                     <Link
                       href="/signup"
                       className={`w-full py-3.5 rounded-lg text-xs font-bold text-center block transition-all ${
-                        plan.popular
+                        plan.trial
+                          ? "bg-gradient-to-r from-[#0057D9] to-[#00C2FF] text-white hover:shadow-lg hover:shadow-[#0057D9]/30"
+                          : plan.popular
                           ? "bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] text-white hover:shadow-lg hover:shadow-[#8B5CF6]/30"
                           : "bg-white/[0.03] border border-white/[0.08] text-white hover:bg-white/[0.06]"
                       }`}
                     >
-                      Get Started with {plan.name}
+                      {plan.trial ? "Start Free Trial (₹1 only)" : `Get Started with ${plan.name}`}
                     </Link>
                   </div>
                 </div>
@@ -222,67 +252,115 @@ export default function PricingPage() {
             <div className="space-y-6">
               <div>
                 <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-wider block mb-1">
-                  Flexible Scaling
+                  Build Your NexDial Plan
                 </span>
                 <h3 className="text-2xl font-bold text-white">
-                  Estimate Your Monthly Outlay
+                  Estimate Your Monthly Cost
                 </h3>
+                <p className="text-xs text-[#64748B] mt-1">
+                  Adjust your team size, WhatsApp channels, and lead volume to get an instant price.
+                </p>
               </div>
 
-              {/* Slider 1 */}
+              {/* Slider 1 — Sales Agents */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-semibold">
-                  <span className="text-[#94A3B8]">Team Member Seats:</span>
-                  <span className="text-[#00C2FF]">{users} Seats</span>
+                  <span className="text-[#94A3B8]">Sales Agents / CRM Users:</span>
+                  <span className="text-[#00C2FF]">{agents} {agents === 1 ? "Agent" : "Agents"} &nbsp;<span className="text-[#64748B] font-normal">@ ₹299/agent</span></span>
                 </div>
                 <input
                   type="range"
                   min="1"
                   max="50"
                   step="1"
-                  value={users}
-                  onChange={(e) => setUsers(parseInt(e.target.value))}
+                  value={agents}
+                  onChange={(e) => setAgents(parseInt(e.target.value))}
                   className="w-full h-1 bg-white/[0.06] rounded-lg appearance-none cursor-pointer accent-[#0057D9]"
                 />
+                <div className="flex justify-between text-[10px] text-[#475569]">
+                  <span>1 (Solo)</span><span>10</span><span>25</span><span>50</span>
+                </div>
               </div>
 
-              {/* Slider 2 */}
+              {/* Slider 2 — WhatsApp Numbers */}
+              <div className="space-y-2">
+                <div className="flex justify-between text-xs font-semibold">
+                  <span className="text-[#94A3B8]">WhatsApp Business Channels:</span>
+                  <span className="text-[#00C2FF]">{waNumbers} {waNumbers === 1 ? "Number" : "Numbers"} &nbsp;<span className="text-[#64748B] font-normal">@ ₹199/number</span></span>
+                </div>
+                <input
+                  type="range"
+                  min="1"
+                  max="10"
+                  step="1"
+                  value={waNumbers}
+                  onChange={(e) => setWaNumbers(parseInt(e.target.value))}
+                  className="w-full h-1 bg-white/[0.06] rounded-lg appearance-none cursor-pointer accent-[#25D366]"
+                />
+                <div className="flex justify-between text-[10px] text-[#475569]">
+                  <span>1</span><span>3</span><span>5</span><span>10</span>
+                </div>
+              </div>
+
+              {/* Slider 3 — Monthly Leads */}
               <div className="space-y-2">
                 <div className="flex justify-between text-xs font-semibold">
                   <span className="text-[#94A3B8]">Monthly Leads Tracked:</span>
-                  <span className="text-[#00C2FF]">{leads.toLocaleString()} Leads</span>
+                  <span className="text-[#00C2FF]">{leads.toLocaleString("en-IN")} Leads &nbsp;<span className="text-[#64748B] font-normal">@ ₹0.50/lead</span></span>
                 </div>
                 <input
                   type="range"
                   min="100"
-                  max="10000"
+                  max="5000"
                   step="100"
                   value={leads}
                   onChange={(e) => setLeads(parseInt(e.target.value))}
-                  className="w-full h-1 bg-white/[0.06] rounded-lg appearance-none cursor-pointer accent-[#0057D9]"
+                  className="w-full h-1 bg-white/[0.06] rounded-lg appearance-none cursor-pointer accent-[#8B5CF6]"
                 />
+                <div className="flex justify-between text-[10px] text-[#475569]">
+                  <span>100</span><span>1,000</span><span>2,500</span><span>5,000</span>
+                </div>
               </div>
 
               <div className="flex gap-2.5 p-3 rounded-lg bg-white/[0.02] border border-white/[0.05] text-[10px] text-[#64748B]">
-                <Info className="w-4.5 h-4.5 text-[#00C2FF] flex-shrink-0" />
-                <span>Estimate includes secure cloud hosting, daily automated database backups, WhatsApp API webhook config, custom lead capture forms, and general support.</span>
+                <Info className="w-4.5 h-4.5 text-[#00C2FF] flex-shrink-0 mt-0.5" />
+                <span>Includes CRM workspace, AI lead scoring, WhatsApp inbox, Kanban pipeline, call logging, automated follow-up reminders, and priority support. ₹199 base platform fee included.</span>
               </div>
             </div>
 
             {/* Price Output */}
             <div className="lg:border-l lg:border-white/[0.06] lg:pl-12 flex flex-col items-center justify-center text-center py-6">
               <span className="text-xs font-semibold text-[#64748B] uppercase tracking-widest">
-                Estimated Outlay ({billingPeriod})
+                Your Estimated Plan ({billingPeriod})
               </span>
               <span className="text-5xl lg:text-6xl font-extrabold text-white mt-4 tracking-tight leading-none" style={{ fontFamily: "var(--font-space-grotesk)" }}>
                 {calculateCustomQuote()}
               </span>
-              <span className="text-xs text-[#64748B] mt-2 block">per month</span>
+              <span className="text-xs text-[#64748B] mt-2 block">per month{billingPeriod === "yearly" ? " · 20% yearly discount applied" : ""}</span>
+
+              {/* Breakdown */}
+              <div className="mt-6 w-full max-w-xs space-y-2 text-left">
+                <div className="flex justify-between text-[11px] text-[#64748B] border-b border-white/[0.04] pb-1">
+                  <span>Platform base</span><span className="text-white">₹199</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-[#64748B] border-b border-white/[0.04] pb-1">
+                  <span>{agents} agent{agents > 1 ? "s" : ""} × ₹299</span>
+                  <span className="text-white">₹{(agents * 299).toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-[#64748B] border-b border-white/[0.04] pb-1">
+                  <span>{waNumbers} WhatsApp × ₹199</span>
+                  <span className="text-white">₹{(waNumbers * 199).toLocaleString("en-IN")}</span>
+                </div>
+                <div className="flex justify-between text-[11px] text-[#64748B]">
+                  <span>{leads.toLocaleString("en-IN")} leads × ₹0.50</span>
+                  <span className="text-white">₹{(leads * 0.5).toLocaleString("en-IN")}</span>
+                </div>
+              </div>
 
               <div className="mt-8 flex gap-4 w-full justify-center">
                 <Link href="/signup" className="btn-primary text-xs !py-3 !px-6 w-full max-w-xs flex items-center justify-center gap-2">
                   <Zap className="w-4 h-4" />
-                  Proceed to Sign Up
+                  Start Your Free Trial
                 </Link>
               </div>
             </div>

@@ -480,16 +480,91 @@ const templates: Record<string, SeedLeadTemplate[]> = {
   ]
 };
 
-export async function seedOnboardingData(userId: string, industry: string) {
+export async function seedOnboardingData(
+  userId: string, 
+  industry: string,
+  payload?: {
+    companyName?: string;
+    team?: Array<{ name: string; email: string; role: string }>;
+    leadSources?: string[];
+    goals?: string[];
+  }
+) {
   // Normalize key
   const normalizedKey = industry.toLowerCase().replace(/[\s-]+/g, "_");
   const dataTemplates = templates[normalizedKey] || templates["real_estate"];
 
   console.log(`[Onboarding Seeder] Seeding leads for user: ${userId}, industry: ${industry}`);
 
+  // Create team members if provided in payload and collect their user IDs
+  const userIdsForDistribution = [userId];
+
+  if (payload?.team && Array.isArray(payload.team)) {
+    for (const member of payload.team) {
+      if (!member.email || !member.name) continue;
+      try {
+        let existingMember = await prisma.user.findUnique({
+          where: { email: member.email.toLowerCase() },
+        });
+
+        if (!existingMember) {
+          let dbRole: any = "SALES";
+          const normRole = member.role.toLowerCase();
+          if (normRole.includes("admin") || normRole.includes("manager")) {
+            dbRole = "ADMIN";
+          }
+
+          existingMember = await prisma.user.create({
+            data: {
+              name: member.name,
+              email: member.email.toLowerCase(),
+              role: dbRole,
+              onboarded: true,
+              industry: industry,
+            },
+          });
+        }
+
+        userIdsForDistribution.push(existingMember.id);
+      } catch (err) {
+        console.error("Failed to seed team member user:", member.email, err);
+      }
+    }
+  }
+
+  let index = 0;
   for (const data of dataTemplates) {
     const createdAtDate = new Date();
     createdAtDate.setDate(createdAtDate.getDate() - data.daysOffset);
+
+    // Assign lead to next user in team list (round-robin)
+    const assignedUserId = userIdsForDistribution[index % userIdsForDistribution.length];
+
+    // Personalize lead source and tags based on selections
+    let source = data.source;
+    let tags = [...data.tags];
+
+    if (payload?.leadSources && payload.leadSources.length > 0) {
+      const chosenSourceText = payload.leadSources[index % payload.leadSources.length];
+      const sourceMap: Record<string, LeadSource> = {
+        "Website": "WEBSITE",
+        "WhatsApp": "WHATSAPP",
+        "Facebook": "FORM",
+        "Instagram": "FORM",
+        "Google Ads": "WEBSITE",
+        "LinkedIn": "MANUAL",
+        "Referrals": "MANUAL",
+        "Cold Calling": "CALL",
+      };
+
+      const mappedEnum = sourceMap[chosenSourceText];
+      if (mappedEnum) {
+        source = mappedEnum;
+      }
+      if (!tags.includes(chosenSourceText)) {
+        tags.push(chosenSourceText);
+      }
+    }
 
     // 1. Create Lead record
     const lead = await prisma.lead.create({
@@ -497,11 +572,11 @@ export async function seedOnboardingData(userId: string, industry: string) {
         name: data.name,
         phone: data.phone,
         email: data.email,
-        source: data.source,
+        source: source,
         status: data.status,
-        tags: data.tags,
+        tags: tags,
         notes: data.notes,
-        assignedToId: userId,
+        assignedToId: assignedUserId,
         createdAt: createdAtDate,
         updatedAt: createdAtDate,
       },
@@ -514,8 +589,8 @@ export async function seedOnboardingData(userId: string, industry: string) {
           leadId: lead.id,
           type: CallType.OUTGOING,
           outcome: data.callOutcome,
-          notes: `Call logged automatically. Client was receptive. Notes: ${data.notes[0]}`,
-          createdById: userId,
+          notes: `Call logged automatically by NexDial AI assistant. Client was receptive. Notes: ${data.notes[0]}`,
+          createdById: assignedUserId,
           timestamp: new Date(createdAtDate.getTime() + 1000 * 60 * 60 * 2), // 2 hours later
         },
       });
@@ -525,8 +600,8 @@ export async function seedOnboardingData(userId: string, industry: string) {
         data: {
           leadId: lead.id,
           type: "CALL_LOGGED",
-          description: `Logged call. Outcome: ${data.callOutcome}.`,
-          createdById: userId,
+          description: `Logged call. Outcome: ${data.callOutcome}. Assigned owner processed call.`,
+          createdById: assignedUserId,
           timestamp: new Date(createdAtDate.getTime() + 1000 * 60 * 60 * 2),
         },
       });
@@ -538,7 +613,7 @@ export async function seedOnboardingData(userId: string, industry: string) {
         leadId: lead.id,
         type: "LEAD_CREATED",
         description: `Lead created from source: ${lead.source} and assigned to user.`,
-        createdById: userId,
+        createdById: assignedUserId,
         timestamp: createdAtDate,
       },
     });
@@ -584,6 +659,8 @@ export async function seedOnboardingData(userId: string, industry: string) {
         });
       }
     }
+
+    index++;
   }
 
   console.log(`[Onboarding Seeder] Seeding completed for user: ${userId}`);
