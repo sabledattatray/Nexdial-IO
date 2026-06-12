@@ -542,7 +542,7 @@ export async function seedOnboardingData(
 
     // Personalize lead source and tags based on selections
     let source = data.source;
-    let tags = [...data.tags];
+    const tags = [...data.tags];
 
     if (payload?.leadSources && payload.leadSources.length > 0) {
       const chosenSourceText = payload.leadSources[index % payload.leadSources.length];

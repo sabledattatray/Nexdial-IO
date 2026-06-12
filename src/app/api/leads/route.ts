@@ -169,7 +169,7 @@ export async function POST(req: Request) {
     }
 
     // Normalize source
-    let sourceParam = body.source || "MANUAL";
+    const sourceParam = body.source || "MANUAL";
     const normalizedSource = sourceParam.toUpperCase().replace(/[\s-]+/g, "_");
     const validSources = ["WHATSAPP", "CALL", "FORM", "MANUAL", "CSV", "WEBSITE"];
     const source = validSources.includes(normalizedSource) ? normalizedSource : "MANUAL";

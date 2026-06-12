@@ -28,7 +28,7 @@ export async function POST(req: Request) {
     // Prepare leads payload
     const leadsData = rawLeads.map((item: any) => {
       // Normalize source
-      let sourceParam = item.source || "CSV";
+      const sourceParam = item.source || "CSV";
       const normalizedSource = sourceParam.toUpperCase().replace(/[\s-]+/g, "_");
       const validSources = ["WHATSAPP", "CALL", "FORM", "MANUAL", "CSV", "WEBSITE"];
       const source = validSources.includes(normalizedSource) ? normalizedSource : "CSV";

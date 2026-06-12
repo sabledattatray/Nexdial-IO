@@ -486,7 +486,7 @@ export function calculateSuggestedFollowUp(lead: any): SuggestedFollowUp {
   }
 
   const now = new Date();
-  let suggestedDate = new Date();
+  const suggestedDate = new Date();
 
   // If status is NEW, CONTACTED or INTERESTED: suggest tomorrow at 11 AM
   if (lead.status === 'NEW' || lead.status === 'CONTACTED' || lead.status === 'INTERESTED') {
