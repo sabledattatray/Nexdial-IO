@@ -24,38 +24,36 @@ export function BlogClient({
   useEffect(() => {
     if (sections.length === 0) return;
 
-    const updateSidebarPos = () => {
-      if (placeholderRef.current) {
-        const rect = placeholderRef.current.getBoundingClientRect();
-        setSidebarLeft(rect.left);
-      }
-      if (gridRef.current) {
+    const handleScrollAndPos = () => {
+      // 1. Position Logic
+      if (placeholderRef.current && gridRef.current && sidebarRef.current) {
         const gridRect = gridRef.current.getBoundingClientRect();
-        const top = gridRect.top + window.scrollY - window.scrollY;
-        setSidebarTop(top);
-        setComputedTop(top);
-      }
-    };
-    updateSidebarPos();
-    window.addEventListener("resize", updateSidebarPos);
+        const placeholderRect = placeholderRef.current.getBoundingClientRect();
+        
+        setSidebarLeft(placeholderRect.left);
 
-    const clampSidebar = () => {
-      if (!gridRef.current || !sidebarRef.current) return;
-      const gridBottom = gridRef.current.getBoundingClientRect().bottom;
-      const sidebarHeight = sidebarRef.current.offsetHeight;
-      const gap = 24;
-      setSidebarTop((initTop) => {
-        let top = initTop;
-        if (top + sidebarHeight + gap > gridBottom) {
-          top = gridBottom - sidebarHeight - gap;
+        const absoluteGridTop = gridRect.top + window.scrollY;
+        const absoluteGridBottom = gridRect.bottom + window.scrollY;
+        const sidebarHeight = sidebarRef.current.offsetHeight;
+        
+        let desiredTop = absoluteGridTop - window.scrollY;
+        
+        // Pin to top underneath navbar
+        if (desiredTop < 112) {
+          desiredTop = 112;
         }
-        setComputedTop(top);
-        return initTop;
-      });
-    };
+        
+        // Clamp at footer
+        const gap = 24;
+        const absoluteSidebarBottom = window.scrollY + desiredTop + sidebarHeight;
+        if (absoluteSidebarBottom + gap > absoluteGridBottom) {
+          desiredTop = (absoluteGridBottom - gap - sidebarHeight) - window.scrollY;
+        }
+        
+        setComputedTop(desiredTop);
+      }
 
-    const handleScroll = () => {
-      clampSidebar();
+      // 2. Active Section Logic
       const scrollPosition = window.scrollY + 200;
       for (const section of sections) {
         const el = document.getElementById(section.id);
@@ -68,10 +66,21 @@ export function BlogClient({
         }
       }
     };
-    window.addEventListener("scroll", handleScroll);
+
+    handleScrollAndPos();
+    const timeoutId = setTimeout(handleScrollAndPos, 150);
+
+    window.addEventListener("resize", handleScrollAndPos);
+    window.addEventListener("scroll", handleScrollAndPos);
+    
+    const observer = new ResizeObserver(handleScrollAndPos);
+    if (gridRef.current) observer.observe(gridRef.current);
+
     return () => {
-      window.removeEventListener("resize", updateSidebarPos);
-      window.removeEventListener("scroll", handleScroll);
+      clearTimeout(timeoutId);
+      window.removeEventListener("resize", handleScrollAndPos);
+      window.removeEventListener("scroll", handleScrollAndPos);
+      observer.disconnect();
     };
   }, [sections]);
 
