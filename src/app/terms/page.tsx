@@ -74,7 +74,7 @@ export default function TermsPage() {
         </AnimatedSection>
 
         {/* Content Body Grid */}
-        <div className="grid lg:grid-cols-[280px,1fr] gap-12 items-start">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           
           {/* Left Sticky Sidebar (Table of Contents) */}
           <aside className="hidden lg:block sticky top-28 bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
@@ -102,11 +102,11 @@ export default function TermsPage() {
             </ul>
           </aside>
 
-          {/* Right Scrollable Policy Content */}
-          <div className="space-y-12 max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed">
+          {/* Right Scrollable Policy Content (Unified Document Card) */}
+          <div className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed space-y-10">
             
             {/* 1. Agreement & Services */}
-            <section id="agreement" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="agreement" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
                 1. Agreement & Services
@@ -119,8 +119,10 @@ export default function TermsPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 2. Accounts & Billing */}
-            <section id="accounts-billing" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="accounts-billing" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <AlertCircle className="w-5 h-5 text-[#00C2FF]" />
                 2. Accounts, Seats & Billing
@@ -135,8 +137,10 @@ export default function TermsPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 3. Acceptable Use & DNC */}
-            <section id="acceptable-use" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="acceptable-use" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00C2FF]" />
                 3. Acceptable Use & DNC compliance
@@ -154,8 +158,10 @@ export default function TermsPage() {
               </div>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 4. Telephony & SMS Rules */}
-            <section id="telephony-sms" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="telephony-sms" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
                 4. Telephony & SMS Rules
@@ -174,8 +180,10 @@ export default function TermsPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 5. SLA & Support Uptime */}
-            <section id="sla-uptime" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="sla-uptime" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <CheckCircle2 className="w-5 h-5 text-[#00C2FF]" />
                 5. Service Level Agreement (SLA)
@@ -190,8 +198,10 @@ export default function TermsPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 6. Proprietary Software */}
-            <section id="intellectual-property" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="intellectual-property" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00C2FF]" />
                 6. Proprietary Software & Licenses
@@ -204,8 +214,10 @@ export default function TermsPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 7. Liability & Indemnity */}
-            <section id="liability" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="liability" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <AlertCircle className="w-5 h-5 text-[#00C2FF]" />
                 7. Limitation of Liability & Indemnification
@@ -218,8 +230,10 @@ export default function TermsPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 8. Dispute & Governing Law */}
-            <section id="governing-law" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="governing-law" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
                 8. Dispute & Governing Law

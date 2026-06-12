@@ -87,26 +87,29 @@ export function Navbar() {
                         pathname?.startsWith("/supervisor") || 
                         pathname?.startsWith("/client-portal") || 
                         pathname?.startsWith("/dialer");
-  if (isConsolePage) return null;
 
   const [scrolled, setScrolled] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [activeMenu, setActiveMenu] = useState<string | null>(null);
 
   useEffect(() => {
+    if (isConsolePage) return;
     const handleScroll = () => setScrolled(window.scrollY > 20);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isConsolePage]);
 
   useEffect(() => {
+    if (isConsolePage) return;
     if (mobileOpen) {
       document.body.style.overflow = "hidden";
     } else {
       document.body.style.overflow = "";
     }
     return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+  }, [mobileOpen, isConsolePage]);
+
+  if (isConsolePage) return null;
 
   return (
     <>
@@ -215,14 +218,14 @@ export function Navbar() {
             {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-3">
               <Link
-                href="/crm"
+                href="/login"
                 className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors px-4 py-2 flex items-center gap-1.5"
               >
                 <LogIn className="w-4 h-4" />
                 Login
               </Link>
               <Link
-                href="/request-demo"
+                href="/signup"
                 className="btn-primary text-sm !py-2.5 !px-5 flex items-center gap-2"
               >
                 <Zap className="w-4 h-4" />
@@ -296,14 +299,14 @@ export function Navbar() {
                 </div>
                 <div className="mt-8 space-y-3">
                   <Link
-                    href="/crm"
+                    href="/login"
                     onClick={() => setMobileOpen(false)}
                     className="btn-secondary w-full text-center block text-sm"
                   >
                     Login to CRM
                   </Link>
                   <Link
-                    href="/request-demo"
+                    href="/signup"
                     onClick={() => setMobileOpen(false)}
                     className="btn-primary w-full text-center block text-sm"
                   >

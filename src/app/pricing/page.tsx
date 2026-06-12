@@ -199,7 +199,7 @@ export default function PricingPage() {
                   {/* Bottom Action */}
                   <div className="pt-8">
                     <Link
-                      href="/request-demo"
+                      href="/signup"
                       className={`w-full py-3.5 rounded-lg text-xs font-bold text-center block transition-all ${
                         plan.popular
                           ? "bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] text-white hover:shadow-lg hover:shadow-[#8B5CF6]/30"
@@ -280,7 +280,7 @@ export default function PricingPage() {
               <span className="text-xs text-[#64748B] mt-2 block">per month</span>
 
               <div className="mt-8 flex gap-4 w-full justify-center">
-                <Link href="/request-demo" className="btn-primary text-xs !py-3 !px-6 w-full max-w-xs flex items-center justify-center gap-2">
+                <Link href="/signup" className="btn-primary text-xs !py-3 !px-6 w-full max-w-xs flex items-center justify-center gap-2">
                   <Zap className="w-4 h-4" />
                   Proceed to Sign Up
                 </Link>

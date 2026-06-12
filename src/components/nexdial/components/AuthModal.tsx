@@ -178,9 +178,9 @@ export default function AuthModal({ isOpen, onClose, onAuthSuccess, initialMode 
               <p className="text-xs text-slate-450">
                 Choose a Google Workspace account to grant identity credentials to Nexdial telephony systems.
               </p>
-              {!(import.meta as any).env?.VITE_GOOGLE_CLIENT_ID && (
+              {!process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID && (
                 <div className="p-3 mt-2 bg-indigo-950/20 border border-indigo-500/15 rounded-xl text-[11px] text-indigo-400 font-sans leading-normal">
-                  💡 <span className="font-semibold">Developer Sandbox:</span> To perform authentic Google Single Sign-on verification, define your <code className="bg-slate-900 px-1 py-0.5 rounded text-white font-mono">VITE_GOOGLE_CLIENT_ID</code> in AI Studio secrets. Falling back to simulation chooser.
+                  💡 <span className="font-semibold">Developer Sandbox:</span> To perform authentic Google Single Sign-on verification, define your <code className="bg-slate-900 px-1 py-0.5 rounded text-white font-mono">NEXT_PUBLIC_GOOGLE_CLIENT_ID</code> in env secrets. Falling back to simulation chooser.
                 </div>
               )}
             </div>

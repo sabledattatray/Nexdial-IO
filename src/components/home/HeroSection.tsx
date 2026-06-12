@@ -84,36 +84,6 @@ function ParticleField() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 }
 
-function TypingText({ text }: { text: string }) {
-  const [displayed, setDisplayed] = useState("");
-  const [cursor, setCursor] = useState(true);
-
-  useEffect(() => {
-    let i = 0;
-    const interval = setInterval(() => {
-      if (i <= text.length) {
-        setDisplayed(text.slice(0, i));
-        i++;
-      } else {
-        clearInterval(interval);
-      }
-    }, 40);
-    return () => clearInterval(interval);
-  }, [text]);
-
-  useEffect(() => {
-    const blink = setInterval(() => setCursor((c) => !c), 530);
-    return () => clearInterval(blink);
-  }, []);
-
-  return (
-    <span>
-      {displayed}
-      <span className={`${cursor ? "opacity-100" : "opacity-0"} transition-opacity text-[#00C2FF]`}>|</span>
-    </span>
-  );
-}
-
 // Mock inbox lead data for the dashboard preview
 const mockLeads = [
   { name: "Arjun Mehta", source: "WhatsApp", status: "NEW", phone: "+91 98765 43210", time: "2 min ago", health: 92 },
@@ -183,7 +153,7 @@ export function HeroSection() {
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-extrabold leading-[1.08] tracking-tight mb-6">
               <span className="gradient-text-hero">
-                <TypingText text="Never Lose a Customer Conversation Again" />
+                Never Lose a Customer Conversation Again
               </span>
             </h1>
 
@@ -206,7 +176,7 @@ export function HeroSection() {
               className="flex flex-col sm:flex-row gap-4 mb-12"
             >
               <Link
-                href="/request-demo"
+                href="/signup"
                 className="btn-primary text-base !py-4 !px-8 flex items-center justify-center gap-2 group"
               >
                 <Zap className="w-5 h-5" />

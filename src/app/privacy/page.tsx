@@ -74,7 +74,7 @@ export default function PrivacyPage() {
         </AnimatedSection>
 
         {/* Content Body Grid */}
-        <div className="grid lg:grid-cols-[280px,1fr] gap-12 items-start">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           
           {/* Left Sticky Sidebar (Table of Contents) */}
           <aside className="hidden lg:block sticky top-28 bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
@@ -102,11 +102,11 @@ export default function PrivacyPage() {
             </ul>
           </aside>
 
-          {/* Right Scrollable Policy Content */}
-          <div className="space-y-12 max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed">
+          {/* Right Scrollable Policy Content (Unified Document Card) */}
+          <div className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed space-y-10">
             
             {/* 1. Introduction */}
-            <section id="introduction" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="introduction" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
                 1. Introduction & Scope
@@ -123,8 +123,10 @@ export default function PrivacyPage() {
               </div>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 2. Information We Collect */}
-            <section id="data-collection" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="data-collection" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Eye className="w-5 h-5 text-[#00C2FF]" />
                 2. Information We Collect
@@ -149,8 +151,10 @@ export default function PrivacyPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 3. How We Use Data */}
-            <section id="data-usage" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="data-usage" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00C2FF]" />
                 3. How We Use Data
@@ -167,8 +171,10 @@ export default function PrivacyPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 4. Compliance, GDPR & HIPAA */}
-            <section id="compliance-gdpr" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="compliance-gdpr" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00C2FF]" />
                 4. GDPR & HIPAA Sovereignty
@@ -188,8 +194,10 @@ export default function PrivacyPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 5. Third-Party Disclosures */}
-            <section id="data-sharing" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="data-sharing" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <FileText className="w-5 h-5 text-[#00C2FF]" />
                 5. Third-Party Disclosures
@@ -204,8 +212,10 @@ export default function PrivacyPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 6. Data Retention & Disposal */}
-            <section id="retention" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="retention" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00C2FF]" />
                 6. Data Retention & Disposal
@@ -220,8 +230,10 @@ export default function PrivacyPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 7. Your Rights & Access */}
-            <section id="user-rights" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="user-rights" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Eye className="w-5 h-5 text-[#00C2FF]" />
                 7. Your Rights & Access
@@ -234,8 +246,10 @@ export default function PrivacyPage() {
               </p>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 8. Contact & Officer */}
-            <section id="contact" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="contact" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00C2FF]" />
                 8. Contact & Data Officer

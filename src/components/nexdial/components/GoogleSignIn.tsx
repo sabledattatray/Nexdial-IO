@@ -44,7 +44,7 @@ export const GoogleIcon = () => (
 export default function GoogleSignIn({ onSuccess, isAuthenticated }: GoogleSignInProps) {
   const [googleClientLoaded, setGoogleClientLoaded] = useState(false);
 
-  const clientId = (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID || '';
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
 
   // Load Google Identity Services library
   useEffect(() => {
@@ -110,7 +110,7 @@ interface GoogleButtonProps {
 
 export function GoogleSignInButton({ onClick, disabled }: GoogleButtonProps) {
   const btnRef = useRef<HTMLDivElement>(null);
-  const clientId = (import.meta as any).env?.VITE_GOOGLE_CLIENT_ID || '';
+  const clientId = process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID || '';
   const [rendered, setRendered] = useState(false);
 
   useEffect(() => {

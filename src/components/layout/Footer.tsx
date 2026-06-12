@@ -107,7 +107,7 @@ export function Footer() {
                 and never miss a follow-up with NexDial.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/request-demo" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
+                <Link href="/signup" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
                   <Zap className="w-5 h-5" />
                   Start Free Trial
                 </Link>
@@ -244,17 +244,18 @@ export function Footer() {
               © {new Date().getFullYear()} Nexdial. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#334155] text-xs">|</span>
-            <p className="text-xs text-[#475569]">
-              Built with ❤️ by{" "}
+            <div className="text-xs text-[#475569] flex items-center flex-wrap gap-1.5">
+              <span>Designed & Engineered by</span>
               <a 
                 href="https://dattasable.com" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-[#00E5A0] hover:text-[#00C2FF] font-medium transition-colors"
+                className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-[#00E5A0] hover:bg-[#00C2FF]/10 hover:border-[#00C2FF]/20 hover:text-[#00C2FF] font-semibold transition-all duration-300 hover:scale-[1.03] active:scale-[0.97]"
               >
+                <span className="w-1.5 h-1.5 rounded-full bg-[#00E5A0] animate-pulse" />
                 Datta Sable
               </a>
-            </p>
+            </div>
           </div>
           <div className="flex items-center gap-6">
             <Link href="/privacy" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">

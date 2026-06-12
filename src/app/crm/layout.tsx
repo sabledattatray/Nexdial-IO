@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useSession } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { 
   LayoutDashboard, 
   Inbox, 
@@ -13,7 +13,14 @@ import {
   Plus, 
   Menu, 
   X, 
-  Bell
+  Bell,
+  LogOut,
+  User as UserIcon,
+  Shield,
+  MessageSquare,
+  Sparkles,
+  Check,
+  BellOff
 } from "lucide-react";
 import AddLeadModal from "@/components/crm/AddLeadModal";
 
@@ -31,6 +38,35 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+
+  const [notifications, setNotifications] = useState([
+    {
+      id: "1",
+      title: "New Hot Lead 🔥",
+      message: "Rahul Sharma registered via WhatsApp form.",
+      time: "2 mins ago",
+      read: false,
+      type: "lead",
+    },
+    {
+      id: "2",
+      title: "Follow-up Scheduled 📅",
+      message: "Call scheduled with Nisha Patel in 30 mins.",
+      time: "15 mins ago",
+      read: false,
+      type: "followup",
+    },
+    {
+      id: "3",
+      title: "Missed Call Alert 📞",
+      message: "Outbound campaign dialer call to Amit Kumar was unanswered.",
+      time: "1 hour ago",
+      read: true,
+      type: "call",
+    }
+  ]);
 
   useEffect(() => {
     const loadAvatar = () => {
@@ -39,6 +75,19 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
     loadAvatar();
     window.addEventListener("nexdial-avatar-change", loadAvatar);
     return () => window.removeEventListener("nexdial-avatar-change", loadAvatar);
+  }, []);
+
+  // Close dropdowns on outside click
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const target = event.target as HTMLElement;
+      if (!target.closest(".header-dropdown-container")) {
+        setIsProfileOpen(false);
+        setIsNotificationsOpen(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
   const user = session?.user;
@@ -179,25 +228,148 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
               Add Lead
             </button>
 
-            <button className="relative text-slate-400 hover:text-white transition-colors">
-              <Bell className="w-5 h-5" />
-              <span className="absolute top-0 right-0 w-2 h-2 bg-red-500 rounded-full animate-pulse border border-[#081120]" />
-            </button>
-            
-            {avatarUrl ? (
-              <img 
-                src={avatarUrl} 
-                alt={user?.name || "User"} 
-                className="w-8 h-8 rounded-full object-cover border border-[#00C2FF]/30 cursor-default select-none"
-              />
-            ) : (
-              <div 
-                title={user?.name || "User"}
-                className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-xs font-bold text-white border border-[#00C2FF]/30 select-none cursor-default"
+            {/* Notifications Popover */}
+            <div className="relative header-dropdown-container">
+              <button 
+                onClick={() => {
+                  setIsNotificationsOpen(!isNotificationsOpen);
+                  setIsProfileOpen(false);
+                }}
+                className="relative text-slate-400 hover:text-white hover:bg-white/5 p-2 rounded-lg transition-colors cursor-pointer flex items-center justify-center"
               >
-                {userInitials}
-              </div>
-            )}
+                <Bell className="w-5 h-5" />
+                {notifications.some(n => !n.read) && (
+                  <span className="absolute top-1.5 right-1.5 w-2 h-2 bg-red-500 rounded-full animate-pulse border border-[#081120]" />
+                )}
+              </button>
+
+              {isNotificationsOpen && (
+                <div className="absolute right-0 mt-2 w-80 bg-[#0F172A]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50">
+                  <div className="px-4 py-3 border-b border-white/5 flex items-center justify-between">
+                    <span className="text-xs font-bold text-white uppercase tracking-wider font-mono">Notifications</span>
+                    {notifications.some(n => !n.read) && (
+                      <button 
+                        onClick={() => setNotifications(notifications.map(n => ({ ...n, read: true })))}
+                        className="text-[10px] text-[#00C2FF] hover:underline cursor-pointer font-medium bg-transparent border-none"
+                      >
+                        Mark all read
+                      </button>
+                    )}
+                  </div>
+                  <div className="max-h-64 overflow-y-auto divide-y divide-white/5">
+                    {notifications.length > 0 ? (
+                      notifications.map(n => (
+                        <div 
+                          key={n.id} 
+                          onClick={() => {
+                            // Mark single notification as read
+                            setNotifications(notifications.map(notif => notif.id === n.id ? { ...notif, read: true } : notif));
+                          }}
+                          className={`p-3.5 flex gap-3 hover:bg-white/[0.03] transition-colors cursor-pointer ${!n.read ? 'bg-white/[0.01]' : 'opacity-60'}`}
+                        >
+                          <div className="mt-0.5">
+                            {n.type === 'lead' ? (
+                              <Sparkles className="w-4 h-4 text-[#00E5A0]" />
+                            ) : n.type === 'followup' ? (
+                              <CalendarClock className="w-4 h-4 text-[#00C2FF]" />
+                            ) : (
+                              <Bell className="w-4 h-4 text-red-400" />
+                            )}
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <div className="flex items-center justify-between gap-1.5">
+                              <span className="text-xs font-bold text-slate-100 truncate">{n.title}</span>
+                              <span className="text-[9px] text-slate-500 dry-run whitespace-nowrap shrink-0">{n.time}</span>
+                            </div>
+                            <p className="text-[10.5px] text-slate-400 mt-0.5 leading-relaxed break-words">{n.message}</p>
+                          </div>
+                        </div>
+                      ))
+                    ) : (
+                      <div className="p-8 text-center text-slate-500 flex flex-col items-center gap-2">
+                        <BellOff className="w-8 h-8 text-slate-650" />
+                        <span className="text-xs">No notifications yet</span>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Profile Dropdown */}
+            <div className="relative header-dropdown-container">
+              <button 
+                onClick={() => {
+                  setIsProfileOpen(!isProfileOpen);
+                  setIsNotificationsOpen(false);
+                }}
+                className="flex items-center gap-2 p-1 rounded-full hover:bg-white/5 transition-colors cursor-pointer border-none bg-transparent"
+              >
+                {avatarUrl ? (
+                  <img 
+                    src={avatarUrl} 
+                    alt={user?.name || "User"} 
+                    className="w-8 h-8 rounded-full object-cover border border-[#00C2FF]/30 select-none"
+                  />
+                ) : (
+                  <div 
+                    title={user?.name || "User"}
+                    className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-xs font-bold text-white border border-[#00C2FF]/30 select-none"
+                  >
+                    {userInitials}
+                  </div>
+                )}
+              </button>
+
+              {isProfileOpen && (
+                <div className="absolute right-0 mt-2 w-64 bg-[#0F172A]/95 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden z-50 py-1.5">
+                  {/* User Info Header */}
+                  <div className="px-4 py-3 border-b border-white/5">
+                    <p className="text-xs font-bold text-white truncate">{user?.name || "Nexdial User"}</p>
+                    <p className="text-[10px] text-slate-400 truncate mt-0.5">{user?.email || "user@nexdial.io"}</p>
+                    
+                    {/* Role badge */}
+                    <div className="mt-2.5 inline-flex items-center gap-1.5 px-2 py-0.5 rounded bg-indigo-950/20 text-[#818CF8] border border-indigo-500/10 text-[9px] font-mono font-bold uppercase">
+                      <Shield className="w-3 h-3" />
+                      <span>{(user as any)?.role || "VIEWER"}</span>
+                    </div>
+                  </div>
+
+                  {/* Links */}
+                  <div className="py-1">
+                    <Link 
+                      href="/crm/settings" 
+                      onClick={() => setIsProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <Settings className="w-4 h-4 text-slate-400" />
+                      <span>Settings</span>
+                    </Link>
+                    <Link 
+                      href="/" 
+                      onClick={() => setIsProfileOpen(false)}
+                      className="flex items-center gap-2.5 px-4 py-2 text-xs text-slate-300 hover:text-white hover:bg-white/5 transition-colors"
+                    >
+                      <UserIcon className="w-4 h-4 text-slate-400" />
+                      <span>Public Website</span>
+                    </Link>
+                  </div>
+
+                  <div className="h-px bg-white/5 my-1" />
+
+                  {/* Sign Out */}
+                  <div className="py-1">
+                    <button 
+                      onClick={() => signOut({ callbackUrl: "/login" })}
+                      className="w-full flex items-center gap-2.5 px-4 py-2 text-xs text-red-400 hover:text-red-300 hover:bg-red-500/5 transition-colors text-left cursor-pointer border-none bg-transparent"
+                    >
+                      <LogOut className="w-4 h-4 text-red-400/80" />
+                      <span>Sign Out</span>
+                    </button>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         </header>
 

@@ -73,7 +73,7 @@ export default function SecurityPage() {
         </AnimatedSection>
 
         {/* Content Body Grid */}
-        <div className="grid lg:grid-cols-[280px,1fr] gap-12 items-start">
+        <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
           
           {/* Left Sticky Sidebar (Table of Contents) */}
           <aside className="hidden lg:block sticky top-28 bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md">
@@ -101,11 +101,11 @@ export default function SecurityPage() {
             </ul>
           </aside>
 
-          {/* Right Scrollable Policy Content */}
-          <div className="space-y-12 max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed">
+          {/* Right Scrollable Policy Content (Unified Document Card) */}
+          <div className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl max-w-4xl text-[#CBD5E1] text-xs sm:text-sm font-light leading-relaxed space-y-10">
             
             {/* 1. Security Overview */}
-            <section id="overview" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="overview" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00E5A0]" />
                 1. Security Overview
@@ -129,8 +129,10 @@ export default function SecurityPage() {
               </div>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 2. Encryption & Keys */}
-            <section id="data-encryption" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="data-encryption" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00E5A0]" />
                 2. Encryption & Keys Management
@@ -145,8 +147,10 @@ export default function SecurityPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 3. VoIP & WebRTC Security */}
-            <section id="network-telephony" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="network-telephony" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Server className="w-5 h-5 text-[#00E5A0]" />
                 3. VoIP & WebRTC Security
@@ -161,8 +165,10 @@ export default function SecurityPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 4. Database & Pod Isolation */}
-            <section id="tenant-isolation" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="tenant-isolation" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Eye className="w-5 h-5 text-[#00E5A0]" />
                 4. Database & Namespace Isolation
@@ -177,8 +183,10 @@ export default function SecurityPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 5. RBAC & SSO Access */}
-            <section id="access-rbac" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="access-rbac" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Lock className="w-5 h-5 text-[#00E5A0]" />
                 5. Access Controls & Audit Logging
@@ -193,8 +201,10 @@ export default function SecurityPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 6. Business Continuity */}
-            <section id="backups-dr" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="backups-dr" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <CheckCircle2 className="w-5 h-5 text-[#00E5A0]" />
                 6. Business Continuity & Disaster Recovery
@@ -209,8 +219,10 @@ export default function SecurityPage() {
               </ul>
             </section>
 
+            <div className="h-px bg-white/[0.06]" />
+
             {/* 7. Audits & Certifications */}
-            <section id="compliance-cert" className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] space-y-4 scroll-mt-28">
+            <section id="compliance-cert" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <Shield className="w-5 h-5 text-[#00E5A0]" />
                 7. Audits, Certifications & Pentesting

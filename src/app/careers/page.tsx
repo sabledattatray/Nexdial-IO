@@ -19,7 +19,7 @@ const jobs = [
     department: "AI Research Desk",
     location: "Remote (Global)",
     type: "Full-Time",
-    salary: "₹90L - ₹1.2Cr / Year",
+    salary: "₹24L - ₹36L / Year",
     desc: "Develop and fine-tune OpenAI RAG integrations, LLM prompt engineering, and voice bot audio transcription tuning."
   },
   {
@@ -27,7 +27,7 @@ const jobs = [
     department: "Client Services",
     location: "London / Hybrid",
     type: "Full-Time",
-    salary: "₹45L - ₹55L / Year",
+    salary: "₹8L - ₹14L / Year",
     desc: "Oversee digital omnichannel chat agents and lead outbound dialer monitoring dashboards during EMEA schedules."
   }
 ];
@@ -69,37 +69,58 @@ export default function CareersPage() {
         <StaggerContainer className="space-y-6 max-w-4xl mx-auto" staggerDelay={0.06}>
           {jobs.map((job) => (
             <StaggerItem key={job.title}>
-              <div className="glass-card-strong p-8 hover:border-white/[0.1] transition-all flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-                <div className="space-y-3">
-                  <div className="flex flex-wrap items-center gap-2.5">
-                    <span className="px-2.5 py-0.5 rounded bg-[#0057D9]/10 border border-[#0057D9]/20 text-[10px] font-bold text-[#00C2FF] uppercase">
+              <div className="group relative bg-gradient-to-b from-[#101B30] to-[#0A1224] hover:from-[#132038] hover:to-[#0C152B] p-6 sm:p-8 rounded-3xl border border-white/[0.04] hover:border-[#00C2FF]/30 hover:shadow-[0_20px_50px_rgba(0,194,255,0.08)] transition-all duration-300 flex flex-col md:flex-row gap-6 relative overflow-hidden">
+                {/* Visual Highlight Decorator */}
+                <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-[#00C2FF]/10 to-[#8B5CF6]/0 rounded-full blur-[30px] group-hover:scale-125 transition-transform duration-500 pointer-events-none" />
+                
+                {/* Left accent glowing bar */}
+                <div className="absolute left-0 top-1/2 -translate-y-1/2 w-1 h-1/2 bg-gradient-to-b from-[#00C2FF] to-[#8B5CF6] rounded-r opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none" />
+
+                {/* Main Content Area */}
+                <div className="flex-1 space-y-4 min-w-0">
+                  {/* Category Pill and Metadata Row */}
+                  <div className="flex flex-wrap items-center gap-2">
+                    <span className="text-[9.5px] tracking-wider uppercase font-extrabold text-[#8B5CF6] px-2.5 py-0.5 rounded bg-[#8B5CF6]/10 border border-[#8B5CF6]/20">
                       {job.department}
                     </span>
-                    <span className="text-xs text-[#64748B] flex items-center gap-1">
-                      <MapPin className="w-3.5 h-3.5" />
+                    <span className="h-3 w-px bg-white/[0.08] hidden sm:block" />
+                    <span className="inline-flex items-center gap-1 text-xs text-[#64748B]">
+                      <MapPin className="w-3.5 h-3.5 text-[#00C2FF] flex-shrink-0" />
                       {job.location}
                     </span>
-                    <span className="text-xs text-[#64748B] flex items-center gap-1">
-                      <Clock className="w-3.5 h-3.5" />
+                    <span className="h-3 w-px bg-white/[0.08] hidden sm:block" />
+                    <span className="inline-flex items-center gap-1 text-xs text-[#64748B]">
+                      <Clock className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0" />
                       {job.type}
                     </span>
                   </div>
-                  
-                  <h3 className="text-xl font-bold text-white">{job.title}</h3>
-                  <p className="text-xs text-[#94A3B8] leading-relaxed max-w-2xl">{job.desc}</p>
+
+                  {/* Title & Description */}
+                  <div className="space-y-2">
+                    <h3 className="text-xl sm:text-2xl font-bold text-white tracking-tight group-hover:text-[#00C2FF] transition-colors duration-250">
+                      {job.title}
+                    </h3>
+                    <p className="text-xs sm:text-sm text-[#94A3B8] leading-relaxed max-w-2xl font-light">
+                      {job.desc}
+                    </p>
+                  </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 w-full md:w-auto justify-between border-t border-white/[0.04] pt-4 md:border-t-0 md:pt-0">
-                  <span className="text-sm font-bold text-[#00E5A0] flex items-center gap-1">
-                    <IndianRupee className="w-4 h-4" />
-                    {job.salary}
-                  </span>
+                {/* Right Side Action Section (Inline Salary + CTA button) */}
+                <div className="flex flex-row md:flex-col items-center md:items-end justify-between md:justify-center gap-4 border-t border-white/[0.06] md:border-t-0 pt-4 md:pt-0 md:pl-6 md:border-l md:border-white/[0.06] flex-shrink-0 w-full md:w-auto">
+                  <div className="md:text-right">
+                    <div className="text-[9px] uppercase font-bold tracking-widest text-[#64748B]">Yearly Compensation</div>
+                    <div className="text-sm sm:text-base font-bold text-[#00E5A0] tracking-tight mt-0.5 whitespace-nowrap">
+                      {job.salary}
+                    </div>
+                  </div>
+                  
                   <button
                     onClick={() => setAppliedJob(job.title)}
-                    className="btn-primary text-xs !py-2.5 !px-5 flex items-center gap-1.5 whitespace-nowrap"
+                    className="inline-flex items-center justify-center gap-1.5 font-bold rounded-full px-5 py-2.5 text-xs bg-[#0057D9] text-white hover:bg-[#00C2FF] hover:text-[#081120] transition-all duration-300 hover:scale-[1.03] active:scale-[0.97] cursor-pointer shadow-lg shadow-[#0057D9]/20 hover:shadow-[#00C2FF]/20 flex-shrink-0"
                   >
-                    Apply Now
-                    <ArrowRight className="w-4 h-4" />
+                    <span>Apply Now</span>
+                    <ArrowRight className="w-3.5 h-3.5 stroke-[2.5] transition-transform duration-300 group-hover:translate-x-0.5" />
                   </button>
                 </div>
               </div>

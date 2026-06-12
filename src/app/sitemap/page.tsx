@@ -89,45 +89,56 @@ export default function HTMLSitemapPage() {
           </p>
         </AnimatedSection>
 
-        {/* Categories Grid */}
-        <div className="grid md:grid-cols-2 gap-8">
-          {categories.map((category) => {
-            const Icon = category.icon;
-            return (
-              <AnimatedSection key={category.title} className="glass-card-strong p-8 rounded-3xl border border-white/[0.06] relative overflow-hidden flex flex-col justify-between">
-                <div className="absolute top-0 right-0 w-32 h-32 rounded-full blur-[60px] opacity-10 pointer-events-none" style={{ backgroundColor: category.color }} />
-                
-                <div>
-                  {/* Category Header */}
-                  <div className="flex items-center gap-3 border-b border-white/[0.06] pb-4 mb-6">
-                    <div
-                      className="w-10 h-10 rounded-xl flex items-center justify-center"
-                      style={{ backgroundColor: `${category.color}15` }}
-                    >
-                      <Icon className="w-5 h-5" style={{ color: category.color }} />
+        {/* Unified Sitemap Card */}
+        <AnimatedSection className="glass-card-strong p-6 sm:p-10 lg:p-12 border border-white/[0.06] rounded-3xl relative overflow-hidden">
+          <div className="grid md:grid-cols-2 gap-8 md:gap-y-12">
+            {categories.map((category, idx) => {
+              const Icon = category.icon;
+              return (
+                <div 
+                  key={category.title} 
+                  className={`relative space-y-6 pb-8 border-b border-white/[0.06] last:border-0 last:pb-0 md:pb-0 md:border-b-0 ${
+                    idx >= 2 ? "md:border-t md:border-white/[0.06] md:pt-10" : ""
+                  } ${
+                    idx % 2 === 1 ? "md:border-l md:border-white/[0.06] md:pl-10 lg:pl-12" : ""
+                  } ${
+                    idx % 2 === 0 ? "md:pr-10 lg:pr-12" : ""
+                  }`}
+                >
+                  <div className="absolute top-0 right-0 w-24 h-24 rounded-full blur-[50px] opacity-10 pointer-events-none" style={{ backgroundColor: category.color }} />
+                  
+                  <div>
+                    {/* Category Header */}
+                    <div className="flex items-center gap-3 border-b border-white/[0.06] pb-4 mb-6">
+                      <div
+                        className="w-10 h-10 rounded-xl flex items-center justify-center"
+                        style={{ backgroundColor: `${category.color}15` }}
+                      >
+                        <Icon className="w-5 h-5" style={{ color: category.color }} />
+                      </div>
+                      <h2 className="text-lg font-bold text-white font-space-grotesk">{category.title}</h2>
                     </div>
-                    <h2 className="text-lg font-bold text-white font-space-grotesk">{category.title}</h2>
-                  </div>
 
-                  {/* Links List */}
-                  <ul className="space-y-4">
-                    {category.links.map((link) => (
-                      <li key={link.href} className="group/item">
-                        <Link href={link.href} className="block space-y-1">
-                          <span className="text-sm font-semibold text-[#CBD5E1] group-hover/item:text-[#00C2FF] transition-colors flex items-center gap-1.5">
-                            {link.label}
-                            <span className="opacity-0 group-hover/item:opacity-100 transition-opacity text-xs font-mono font-bold text-[#00C2FF]">&rarr;</span>
-                          </span>
-                          <span className="text-xs text-[#64748B] block leading-relaxed">{link.desc}</span>
-                        </Link>
-                      </li>
-                    ))}
-                  </ul>
+                    {/* Links List */}
+                    <ul className="space-y-4">
+                      {category.links.map((link) => (
+                        <li key={link.href} className="group/item">
+                          <Link href={link.href} className="block space-y-1">
+                            <span className="text-sm font-semibold text-[#CBD5E1] group-hover/item:text-[#00C2FF] transition-colors flex items-center gap-1.5">
+                              {link.label}
+                              <span className="opacity-0 group-hover/item:opacity-100 transition-opacity text-xs font-mono font-bold text-[#00C2FF]">&rarr;</span>
+                            </span>
+                            <span className="text-xs text-[#64748B] block leading-relaxed">{link.desc}</span>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
                 </div>
-              </AnimatedSection>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </AnimatedSection>
 
       </div>
     </div>
