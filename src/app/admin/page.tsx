@@ -91,8 +91,26 @@ export default function AdminDashboard() {
     return workspaces.reduce((acc, ws) => acc + (rates[ws.plan] || 0), 0);
   };
 
-  const handleImpersonate = (id: string) => {
-    alert(`Impersonation token generated. Logging into workspace ${id}...`);
+  const handleImpersonate = async (id: string) => {
+    if (!confirm("You are about to switch your active session to this client's workspace. Continue?")) return;
+    
+    try {
+      const res = await fetch("/api/admin/impersonate", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ workspaceId: id })
+      });
+      if (res.ok) {
+        const data = await res.json();
+        alert(`Impersonation successful. Welcome to ${data.workspaceName}.`);
+        window.location.href = "/crm"; // Redirect to CRM with new workspace context
+      } else {
+        alert("Failed to initiate impersonation.");
+      }
+    } catch (e) {
+      console.error(e);
+      alert("Error initiating impersonation.");
+    }
   };
 
   const handleSuspend = (id: string) => {
