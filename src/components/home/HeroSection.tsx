@@ -206,13 +206,13 @@ export function HeroSection() {
           </div>
 
           {/* Right — CRM Inbox Preview */}
-          <div className="block mt-16 lg:mt-0 relative w-full min-w-0 perspective-1000">
+          <div className="block mt-16 lg:mt-0 relative w-full min-w-0">
             <motion.div
-              initial={{ opacity: 0, y: 40, rotateX: 15, rotateY: -15, scale: 0.9 }}
-              animate={{ opacity: 1, y: 0, rotateX: 5, rotateY: -8, scale: 1 }}
-              whileHover={{ rotateX: 0, rotateY: 0, scale: 1.02 }}
-              transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full transform-3d group"
+              initial={{ opacity: 0, y: 40, scale: 0.95 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              whileHover={{ scale: 1.02 }}
+              transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full group"
             >
               {/* Ambient Glow */}
               <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-tr from-[#0057D9]/20 via-[#00C2FF]/10 to-[#00E5A0]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
