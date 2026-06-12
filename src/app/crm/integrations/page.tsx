@@ -10,7 +10,8 @@ import {
   Copy, 
   CheckCircle2, 
   ExternalLink,
-  ChevronRight
+  ChevronRight,
+  Share2
 } from "lucide-react";
 
 export default function IntegrationsPage() {
@@ -103,6 +104,24 @@ export default function IntegrationsPage() {
               <p className="text-[11px] opacity-70 mt-0.5">Bulk manual upload</p>
             </div>
             {activeTab === "csv" && <ChevronRight className="w-4 h-4 text-purple-400" />}
+          </button>
+
+          <button
+            onClick={() => setActiveTab("social")}
+            className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all ${
+              activeTab === "social" 
+                ? "bg-pink-500/10 border border-pink-500/20 text-white" 
+                : "bg-[#050A15] border border-white/5 text-slate-400 hover:bg-white/[0.02]"
+            }`}
+          >
+            <div className={`p-2 rounded-lg ${activeTab === "social" ? "bg-pink-500/20" : "bg-white/5"}`}>
+              <Share2 className={`w-5 h-5 ${activeTab === "social" ? "text-pink-500" : "text-slate-400"}`} />
+            </div>
+            <div className="flex-1">
+              <h3 className="font-semibold text-sm">Social Media</h3>
+              <p className="text-[11px] opacity-70 mt-0.5">FB & Instagram Leads</p>
+            </div>
+            {activeTab === "social" && <ChevronRight className="w-4 h-4 text-pink-500" />}
           </button>
         </div>
 
@@ -306,6 +325,58 @@ export default function IntegrationsPage() {
                   <button className="text-sm text-purple-400 hover:underline font-semibold flex items-center gap-2">
                     Download CSV Template <Copy className="w-4 h-4" />
                   </button>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "social" && (
+              <motion.div
+                key="social"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                className="space-y-6"
+              >
+                <div className="flex items-center gap-4 border-b border-white/10 pb-6">
+                  <div className="w-12 h-12 rounded-full bg-pink-500/20 flex items-center justify-center border border-pink-500/30">
+                    <Share2 className="w-6 h-6 text-pink-500" />
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white">Social Media Lead Ads</h2>
+                    <p className="text-sm text-slate-400">Automatically sync leads from Facebook and Instagram Ads.</p>
+                  </div>
+                </div>
+
+                <div className="bg-[#020610]/80 border border-pink-500/20 rounded-xl p-6 mb-6">
+                  <div className="flex items-start gap-4">
+                    <div className="w-10 h-10 rounded-full bg-pink-500/10 flex items-center justify-center shrink-0">
+                      <ExternalLink className="w-5 h-5 text-pink-500" />
+                    </div>
+                    <div>
+                      <h3 className="text-sm font-semibold text-white mb-1">Official Meta Business App Integration</h3>
+                      <p className="text-sm text-slate-400 mb-4">To sync leads directly from your Facebook Page or Instagram Business account, you need to authenticate with Meta.</p>
+                      <button className="bg-[#1877F2] hover:bg-[#1877F2]/90 text-white px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors">
+                        Connect with Facebook
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-4 pt-4 border-t border-white/10">
+                  <h3 className="text-sm font-semibold text-white">Manual Zapier Sync</h3>
+                  <p className="text-sm text-slate-400">If you prefer using Zapier to route your social leads, use this dedicated webhook URL specifically for tracking Social campaigns.</p>
+                  
+                  <div className="flex items-center gap-2">
+                    <div className="flex-1 bg-[#020610] border border-white/10 rounded-lg p-3 font-mono text-sm text-[#00E5A0] overflow-x-auto">
+                      https://api.nexdial.io/v1/webhook/social/ws_12345abcde
+                    </div>
+                    <button 
+                      onClick={() => copyToClipboard("https://api.nexdial.io/v1/webhook/social/ws_12345abcde", "social-url")}
+                      className="p-3 bg-white/5 hover:bg-white/10 border border-white/10 rounded-lg transition-colors text-slate-300"
+                    >
+                      {copied === "social-url" ? <CheckCircle2 className="w-5 h-5 text-green-400" /> : <Copy className="w-5 h-5" />}
+                    </button>
+                  </div>
                 </div>
               </motion.div>
             )}
