@@ -193,6 +193,25 @@ export default function SettingsPage() {
     
     // Fetch live team database members
     fetchTeamMembers();
+
+    // FORCE SYNC: Push legacy localStorage data to the backend database so the Admin can see it
+    setTimeout(() => {
+      try {
+        const payload = {
+          companyName: localStorage.getItem("nexdial_company_name"),
+          leadSources: JSON.parse(localStorage.getItem("nexdial_lead_sources") || "[]"),
+          goals: JSON.parse(localStorage.getItem("nexdial_goals") || "[]"),
+        };
+        fetch("/api/crm/sync-settings", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload)
+        });
+      } catch (e) {
+        console.error("Silent sync failed", e);
+      }
+    }, 2000);
+
   }, [session]);
 
   const fetchTeamMembers = async () => {
