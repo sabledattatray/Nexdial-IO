@@ -1,5 +1,6 @@
 import { redirect } from "next/navigation";
 import { getAuthenticatedSession } from "@/lib/auth";
+import AdminSidebar from "@/components/admin/AdminSidebar";
 
 export const dynamic = "force-dynamic";
 
@@ -12,8 +13,11 @@ export default async function AdminLayout({ children }: { children: React.ReactN
   }
 
   return (
-    <div className="bg-[#081120] min-h-screen">
-      {children}
+    <div className="bg-[#081120] min-h-screen flex">
+      <AdminSidebar />
+      <div className="flex-1 ml-64 min-h-screen">
+        {children}
+      </div>
     </div>
   );
 }

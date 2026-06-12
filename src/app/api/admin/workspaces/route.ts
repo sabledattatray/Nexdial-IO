@@ -10,9 +10,13 @@ export async function GET() {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
-    // Return all workspaces for Super Admin
+    // Return all workspaces for Super Admin, including the actual human owners
     const rawWorkspaces = await prisma.workspace.findMany({
       include: {
+        users: {
+          where: { role: "ADMIN" },
+          select: { id: true, name: true, email: true, image: true }
+        },
         _count: {
           select: {
             users: true,
