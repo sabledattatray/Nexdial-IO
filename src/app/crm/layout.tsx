@@ -150,7 +150,16 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
           })}
         </nav>
 
-        <div className="p-4 border-t border-white/10">
+        <div className="p-4 border-t border-white/10 space-y-2">
+          {(user as any)?.role === "ADMIN" && (
+            <Link 
+              href="/admin"
+              className="w-full flex items-center justify-center gap-2 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/20 text-xs font-bold py-2.5 rounded-lg transition-colors cursor-pointer"
+            >
+              <Shield className="w-4 h-4" />
+              SaaS Control Center
+            </Link>
+          )}
           <button 
             onClick={() => setIsAddLeadModalOpen(true)}
             className="w-full flex items-center justify-center gap-2 bg-[#0057D9] hover:bg-[#0057D9]/80 text-white text-sm font-semibold py-2.5 rounded-lg transition-colors shadow-lg shadow-[#0057D9]/20 cursor-pointer"
@@ -196,7 +205,17 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
                 );
               })}
             </nav>
-            <div className="p-4 border-t border-white/10">
+            <div className="p-4 border-t border-white/10 space-y-2">
+              {(user as any)?.role === "ADMIN" && (
+                <Link 
+                  href="/admin"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="w-full flex items-center justify-center gap-2 bg-indigo-500/10 hover:bg-indigo-500/20 text-indigo-400 border border-indigo-500/20 text-xs font-bold py-2.5 rounded-lg transition-colors cursor-pointer"
+                >
+                  <Shield className="w-4 h-4" />
+                  SaaS Control Center
+                </Link>
+              )}
               <button 
                 onClick={() => {
                   setIsMobileMenuOpen(false);
