@@ -64,10 +64,15 @@ model Workspace {
   whatsappNumber String?
   supportEmail   String?
 
-  // Billing
+  // Billing & Status
   plan        String    @default("TRIAL") // TRIAL, SMALL, MEDIUM, LARGE
+  status      String    @default("ACTIVE") // ACTIVE, SUSPENDED
   razorpayId  String?
   trialEndsAt DateTime?
+  
+  // Metrics
+  healthScore Int       @default(100) @map("health_score")
+  lastLoginAt DateTime? @map("last_login_at")
 
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")

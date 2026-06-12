@@ -1,201 +1,264 @@
 "use client";
 
-import { useState } from "react";
-import { motion } from "framer-motion";
-import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Shield, Users, Server, IndianRupee, Activity, Settings, Plus, Play, Pause, Trash2, Key, Database, PhoneCall } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Shield, Users, Server, IndianRupee, Activity, Play, Pause, LogIn, Mail, MoreVertical } from "lucide-react";
 import Link from "next/link";
+import { formatDistanceToNow } from "date-fns";
 
-// Mock Tenant Data
-const initialTenants = [
-  { id: "t-1", name: "Apex Financial", subdomain: "apex.nexdial.com", agents: 240, status: "Active", billing: "₹7,00,000/mo" },
-  { id: "t-2", name: "Zeta E-Commerce", subdomain: "zeta.nexdial.com", agents: 550, status: "Active", billing: "₹13,70,000/mo" },
-  { id: "t-3", name: "Global Medtech", subdomain: "medtech.nexdial.com", agents: 120, status: "Paused", billing: "₹3,50,000/mo" }
-];
+type Workspace = {
+  id: string;
+  name: string;
+  plan: string;
+  status: string;
+  healthScore: number;
+  lastLoginAt: string | null;
+  createdAt: string;
+  _count: {
+    users: number;
+    leads: number;
+    integrations: number;
+  };
+};
 
 export default function AdminDashboard() {
-  const [tenants, setTenants] = useState(initialTenants);
-  const [newTenantName, setNewTenantName] = useState("");
-  const [newSubdomain, setNewSubdomain] = useState("");
+  const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [emailModal, setEmailModal] = useState<string | null>(null);
 
-  const toggleStatus = (id: string) => {
-    setTenants(tenants.map(t => t.id === id ? { ...t, status: t.status === "Active" ? "Paused" : "Active" } : t));
+  useEffect(() => {
+    fetchWorkspaces();
+  }, []);
+
+  const fetchWorkspaces = async () => {
+    try {
+      const res = await fetch("/api/admin/workspaces");
+      if (res.ok) setWorkspaces(await res.json());
+    } catch (e) {
+      console.error("Failed to fetch workspaces", e);
+    }
+    setIsLoading(false);
   };
 
-  const deleteTenant = (id: string) => {
-    setTenants(tenants.filter(t => t.id !== id));
+  const calculateMRR = () => {
+    // Basic approximation based on plan
+    const rates: Record<string, number> = { TRIAL: 0, SMALL: 2500, MEDIUM: 5000, LARGE: 10000 };
+    return workspaces.reduce((acc, ws) => acc + (rates[ws.plan] || 0), 0);
   };
 
-  const addTenant = (e: React.FormEvent) => {
+  const handleImpersonate = (id: string) => {
+    alert(`Impersonation sequence initiated for workspace ${id}. (Mock action)`);
+  };
+
+  const handleSuspend = (id: string) => {
+    alert(`Toggled suspension for workspace ${id}. (Mock action)`);
+  };
+
+  const handleSendEmail = (e: React.FormEvent) => {
     e.preventDefault();
-    if (!newTenantName || !newSubdomain) return;
-    const newT = {
-      id: `t-${Date.now()}`,
-      name: newTenantName,
-      subdomain: `${newSubdomain}.nexdial.com`,
-      agents: 10,
-      status: "Active",
-      billing: "₹37,500/mo"
-    };
-    setTenants([...tenants, newT]);
-    setNewTenantName("");
-    setNewSubdomain("");
+    console.log(`Sending email payload to workspace: ${emailModal}`);
+    alert("Email payload logged to console successfully!");
+    setEmailModal(null);
   };
+
+  const getHealthColor = (score: number) => {
+    if (score >= 80) return "text-green-400 bg-green-400/10 border-green-400/20";
+    if (score >= 50) return "text-yellow-400 bg-yellow-400/10 border-yellow-400/20";
+    return "text-red-400 bg-red-400/10 border-red-400/20";
+  };
+
+  const mrr = calculateMRR();
 
   return (
-    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden">
-      <div className="absolute inset-0 noise-overlay pointer-events-none" />
-      <div className="absolute top-0 right-0 w-[400px] h-[400px] bg-[#0057D9]/5 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-[1400px] mx-auto px-6">
+    <div className="min-h-screen bg-[#081120] pt-28 pb-20">
+      <div className="max-w-[1400px] mx-auto px-6">
         
         {/* Header */}
-        <AnimatedSection className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/[0.06] pb-8 mb-12">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 border-b border-white/10 pb-8 mb-8">
           <div>
             <div className="flex items-center gap-2">
               <Shield className="w-5 h-5 text-[#00C2FF]" />
-              <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest">Super Admin Console</span>
+              <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest">SaaS Control Center</span>
             </div>
             <h1 className="text-3xl font-extrabold text-white mt-2">Platform Administration</h1>
           </div>
-
-          <div className="flex flex-wrap items-center gap-4">
-            <span className="px-3 py-1.5 rounded bg-[#22C55E]/10 border border-[#22C55E]/30 text-xs font-semibold text-[#22C55E] flex items-center gap-2">
-              <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-ping" />
+          <div className="flex items-center gap-4">
+            <span className="px-3 py-1.5 rounded bg-green-500/10 border border-green-500/30 text-xs font-semibold text-green-500 flex items-center gap-2">
+              <span className="w-2 h-2 rounded-full bg-green-500 animate-ping" />
               All Systems Operational
             </span>
-            <Link href="/admin/dialer" className="px-4 py-2 rounded bg-[#0057D9] hover:bg-blue-600 border border-white/10 text-xs font-semibold text-white flex items-center gap-2 transition-all shadow-md shadow-[#0057D9]/15">
-              <PhoneCall className="w-4 h-4" />
-              Dialer Operations Console
-            </Link>
           </div>
-        </AnimatedSection>
+        </div>
 
-        {/* Global System Stats */}
-        <StaggerContainer className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-12" staggerDelay={0.05}>
-          {[
-            { label: "Global Active Tenants", value: tenants.length, icon: Database, color: "#0057D9" },
-            { label: "Total Managed Seats", value: tenants.reduce((acc, t) => acc + t.agents, 0), icon: Users, color: "#00C2FF" },
-            { label: "Active VoIP Channels", value: "1,842 / 2,000", icon: Server, color: "#00E5A0" },
-            { label: "Monthly Recurring Revenue", value: `₹${(tenants.reduce((acc, t) => acc + parseInt(t.billing.replace(/[^0-9]/g, "")), 0)).toLocaleString("en-IN")}`, icon: IndianRupee, color: "#8B5CF6" }
-          ].map((stat) => {
-            const Icon = stat.icon;
-            return (
-              <StaggerItem key={stat.label}>
-                <div className="glass-card-strong p-6 group hover:border-white/[0.1] transition-all">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-[10px] uppercase font-bold text-[#64748B]">{stat.label}</span>
-                    <Icon className="w-4.5 h-4.5" style={{ color: stat.color }} />
-                  </div>
-                  <p className="text-2xl font-bold text-white" style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                    {stat.value}
-                  </p>
-                </div>
-              </StaggerItem>
-            );
-          })}
-        </StaggerContainer>
-
-        {/* Main Grid: Tenant List & Create Tenant */}
-        <div className="grid lg:grid-cols-[2fr,1.1fr] gap-12 items-start">
+        {/* Revenue & Stats */}
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
+          <div className="bg-[#020610] border border-white/10 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs uppercase font-bold text-slate-500">Total MRR</span>
+              <IndianRupee className="w-4 h-4 text-[#8B5CF6]" />
+            </div>
+            <p className="text-3xl font-bold text-white">₹{mrr.toLocaleString("en-IN")}</p>
+            <p className="text-xs text-green-400 mt-2">+12% from last month</p>
+          </div>
           
-          {/* Tenant List Table */}
-          <AnimatedSection className="glass-card-strong p-8">
-            <h3 className="text-lg font-bold text-white mb-6">Tenant Organizations</h3>
-            
-            <div className="overflow-x-auto">
-              <table className="w-full text-left text-xs">
-                <thead>
-                  <tr className="border-b border-white/[0.06] text-[#64748B] uppercase font-semibold">
-                    <th className="pb-4">Organization</th>
-                    <th className="pb-4">Subdomain</th>
-                    <th className="pb-4 text-center">Seats</th>
-                    <th className="pb-4">Status</th>
-                    <th className="pb-4">Billing Rate</th>
-                    <th className="pb-4 text-right">Actions</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-white/[0.04] text-white">
-                  {tenants.map((t) => (
-                    <tr key={t.id} className="hover:bg-white/[0.01]">
-                      <td className="py-4 font-bold">{t.name}</td>
-                      <td className="py-4 text-[#94A3B8] font-mono">{t.subdomain}</td>
-                      <td className="py-4 text-center font-semibold">{t.agents}</td>
-                      <td className="py-4">
-                        <span className={`px-2.5 py-0.5 rounded-full text-[9px] font-bold uppercase ${
-                          t.status === "Active" ? "bg-[#22C55E]/10 border border-[#22C55E]/20 text-[#22C55E]" : "bg-[#F59E0B]/10 border border-[#F59E0B]/20 text-[#F59E0B]"
-                        }`}>
-                          {t.status}
+          <div className="bg-[#020610] border border-white/10 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs uppercase font-bold text-slate-500">Active Workspaces</span>
+              <Server className="w-4 h-4 text-[#00C2FF]" />
+            </div>
+            <p className="text-3xl font-bold text-white">{workspaces.length}</p>
+            <p className="text-xs text-slate-400 mt-2">{workspaces.filter(w => w.plan === 'TRIAL').length} on trial</p>
+          </div>
+
+          <div className="bg-[#020610] border border-white/10 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs uppercase font-bold text-slate-500">Total Seats</span>
+              <Users className="w-4 h-4 text-[#00E5A0]" />
+            </div>
+            <p className="text-3xl font-bold text-white">{workspaces.reduce((acc, w) => acc + w._count.users, 0)}</p>
+            <p className="text-xs text-slate-400 mt-2">Platform-wide assigned users</p>
+          </div>
+
+          <div className="bg-[#020610] border border-white/10 rounded-xl p-6">
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-xs uppercase font-bold text-slate-500">Leads Managed</span>
+              <Activity className="w-4 h-4 text-orange-400" />
+            </div>
+            <p className="text-3xl font-bold text-white">{workspaces.reduce((acc, w) => acc + w._count.leads, 0).toLocaleString()}</p>
+            <p className="text-xs text-slate-400 mt-2">In active pipelines</p>
+          </div>
+        </div>
+
+        {/* Live Workspace Table */}
+        <div className="bg-[#020610] border border-white/10 rounded-xl overflow-hidden">
+          <div className="p-6 border-b border-white/10 flex justify-between items-center">
+            <h3 className="text-lg font-bold text-white">Live Client Workspaces</h3>
+          </div>
+          
+          <div className="overflow-x-auto">
+            <table className="w-full text-left text-sm">
+              <thead>
+                <tr className="border-b border-white/5 text-slate-500 uppercase font-semibold text-xs bg-white/[0.02]">
+                  <th className="p-4 pl-6">Workspace</th>
+                  <th className="p-4">Plan & Status</th>
+                  <th className="p-4">Usage (Users / Leads)</th>
+                  <th className="p-4 text-center">Health</th>
+                  <th className="p-4 text-right pr-6">Actions</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-white/5 text-slate-300">
+                {isLoading ? (
+                  <tr><td colSpan={5} className="p-8 text-center text-slate-500">Loading workspaces...</td></tr>
+                ) : workspaces.length === 0 ? (
+                  <tr><td colSpan={5} className="p-8 text-center text-slate-500">No workspaces found.</td></tr>
+                ) : (
+                  workspaces.map((w) => (
+                    <tr key={w.id} className="hover:bg-white/[0.02] transition-colors group">
+                      <td className="p-4 pl-6">
+                        <div className="font-bold text-white">{w.name}</div>
+                        <div className="text-xs text-slate-500">ID: {w.id.split('-')[0]}...</div>
+                        <div className="text-[10px] text-slate-600 mt-1">
+                          Created {formatDistanceToNow(new Date(w.createdAt))} ago
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="flex flex-col gap-2 items-start">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/20">
+                            {w.plan}
+                          </span>
+                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${w.status === 'ACTIVE' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
+                            {w.status}
+                          </span>
+                        </div>
+                      </td>
+                      <td className="p-4">
+                        <div className="space-y-3 w-48">
+                          {/* Users Bar */}
+                          <div>
+                            <div className="flex justify-between text-[10px] mb-1">
+                              <span className="text-slate-400">Users</span>
+                              <span className="font-mono text-white">{w._count.users}</span>
+                            </div>
+                            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                              <div className="h-full bg-[#00C2FF] rounded-full" style={{ width: `${Math.min(100, (w._count.users / 10) * 100)}%` }} />
+                            </div>
+                          </div>
+                          {/* Leads Bar */}
+                          <div>
+                            <div className="flex justify-between text-[10px] mb-1">
+                              <span className="text-slate-400">Leads</span>
+                              <span className="font-mono text-white">{w._count.leads}</span>
+                            </div>
+                            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                              <div className="h-full bg-orange-400 rounded-full" style={{ width: `${Math.min(100, (w._count.leads / 500) * 100)}%` }} />
+                            </div>
+                          </div>
+                        </div>
+                      </td>
+                      <td className="p-4 text-center">
+                        <span className={`inline-flex items-center justify-center w-10 h-10 rounded-full font-bold border ${getHealthColor(w.healthScore)}`}>
+                          {w.healthScore}
                         </span>
                       </td>
-                      <td className="py-4 font-semibold text-[#00E5A0]">{t.billing}</td>
-                      <td className="py-4 text-right space-x-2">
-                        <button
-                          onClick={() => toggleStatus(t.id)}
-                          className="p-1.5 rounded bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] text-[#94A3B8] hover:text-white"
-                          title="Toggle Status"
+                      <td className="p-4 pr-6 text-right space-x-2">
+                        <button 
+                          onClick={() => handleImpersonate(w.id)}
+                          className="p-2 rounded-lg bg-white/5 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-400 transition-colors" 
+                          title="Login As Client"
                         >
-                          {t.status === "Active" ? <Pause className="w-3.5 h-3.5" /> : <Play className="w-3.5 h-3.5 text-[#22C55E]" />}
+                          <LogIn className="w-4 h-4" />
                         </button>
-                        <button
-                          onClick={() => deleteTenant(t.id)}
-                          className="p-1.5 rounded bg-white/[0.03] border border-[#EF4444]/20 hover:bg-[#EF4444]/10 text-[#EF4444]"
-                          title="Decommission Tenant"
+                        <button 
+                          onClick={() => setEmailModal(w.id)}
+                          className="p-2 rounded-lg bg-white/5 hover:bg-white/10 text-slate-400 transition-colors" 
+                          title="Send Email"
                         >
-                          <Trash2 className="w-3.5 h-3.5" />
+                          <Mail className="w-4 h-4" />
+                        </button>
+                        <button 
+                          onClick={() => handleSuspend(w.id)}
+                          className="p-2 rounded-lg bg-white/5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 transition-colors" 
+                          title="Suspend Workspace"
+                        >
+                          <Pause className="w-4 h-4" />
                         </button>
                       </td>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </AnimatedSection>
-
-          {/* Create Tenant Form */}
-          <AnimatedSection delay={0.1} className="glass-card p-6">
-            <h3 className="text-sm font-bold text-white mb-6 border-b border-white/[0.06] pb-3 flex items-center gap-2">
-              <Plus className="w-4 h-4 text-[#00C2FF]" />
-              Provision New Tenant
-            </h3>
-
-            <form onSubmit={addTenant} className="space-y-4">
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-[#64748B]">Organization Name</label>
-                <input
-                  type="text"
-                  required
-                  placeholder="Acme Inc."
-                  value={newTenantName}
-                  onChange={(e) => setNewTenantName(e.target.value)}
-                  className="w-full px-4 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-xs text-white placeholder-[#475569] transition-all"
-                />
-              </div>
-
-              <div className="space-y-1.5">
-                <label className="text-[10px] font-bold uppercase text-[#64748B]">Custom Subdomain</label>
-                <div className="relative">
-                  <input
-                    type="text"
-                    required
-                    placeholder="acme"
-                    value={newSubdomain}
-                    onChange={(e) => setNewSubdomain(e.target.value)}
-                    className="w-full pl-4 pr-32 py-2.5 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-xs text-white placeholder-[#475569] transition-all"
-                  />
-                  <span className="absolute right-3 top-3 text-[10px] text-[#64748B] font-mono">.nexdial.com</span>
-                </div>
-              </div>
-
-              <button type="submit" className="btn-primary w-full py-3 text-xs font-bold flex items-center justify-center gap-1.5">
-                <Shield className="w-3.5 h-3.5" />
-                Initialize Sandbox Organization
-              </button>
-            </form>
-          </AnimatedSection>
-
+                  ))
+                )}
+              </tbody>
+            </table>
+          </div>
         </div>
+
       </div>
+
+      {/* Email Modal */}
+      {!!emailModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm">
+          <div className="bg-[#0A0F1C] border border-white/10 rounded-2xl w-full max-w-lg p-6 shadow-2xl">
+            <h3 className="text-xl font-bold text-white mb-2">Send Broadcast Email</h3>
+            <p className="text-sm text-slate-400 mb-6">Send an email directly to the admins of workspace: {emailModal.split('-')[0]}...</p>
+            
+            <form onSubmit={handleSendEmail} className="space-y-4">
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Subject</label>
+                <input type="text" required className="w-full bg-[#020610] border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00C2FF]" placeholder="Important Update regarding your NexDial Plan" />
+              </div>
+              <div>
+                <label className="block text-xs font-semibold text-slate-400 uppercase mb-2">Message</label>
+                <textarea required rows={5} className="w-full bg-[#020610] border border-white/10 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-[#00C2FF] resize-none" placeholder="Type your message here..." />
+              </div>
+              
+              <div className="flex justify-end gap-3 pt-4">
+                <button type="button" onClick={() => setEmailModal(null)} className="px-4 py-2 text-slate-400 hover:text-white text-sm font-semibold">Cancel</button>
+                <button type="submit" className="px-6 py-2 bg-[#00C2FF] hover:bg-[#00C2FF]/80 text-black font-semibold rounded-lg text-sm transition-colors flex items-center gap-2">
+                  <Mail className="w-4 h-4" /> Send Email
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
