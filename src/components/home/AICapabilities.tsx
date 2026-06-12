@@ -419,16 +419,16 @@ export function AICapabilities() {
               ))}
             </div>
 
-            {/* Feature Detail Sandbox Card */}
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeFeature.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -20 }}
-                transition={{ duration: 0.3 }}
-                className="glass-card-strong p-8 lg:p-10 relative overflow-hidden w-full"
-              >
+            <div className="perspective-1000 w-full mt-6">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeFeature.id}
+                  initial={{ opacity: 0, y: 30, rotateX: 10 }}
+                  animate={{ opacity: 1, y: 0, rotateX: 0 }}
+                  exit={{ opacity: 0, y: -20, rotateX: -5 }}
+                  transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                  className="glass-card-strong hover-3d-lift transform-3d p-8 lg:p-10 relative overflow-hidden w-full border border-white/[0.1] shadow-2xl"
+                >
                 {/* Background Glow */}
                 <div
                   className="absolute -top-20 -right-20 w-80 h-80 rounded-full blur-[100px] opacity-15"
@@ -494,8 +494,9 @@ export function AICapabilities() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
-            </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
           </div>
         </AnimatedSection>
       </div>

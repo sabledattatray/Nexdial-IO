@@ -206,15 +206,19 @@ export function HeroSection() {
           </div>
 
           {/* Right — CRM Inbox Preview */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="block mt-16 lg:mt-0 relative w-full min-w-0"
-          >
-            <div className="relative w-full">
+          <div className="block mt-16 lg:mt-0 relative w-full min-w-0 perspective-1000">
+            <motion.div
+              initial={{ opacity: 0, y: 40, rotateX: 15, rotateY: -15, scale: 0.9 }}
+              animate={{ opacity: 1, y: 0, rotateX: 5, rotateY: -8, scale: 1 }}
+              whileHover={{ rotateX: 0, rotateY: 0, scale: 1.02 }}
+              transition={{ delay: 0.4, duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
+              className="relative w-full transform-3d group"
+            >
+              {/* Ambient Glow */}
+              <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-tr from-[#0057D9]/20 via-[#00C2FF]/10 to-[#00E5A0]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
+              
               {/* Main Dashboard Card */}
-              <div className="glass-card-strong w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/30 border border-white/[0.08]">
+              <div className="glass-card-strong relative z-10 w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/50 border border-white/[0.08] animate-shine">
                 {/* Browser Window Header */}
                 <div className="flex items-center gap-3 mb-4">
                   <div className="flex gap-1.5">
@@ -452,8 +456,8 @@ export function HeroSection() {
                   </AnimatePresence>
                 </div>
               </div>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         </div>
       </div>
     </section>

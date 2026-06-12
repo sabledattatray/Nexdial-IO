@@ -14,38 +14,38 @@ const steps = [
   {
     step: "01",
     icon: Download,
-    title: "Capture Leads",
-    description: "Leads are instantly collected from website forms, WhatsApp messages, phone calls, CSV imports, or our custom API.",
+    title: "Omnichannel Lead Capture",
+    description: "Leads are instantly collected from website forms, WhatsApp messages, phone calls, CSV imports, or our custom API. Never let a high-value prospect slip through the cracks again.",
     details: ["WhatsApp Webhook", "Custom Form Builders", "CSV Lead Importer", "Developer API"],
     color: "#0057D9",
-    gradient: "from-[#0057D9] to-[#00C2FF]",
+    className: "md:col-span-2 lg:col-span-2 lg:row-span-2",
   },
   {
     step: "02",
     icon: Inbox,
-    title: "Track in Unified Inbox",
-    description: "Every inquiry drops into a single, clean workspace. Assign status, tag categories, and instantly see contact history.",
-    details: ["Real-time Sync", "Custom Lead Statuses", "Lead Health Scoring", "Interaction Timeline"],
+    title: "Unified Workspace",
+    description: "Every inquiry drops into a single, clean interface.",
+    details: ["Real-time Sync", "Custom Lead Statuses"],
     color: "#00C2FF",
-    gradient: "from-[#00C2FF] to-[#00E5A0]",
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     step: "03",
     icon: CalendarDays,
-    title: "Follow Up & Convert",
-    description: "Schedule follow-up tasks, set automated notifications, and move leads through your visual Kanban pipeline.",
-    details: ["Drag-and-drop Kanban", "Auto-scheduled Tasks", "Smart Notifications", "Call Outcomes Log"],
+    title: "Automated Follow-ups",
+    description: "Schedule tasks and set visual notifications.",
+    details: ["Drag-and-drop Kanban", "Smart Alerts"],
     color: "#8B5CF6",
-    gradient: "from-[#8B5CF6] to-[#A78BFA]",
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     step: "04",
     icon: LineChart,
-    title: "Measure & Improve",
-    description: "Analyze response times, conversion funnels, and agent performance from a centralized analytics dashboard.",
-    details: ["Conversion Funnels", "Response Time Audit", "Daily Performance Reports", "Excel/CSV Export"],
-    color: "#EC4899",
-    gradient: "from-[#EC4899] to-[#F472B6]",
+    title: "Advanced Analytics",
+    description: "Analyze response times, conversion funnels, and agent performance from a centralized dashboard. Optimize your engine with data.",
+    details: ["Conversion Funnels", "Response Time Audit", "Daily Reports"],
+    color: "#00E5A0",
+    className: "md:col-span-2 lg:col-span-2",
   },
 ];
 
@@ -67,49 +67,49 @@ export function PlatformOverview() {
           </p>
         </AnimatedSection>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6 relative" staggerDelay={0.1}>
-          {/* Horizontal line connecting steps on large screens */}
-          <div className="hidden xl:block absolute top-[60px] left-[15%] right-[15%] h-[2px] bg-white/[0.04] z-0" />
-
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 relative perspective-1000" staggerDelay={0.1}>
           {steps.map((step, index) => (
-            <StaggerItem key={step.step} className="relative z-10">
-              <div className="glass-card group p-6 h-full flex flex-col justify-between hover:border-white/[0.12] transition-all duration-500 relative overflow-hidden">
+            <StaggerItem key={step.step} className={`relative z-10 ${step.className} transform-3d`}>
+              <div className="glass-card hover-3d-lift group p-8 h-full flex flex-col justify-between hover:border-white/[0.2] transition-all duration-700 relative overflow-hidden">
+                {/* Subtle Ambient Glow */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.01] to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
+                
                 {/* Step Number Badge */}
                 <div 
-                  className="absolute top-4 right-4 text-4xl font-extrabold text-white/[0.03] group-hover:text-white/[0.06] transition-colors"
+                  className="absolute top-6 right-6 text-5xl font-extrabold text-white/[0.02] group-hover:text-white/[0.08] transition-colors duration-700"
                   style={{ fontFamily: "var(--font-space-grotesk)" }}
                 >
                   {step.step}
                 </div>
 
-                {/* Glow */}
+                {/* Hover Spotlight Glow */}
                 <div
-                  className="absolute -top-12 left-1/2 -translate-x-1/2 w-24 h-24 rounded-full blur-[50px] opacity-0 group-hover:opacity-25 transition-opacity duration-500"
+                  className="absolute -top-20 -right-20 w-48 h-48 rounded-full blur-[80px] opacity-0 group-hover:opacity-20 transition-opacity duration-700 pointer-events-none"
                   style={{ backgroundColor: step.color }}
                 />
 
-                <div>
+                <div className="relative z-10">
                   <div
-                    className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-6 transition-transform group-hover:scale-110 duration-300`}
-                    style={{ background: `linear-gradient(135deg, ${step.color}20, ${step.color}08)` }}
+                    className={`w-14 h-14 rounded-2xl flex items-center justify-center mb-8 transition-transform group-hover:scale-110 duration-500 shadow-lg`}
+                    style={{ background: `linear-gradient(135deg, ${step.color}20, ${step.color}08)`, border: `1px solid ${step.color}30` }}
                   >
                     <step.icon className="w-6 h-6" style={{ color: step.color }} />
                   </div>
 
-                  <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                  <h3 className="text-xl font-bold text-white mb-4 flex items-center gap-2" style={{ fontFamily: "var(--font-outfit)" }}>
                     {step.title}
                   </h3>
                   
-                  <p className="text-sm text-[#64748B] leading-relaxed mb-6">
+                  <p className="text-sm text-[#94A3B8] leading-relaxed mb-8 max-w-[90%]">
                     {step.description}
                   </p>
                 </div>
 
-                <div className="space-y-2 mt-auto pt-4 border-t border-white/[0.04]">
+                <div className="space-y-3 mt-auto pt-6 border-t border-white/[0.04] relative z-10">
                   {step.details.map((detail) => (
-                    <div key={detail} className="flex items-center gap-2">
-                      <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: step.color }} />
-                      <span className="text-xs text-[#CBD5E1] font-medium">{detail}</span>
+                    <div key={detail} className="flex items-center gap-3">
+                      <div className="w-1.5 h-1.5 rounded-full shadow-[0_0_8px_rgba(255,255,255,0.5)]" style={{ backgroundColor: step.color }} />
+                      <span className="text-xs text-[#CBD5E1] font-medium tracking-wide">{detail}</span>
                     </div>
                   ))}
                 </div>
