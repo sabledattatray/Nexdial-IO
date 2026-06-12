@@ -147,7 +147,7 @@ export function HeroSection() {
             </motion.div>
 
             {/* Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-extrabold leading-[1.08] tracking-tight mb-6">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-bold leading-[1.08] tracking-tight mb-6">
               <span className="gradient-text-hero">
                 Never Lose a Customer Conversation Again
               </span>
