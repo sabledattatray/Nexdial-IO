@@ -4,6 +4,8 @@ import { useState, useEffect } from "react";
 import { Shield, Users, Server, IndianRupee, Activity, Play, Pause, LogIn, Mail, MoreVertical, Radio, Terminal, Send, CheckCircle2 } from "lucide-react";
 import Link from "next/link";
 import { formatDistanceToNow } from "date-fns";
+import { useRouter } from "next/navigation";
+import { useSession } from "next-auth/react";
 
 type Workspace = {
   id: string;
@@ -29,6 +31,7 @@ type AuditLog = {
 };
 
 export default function AdminDashboard() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState<"workspaces" | "broadcast" | "audit">("workspaces");
   
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
@@ -36,6 +39,13 @@ export default function AdminDashboard() {
   
   const [isLoading, setIsLoading] = useState(true);
   const [emailModal, setEmailModal] = useState<string | null>(null);
+
+  const { data: session, status } = useSession({
+    required: true,
+    onUnauthenticated() {
+      router.push("/login");
+    },
+  });
 
   // Broadcast state
   const [broadcastTitle, setBroadcastTitle] = useState("");
