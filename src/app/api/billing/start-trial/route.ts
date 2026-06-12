@@ -34,13 +34,25 @@ export async function POST(req: Request) {
       receipt: `rcpt_trial_${workspace?.id}_${Date.now()}`,
     };
 
+    const keyId = process.env.RAZORPAY_KEY_ID || "rzp_test_mock";
+    
+    // If using mock keys, bypass actual Razorpay API to prevent Auth errors
+    if (keyId === "rzp_test_mock") {
+      return NextResponse.json({
+        orderId: `order_mock_${Date.now()}`,
+        amount,
+        currency,
+        keyId,
+      });
+    }
+
     const order = await razorpay.orders.create(options);
 
     return NextResponse.json({
       orderId: order.id,
       amount: order.amount,
       currency: order.currency,
-      keyId: process.env.RAZORPAY_KEY_ID || "rzp_test_mock",
+      keyId,
     });
 
   } catch (error: any) {
