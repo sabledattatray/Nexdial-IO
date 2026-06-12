@@ -157,7 +157,7 @@ export function Navbar() {
                 <div className="absolute -inset-1 rounded-xl bg-gradient-to-br from-[#0057D9]/30 to-[#00C2FF]/30 blur-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </div>
               <div className="flex flex-col">
-                <span className="text-white font-extrabold text-2xl tracking-tighter leading-none flex items-center" style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                <span className="text-white font-extrabold text-2xl tracking-tighter leading-none flex items-center" style={{ fontFamily: "var(--font-outfit)" }}>
                   Nexdial<sup className="inline-flex items-center justify-center w-[14px] h-[14px] ml-0.5 rounded-full border border-[#00C2FF] text-[#00C2FF] text-[9px] font-light shadow-[0_0_8px_rgba(0,194,255,0.2)]">R</sup>
                 </span>
                 <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
