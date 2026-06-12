@@ -33,7 +33,7 @@ const team = [
     desc: "Full-stack software architect with a vision to eliminate communication chaos for small businesses. Oversees core product engineering and AI research.",
     initials: "DS",
     color: "#0057D9",
-    image: "/author.png"
+    image: "/datta.png"
   },
   {
     name: "Rahul K.",
