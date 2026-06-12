@@ -18,7 +18,7 @@ const steps = [
     description: "Leads are instantly collected from website forms, WhatsApp messages, phone calls, CSV imports, or our custom API. Never let a high-value prospect slip through the cracks again.",
     details: ["WhatsApp Webhook", "Custom Form Builders", "CSV Lead Importer", "Developer API"],
     color: "#0057D9",
-    className: "md:col-span-2 lg:col-span-2 lg:row-span-2",
+    className: "md:col-span-2 lg:col-span-2",
   },
   {
     step: "02",
