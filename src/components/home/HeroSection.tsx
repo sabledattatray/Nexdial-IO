@@ -211,10 +211,10 @@ export function HeroSection() {
 
           {/* Right — CRM Inbox Preview */}
           <motion.div
-            initial={{ opacity: 0, x: 60, rotateY: -10 }}
-            animate={{ opacity: 1, x: 0, rotateY: 0 }}
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="hidden lg:block relative"
+            className="block mt-16 lg:mt-0 relative"
           >
             <div className="relative">
               {/* Main Dashboard Card */}
@@ -352,27 +352,29 @@ export function HeroSection() {
                         className="space-y-4"
                       >
                         {/* Pipeline Columns */}
-                        <div className="grid grid-cols-4 gap-2">
-                          {[
-                            { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
-                            { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
-                            { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
-                            { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
-                          ].map((col) => (
-                            <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
-                              <div className="flex items-center justify-between mb-2">
-                                <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
-                                <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
+                        <div className="overflow-x-auto scrollbar-none -mx-2 px-2">
+                          <div className="grid grid-cols-4 gap-2 min-w-[440px] lg:min-w-0">
+                            {[
+                              { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
+                              { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
+                              { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
+                              { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
+                            ].map((col) => (
+                              <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
+                                <div className="flex items-center justify-between mb-2">
+                                  <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
+                                  <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
+                                </div>
+                                <div className="space-y-1.5">
+                                  {col.leads.map((lead) => (
+                                    <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
+                                      {lead}
+                                    </div>
+                                  ))}
+                                </div>
                               </div>
-                              <div className="space-y-1.5">
-                                {col.leads.map((lead) => (
-                                  <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
-                                    {lead}
-                                  </div>
-                                ))}
-                              </div>
-                            </div>
-                          ))}
+                            ))}
+                          </div>
                         </div>
 
                         {/* Conversion Funnel */}
