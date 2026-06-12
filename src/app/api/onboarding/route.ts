@@ -29,6 +29,21 @@ export async function POST(req: Request) {
       },
     });
 
+    // Save onboarding metadata permanently to the workspace
+    if (updatedUser.workspaceId) {
+      await prisma.workspace.update({
+        where: { id: updatedUser.workspaceId },
+        data: {
+          onboardingData: {
+            companyName: companyName || "",
+            leadSources: leadSources || [],
+            goals: goals || [],
+            teamSize: team ? team.length : 0
+          }
+        }
+      });
+    }
+
     // Seed onboarding demo data if requested
     if (seedDemoData) {
       try {

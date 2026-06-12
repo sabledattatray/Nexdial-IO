@@ -1,7 +1,7 @@
 "use client";
 
-import { useState, useEffect } from "react";
-import { Users, LogIn, Pause, Search, User, Mail, Plus } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { Users, LogIn, Pause, Search, User, Mail, Plus, ChevronDown, ChevronUp, Briefcase, Target, Filter } from "lucide-react";
 import { formatDistanceToNow } from "date-fns";
 
 type WorkspaceOwner = {
@@ -20,6 +20,12 @@ type Workspace = {
   lastLoginAt: string | null;
   createdAt: string;
   users: WorkspaceOwner[]; // Fetched from our API update
+  onboardingData: {
+    companyName?: string;
+    leadSources?: string[];
+    goals?: string[];
+    teamSize?: number;
+  } | null;
   _count: {
     users: number;
     leads: number;
@@ -30,6 +36,7 @@ export default function AdminClientsPage() {
   const [workspaces, setWorkspaces] = useState<Workspace[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
+  const [expandedId, setExpandedId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchWorkspaces();
@@ -128,78 +135,134 @@ export default function AdminClientsPage() {
                   const owner = w.users?.[0]; // Assume first ADMIN is the primary owner
                   
                   return (
-                    <tr key={w.id} className="hover:bg-white/[0.02] transition-colors group">
-                      <td className="p-4 pl-6">
-                        <div className="font-bold text-white text-base mb-1">{w.name}</div>
-                        {owner ? (
-                          <div className="flex items-center gap-2 text-slate-400 mt-2">
-                            {owner.image ? (
-                              <img src={owner.image} alt="" className="w-6 h-6 rounded-full" />
-                            ) : (
-                              <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center">
-                                <User className="w-3 h-3 text-slate-400" />
+                    <React.Fragment key={w.id}>
+                      <tr className="hover:bg-white/[0.02] transition-colors group">
+                        <td className="p-4 pl-6">
+                          <div className="font-bold text-white text-base mb-1">{w.name}</div>
+                          {owner ? (
+                            <div className="flex items-center gap-2 text-slate-400 mt-2">
+                              {owner.image ? (
+                                <img src={owner.image} alt="" className="w-6 h-6 rounded-full" />
+                              ) : (
+                                <div className="w-6 h-6 rounded-full bg-slate-800 flex items-center justify-center">
+                                  <User className="w-3 h-3 text-slate-400" />
+                                </div>
+                              )}
+                              <div className="flex flex-col">
+                                <span className="text-xs font-medium text-slate-300">{owner.name || "Unnamed"}</span>
+                                <span className="text-[10px] text-slate-500">{owner.email}</span>
                               </div>
+                            </div>
+                          ) : (
+                            <span className="text-[10px] text-red-400/80 italic">No admin assigned</span>
+                          )}
+                        </td>
+                        <td className="p-4">
+                          <div className="flex flex-col gap-2 items-start">
+                            <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/20">
+                              {w.plan}
+                            </span>
+                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${w.status === 'ACTIVE' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
+                              {w.status}
+                            </span>
+                          </div>
+                        </td>
+                        <td className="p-4">
+                          <div className="space-y-3 w-48">
+                            <div>
+                              <div className="flex justify-between text-[10px] mb-1">
+                                <span className="text-slate-400">Users</span>
+                                <span className="font-mono text-white">{w._count.users}</span>
+                              </div>
+                              <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div className="h-full bg-[#00C2FF] rounded-full" style={{ width: `${Math.min(100, (w._count.users / 10) * 100)}%` }} />
+                              </div>
+                            </div>
+                            <div>
+                              <div className="flex justify-between text-[10px] mb-1">
+                                <span className="text-slate-400">Leads</span>
+                                <span className="font-mono text-white">{w._count.leads}</span>
+                              </div>
+                              <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+                                <div className="h-full bg-orange-400 rounded-full" style={{ width: `${Math.min(100, (w._count.leads / 500) * 100)}%` }} />
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+                        <td className="p-4 text-center">
+                          <span className={`inline-flex items-center justify-center w-10 h-10 rounded-full font-bold border ${getHealthColor(w.healthScore)}`}>
+                            {w.healthScore}
+                          </span>
+                        </td>
+                        <td className="p-4 pr-6 text-right space-x-2">
+                          <button 
+                            onClick={() => setExpandedId(expandedId === w.id ? null : w.id)} 
+                            className={`p-2 rounded-lg transition-colors ${expandedId === w.id ? 'bg-[#00C2FF]/20 text-[#00C2FF]' : 'bg-white/5 hover:bg-white/10 text-slate-400'}`} 
+                            title="View Onboarding Data"
+                          >
+                            {expandedId === w.id ? <ChevronUp className="w-4 h-4" /> : <ChevronDown className="w-4 h-4" />}
+                          </button>
+                          {owner?.email && (
+                            <a href={`mailto:${owner.email}`} className="inline-block p-2 rounded-lg bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 text-slate-400 transition-colors" title="Email Client">
+                              <Mail className="w-4 h-4" />
+                            </a>
+                          )}
+                          <button onClick={() => handleImpersonate(w.id)} className="p-2 rounded-lg bg-white/5 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-400 transition-colors" title="Login As Client">
+                            <LogIn className="w-4 h-4" />
+                          </button>
+                          <button className="p-2 rounded-lg bg-white/5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 transition-colors" title="Suspend Workspace">
+                            <Pause className="w-4 h-4" />
+                          </button>
+                        </td>
+                      </tr>
+                      {expandedId === w.id && (
+                        <tr className="bg-[#050a15] border-y border-[#00C2FF]/20 shadow-[inset_0_0_20px_rgba(0,194,255,0.02)]">
+                          <td colSpan={5} className="p-6 pl-8">
+                            <div className="flex items-center gap-2 mb-4">
+                              <div className="w-6 h-6 rounded-full bg-[#00C2FF]/10 flex items-center justify-center border border-[#00C2FF]/20">
+                                <Briefcase className="w-3 h-3 text-[#00C2FF]" />
+                              </div>
+                              <h4 className="text-sm font-bold text-white uppercase tracking-wider">Client Onboarding Profile</h4>
+                            </div>
+                            
+                            {w.onboardingData ? (
+                              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                                <div>
+                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Registered Company Name</span>
+                                  <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.companyName || "Not provided"}</span>
+                                </div>
+                                <div>
+                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Filter className="w-3 h-3" /> Lead Sources</span>
+                                  <div className="flex flex-wrap gap-1.5">
+                                    {w.onboardingData.leadSources && w.onboardingData.leadSources.length > 0 ? (
+                                      w.onboardingData.leadSources.map((source, i) => (
+                                        <span key={i} className="text-[10px] bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full">{source}</span>
+                                      ))
+                                    ) : (
+                                      <span className="text-xs text-slate-500 italic">None selected</span>
+                                    )}
+                                  </div>
+                                </div>
+                                <div>
+                                  <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Target className="w-3 h-3" /> Core Goals</span>
+                                  <div className="flex flex-col gap-1.5">
+                                    {w.onboardingData.goals && w.onboardingData.goals.length > 0 ? (
+                                      w.onboardingData.goals.map((goal, i) => (
+                                        <span key={i} className="text-xs text-slate-300 bg-emerald-500/5 border border-emerald-500/10 px-2 py-1 rounded">{goal}</span>
+                                      ))
+                                    ) : (
+                                      <span className="text-xs text-slate-500 italic">None selected</span>
+                                    )}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className="text-sm text-slate-400 italic">No onboarding data recorded for this legacy workspace.</div>
                             )}
-                            <div className="flex flex-col">
-                              <span className="text-xs font-medium text-slate-300">{owner.name || "Unnamed"}</span>
-                              <span className="text-[10px] text-slate-500">{owner.email}</span>
-                            </div>
-                          </div>
-                        ) : (
-                          <span className="text-[10px] text-red-400/80 italic">No admin assigned</span>
-                        )}
-                      </td>
-                      <td className="p-4">
-                        <div className="flex flex-col gap-2 items-start">
-                          <span className="px-2 py-0.5 rounded text-[10px] font-bold tracking-wider bg-purple-500/20 text-purple-400 border border-purple-500/20">
-                            {w.plan}
-                          </span>
-                          <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${w.status === 'ACTIVE' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
-                            {w.status}
-                          </span>
-                        </div>
-                      </td>
-                      <td className="p-4">
-                        <div className="space-y-3 w-48">
-                          <div>
-                            <div className="flex justify-between text-[10px] mb-1">
-                              <span className="text-slate-400">Users</span>
-                              <span className="font-mono text-white">{w._count.users}</span>
-                            </div>
-                            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                              <div className="h-full bg-[#00C2FF] rounded-full" style={{ width: `${Math.min(100, (w._count.users / 10) * 100)}%` }} />
-                            </div>
-                          </div>
-                          <div>
-                            <div className="flex justify-between text-[10px] mb-1">
-                              <span className="text-slate-400">Leads</span>
-                              <span className="font-mono text-white">{w._count.leads}</span>
-                            </div>
-                            <div className="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
-                              <div className="h-full bg-orange-400 rounded-full" style={{ width: `${Math.min(100, (w._count.leads / 500) * 100)}%` }} />
-                            </div>
-                          </div>
-                        </div>
-                      </td>
-                      <td className="p-4 text-center">
-                        <span className={`inline-flex items-center justify-center w-10 h-10 rounded-full font-bold border ${getHealthColor(w.healthScore)}`}>
-                          {w.healthScore}
-                        </span>
-                      </td>
-                      <td className="p-4 pr-6 text-right space-x-2">
-                        {owner?.email && (
-                          <a href={`mailto:${owner.email}`} className="inline-block p-2 rounded-lg bg-white/5 hover:bg-emerald-500/20 hover:text-emerald-400 text-slate-400 transition-colors" title="Email Client">
-                            <Mail className="w-4 h-4" />
-                          </a>
-                        )}
-                        <button onClick={() => handleImpersonate(w.id)} className="p-2 rounded-lg bg-white/5 hover:bg-[#00C2FF]/20 hover:text-[#00C2FF] text-slate-400 transition-colors" title="Login As Client">
-                          <LogIn className="w-4 h-4" />
-                        </button>
-                        <button className="p-2 rounded-lg bg-white/5 hover:bg-red-500/20 hover:text-red-400 text-slate-400 transition-colors" title="Suspend Workspace">
-                          <Pause className="w-4 h-4" />
-                        </button>
-                      </td>
-                    </tr>
+                          </td>
+                        </tr>
+                      )}
+                    </React.Fragment>
                   );
                 })
               )}

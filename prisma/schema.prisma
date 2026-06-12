@@ -64,6 +64,9 @@ model Workspace {
   whatsappNumber String?
   supportEmail   String?
 
+  // Onboarding Metadata
+  onboardingData Json? @map("onboarding_data")
+
   // Billing & Status
   plan        String    @default("TRIAL") // TRIAL, SMALL, MEDIUM, LARGE
   status      String    @default("ACTIVE") // ACTIVE, SUSPENDED
