@@ -51,7 +51,7 @@ export default function TermsPage() {
         if (top + sidebarHeight + gap > gridBottom) {
           top = gridBottom - sidebarHeight - gap;
         }
-        setComputedTop(Math.max(0, top));
+        setComputedTop(top);
         return initTop; // don't mutate initTop
       });
     };

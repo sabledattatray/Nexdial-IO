@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Calendar, User, ArrowLeft, Clock, CheckCircle } from "lucide-react";
+import { BlogClient } from "@/components/blog/BlogClient";
 
 // Local database of SEO-optimized articles
 const ARTICLES: Record<string, {
@@ -13,6 +14,7 @@ const ARTICLES: Record<string, {
   category: string;
   readTime: string;
   schemaImage: string;
+  sections: { id: string, label: string }[];
   content: React.ReactNode;
 }> = {
   "whatsapp-crm-alternative": {
@@ -24,6 +26,10 @@ const ARTICLES: Record<string, {
     category: "Lead Tracking",
     readTime: "5 min read",
     schemaImage: "https://nexdial.io/blog-whatsapp-crm.png",
+    sections: [
+      { id: "spreadsheets-trap", label: "The Spreadsheets Trap" },
+      { id: "choosing-alternative", label: "Choosing an Alternative" }
+    ],
     content: (
       <>
         <p>
@@ -33,7 +39,7 @@ const ARTICLES: Record<string, {
           But as you grow from 5 queries a day to 50, WhatsApp threads become a nightmare. Messages slip through the cracks. Conversions plummet. To cope, you probably export details to an Excel spreadsheet. Now, you have two disjointed systems: WhatsApp for talking, and Excel for logging.
         </p>
 
-        <h2>The Spreadsheets Trap: Why It Fails</h2>
+        <h2 id="spreadsheets-trap" className="scroll-mt-28">The Spreadsheets Trap: Why It Fails</h2>
         <p>
           Spreadsheets are static. They do not send follow-up notifications. They do not log calls automatically. They do not tell you if an agent has already responded. 
           When your lead data is locked in cells and your conversation is locked in chat history, three things happen:
@@ -44,7 +50,7 @@ const ARTICLES: Record<string, {
           <li><strong>Zero Follow-up Discipline:</strong> Without structured alarms or tasks, "call back next Wednesday" simply never happens.</li>
         </ul>
 
-        <h2>Choosing a WhatsApp CRM Alternative</h2>
+        <h2 id="choosing-alternative" className="scroll-mt-28">Choosing a WhatsApp CRM Alternative</h2>
         <p>
           A true <strong>WhatsApp CRM alternative</strong> does not mean getting rid of WhatsApp. It means bridging the gap. By funneling incoming chats, SMS, and missed calls into a <strong>unified customer inbox</strong>, your team can coordinate responses from a single board.
         </p>
@@ -75,6 +81,10 @@ const ARTICLES: Record<string, {
     category: "Small Business",
     readTime: "8 min read",
     schemaImage: "https://nexdial.io/blog-small-business-crm.png",
+    sections: [
+      { id: "what-you-need", label: "What You Actually Need" },
+      { id: "setting-up", label: "Setting Up Your Pipeline" }
+    ],
     content: (
       <>
         <p>
@@ -84,7 +94,7 @@ const ARTICLES: Record<string, {
           But for small businesses, this complexity is a burden. Agents spend more time filling out forms and categorizing fields than actually calling clients. The result? The team abandons the CRM and goes back to Excel.
         </p>
 
-        <h2>What Small Businesses Actually Need in a CRM</h2>
+        <h2 id="what-you-need" className="scroll-mt-28">What Small Businesses Actually Need in a CRM</h2>
         <p>
           To be effective, a small business CRM must focus on speed and simplicity. You do not need automated chatbots; you need to know who to call next. Here is the lightweight feature set that matters:
         </p>
@@ -95,7 +105,7 @@ const ARTICLES: Record<string, {
           <li><strong>Zero Setup Overheads:</strong> A simple interface that anyone can master in under 5 minutes.</li>
         </ol>
 
-        <h2>Setting Up Your CRM Pipeline</h2>
+        <h2 id="setting-up" className="scroll-mt-28">Setting Up Your CRM Pipeline</h2>
         <p>
           Do not overcomplicate your sales stages. Start with five basic columns:
           <br />
@@ -126,6 +136,10 @@ const ARTICLES: Record<string, {
     category: "Sales Strategy",
     readTime: "6 min read",
     schemaImage: "https://nexdial.io/blog-lead-tracking-india.png",
+    sections: [
+      { id: "local-challenges", label: "Local Tracking Challenges" },
+      { id: "discipline", label: "Discipline Over Automation" }
+    ],
     content: (
       <>
         <p>
@@ -135,7 +149,7 @@ const ARTICLES: Record<string, {
           Whether you are running a real estate advisory, an educational consultancy, or a financial services firm, lead response time (speed-to-lead) is the single biggest factor in winning deals.
         </p>
 
-        <h2>Local Challenges in Lead Tracking</h2>
+        <h2 id="local-challenges" className="scroll-mt-28">Local Challenges in Lead Tracking</h2>
         <p>
           Many Indian businesses capture leads from varied platforms: Facebook Leads, Google Ads, IndiaMART, Justdial, and direct website forms. 
           Manually copying these contacts into Excel leads to major delays. By the time your sales representative calls, the prospect has already contacted a competitor.
@@ -149,7 +163,7 @@ const ARTICLES: Record<string, {
           <li><strong>Activity Timelines:</strong> Track exactly when a lead called back, what notes were logged, and when the next follow-up is scheduled.</li>
         </ul>
 
-        <h2>Discipline Over Automation</h2>
+        <h2 id="discipline" className="scroll-mt-28">Discipline Over Automation</h2>
         <p>
           You do not need complex AI agents sending robotic automated WhatsApp texts. Prospects value human interaction. 
           The best lead tracking software simply enforces **agent discipline**. By showing the representative who needs to be called today and tracking follow-up dates, you ensure no prospect goes cold.
@@ -178,12 +192,16 @@ const ARTICLES: Record<string, {
     category: "API & Webhooks",
     readTime: "5 min read",
     schemaImage: "https://nexdial.io/blog-webhooks.png",
+    sections: [
+      { id: "what-is-webhook", label: "What is a Webhook?" },
+      { id: "setup-webhook", label: "Setup Webhooks in NexDial" }
+    ],
     content: (
       <>
         <p>For modern small businesses, capturing leads immediately from their source is the key to winning sales. Copying and pasting customer information manually wastes time and introduces human error.</p>
-        <h2>What is a Webhook?</h2>
+        <h2 id="what-is-webhook" className="scroll-mt-28">What is a Webhook?</h2>
         <p>A webhook is a lightweight mechanism that allows one application to send real-time data to another as soon as an event happens. For example, when a customer fills out a Facebook Lead Form or a custom website inquiry, a webhook sends that lead details instantly to NexDial.</p>
-        <h2>How to Setup Webhooks in NexDial</h2>
+        <h2 id="setup-webhook" className="scroll-mt-28">How to Setup Webhooks in NexDial</h2>
         <p>Setting up your integration is simple:</p>
         <ol>
           <li>Navigate to your CRM settings tab.</li>
@@ -204,14 +222,19 @@ const ARTICLES: Record<string, {
     category: "Sales Strategy",
     readTime: "7 min read",
     schemaImage: "https://nexdial.io/blog-followups.png",
+    sections: [
+      { id: "speed-to-lead", label: "The 'Speed-to-Lead' Factor" },
+      { id: "tactic-1", label: "Tactic 1: Centralize Inboxes" },
+      { id: "tactic-2", label: "Tactic 2: Clear Reminders" }
+    ],
     content: (
       <>
         <p>In sales, timing is everything. Studies consistently show that businesses that contact a lead within five minutes of submission are 100 times more likely to get in touch compared to those responding after 30 minutes.</p>
-        <h2>The 'Speed-to-Lead' Factor</h2>
+        <h2 id="speed-to-lead" className="scroll-mt-28">The 'Speed-to-Lead' Factor</h2>
         <p>When a prospect fills out a form or messages you, they are actively thinking about their problem. If you call them immediately, they are engaged and ready to talk. If you wait until tomorrow, they have already moved on, forgotten their inquiry, or signed up with a competitor who got back to them first.</p>
-        <h2>Tactic 1: Centralize Your Inboxes</h2>
+        <h2 id="tactic-1" className="scroll-mt-28">Tactic 1: Centralize Your Inboxes</h2>
         <p>You cannot respond quickly if you have to log into three different email accounts, check WhatsApp Web, and download CSVs from Facebook. Centralizing your notifications in a single CRM dashboard is step number one.</p>
-        <h2>Tactic 2: Clear Reminders & Urgency Badges</h2>
+        <h2 id="tactic-2" className="scroll-mt-28">Tactic 2: Clear Reminders & Urgency Badges</h2>
         <p>Use visual indicators like NexDial's overdue follow-up tags and Today banners. Setting immediate reminders for callbacks keeps your sales reps focused on hot prospects before they turn cold.</p>
       </>
     )
@@ -225,12 +248,16 @@ const ARTICLES: Record<string, {
     category: "Engineering",
     readTime: "6 min read",
     schemaImage: "https://nexdial.io/blog-engineering.png",
+    sections: [
+      { id: "server-architecture", label: "Our Server Architecture" },
+      { id: "database-redundancy", label: "Database Redundancy" }
+    ],
     content: (
       <>
         <p>As a CRM and Unified Inbox, NexDial is the lifeblood of our customers' sales pipelines. If the system is offline, sales representatives cannot access leads, call logs fail, and messages are delayed. Uptime is not just a dev metric; it is business continuity.</p>
-        <h2>Our Server Architecture</h2>
+        <h2 id="server-architecture" className="scroll-mt-28">Our Server Architecture</h2>
         <p>We deploy NexDial across regional cloud clusters with automatic failovers. If one node encounters high load or memory leakage, traffic is dynamically routed to a hot replica to ensure zero disruption to live agents.</p>
-        <h2>Database Redundancy & Daily Backups</h2>
+        <h2 id="database-redundancy" className="scroll-mt-28">Database Redundancy & Daily Backups</h2>
         <p>Using Prisma and PostgreSQL, we enforce strict indexing and database replication. Every transaction is synced in real-time, and daily backups are encrypted and saved securely. In the event of a catastrophic regional cloud failure, we can restore full service with minimal RPO.</p>
       </>
     )
@@ -298,56 +325,15 @@ export default async function BlogPostPage({
   };
 
   return (
-    <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 font-sans text-slate-300">
+    <>
       {/* JSON-LD Schema injection */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-
-      <div className="absolute inset-0 bg-grid-white/[0.02] pointer-events-none" />
-      <div className="absolute top-1/4 left-1/2 -translate-x-1/2 w-[500px] h-[500px] bg-[#00C2FF]/5 rounded-full blur-[120px] pointer-events-none" />
-
-      <div className="relative z-10 max-w-[800px] mx-auto px-6">
-        {/* Back Link */}
-        <Link
-          href="/blog"
-          className="inline-flex items-center gap-2 text-xs font-semibold text-slate-400 hover:text-[#00C2FF] mb-10 transition-colors group"
-        >
-          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-          Back to Insights
-        </Link>
-
-        {/* Article Header */}
-        <header className="space-y-6 mb-12">
-          <span className="text-xs font-bold text-[#00C2FF] uppercase tracking-wider bg-[#00C2FF]/10 px-3 py-1 rounded-full border border-[#00C2FF]/20">
-            {article.category}
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold text-white leading-tight">
-            {article.title}
-          </h1>
-
-          <div className="flex flex-wrap items-center gap-6 text-xs text-slate-400 border-b border-white/5 pb-6">
-            <span className="flex items-center gap-1.5">
-              <User className="w-4 h-4 text-slate-500" />
-              By {article.author}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Calendar className="w-4 h-4 text-slate-500" />
-              {article.date}
-            </span>
-            <span className="flex items-center gap-1.5">
-              <Clock className="w-4 h-4 text-slate-500" />
-              {article.readTime}
-            </span>
-          </div>
-        </header>
-
-        {/* Article Body */}
-        <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-sm prose-p:leading-relaxed prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:space-y-2 prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:space-y-2 text-slate-350">
-          {article.content}
-        </article>
-      </div>
-    </div>
+      <BlogClient article={article} sections={article.sections}>
+        {article.content}
+      </BlogClient>
+    </>
   );
 }
