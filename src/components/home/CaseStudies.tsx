@@ -3,47 +3,46 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { ArrowUpRight, TrendingUp, Users, Clock, Percent, ShieldCheck, ExternalLink } from "lucide-react";
-import Image from "next/image";
+import { ArrowUpRight, TrendingUp, Users, Clock, Percent, ShieldCheck } from "lucide-react";
 
 const cases = [
   {
-    id: "fintech",
-    category: "Fintech & Banking",
-    title: "Global Neobank Scales Support to 5M+ Users with AI Voice Agents",
-    description: "How a leading European neobank integrated our conversational Voice AI agent platform to handle tier-1 support calls, reducing average handle time (AHT) and increasing customer satisfaction.",
+    id: "realestate",
+    category: "Real Estate Agency",
+    title: "Apex Realty Closes 40% More Deals with Structured Lead Tracking",
+    description: "Apex Realty transitioned from scattered WhatsApp chats and messy spreadsheets to NexDial's Unified Inbox. By centralizing every property inquiry and tracking communications in one place, their agents instantly boosted client engagement and closed more property listings.",
     metrics: [
-      { label: "AHT Reduction", value: "42%", icon: Clock, color: "#0057D9" },
-      { label: "Cost Per Contact", value: "-68%", icon: TrendingUp, color: "#00C2FF" },
-      { label: "CSAT Improvement", value: "+18%", icon: Percent, color: "#00E5A0" },
+      { label: "Closed Deals Lift", value: "+40%", icon: TrendingUp, color: "#0057D9" },
+      { label: "Average Response Time", value: "< 5 min", icon: Clock, color: "#00C2FF" },
+      { label: "Saved Hours Per Agent", value: "12 hrs/wk", icon: Users, color: "#00E5A0" },
     ],
     bgGradient: "from-[#0057D9]/10 via-[#00C2FF]/5 to-transparent",
     borderGlow: "rgba(0, 194, 255, 0.2)",
     accentColor: "#00C2FF",
   },
   {
-    id: "healthcare",
-    category: "Healthcare SaaS",
-    title: "Telehealth Network Automates Patient Scheduling & Verification",
-    description: "Our predictive dialer coupled with CRM automation enabled an enterprise healthcare provider to scale outreach operations while maintaining HIPAA compliance and clinical standards.",
+    id: "agency",
+    category: "Marketing Agency",
+    title: "PixelCraft Media Achieves 3x Faster Client Response Speed",
+    description: "With multi-channel lead capture from landing page forms and social media ad webhooks, PixelCraft Media centralized client leads in NexDial. Instant notifications allow their sales team to follow up within 2 minutes of initial submission, maximizing ad campaign ROI.",
     metrics: [
-      { label: "Patient Reach", value: "310%", icon: Users, color: "#8B5CF6" },
-      { label: "No-Show Rate", value: "-45%", icon: Clock, color: "#EC4899" },
-      { label: "Compliance Score", value: "100%", icon: ShieldCheck, color: "#00E5A0" },
+      { label: "Follow-up Velocity", value: "3.5x Faster", icon: Clock, color: "#8B5CF6" },
+      { label: "Ad Lead Conversion", value: "+28%", icon: TrendingUp, color: "#EC4899" },
+      { label: "Lead Attrition Rate", value: "-40%", icon: Percent, color: "#00E5A0" },
     ],
     bgGradient: "from-[#8B5CF6]/10 via-[#EC4899]/5 to-transparent",
     borderGlow: "rgba(139, 92, 246, 0.2)",
     accentColor: "#8B5CF6",
   },
   {
-    id: "ecommerce",
-    category: "E-Commerce & Retail",
-    title: "Omnichannel Support Suite Boosts Black Friday Conversions by 3.5x",
-    description: "A global retail brand deployed our Unified Omnichannel Hub (Chat, WhatsApp, Voice) during the holiday season to handle a massive surge in sales queries, support tickets, and order tracking.",
+    id: "education",
+    category: "Education Consultancy",
+    title: "Global Prep Academy Eliminates Missed Follow-ups, Hitting 55% Conversion",
+    description: "Managing hundreds of student enrollment inquiries was chaotic until Global Prep Academy implemented NexDial's Follow-up Engine. Reminders are auto-scheduled, ensuring advisors keep in touch regularly throughout the application timeline.",
     metrics: [
-      { label: "Sales Conversion", value: "+250%", icon: TrendingUp, color: "#00E5A0" },
-      { label: "First Contact Resolution", value: "92%", icon: ShieldCheck, color: "#0057D9" },
-      { label: "Response Time", value: "<15s", icon: Clock, color: "#00C2FF" },
+      { label: "Final Conversion Rate", value: "55%", icon: Percent, color: "#00E5A0" },
+      { label: "Missed Follow-ups", value: "0", icon: ShieldCheck, color: "#0057D9" },
+      { label: "Team Productivity", value: "+45%", icon: Users, color: "#00C2FF" },
     ],
     bgGradient: "from-[#00E5A0]/10 via-[#0057D9]/5 to-transparent",
     borderGlow: "rgba(0, 229, 160, 0.2)",
@@ -65,13 +64,13 @@ export function CaseStudies() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16">
           <AnimatedSection className="max-w-xl">
             <p className="text-sm font-semibold text-[#00C2FF] uppercase tracking-widest mb-4">
-              Case Studies
+              Success Stories
             </p>
             <h2 className="section-title text-white mb-4">
-              Proven Results for <span className="gradient-text">Global Enterprises</span>
+              Loved by <span className="gradient-text">Growing Businesses</span>
             </h2>
             <p className="text-[#64748B] text-lg">
-              Explore how leading companies use Nexdial to streamline operations, cut costs, and boost customer loyalty.
+              Explore how small businesses use NexDial to streamline operations, cut response times, and close more deals.
             </p>
           </AnimatedSection>
 
@@ -127,13 +126,10 @@ export function CaseStudies() {
                   </div>
 
                   <div className="flex flex-wrap items-center gap-4">
-                    <button className="btn-primary text-sm !py-3 !px-6 flex items-center gap-2 group">
-                      Read Full Case Study
+                    <a href="/request-demo" className="btn-primary text-sm !py-3 !px-6 flex items-center gap-2 group">
+                      Start Your Success Story
                       <ArrowUpRight className="w-4 h-4 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                    </button>
-                    <button className="btn-secondary text-sm !py-3 !px-6 flex items-center gap-2 text-white">
-                      View Success Metrics
-                    </button>
+                    </a>
                   </div>
                 </div>
 

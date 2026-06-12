@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Mail, Phone, MessageSquare, Calendar, Send, ShieldAlert, CheckCircle, ArrowRight, Building, MapPin } from "lucide-react";
+import { Mail, Phone, MessageSquare, Calendar, Send, ShieldCheck, CheckCircle, ArrowRight, Building, MapPin } from "lucide-react";
 
 export function ContactSection() {
   const [activeTab, setActiveTab] = useState<"message" | "demo">("message");
@@ -14,7 +14,7 @@ export function ContactSection() {
     company: "",
     phone: "",
     message: "",
-    interest: "AI Contact Center",
+    interest: "Full CRM Suite",
   });
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>) => {
@@ -33,18 +33,18 @@ export function ContactSection() {
         company: "",
         phone: "",
         message: "",
-        interest: "AI Contact Center",
+        interest: "Full CRM Suite",
       });
     }, 4000);
   };
 
   // Mock Calendar Dates
   const calendarDates = [
-    { day: "Wed", date: "10", slots: ["2:00 PM", "3:30 PM", "5:00 PM"] },
-    { day: "Thu", date: "11", slots: ["10:00 AM", "11:30 AM", "4:00 PM"] },
-    { day: "Fri", date: "12", slots: ["1:00 PM", "2:30 PM", "4:30 PM"] },
+    { day: "Mon", date: "15", slots: ["10:00 AM", "11:30 AM", "2:00 PM"] },
+    { day: "Tue", date: "16", slots: ["11:00 AM", "1:30 PM", "4:00 PM"] },
+    { day: "Wed", date: "17", slots: ["9:30 AM", "2:30 PM", "5:00 PM"] },
   ];
-  const [selectedDate, setSelectedDate] = useState("10");
+  const [selectedDate, setSelectedDate] = useState("15");
   const [selectedSlot, setSelectedSlot] = useState("");
   const [demoBooked, setDemoBooked] = useState(false);
 
@@ -66,14 +66,14 @@ export function ContactSection() {
                 Get In Touch
               </p>
               <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-white leading-tight">
-                Let&apos;s Build the Future of <span className="gradient-text">Customer Relations</span>
+                Ready to Streamline Your <span className="gradient-text">Business?</span>
               </h2>
               <p className="text-[#94A3B8] text-base leading-relaxed mt-4">
-                Have questions about our multi-tenant SaaS capabilities, Voice AI integrations, or custom VoIP pricing? Connect with our global solutions architecture team today.
+                Have questions about our CRM inbox, WhatsApp integrations, or subscription pricing? Fill out the form, or reach out directly to chat with our team.
               </p>
             </AnimatedSection>
 
-            {/* Quick Contact Items - Asymmetric grid layout with premium glows & visual borders */}
+            {/* Quick Contact Items */}
             <div className="grid sm:grid-cols-2 gap-4 relative z-10">
               <AnimatedSection delay={0.1} className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00C2FF]/30 hover:bg-[#00C2FF]/5 hover:shadow-[0_4px_25px_rgba(0,194,255,0.06)] transition-all duration-300">
                 <div className="absolute left-0 top-0 w-1 h-full bg-[#00C2FF]" />
@@ -81,7 +81,7 @@ export function ContactSection() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Enterprise Sales</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Email Support</p>
                   <a href="mailto:info@nexdial.io" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
                     info@nexdial.io
                   </a>
@@ -94,7 +94,7 @@ export function ContactSection() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Global Hotline</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Phone Support</p>
                   <a href="tel:+918010803756" className="text-sm font-extrabold text-white hover:text-[#00E5A0] transition-colors mt-1 block">
                     +91 8010803756
                   </a>
@@ -109,14 +109,14 @@ export function ContactSection() {
                   </div>
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B] flex items-center gap-1.5">
-                      WhatsApp Business Support
+                      WhatsApp Support
                       <span className="flex h-2 w-2 relative">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22C55E] opacity-75"></span>
                         <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]"></span>
                       </span>
                     </p>
                     <a href="https://wa.me/918010803756" target="_blank" rel="noopener noreferrer" className="text-sm font-extrabold text-[#00E5A0] hover:underline mt-1 block">
-                      Chat with an AI Advisor
+                      Chat with Sales Support
                     </a>
                   </div>
                 </div>
@@ -124,31 +124,28 @@ export function ContactSection() {
               </AnimatedSection>
             </div>
 
-            {/* Corporate Headquarters Card */}
+            {/* Address Card */}
             <div className="space-y-3 pt-6 border-t border-white/[0.06] relative z-10">
               <h4 className="text-[10px] uppercase font-bold text-[#64748B] tracking-widest ml-1">
-                Corporate Headquarters Node
+                Our Office
               </h4>
               <div className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00C2FF]/20 transition-all duration-300 shadow-md">
                 <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00E5A0] to-[#00C2FF]" />
-                <div className="absolute right-4 top-4 px-2 py-0.5 rounded bg-[#00E5A0]/10 border border-[#00E5A0]/20 text-[8px] font-bold text-[#00E5A0] uppercase tracking-widest">
-                  HQ Cluster
-                </div>
                 <div className="w-11 h-11 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] flex-shrink-0">
-                  <Building className="w-5 h-5 text-[#00E5A0]" />
+                  <MapPin className="w-5 h-5 text-[#00E5A0]" />
                 </div>
                 <div className="space-y-1">
-                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">Nexdial</span>
+                  <span className="text-[10px] uppercase font-extrabold text-[#CBD5E1] tracking-wider">NexDial HQ</span>
                   <p className="text-xs text-[#94A3B8] leading-relaxed font-medium">
-                    123 Innovation Boulevard, Tech District, San Francisco, CA 94105
+                    Pune, Maharashtra, India
                   </p>
                 </div>
               </div>
             </div>
 
-            <AnimatedSection delay={0.4} className="p-4 rounded-xl bg-white/[0.02] border border-[#EF4444]/20 text-xs text-[#94A3B8] flex gap-3 items-start">
-              <ShieldAlert className="w-5 h-5 text-[#EF4444] flex-shrink-0" />
-              <span>We value data security. All contact submissions are processed over highly encrypted TLS channels and comply strictly with SOC2/GDPR guidelines.</span>
+            <AnimatedSection delay={0.4} className="p-4 rounded-xl bg-white/[0.02] border border-[#00E5A0]/20 text-xs text-[#94A3B8] flex gap-3 items-center">
+              <ShieldCheck className="w-5 h-5 text-[#00E5A0] flex-shrink-0" />
+              <span>We value your privacy. Your information is processed over encrypted channels and stored securely. We will never sell or share your contact data.</span>
             </AnimatedSection>
           </div>
 
@@ -195,9 +192,9 @@ export function ContactSection() {
                       <div className="w-16 h-16 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/30 flex items-center justify-center mx-auto text-[#00E5A0]">
                         <CheckCircle className="w-8 h-8" />
                       </div>
-                      <h3 className="text-xl font-bold text-white">Message Received Successfully</h3>
+                      <h3 className="text-xl font-bold text-white">Message Received</h3>
                       <p className="text-sm text-[#94A3B8] max-w-sm mx-auto">
-                        Thank you for reaching out. A solutions architect will contact you within 15 minutes.
+                        Thank you for reaching out! A member of our team will contact you shortly to help.
                       </p>
                     </div>
                   ) : (
@@ -216,7 +213,7 @@ export function ContactSection() {
                           />
                         </div>
                         <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-[#94A3B8]">Work Email</label>
+                          <label className="text-xs font-semibold text-[#94A3B8]">Business Email</label>
                           <input
                             type="email"
                             name="email"
@@ -231,7 +228,7 @@ export function ContactSection() {
 
                       <div className="grid sm:grid-cols-2 gap-4">
                         <div className="space-y-1.5">
-                          <label className="text-xs font-semibold text-[#94A3B8]">Company Name</label>
+                          <label className="text-xs font-semibold text-[#94A3B8]">Business Name</label>
                           <input
                             type="text"
                             name="company"
@@ -247,38 +244,39 @@ export function ContactSection() {
                           <input
                             type="tel"
                             name="phone"
+                            required
                             value={formData.phone}
                             onChange={handleInputChange}
-                            placeholder="+1 (555) 000-0000"
+                            placeholder="+91 98765 43210"
                             className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-white placeholder-[#475569] transition-all"
                           />
                         </div>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#94A3B8]">Product/Service of Interest</label>
+                        <label className="text-xs font-semibold text-[#94A3B8]">Interest</label>
                         <select
                           name="interest"
                           value={formData.interest}
                           onChange={handleInputChange}
                           className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-[#94A3B8] transition-all"
                         >
-                          <option value="AI Contact Center" className="bg-[#0f172a] text-white">AI Contact Center & Copilots</option>
-                          <option value="CRM Dialer" className="bg-[#0f172a] text-white">CRM & Predictive Dialer Platform</option>
-                          <option value="Omnichannel CX" className="bg-[#0f172a] text-white">Omnichannel Digital CX</option>
-                          <option value="Managed Team" className="bg-[#0f172a] text-white">Managed Outsourcing & Support Team</option>
+                          <option value="Lead Management" className="bg-[#0f172a] text-white">Lead Management</option>
+                          <option value="Follow-Up System" className="bg-[#0f172a] text-white">Follow-Up System</option>
+                          <option value="Full CRM Suite" className="bg-[#0f172a] text-white">Full CRM Suite</option>
+                          <option value="Other" className="bg-[#0f172a] text-white">Other</option>
                         </select>
                       </div>
 
                       <div className="space-y-1.5">
-                        <label className="text-xs font-semibold text-[#94A3B8]">Message / Requirements</label>
+                        <label className="text-xs font-semibold text-[#94A3B8]">How can we help your business?</label>
                         <textarea
                           name="message"
                           required
                           value={formData.message}
                           onChange={handleInputChange}
                           rows={4}
-                          placeholder="Tell us about your team size, expected call volumes, and platform requirements..."
+                          placeholder="Tell us about your team, current workflow, and what you are looking to solve..."
                           className="w-full px-4 py-3 rounded-lg bg-white/[0.03] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-white placeholder-[#475569] transition-all resize-none"
                         />
                       </div>
@@ -304,9 +302,9 @@ export function ContactSection() {
                       <div className="w-16 h-16 rounded-full bg-[#00E5A0]/10 border border-[#00E5A0]/30 flex items-center justify-center mx-auto text-[#00E5A0]">
                         <CheckCircle className="w-8 h-8" />
                       </div>
-                      <h3 className="text-xl font-bold text-white">Consultation Booked</h3>
+                      <h3 className="text-xl font-bold text-white">Demonstration Scheduled</h3>
                       <p className="text-sm text-[#94A3B8] max-w-sm mx-auto">
-                        Your live demo is scheduled for June {selectedDate}th at {selectedSlot}. Calendar invite sent.
+                        Your live CRM demonstration is booked for the {selectedDate}th at {selectedSlot}. A calendar invite has been sent to your email.
                       </p>
                       <button onClick={() => setDemoBooked(false)} className="btn-secondary text-xs !py-2 !px-4 mt-2">
                         Book Another Time
@@ -315,7 +313,7 @@ export function ContactSection() {
                   ) : (
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-sm font-bold text-white mb-1">Select Date (June 2026)</h4>
+                        <h4 className="text-sm font-bold text-white mb-1">Select Date</h4>
                         <div className="grid grid-cols-3 gap-3 mt-3">
                           {calendarDates.map((d) => (
                             <button
@@ -365,7 +363,7 @@ export function ContactSection() {
                         </div>
                         <div className="flex justify-between items-center text-xs text-[#94A3B8]">
                           <span>Platform:</span>
-                          <span className="font-bold text-white">Google Meet / Teams</span>
+                          <span className="font-bold text-white">Google Meet / Zoom</span>
                         </div>
 
                         <button

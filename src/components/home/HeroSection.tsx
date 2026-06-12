@@ -2,18 +2,8 @@
 
 import { useEffect, useMemo, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { Zap, Play, ArrowRight, Sparkles, BarChart2, Activity, Database, Volume2, Upload, RefreshCw } from "lucide-react";
+import { Zap, ArrowRight, Sparkles, Inbox, Users, CalendarCheck, BarChart3, PhoneCall, MessageSquare } from "lucide-react";
 import Link from "next/link";
-
-const aiScript = [
-  { speaker: "Customer", text: "Hello, I am calling regarding my postpaid VIP account billing discrepancy.", sentiment: "neutral" },
-  { speaker: "AI Copilot", text: "Searching database. Detected double-charge on premium data pack #401. Suggestion: Approve waiver.", sentiment: "positive" },
-  { speaker: "Agent", text: "I see the double charge for last month's data pack. Let me waive that for you immediately.", sentiment: "positive" },
-  { speaker: "Customer", text: "Oh, that was quick! Thank you so much for resolving it without wait times.", sentiment: "positive" },
-  { speaker: "AI Copilot", text: "Sentiment positive (98.2%). Customer qualified for loyalty data bundle upgrade.", sentiment: "positive" },
-  { speaker: "Agent", text: "You're welcome! As a VIP customer, you also qualify for a free 10GB loyalty bonus this month.", sentiment: "positive" },
-  { speaker: "Customer", text: "Perfect! Yes, please activate it. I appreciate the excellent support.", sentiment: "positive" },
-];
 
 function ParticleField() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
@@ -64,7 +54,6 @@ function ParticleField() {
         ctx.globalAlpha = p.opacity;
         ctx.fill();
 
-        // Draw connections
         for (let j = i + 1; j < particles.length; j++) {
           const dx = p.x - particles[j].x;
           const dy = p.y - particles[j].y;
@@ -125,161 +114,38 @@ function TypingText({ text }: { text: string }) {
   );
 }
 
+// Mock inbox lead data for the dashboard preview
+const mockLeads = [
+  { name: "Arjun Mehta", source: "WhatsApp", status: "NEW", phone: "+91 98765 43210", time: "2 min ago", health: 92 },
+  { name: "Sarah Jenkins", source: "Form", status: "CONTACTED", phone: "+1 555-0142", time: "15 min ago", health: 78 },
+  { name: "Priya Sharma", source: "Call", status: "INTERESTED", phone: "+91 87654 32109", time: "1 hr ago", health: 85 },
+  { name: "Michael Chen", source: "Manual", status: "IN_PROGRESS", phone: "+65 9012 3456", time: "3 hrs ago", health: 64 },
+];
+
+const statusColors: Record<string, string> = {
+  NEW: "bg-[#00C2FF]/20 text-[#00C2FF]",
+  CONTACTED: "bg-[#8B5CF6]/20 text-[#8B5CF6]",
+  INTERESTED: "bg-[#00E5A0]/20 text-[#00E5A0]",
+  IN_PROGRESS: "bg-[#F59E0B]/20 text-[#F59E0B]",
+};
+
+const sourceIcons: Record<string, typeof PhoneCall> = {
+  WhatsApp: MessageSquare,
+  Form: Inbox,
+  Call: PhoneCall,
+  Manual: Users,
+};
+
 export function HeroSection() {
-  // Mock Dashboard Interactive States
-  const [activeTab, setActiveTab] = useState<"ops" | "ai" | "campaigns">("ops");
-  const [expandedAgent, setExpandedAgent] = useState<string | null>(null);
+  const [activeTab, setActiveTab] = useState<"inbox" | "pipeline" | "followups">("inbox");
+  const [highlightedLead, setHighlightedLead] = useState(0);
 
-  // Operations Tab live simulation
-  const [activeCalls, setActiveCalls] = useState(847);
-  const [csat, setCsat] = useState(98.2);
-  const [revenue, setRevenue] = useState(20.145);
-  const [chartData, setChartData] = useState([55, 48, 35, 42, 38, 22, 28, 18, 22, 14, 18]);
-
-  // AI Tab live simulation
-  const [aiStep, setAiStep] = useState(0);
-  const [isPlayingAi, setIsPlayingAi] = useState(true);
-
-  // Campaigns Tab live simulation
-  const [campaignList, setCampaignList] = useState([
-    { id: 1, name: "Predective dialing", progress: 84, called: 2432, total: 3000, status: "Active" },
-    { id: 2, name: "Promise to Pay (PTP) Follow-Up", progress: 62, called: 1860, total: 3000, status: "Active" },
-  ]);
-  const [uploadProgress, setUploadProgress] = useState(0);
-  const [isUploading, setIsUploading] = useState(false);
-
-  // Periodic Operations Telemetry updates
+  // Cycle highlighted lead
   useEffect(() => {
     const interval = setInterval(() => {
-      // Fluctuate active calls
-      setActiveCalls((prev) => {
-        const change = Math.random() > 0.5 ? 1 : -1;
-        const newVal = prev + change;
-        return newVal > 860 ? 858 : newVal < 835 ? 838 : newVal;
-      });
-
-      // Slowly increment revenue
-      setRevenue((prev) => prev + 0.0002);
-
-      // Fluctuate CSAT
-      setCsat((prev) => {
-        const change = (Math.random() - 0.5) * 0.1;
-        const newVal = +(prev + change).toFixed(1);
-        return newVal > 99.0 ? 98.9 : newVal < 97.5 ? 97.6 : newVal;
-      });
-
-      // Advance chart data
-      setChartData((prev) => {
-        const nextData = [...prev.slice(1)];
-        const lastVal = prev[prev.length - 1];
-        const change = (Math.random() - 0.5) * 20;
-        let nextVal = Math.round(lastVal + change);
-        if (nextVal < 10) nextVal = 15;
-        if (nextVal > 70) nextVal = 65;
-        nextData.push(nextVal);
-        return nextData;
-      });
-    }, 3000);
-
-    return () => clearInterval(interval);
-  }, []);
-
-  // AI Dialogue Play Loop
-  useEffect(() => {
-    if (!isPlayingAi || activeTab !== "ai") return;
-    const interval = setInterval(() => {
-      setAiStep((prev) => (prev + 1) % aiScript.length);
-    }, 4000);
-    return () => clearInterval(interval);
-  }, [isPlayingAi, activeTab]);
-
-  // Campaign progress simulation
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCampaignList((prev) => 
-        prev.map((c) => {
-          if (c.progress < 100 && c.status === "Active") {
-            const nextProgress = Math.min(100, c.progress + (c.called === 0 ? 3 : 1));
-            return {
-              ...c,
-              progress: nextProgress,
-              called: Math.min(c.total, Math.round((nextProgress / 100) * c.total))
-            };
-          }
-          return c;
-        })
-      );
+      setHighlightedLead((prev) => (prev + 1) % mockLeads.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
-
-  const triggerMockUpload = () => {
-    if (isUploading) return;
-    setIsUploading(true);
-    setUploadProgress(0);
-    
-    let prog = 0;
-    const interval = setInterval(() => {
-      prog += 10;
-      setUploadProgress(prog);
-      if (prog >= 100) {
-        clearInterval(interval);
-        setTimeout(() => {
-          setIsUploading(false);
-          setCampaignList((prev) => {
-            const remaining = [
-              "Broken PTP Campaign",
-              "Settlement Offer Campaign",
-              "Skip Trace Campaign",
-              "Re-Aging Campaign",
-              "Customer Retention Collections",
-              "Deceased Account Verification",
-              "Bankruptcy Verification"
-            ];
-            const index = (prev.length - 2) % remaining.length;
-            const campaignName = index >= 0 && index < remaining.length ? remaining[index] : `Campaign #${prev.length + 1}`;
-            return [
-              ...prev,
-              { 
-                id: prev.length + 1, 
-                name: campaignName, 
-                progress: 0, 
-                called: 0, 
-                total: 2500, 
-                status: "Active" 
-              }
-            ];
-          });
-        }, 1000);
-      }
-    }, 150);
-  };
-
-  // Generate SVG chart path dynamically
-  const chartWidth = 300;
-  const chartHeight = 80;
-  const chartPathD = chartData.reduce((acc, val, i) => {
-    const x = (i * chartWidth) / (chartData.length - 1);
-    const y = val;
-    return acc + `${i === 0 ? "M" : "L"} ${x},${y}`;
-  }, "");
-
-  // Pre-compute stable equalizer bar values (avoids SSR/client hydration mismatch from Math.random() in JSX)
-  const equalizerBars = useMemo(() => {
-    const channels = [
-      { id: "ch-01", barCount: 16, speed: 0.5 },
-      { id: "ch-02", barCount: 16, speed: 0.3 },
-      { id: "ch-03", barCount: 16, speed: 0.6 },
-    ];
-    // Deterministic pseudo-random using a simple LCG seeded by index
-    const lcg = (seed: number) => ((seed * 1664525 + 1013904223) & 0x7fffffff) / 0x7fffffff;
-    return channels.map((ch) =>
-      Array.from({ length: ch.barCount }, (_, idx) => {
-        const h = lcg(idx * 31 + ch.barCount) * 80 + 20;
-        const s = ch.speed + lcg(idx * 17 + ch.barCount * 3) * 0.4;
-        return { height: `${Math.floor(h)}%`, duration: `${s.toFixed(4)}s` };
-      })
-    );
   }, []);
 
   return (
@@ -310,14 +176,14 @@ export function HeroSection() {
             >
               <Sparkles className="w-4 h-4 text-[#00C2FF]" />
               <span className="text-sm font-medium text-[#00C2FF]">
-                AI-Powered Platform — Now with GPT-4o & Gemini
+                Built for Small Businesses — Simple, Powerful CRM
               </span>
             </motion.div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-extrabold leading-[1.08] tracking-tight mb-6">
               <span className="gradient-text-hero">
-                <TypingText text="Transform Customer Conversations Into Business Growth" />
+                <TypingText text="Never Lose a Customer Conversation Again" />
               </span>
             </h1>
 
@@ -328,8 +194,8 @@ export function HeroSection() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="text-lg lg:text-xl text-[#94A3B8] leading-relaxed mb-10 max-w-xl"
             >
-              AI-Powered Omnichannel Customer Experience Solutions Designed For Modern
-              Enterprises. CRM, Dialer, Analytics & Multi-Tenant SaaS — All In One Platform.
+              Unified inbox for calls, WhatsApp, forms &amp; manual entries.
+              Track every lead, automate follow-ups, and close more deals — all in one place.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -344,26 +210,15 @@ export function HeroSection() {
                 className="btn-primary text-base !py-4 !px-8 flex items-center justify-center gap-2 group"
               >
                 <Zap className="w-5 h-5" />
-                Request Demo
+                Start Free Trial
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </Link>
               <Link
                 href="/contact"
                 className="btn-secondary text-base !py-4 !px-8 flex items-center justify-center gap-2"
               >
-                Talk To Expert
+                See How It Works
               </Link>
-              <a 
-                href="https://youtu.be/5sXT6HuV61w?si=eWL3NyNHaosjzkY0" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="flex items-center justify-center gap-2 text-[#94A3B8] hover:text-white transition-colors group"
-              >
-                <div className="w-10 h-10 rounded-full border border-white/20 flex items-center justify-center group-hover:border-[#00C2FF] group-hover:bg-[#00C2FF]/10 transition-all">
-                  <Play className="w-4 h-4 ml-0.5" />
-                </div>
-                <span className="text-sm font-medium">Watch Tour</span>
-              </a>
             </motion.div>
 
             {/* Trust Bar */}
@@ -375,16 +230,16 @@ export function HeroSection() {
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
-                500+ Active Clients
+                1,000+ Businesses
               </div>
               <div className="w-px h-4 bg-white/10" />
-              <div>99.99% Uptime SLA</div>
+              <div>2-Min Setup</div>
               <div className="w-px h-4 bg-white/10" />
-              <div>SOC2 Certified</div>
+              <div>No Credit Card</div>
             </motion.div>
           </motion.div>
 
-          {/* Right — Dashboard Preview */}
+          {/* Right — CRM Inbox Preview */}
           <motion.div
             initial={{ opacity: 0, x: 60, rotateY: -10 }}
             animate={{ opacity: 1, x: 0, rotateY: 0 }}
@@ -402,333 +257,233 @@ export function HeroSection() {
                     <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
                   </div>
                   <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
-                    <span className="text-[10px] text-[#64748B]">app.nexdial.com/dashboard</span>
+                    <span className="text-[10px] text-[#64748B]">app.nexdial.io/crm</span>
                   </div>
                 </div>
 
-                {/* Dashboard Tab Bar */}
+                {/* Tab Bar */}
                 <div className="flex border-b border-white/5 mb-4 text-[11px] font-semibold text-[#64748B] w-full">
                   <button 
-                    onClick={() => setActiveTab("ops")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "ops" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                    onClick={() => setActiveTab("inbox")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "inbox" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
                   >
-                    <BarChart2 className="w-3.5 h-3.5 text-[#00C2FF]" />
-                    Live Ops
+                    <Inbox className="w-3.5 h-3.5 text-[#00C2FF]" />
+                    Inbox
                   </button>
                   <button 
-                    onClick={() => setActiveTab("ai")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "ai" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                    onClick={() => setActiveTab("pipeline")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "pipeline" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
                   >
-                    <Activity className="w-3.5 h-3.5 text-[#00E5A0]" />
-                    AI Copilot
+                    <BarChart3 className="w-3.5 h-3.5 text-[#00E5A0]" />
+                    Pipeline
                   </button>
                   <button 
-                    onClick={() => setActiveTab("campaigns")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "campaigns" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+                    onClick={() => setActiveTab("followups")}
+                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "followups" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
                   >
-                    <Database className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                    Campaigns
+                    <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                    Follow-ups
                   </button>
                 </div>
 
-                {/* Dashboard Content Container */}
+                {/* Content */}
                 <div className="min-h-[360px] flex flex-col justify-between">
                   <AnimatePresence mode="wait">
-                    {activeTab === "ops" && (
+                    {activeTab === "inbox" && (
                       <motion.div
-                        key="ops-tab"
+                        key="inbox-tab"
                         initial={{ opacity: 0, y: 10 }}
                         animate={{ opacity: 1, y: 0 }}
                         exit={{ opacity: 0, y: -10 }}
                         transition={{ duration: 0.2 }}
-                        className="space-y-4"
+                        className="space-y-2.5"
                       >
-                        {/* Operations KPI Metrics */}
-                        <div className="grid grid-cols-3 gap-3">
+                        {/* KPIs */}
+                        <div className="grid grid-cols-3 gap-3 mb-3">
                           {[
-                            { label: "Active Calls", value: activeCalls.toString(), color: "from-[#0057D9] to-[#00C2FF]", change: "+12%" },
-                            { label: "CSAT Score", value: `${csat}%`, color: "from-[#00E5A0] to-[#00C896]", change: "+2.1%" },
-                            { label: "Revenue", value: `₹${revenue.toFixed(3)} Cr`, color: "from-[#8B5CF6] to-[#A78BFA]", change: "+18%" },
+                            { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
+                            { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
+                            { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
                           ].map((stat) => (
                             <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
                               <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
-                              <p className={`text-sm sm:text-base font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                              <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
                                 {stat.value}
                               </p>
-                              <p className="text-[10px] text-[#22C55E] font-semibold flex items-center gap-0.5 mt-0.5">
-                                <span className="inline-block w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
-                                {stat.change}
-                              </p>
+                              <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
                             </div>
                           ))}
                         </div>
 
-                        {/* Crawling Line Chart */}
-                        <div className="bg-[#081120] border border-white/[0.06] rounded-xl p-3.5 h-[130px] relative overflow-hidden flex flex-col justify-between">
-                          <div className="flex items-center justify-between">
-                            <span className="text-[10px] font-semibold text-[#64748B] uppercase tracking-wider">Live Call Volume (24h)</span>
-                            <span className="text-[10px] text-[#00C2FF] font-mono flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#00C2FF] animate-ping" />
-                              Real-time Telemetry
-                            </span>
-                          </div>
-                          <div className="h-[70px] relative mt-2">
-                            <svg viewBox="0 0 300 80" className="w-full h-full" preserveAspectRatio="none">
-                              <defs>
-                                <linearGradient id="liveChartGrad" x1="0" y1="0" x2="0" y2="1">
-                                  <stop offset="0%" stopColor="#0057D9" stopOpacity="0.35" />
-                                  <stop offset="100%" stopColor="#0057D9" stopOpacity="0" />
-                                </linearGradient>
-                              </defs>
-                              <style>{`
-                                @keyframes equalize {
-                                  0% { transform: scaleY(0.3); }
-                                  100% { transform: scaleY(1); }
-                                }
-                              `}</style>
-                              {/* Area under chart */}
-                              <path 
-                                d={`${chartPathD} L 300,80 L 0,80 Z`} 
-                                fill="url(#liveChartGrad)" 
-                                className="transition-all duration-1000 ease-in-out"
-                              />
-                              {/* Line */}
-                              <path 
-                                d={chartPathD} 
-                                fill="none" 
-                                stroke="#0057D9" 
-                                strokeWidth="2.5" 
-                                strokeLinecap="round"
-                                className="transition-all duration-1000 ease-in-out"
-                              />
-                              {/* End Node Pulse */}
-                              <circle 
-                                cx="300" 
-                                cy={chartData[chartData.length - 1]} 
-                                r="4" 
-                                fill="#00C2FF" 
-                                className="animate-pulse"
-                              />
-                            </svg>
-                          </div>
+                        {/* Lead List */}
+                        <div className="space-y-2">
+                          {mockLeads.map((lead, idx) => {
+                            const SourceIcon = sourceIcons[lead.source];
+                            return (
+                              <div 
+                                key={lead.name} 
+                                className={`p-3 rounded-xl border transition-all duration-500 ${
+                                  idx === highlightedLead 
+                                    ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
+                                    : "bg-white/[0.02] border-white/[0.05]"
+                                }`}
+                              >
+                                <div className="flex items-center justify-between">
+                                  <div className="flex items-center gap-3">
+                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                                      {lead.name.charAt(0)}
+                                    </div>
+                                    <div>
+                                      <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                                      <div className="flex items-center gap-2 mt-0.5">
+                                        <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                                          <SourceIcon className="w-2.5 h-2.5" />
+                                          {lead.source}
+                                        </span>
+                                        <span className="text-[9px] text-[#475569]">•</span>
+                                        <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                                      </div>
+                                    </div>
+                                  </div>
+                                  <div className="flex items-center gap-2">
+                                    <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                                      {lead.status.replace("_", " ")}
+                                    </span>
+                                    <div className="text-right">
+                                      <div className="text-[8px] text-[#64748B]">Health</div>
+                                      <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                                        {lead.health}%
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            );
+                          })}
                         </div>
 
-                        {/* Live Channels Visual Grid */}
-                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
-                          <div className="flex items-center justify-between mb-2">
-                            <span className="text-[10px] text-[#64748B] font-semibold uppercase tracking-wider">Live Call Channels</span>
-                            <span className="text-[9px] text-[#00C2FF] font-mono flex items-center gap-1">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" />
-                              Active Nodes: 3
-                            </span>
+                        {/* AI Suggestion Bar */}
+                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
+                          <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] animate-pulse flex-shrink-0" />
+                          <span className="text-[10px] text-[#00E5A0] font-medium">
+                            AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+                          </span>
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeTab === "pipeline" && (
+                      <motion.div
+                        key="pipeline-tab"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-4"
+                      >
+                        {/* Pipeline Columns */}
+                        <div className="grid grid-cols-4 gap-2">
+                          {[
+                            { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
+                            { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
+                            { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
+                            { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
+                          ].map((col) => (
+                            <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
+                              <div className="flex items-center justify-between mb-2">
+                                <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
+                                <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
+                              </div>
+                              <div className="space-y-1.5">
+                                {col.leads.map((lead) => (
+                                  <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
+                                    {lead}
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+
+                        {/* Conversion Funnel */}
+                        <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3">
+                          <span className="text-[9px] font-bold uppercase text-[#64748B] tracking-wider">Conversion Funnel</span>
+                          <div className="space-y-2 mt-2">
+                            {[
+                              { stage: "New → Contacted", rate: "75%", width: "75%" },
+                              { stage: "Contacted → Interested", rate: "67%", width: "67%" },
+                              { stage: "Interested → Converted", rate: "42%", width: "42%" },
+                            ].map((step) => (
+                              <div key={step.stage} className="space-y-1">
+                                <div className="flex justify-between text-[9px]">
+                                  <span className="text-[#94A3B8]">{step.stage}</span>
+                                  <span className="text-[#00E5A0] font-bold">{step.rate}</span>
+                                </div>
+                                <div className="h-1 bg-white/[0.04] rounded-full overflow-hidden">
+                                  <div className="h-full bg-gradient-to-r from-[#0057D9] to-[#00C2FF] rounded-full" style={{ width: step.width }} />
+                                </div>
+                              </div>
+                            ))}
                           </div>
-                          
+                        </div>
+                      </motion.div>
+                    )}
+
+                    {activeTab === "followups" && (
+                      <motion.div
+                        key="followups-tab"
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0, y: -10 }}
+                        transition={{ duration: 0.2 }}
+                        className="space-y-4"
+                      >
+                        {/* Today's Follow-ups */}
+                        <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3.5">
+                          <div className="flex items-center justify-between mb-3">
+                            <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                              <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                              Today&apos;s Follow-ups
+                            </span>
+                            <span className="text-[9px] text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-2 py-0.5 rounded-full">3 overdue</span>
+                          </div>
                           <div className="space-y-2">
                             {[
-                              { id: "ch-01", name: "Outbound VoIP Trunk 01", type: "SIP Session • Live", color: "from-[#0057D9] to-[#00C2FF]", barCount: 16, speed: 0.5, chIdx: 0 },
-                              { id: "ch-02", name: "AI Voice Bot Gateway 04", type: "Gemini voice-v1 • Streaming", color: "from-[#00E5A0] to-[#00C896]", barCount: 16, speed: 0.3, chIdx: 1 },
-                              { id: "ch-03", name: "Omnichannel Gateway 09", type: "WebRTC Endpoint • Connected", color: "from-[#8B5CF6] to-[#A78BFA]", barCount: 16, speed: 0.6, chIdx: 2 },
-                            ].map((ch) => (
-                              <div key={ch.id} className="p-2 rounded-lg bg-[#081120] border border-white/[0.04] flex items-center justify-between gap-4">
-                                <div className="space-y-0.5">
-                                  <span className="text-[10px] font-bold text-[#CBD5E1] block">{ch.name}</span>
-                                  <span className="text-[8px] text-[#64748B] uppercase tracking-widest">{ch.type}</span>
+                              { name: "Arjun Mehta", time: "10:30 AM", type: "Call back", status: "overdue", color: "#EF4444" },
+                              { name: "Sarah Jenkins", time: "2:00 PM", type: "Send proposal", status: "upcoming", color: "#00C2FF" },
+                              { name: "Priya Sharma", time: "4:30 PM", type: "WhatsApp follow-up", status: "upcoming", color: "#00C2FF" },
+                              { name: "Michael Chen", time: "11:00 AM", type: "Schedule demo", status: "overdue", color: "#EF4444" },
+                              { name: "Lisa Wong", time: "5:00 PM", type: "Quote follow-up", status: "upcoming", color: "#00C2FF" },
+                            ].map((fu) => (
+                              <div key={fu.name} className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                                <div className="flex items-center gap-2.5">
+                                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: fu.color }} />
+                                  <div>
+                                    <p className="text-[10px] font-bold text-white">{fu.name}</p>
+                                    <p className="text-[8px] text-[#64748B]">{fu.type}</p>
+                                  </div>
                                 </div>
-                                
-                                {/* Equalizer waveform visualizer — stable values from useMemo */}
-                                <div className="flex-1 flex gap-0.5 h-6 items-end justify-end max-w-[120px]">
-                                  {equalizerBars[ch.chIdx].map((bar, idx) => (
-                                    <span 
-                                      key={idx} 
-                                      className={`w-0.5 rounded-sm bg-gradient-to-t ${ch.color}`}
-                                      style={{ 
-                                        height: bar.height,
-                                        animation: `equalize ${bar.duration} ease-in-out infinite alternate` 
-                                      }}
-                                    />
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeTab === "ai" && (
-                      <motion.div
-                        key="ai-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-4"
-                      >
-                        {/* Live AI Dialogue Transcript Stream */}
-                        <div className="bg-[#081120] border border-white/[0.05] rounded-xl p-3 h-[200px] overflow-y-auto space-y-2.5 flex flex-col justify-end shadow-inner relative">
-                          <div className="absolute top-2 left-2 right-2 flex items-center justify-between pointer-events-none z-10">
-                            <span className="text-[9px] font-bold text-[#64748B] uppercase tracking-widest bg-[#0a1424]/90 px-1.5 py-0.5 rounded border border-white/5">AI Speech-to-Text</span>
-                            <span className="text-[9px] text-[#00E5A0] font-mono flex items-center gap-1 bg-[#0a1424]/90 px-1.5 py-0.5 rounded border border-white/5">
-                              <span className="w-1.5 h-1.5 rounded-full bg-[#00E5A0] animate-ping" />
-                              Gemini-Voice Live
-                            </span>
-                          </div>
-
-                          <div className="space-y-2 max-h-[160px] overflow-y-auto pr-1">
-                            {aiScript.slice(0, aiStep + 1).map((msg, idx) => (
-                              <div 
-                                key={idx} 
-                                className={`flex flex-col max-w-[85%] ${
-                                  msg.speaker === "Agent" 
-                                    ? "self-end items-end ml-auto" 
-                                    : msg.speaker === "Customer" 
-                                      ? "self-start items-start" 
-                                      : "self-start items-start w-full max-w-full"
-                                }`}
-                              >
-                                <span className="text-[8px] text-[#64748B] mb-0.5 font-bold uppercase tracking-wider">{msg.speaker}</span>
-                                <div className={`p-2.5 rounded-xl text-[10px] leading-relaxed shadow-sm ${
-                                  msg.speaker === "Agent" 
-                                    ? "bg-[#0057D9] text-white rounded-tr-none" 
-                                    : msg.speaker === "Customer" 
-                                      ? "bg-white/[0.04] border border-white/[0.08] text-[#CBD5E1] rounded-tl-none" 
-                                      : "bg-[#00E5A0]/5 border border-[#00E5A0]/20 text-[#00E5A0] font-medium w-full flex items-center gap-2 rounded-tl-none"
-                                }`}>
-                                  {msg.speaker === "AI Copilot" && <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0 animate-pulse" />}
-                                  <span>{msg.text}</span>
+                                <div className="text-right">
+                                  <p className="text-[9px] font-bold" style={{ color: fu.color }}>{fu.time}</p>
+                                  <p className={`text-[7px] uppercase font-bold tracking-wider ${fu.status === "overdue" ? "text-[#EF4444]" : "text-[#64748B]"}`}>{fu.status}</p>
                                 </div>
                               </div>
                             ))}
                           </div>
                         </div>
 
-                        {/* Controls & Sentiment Telemetry */}
-                        <div className="grid grid-cols-2 gap-3">
-                          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 flex flex-col justify-between">
-                            <span className="text-[9px] uppercase font-bold text-[#64748B]">Dialogue Simulator</span>
-                            <div className="flex items-center gap-2 mt-2">
-                              <button 
-                                onClick={() => setIsPlayingAi(!isPlayingAi)}
-                                className={`flex-1 py-1.5 px-2 rounded-lg text-[10px] font-semibold transition-all text-center ${
-                                  isPlayingAi 
-                                    ? "bg-white/5 hover:bg-white/10 text-white border border-white/10" 
-                                    : "bg-[#00E5A0]/20 hover:bg-[#00E5A0]/30 text-[#00E5A0] border border-[#00E5A0]/30"
-                                }`}
-                              >
-                                {isPlayingAi ? "Pause Simulation" : "Resume Simulation"}
-                              </button>
-                              <button 
-                                onClick={() => setAiStep(0)}
-                                className="p-1.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white"
-                                title="Replay"
-                              >
-                                <RefreshCw className="w-3.5 h-3.5" />
-                              </button>
-                            </div>
-                          </div>
-
-                          <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 flex flex-col justify-between">
-                            <span className="text-[9px] uppercase font-bold text-[#64748B]">Real-Time Sentiment</span>
-                            <div className="mt-1.5 flex flex-col gap-1">
-                              <div className="flex justify-between items-center text-[10px]">
-                                <span className="text-[#64748B]">Status:</span>
-                                <span className={`font-bold uppercase tracking-wider ${
-                                  aiScript[aiStep]?.sentiment === "positive" 
-                                    ? "text-[#00E5A0]" 
-                                    : "text-[#F59E0B]"
-                                }`}>
-                                  {aiScript[aiStep]?.sentiment || "Positive"}
-                                </span>
-                              </div>
-                              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden mt-1 relative">
-                                <div 
-                                  className={`h-full bg-gradient-to-r from-[#00C2FF] to-[#00E5A0] transition-all duration-1000`}
-                                  style={{ 
-                                    width: aiScript[aiStep]?.sentiment === "positive" ? "88%" : "55%" 
-                                  }} 
-                                />
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeTab === "campaigns" && (
-                      <motion.div
-                        key="campaigns-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-4"
-                      >
-                        {/* Outbound Campaigns Pipeline List */}
-                        <div className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3.5 space-y-3">
-                          <span className="text-[10px] uppercase font-bold text-[#64748B] tracking-wider block">Outreach Campaign Pipeline</span>
-                          <div className="space-y-3 max-h-[145px] overflow-y-auto pr-1">
-                            {campaignList.map((c) => (
-                              <div key={c.id} className="space-y-1.5">
-                                <div className="flex justify-between text-[11px] font-semibold text-[#CBD5E1]">
-                                  <span>{c.name}</span>
-                                  <span className="text-[#00C2FF] font-mono">{c.progress}%</span>
-                                </div>
-                                <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                  <div 
-                                    className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-300"
-                                    style={{ width: `${c.progress}%` }}
-                                  />
-                                </div>
-                                <div className="flex justify-between text-[9px] text-[#64748B]">
-                                  <span>Called: {c.called.toLocaleString()} / {c.total.toLocaleString()} leads</span>
-                                  <span className="text-[#22C55E] uppercase font-bold tracking-wider">{c.status}</span>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Interactive Lead Uploader Dropzone Area */}
-                        <div 
-                          onClick={triggerMockUpload}
-                          className="border-2 border-dashed border-white/10 hover:border-[#8B5CF6]/50 rounded-xl p-4 text-center cursor-pointer transition-all hover:bg-white/[0.01] flex flex-col items-center justify-center space-y-2 min-h-[100px] relative overflow-hidden"
-                        >
-                          {isUploading ? (
-                            <div className="w-full space-y-2">
-                              <div className="flex justify-between text-[10px] text-[#94A3B8] font-semibold">
-                                <span className="flex items-center gap-1">
-                                  <RefreshCw className="w-3 h-3 animate-spin text-[#8B5CF6]" />
-                                  Parsing leads.csv...
-                                </span>
-                                <span>{uploadProgress}%</span>
-                              </div>
-                              <div className="w-full h-1.5 bg-white/5 rounded-full overflow-hidden">
-                                <div 
-                                  className="h-full bg-gradient-to-r from-[#8B5CF6] to-[#A78BFA] transition-all duration-150" 
-                                  style={{ width: `${uploadProgress}%` }} 
-                                />
-                              </div>
-                              <p className="text-[8px] text-[#64748B]">Compiling and assigning SIP channels...</p>
-                            </div>
-                          ) : (
-                            <>
-                              <Upload className="w-6 h-6 text-[#64748B] hover:text-[#8B5CF6] transition-colors" />
-                              <div>
-                                <p className="text-[11px] font-bold text-[#CBD5E1]">Simulate Outbound Lead Upload</p>
-                                <p className="text-[9px] text-[#64748B] mt-0.5">Click to import leads.csv and initiate campaign dialing</p>
-                              </div>
-                            </>
-                          )}
+                        {/* Auto-suggest */}
+                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#8B5CF6]/5 border border-[#8B5CF6]/15">
+                          <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6] animate-pulse flex-shrink-0" />
+                          <span className="text-[10px] text-[#8B5CF6] font-medium">
+                            Auto-suggested: Set follow-up for Michael Chen tomorrow at 11 AM
+                          </span>
                         </div>
                       </motion.div>
                     )}
                   </AnimatePresence>
                 </div>
               </div>
-
-
-
-
             </div>
           </motion.div>
         </div>

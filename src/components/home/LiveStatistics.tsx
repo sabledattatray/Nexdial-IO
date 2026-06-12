@@ -3,66 +3,82 @@
 import { useRef, useEffect } from "react";
 import { useInView } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Users, Headphones, Clock, ThumbsUp, Server, Zap } from "lucide-react";
+import { Users, Building2, CalendarCheck, Clock, BarChart3, ThumbsUp } from "lucide-react";
 
 const stats = [
   {
     icon: Users,
     value: 500,
-    suffix: "+",
-    label: "Clients",
-    description: "Trusted enterprises globally",
+    suffix: "K+",
+    prefix: "",
+    label: "Leads Tracked",
+    description: "Organized in unified inbox",
     color: "#0057D9",
     gradient: "from-[#0057D9] to-[#00C2FF]",
   },
   {
-    icon: Headphones,
-    value: 1200,
+    icon: Building2,
+    value: 1000,
     suffix: "+",
-    label: "Agents",
-    description: "Trained professionals",
+    prefix: "",
+    label: "Businesses",
+    description: "Trusting NexDial daily",
     color: "#00C2FF",
     gradient: "from-[#00C2FF] to-[#00E5A0]",
   },
   {
-    icon: Clock,
-    value: 24,
-    suffix: "/7",
-    label: "Operations",
-    description: "Round-the-clock support",
+    icon: CalendarCheck,
+    value: 2,
+    suffix: "M+",
+    prefix: "",
+    label: "Follow-ups",
+    description: "Automated & manual actions",
     color: "#00E5A0",
     gradient: "from-[#00E5A0] to-[#00C896]",
   },
   {
-    icon: ThumbsUp,
-    value: 98,
-    suffix: "%",
-    label: "Customer Satisfaction",
-    description: "Average CSAT score",
+    icon: Clock,
+    value: 2,
+    suffix: " min",
+    prefix: "< ",
+    label: "Avg. Response",
+    description: "From submission to contact",
     color: "#8B5CF6",
     gradient: "from-[#8B5CF6] to-[#A78BFA]",
   },
   {
-    icon: Server,
-    value: 99.99,
+    icon: BarChart3,
+    value: 35,
     suffix: "%",
-    label: "System Availability",
-    description: "Enterprise-grade uptime",
+    prefix: "",
+    label: "Conversion Lift",
+    description: "Increase in closed deals",
     color: "#F59E0B",
     gradient: "from-[#F59E0B] to-[#FBBF24]",
   },
   {
-    icon: Zap,
-    value: 50,
-    suffix: "M+",
-    label: "AI Interactions",
-    description: "Automated conversations handled",
+    icon: ThumbsUp,
+    value: 94,
+    suffix: "%",
+    prefix: "",
+    label: "Retention Rate",
+    description: "Average customer retention",
     color: "#EC4899",
     gradient: "from-[#EC4899] to-[#F472B6]",
   },
 ];
 
-function AnimatedCounter({ value, suffix, isDecimal }: { value: number; suffix: string; isDecimal?: boolean }) {
+function AnimatedCounter({ 
+  value, 
+  suffix, 
+  prefix = "", 
+  isDecimal 
+}: { 
+  value: number; 
+  suffix: string; 
+  prefix?: string; 
+  isDecimal?: boolean; 
+}) {
   const ref = useRef<HTMLSpanElement>(null);
   const isInView = useInView(ref, { once: true });
 
@@ -80,9 +96,9 @@ function AnimatedCounter({ value, suffix, isDecimal }: { value: number; suffix: 
 
       if (ref.current) {
         if (isDecimal) {
-          ref.current.textContent = current.toFixed(2) + suffix;
+          ref.current.textContent = prefix + current.toFixed(2) + suffix;
         } else {
-          ref.current.textContent = Math.floor(current).toLocaleString() + suffix;
+          ref.current.textContent = prefix + Math.floor(current).toLocaleString() + suffix;
         }
       }
 
@@ -90,9 +106,9 @@ function AnimatedCounter({ value, suffix, isDecimal }: { value: number; suffix: 
     };
 
     requestAnimationFrame(animate);
-  }, [isInView, value, suffix, isDecimal]);
+  }, [isInView, value, suffix, prefix, isDecimal]);
 
-  return <span ref={ref}>0{suffix}</span>;
+  return <span ref={ref}>{prefix}0{suffix}</span>;
 }
 
 export function LiveStatistics() {
@@ -106,10 +122,10 @@ export function LiveStatistics() {
             Platform Metrics
           </p>
           <h2 className="section-title text-white mb-4">
-            Powering <span className="gradient-text-blue">Enterprise-Scale</span> Operations
+            Powering <span className="gradient-text-blue">Small Business</span> Success
           </h2>
           <p className="section-subtitle mx-auto">
-            Real-time performance metrics that showcase our platform&apos;s reliability and scale
+            Real-time metrics demonstrating how NexDial drives growth, retention, and response speed for businesses
           </p>
         </AnimatedSection>
 
@@ -138,6 +154,7 @@ export function LiveStatistics() {
                     <AnimatedCounter
                       value={stat.value}
                       suffix={stat.suffix}
+                      prefix={stat.prefix}
                       isDecimal={stat.value % 1 !== 0}
                     />
                   </div>
