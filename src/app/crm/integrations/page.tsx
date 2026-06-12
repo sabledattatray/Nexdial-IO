@@ -53,9 +53,9 @@ export default function IntegrationsPlatformPage() {
         </div>
       </div>
 
-      <div className="grid lg:grid-cols-[280px,1fr] gap-8 items-start">
+      <div className="flex flex-col lg:flex-row gap-8 items-start">
         {/* Main Sidebar Navigation */}
-        <div className="flex flex-col gap-2 sticky top-24">
+        <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto w-full lg:w-[280px] lg:sticky lg:top-24 z-10 pb-2 lg:pb-0 custom-scrollbar shrink-0">
           {tabs.map((tab) => {
             const Icon = tab.icon;
             const isActive = activeTab === tab.id;
@@ -64,7 +64,7 @@ export default function IntegrationsPlatformPage() {
               <button
                 key={tab.id}
                 onClick={() => setActiveTab(tab.id)}
-                className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all ${
+                className={`flex items-center gap-3 p-4 rounded-xl text-left transition-all whitespace-nowrap min-w-fit lg:min-w-0 ${
                   isActive 
                     ? "bg-[#00C2FF]/10 border border-[#00C2FF]/20 text-white" 
                     : "bg-[#050A15] border border-white/5 text-slate-400 hover:bg-white/[0.02]"
@@ -75,16 +75,16 @@ export default function IntegrationsPlatformPage() {
                 </div>
                 <div className="flex-1">
                   <h3 className="font-semibold text-sm">{tab.label}</h3>
-                  <p className="text-[11px] opacity-70 mt-0.5">{tab.desc}</p>
+                  <p className="text-[11px] opacity-70 mt-0.5 hidden lg:block">{tab.desc}</p>
                 </div>
-                {isActive && <ChevronRight className="w-4 h-4 text-[#00C2FF]" />}
+                {isActive && <ChevronRight className="w-4 h-4 text-[#00C2FF] hidden lg:block" />}
               </button>
             );
           })}
         </div>
 
         {/* Dynamic Content Area */}
-        <div className="bg-[#050A15] border border-white/10 rounded-2xl min-h-[700px] overflow-hidden">
+        <div className="flex-1 w-full bg-[#050A15] border border-white/10 rounded-2xl min-h-[700px] overflow-hidden">
           <AnimatePresence mode="wait">
             <motion.div
               key={activeTab}
