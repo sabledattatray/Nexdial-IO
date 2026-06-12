@@ -43,6 +43,9 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "NexDial" }],
   creator: "NexDial",
+  verification: {
+    google: "MRwYS7MG0Xj3bK0kZa_uTyl6FTDhzIcs-braGl5EYjs",
+  },
   openGraph: {
     type: "website",
     locale: "en_US",
