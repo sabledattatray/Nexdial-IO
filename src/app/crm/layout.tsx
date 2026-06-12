@@ -21,7 +21,8 @@ import {
   Sparkles,
   Check,
   BellOff,
-  Blocks
+  Blocks,
+  Radio
 } from "lucide-react";
 import AddLeadModal from "@/components/crm/AddLeadModal";
 
@@ -79,6 +80,37 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
     window.addEventListener("nexdial-avatar-change", loadAvatar);
     return () => window.removeEventListener("nexdial-avatar-change", loadAvatar);
   }, []);
+
+  const [announcement, setAnnouncement] = useState<{ id: string; title: string; message: string; type: string } | null>(null);
+  const [isAnnouncementDismissed, setIsAnnouncementDismissed] = useState(false);
+
+  useEffect(() => {
+    if (!session) return;
+    const fetchAnnouncement = async () => {
+      try {
+        const res = await fetch("/api/crm/announcements");
+        if (res.ok) {
+          const data = await res.json();
+          if (data) {
+            const dismissed = localStorage.getItem(`dismissed_announcement_${data.id}`);
+            if (!dismissed) {
+              setAnnouncement(data);
+            }
+          }
+        }
+      } catch (e) {
+        console.error("Failed to fetch announcement", e);
+      }
+    };
+    fetchAnnouncement();
+  }, [session]);
+
+  const dismissAnnouncement = () => {
+    if (announcement) {
+      localStorage.setItem(`dismissed_announcement_${announcement.id}`, "true");
+      setIsAnnouncementDismissed(true);
+    }
+  };
 
   // Redirect guard: if user is logged in but has not onboarded, redirect to /onboarding
   useEffect(() => {
@@ -401,6 +433,33 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
             </div>
           </div>
         </header>
+
+        {/* Global Announcement Banner */}
+        {announcement && !isAnnouncementDismissed && (
+          <div className={`border-b px-4 py-3 sm:px-6 flex items-start sm:items-center justify-between gap-4 animate-in slide-in-from-top-2 duration-300 ${
+            announcement.type === "WARNING" ? "bg-amber-500/10 border-amber-500/20 text-amber-200" :
+            announcement.type === "ERROR" ? "bg-red-500/10 border-red-500/20 text-red-200" :
+            announcement.type === "SUCCESS" ? "bg-green-500/10 border-green-500/20 text-green-200" :
+            "bg-[#00C2FF]/10 border-[#00C2FF]/20 text-[#00C2FF]"
+          }`}>
+            <div className="flex gap-3">
+              <div className="mt-0.5">
+                <Radio className="w-4 h-4 animate-pulse" />
+              </div>
+              <div>
+                <p className="text-sm font-bold">{announcement.title}</p>
+                <p className="text-xs opacity-80 mt-0.5">{announcement.message}</p>
+              </div>
+            </div>
+            <button 
+              onClick={dismissAnnouncement}
+              className="p-1 rounded-md hover:bg-black/20 transition-colors shrink-0"
+              title="Dismiss"
+            >
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+        )}
 
         {/* Page Content */}
         <div className="flex-1 overflow-auto bg-[#050A15]">
