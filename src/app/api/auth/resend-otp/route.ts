@@ -48,8 +48,10 @@ export async function POST(req: Request) {
       mockOtp: isMockMode ? otp : undefined // Temporarily expose for testing
     });
 
-  } catch (error) {
+  } catch (error: any) {
     console.error("Resend OTP error:", error);
-    return NextResponse.json({ error: "Failed to resend OTP" }, { status: 500 });
+    return NextResponse.json({ 
+      error: `Debug Error: ${error?.message || error}` 
+    }, { status: 500 });
   }
 }
