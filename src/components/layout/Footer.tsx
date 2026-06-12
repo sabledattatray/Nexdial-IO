@@ -1,5 +1,6 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
@@ -83,6 +84,12 @@ const badges = [
 
 export function Footer() {
   const pathname = usePathname();
+  const [currentYear, setCurrentYear] = useState(2026);
+
+  useEffect(() => {
+    setCurrentYear(new Date().getFullYear());
+  }, []);
+
   const isConsolePage = pathname?.startsWith("/crm") || 
                         pathname?.startsWith("/admin") || 
                         pathname?.startsWith("/supervisor") || 
@@ -241,7 +248,7 @@ export function Footer() {
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
             <p className="text-xs text-[#475569]">
-              © {new Date().getFullYear()} Nexdial. All rights reserved.
+              © {currentYear} Nexdial. All rights reserved.
             </p>
             <span className="hidden sm:inline text-[#334155] text-xs">|</span>
             <div className="text-xs text-[#475569] flex items-center flex-wrap gap-1.5">

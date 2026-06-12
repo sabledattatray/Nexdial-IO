@@ -165,5 +165,6 @@ model AIRecommendation {
 
   lead           Lead     @relation(fields: [leadId], references: [id], onDelete: Cascade)
 
+  @@index([leadId])
   @@map("ai_recommendations")
 }

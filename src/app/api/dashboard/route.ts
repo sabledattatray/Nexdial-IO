@@ -109,18 +109,64 @@ export async function GET(req: Request) {
       return acc;
     }, {});
 
-    // Retrieve leads to run calculations
-    const allLeadsForMetrics = await prisma.lead.findMany({
+    // Retrieve leads to run calculations with only base fields to avoid massive N+1 loading of inactive records
+    const baseLeads = await prisma.lead.findMany({
       where: leadFilters,
-      include: {
-        calls: {
-          orderBy: { timestamp: "desc" },
-        },
-        activities: {
-          orderBy: { timestamp: "desc" },
-        },
+      select: {
+        id: true,
+        name: true,
+        phone: true,
+        email: true,
+        source: true,
+        status: true,
+        tags: true,
+        assignedToId: true,
+        followUpDate: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
+
+    // Extract active lead IDs (momentum and certainty calculations are only run for active pipeline leads)
+    const activeLeadIds = baseLeads
+      .filter((l) => l.status !== "CONVERTED" && l.status !== "LOST")
+      .map((l) => l.id);
+
+    // Fetch calls and activities in batch only for active leads
+    const [activeCalls, activeActivities] = await Promise.all([
+      activeLeadIds.length > 0
+        ? prisma.call.findMany({
+            where: { leadId: { in: activeLeadIds } },
+            orderBy: { timestamp: "desc" },
+          })
+        : Promise.resolve([]),
+      activeLeadIds.length > 0
+        ? prisma.activity.findMany({
+            where: { leadId: { in: activeLeadIds } },
+            orderBy: { timestamp: "desc" },
+          })
+        : Promise.resolve([]),
+    ]);
+
+    // Group calls and activities by leadId for O(1) matching
+    const callsByLeadId = activeCalls.reduce((acc: any, curr) => {
+      if (!acc[curr.leadId]) acc[curr.leadId] = [];
+      acc[curr.leadId].push(curr);
+      return acc;
+    }, {});
+
+    const activitiesByLeadId = activeActivities.reduce((acc: any, curr) => {
+      if (!acc[curr.leadId]) acc[curr.leadId] = [];
+      acc[curr.leadId].push(curr);
+      return acc;
+    }, {});
+
+    // Reconstruct the structure with calls and activities attached
+    const allLeadsForMetrics = baseLeads.map((lead) => ({
+      ...lead,
+      calls: callsByLeadId[lead.id] || [],
+      activities: activitiesByLeadId[lead.id] || [],
+    }));
 
     let conservativeRevenue = 0;
     let realisticRevenue = 0;
