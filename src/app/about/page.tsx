@@ -105,6 +105,7 @@ export default function AboutPage() {
                           src={member.image}
                           alt={member.name}
                           fill
+                          sizes="64px"
                           className="object-cover"
                           style={{ objectPosition: "center 20%" }}
                         />
