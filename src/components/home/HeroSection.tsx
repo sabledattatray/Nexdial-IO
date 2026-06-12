@@ -119,7 +119,7 @@ export function HeroSection() {
   }, []);
 
   return (
-    <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+    <section className="relative min-h-screen flex items-center overflow-hidden pt-20" style={{ fontFamily: "var(--font-outfit)" }}>
       {/* Background Layers */}
       <div className="absolute inset-0 mesh-gradient" />
       <div className="absolute inset-0 grid-pattern" />
