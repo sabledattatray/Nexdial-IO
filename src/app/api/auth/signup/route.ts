@@ -57,6 +57,21 @@ export async function POST(req: Request) {
       },
     });
 
+    // 3. Generate a 6-digit OTP for email verification
+    const otp = Math.floor(100000 + Math.random() * 900000).toString();
+    const expires = new Date(Date.now() + 15 * 60 * 1000); // 15 minutes expiration
+
+    await prisma.verificationToken.create({
+      data: {
+        identifier: email.toLowerCase(),
+        token: otp,
+        expires,
+      }
+    });
+
+    // 🚀 IN A PRODUCTION ENVIRONMENT, YOU WOULD EMAIL `otp` VIA SENDGRID/RESEND HERE
+    console.log(`\n\n[MOCK EMAIL SERVER] Verification OTP for ${email.toLowerCase()}: ${otp}\n\n`);
+
     // Seed onboarding demo data if requested
     if (seedDemoData) {
       try {

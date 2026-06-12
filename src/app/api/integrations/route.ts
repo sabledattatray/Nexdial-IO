@@ -12,6 +12,18 @@ export async function POST(req: Request) {
     const user = await prisma.user.findUnique({ where: { email: session.user.email } });
     if (!user?.workspaceId) return NextResponse.json({ error: "No workspace" }, { status: 400 });
 
+    const workspace = await prisma.workspace.findUnique({
+      where: { id: user.workspaceId }
+    });
+
+    if (!workspace) {
+      return NextResponse.json({ error: "Workspace not found" }, { status: 404 });
+    }
+
+    if (!workspace.trialEndsAt) {
+      return NextResponse.json({ error: "trial_not_started", message: "15-Day Trial has not been activated." }, { status: 402 });
+    }
+
     const { provider } = await req.json();
 
     if (!provider) {

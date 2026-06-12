@@ -45,14 +45,9 @@ function SignupContent() {
       setSuccess(true);
       setLoading(false);
 
-      // Auto login user after 2 seconds
-      setTimeout(async () => {
-        await signIn("credentials", {
-          email,
-          password,
-          redirect: true,
-          callbackUrl: "/crm",
-        });
+      // Auto redirect to email verification after 2 seconds
+      setTimeout(() => {
+        router.push(`/verify-email?email=${encodeURIComponent(email)}`);
       }, 2000);
     } catch (err) {
       setError("An unexpected registration error occurred.");
@@ -77,9 +72,9 @@ function SignupContent() {
       <div className="relative w-full max-w-md bg-[#0F172A]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl text-center transition-all duration-300">
         <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5A0]/10 rounded-full blur-3xl pointer-events-none" />
         <CheckCircle2 className="w-16 h-16 text-[#00E5A0] mx-auto mb-4 animate-bounce" />
-        <h2 className="text-2xl font-bold text-white tracking-tight">Account Provisioned!</h2>
+        <h2 className="text-2xl font-bold text-white tracking-tight">Account Created!</h2>
         <p className="text-xs text-slate-400 mt-2 leading-relaxed">
-          Welcome to NexDial. Your workspace is configured and {seedDemoData ? `pre-populated with sample ${industryName} leads.` : "ready to use."} Autologging in now...
+          Welcome to NexDial. Please verify your email to secure your account. Redirecting to verification...
         </p>
         <Loader2 className="w-6 h-6 animate-spin text-[#00C2FF] mx-auto mt-6" />
       </div>

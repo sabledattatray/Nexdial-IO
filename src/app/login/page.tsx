@@ -2,13 +2,14 @@
 
 import React, { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
-import { useSearchParams } from "next/navigation";
+import { useSearchParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import { Lock, Mail, Eye, EyeOff, Shield, Key, AlertCircle, Loader2, ArrowLeft } from "lucide-react";
 import { GoogleIcon } from "@/components/nexdial/components/GoogleSignIn";
 
 function LoginContent() {
   const searchParams = useSearchParams();
+  const router = useRouter();
   const errorParam = searchParams.get("error");
 
   const [email, setEmail] = useState("");
@@ -27,13 +28,19 @@ function LoginContent() {
       const res = await signIn("credentials", {
         email,
         password,
-        redirect: true,
-        callbackUrl: "/crm",
+        redirect: false,
       });
 
       if (res?.error) {
-        setError("Invalid email or password. Please try again.");
-        setLoading(false);
+        if (res.error === "unverified") {
+          router.push(`/verify-email?email=${encodeURIComponent(email)}`);
+        } else {
+          setError("Invalid email or password. Please try again.");
+          setLoading(false);
+        }
+      } else if (res?.ok) {
+        // Success
+        router.push("/crm");
       }
     } catch (err) {
       setError("An unexpected authentication error occurred.");

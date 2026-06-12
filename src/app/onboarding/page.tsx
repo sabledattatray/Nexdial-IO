@@ -32,20 +32,7 @@ import {
   MessageSquare
 } from "lucide-react";
 
-// Load Razorpay SDK Script dynamically
-const loadRazorpayScript = () => {
-  return new Promise((resolve) => {
-    if ((window as any).Razorpay) {
-      resolve(true);
-      return;
-    }
-    const script = document.createElement("script");
-    script.src = "https://checkout.razorpay.com/v1/checkout.js";
-    script.onload = () => resolve(true);
-    script.onerror = () => resolve(false);
-    document.body.appendChild(script);
-  });
-};
+// Razorpay script removed since onboarding is now free
 
 interface TeamMember {
   name: string;
@@ -241,85 +228,11 @@ function OnboardingContent() {
     setTeamMembers((prev) => prev.filter((_, i) => i !== idx));
   };
 
-  // Trigger Razorpay Standard Checkout Setup
-  const handleRazorpaySetup = async () => {
+  // Directly complete onboarding without payment
+  const completeOnboardingStep = async () => {
     setError("");
     setLoadingPayment(true);
-
-    try {
-      // Create the order on the backend
-      const res = await fetch("/api/onboarding/payment", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-      });
-
-      if (!res.ok) {
-        throw new Error("Failed to create onboarding subscription order.");
-      }
-
-      const orderData = await res.json();
-
-      // Load SDK
-      const scriptLoaded = await loadRazorpayScript();
-      if (!scriptLoaded) {
-        throw new Error("Razorpay payment script failed to load. Please verify connection.");
-      }
-
-      const options = {
-        key: orderData.keyId,
-        amount: orderData.amount,
-        currency: orderData.currency,
-        name: "NexDial CCOS",
-        description: "15-day Trial Authorization (₹1 Auth)",
-        order_id: orderData.orderId,
-        handler: async function (response: any) {
-          // Signature Verification
-          try {
-            setLoadingPayment(true);
-            const verifyRes = await fetch("/api/verify-payment", {
-              method: "POST",
-              headers: { "Content-Type": "application/json" },
-              body: JSON.stringify({
-                razorpay_order_id: response.razorpay_order_id,
-                razorpay_payment_id: response.razorpay_payment_id,
-                razorpay_signature: response.razorpay_signature
-              })
-            });
-
-            if (!verifyRes.ok) {
-              const errData = await verifyRes.json().catch(() => ({}));
-              throw new Error(errData.error || "Mandate authentication failed.");
-            }
-
-            const verifyData = await verifyRes.json();
-            if (!verifyData.success) {
-              throw new Error("Payment signature verification failed.");
-            }
-
-            // Payment verified, trigger onboarding save
-            await submitOnboardingConfig();
-          } catch (err: any) {
-            setError(err.message || "Verification failed.");
-            setLoadingPayment(false);
-          }
-        },
-        prefill: {
-          name: ownerName || session?.user?.name || "NexDial Admin",
-          email: ownerEmail || session?.user?.email || "admin@nexdial.io",
-          contact: ownerMobile || ""
-        },
-        theme: {
-          color: "#0057D9"
-        }
-      };
-
-      setLoadingPayment(false);
-      const rzp = new (window as any).Razorpay(options);
-      rzp.open();
-    } catch (err: any) {
-      setError(err.message || "An unexpected error occurred during subscription setup.");
-      setLoadingPayment(false);
-    }
+    await submitOnboardingConfig();
   };
 
   // Submit complete onboarding configs
@@ -1094,7 +1007,7 @@ function OnboardingContent() {
         </div>
       )}
 
-      {/* STEP 6: Secure Mandate Verification */}
+      {/* STEP 6: Review & Finish */}
       {step === 6 && (
         <div className="space-y-6">
           <div className="bg-[#0A1628] border border-white/10 rounded-2xl p-5 relative overflow-hidden">
@@ -1102,43 +1015,23 @@ function OnboardingContent() {
             <div className="flex items-center justify-between">
               <div>
                 <span className="text-[9px] uppercase tracking-wider text-[#00C2FF] font-bold px-2 py-0.5 rounded bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-                  SaaS Trial Plan
+                  Workspace Ready
                 </span>
-                <h3 className="text-base font-bold text-white mt-2">15-Day Free Trial Period</h3>
-                <p className="text-[10.5px] text-slate-400 mt-1 leading-relaxed">
-                  Start testing NexDial with full access. After the trial, auto-renewal begins at your selected plan rate.
+                <h3 className="text-base font-bold text-white mt-2">Almost there!</h3>
+                <p className="text-[10.5px] text-slate-400 mt-1 leading-relaxed max-w-sm">
+                  You have successfully configured your pipelines, team roles, and AI settings. Click below to finalize your workspace and enter the CRM.
                 </p>
               </div>
               <div className="text-right">
-                <p className="text-[9px] text-slate-500 uppercase tracking-wide mb-1">Auth Charge</p>
-                <p className="text-2xl font-black text-white">₹1</p>
-                <p className="text-[9px] text-[#00E5A0] font-bold">Verification Only</p>
-              </div>
-            </div>
-
-            {/* Pricing Tiers */}
-            <div className="mt-4 grid grid-cols-3 gap-2">
-              <div className="bg-[#050A15] border border-[#00C2FF]/20 rounded-xl p-3">
-                <p className="text-[9px] uppercase tracking-wider text-[#00C2FF] font-bold">Small Business</p>
-                <p className="text-xl font-black text-white mt-1">₹499<span className="text-xs font-normal text-slate-400">/mo</span></p>
-                <p className="text-[9px] text-slate-400 mt-0.5">Solo — 10 Users</p>
-              </div>
-              <div className="bg-[#050A15] border border-purple-500/20 rounded-xl p-3">
-                <p className="text-[9px] uppercase tracking-wider text-purple-400 font-bold">Medium Business</p>
-                <p className="text-xl font-black text-white mt-1">₹599<span className="text-xs font-normal text-slate-400">/mo</span></p>
-                <p className="text-[9px] text-slate-400 mt-0.5">11 — 50 Users</p>
-              </div>
-              <div className="bg-[#050A15] border border-[#00E5A0]/20 rounded-xl p-3">
-                <p className="text-[9px] uppercase tracking-wider text-[#00E5A0] font-bold">Large Business</p>
-                <p className="text-xl font-black text-white mt-1">₹999<span className="text-xs font-normal text-slate-400">/mo</span></p>
-                <p className="text-[9px] text-slate-400 mt-0.5">50+ Users</p>
+                <p className="text-[9px] text-slate-500 uppercase tracking-wide mb-1">Setup Cost</p>
+                <p className="text-2xl font-black text-white">₹0</p>
+                <p className="text-[9px] text-[#00E5A0] font-bold">100% Free</p>
               </div>
             </div>
 
             <div className="border-t border-white/5 mt-4 pt-4 flex justify-between text-[10px] text-slate-450">
-              <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#00E5A0]" /> Secure Mandate</span>
-              <span className="flex items-center gap-1"><Sparkles className="w-3.5 h-3.5 text-[#00C2FF]" /> Cancel Anytime</span>
-              <span className="flex items-center gap-1"><Smartphone className="w-3.5 h-3.5 text-purple-400" /> Auto-Pay Enabled</span>
+              <span className="flex items-center gap-1"><ShieldCheck className="w-3.5 h-3.5 text-[#00E5A0]" /> Secure CRM</span>
+              <span className="flex items-center gap-1"><Sparkles className="w-3.5 h-3.5 text-[#00C2FF]" /> No Credit Card Required</span>
             </div>
           </div>
 
@@ -1166,7 +1059,7 @@ function OnboardingContent() {
                 <a href="/terms" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline font-semibold">Terms &amp; Conditions</a>{" "}
                 and{" "}
                 <a href="/privacy" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline font-semibold">Privacy Policy</a>.
-                I understand that <strong className="text-white">₹1 will be charged today</strong> as a Razorpay mandate authorization, and my plan will <strong className="text-white">auto-renew after the 15-day free trial</strong> at my selected plan rate. I can cancel anytime.
+                I understand that my <strong className="text-white">15-day free trial</strong> will automatically begin when I connect my first lead source integration in the CRM.
               </p>
             </label>
           </div>
@@ -1179,7 +1072,7 @@ function OnboardingContent() {
               <ArrowLeft className="w-4 h-4" /> Back
             </button>
             <button
-              onClick={handleRazorpaySetup}
+              onClick={completeOnboardingStep}
               disabled={loadingPayment || !termsAccepted}
               title={!termsAccepted ? "Please accept the Terms & Conditions to continue" : ""}
               className={`w-full py-3.5 text-sm font-black tracking-wide rounded-xl transition-all flex items-center justify-center gap-2 ${
@@ -1195,28 +1088,10 @@ function OnboardingContent() {
                 </>
               ) : (
                 <>
-                  <CreditCard className="w-5 h-5" />
-                  <span>Authorize & Start 15-Day Trial</span>
+                  <Sparkles className="w-5 h-5" />
+                  <span>Complete Setup & Enter CRM</span>
                 </>
               )}
-            </button>
-
-            {/* Dev Mode Payment Bypass */}
-            {process.env.NODE_ENV === "development" && (
-              <button
-                onClick={submitOnboardingConfig}
-                className="w-full py-2.5 bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-bold rounded-xl transition-all flex items-center justify-center gap-2"
-              >
-                <span>Skip Payment (Dev Mode)</span>
-                <ArrowRight className="w-3.5 h-3.5" />
-              </button>
-            )}
-
-            <button
-              onClick={() => setStep(5)}
-              className="w-full py-3 border border-white/10 hover:border-white/20 text-xs font-bold text-slate-300 rounded-xl transition-all cursor-pointer flex items-center justify-center gap-1"
-            >
-              <ArrowLeft className="w-4 h-4" /> Back
             </button>
           </div>
         </div>

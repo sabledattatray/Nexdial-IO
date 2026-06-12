@@ -6,8 +6,22 @@ import {
   MessageSquare, Phone, Mail, 
   Code, FormInput, MessageCircle, 
   Database, ShoppingCart, CreditCard, Calendar,
-  CheckCircle2, Loader2, Copy, X
+  CheckCircle2, Loader2, Copy, X, ShieldCheck
 } from "lucide-react";
+
+const loadRazorpayScript = () => {
+  return new Promise((resolve) => {
+    if ((window as any).Razorpay) {
+      resolve(true);
+      return;
+    }
+    const script = document.createElement("script");
+    script.src = "https://checkout.razorpay.com/v1/checkout.js";
+    script.onload = () => resolve(true);
+    script.onerror = () => resolve(false);
+    document.body.appendChild(script);
+  });
+};
 
 export default function MarketplaceTab() {
   const [connectingApp, setConnectingApp] = useState<string | null>(null);
@@ -23,6 +37,13 @@ export default function MarketplaceTab() {
         body: JSON.stringify({ provider: providerName })
       });
       const data = await res.json();
+      
+      if (res.status === 402 && data.error === "trial_not_started") {
+        setConnectingApp(null);
+        await initiateTrialPayment(providerName);
+        return;
+      }
+
       if (data.id) {
         setCreatedIntegration(data);
       } else {
@@ -33,6 +54,59 @@ export default function MarketplaceTab() {
       alert("Network error.");
     }
     setConnectingApp(null);
+  };
+
+  const initiateTrialPayment = async (providerName: string) => {
+    try {
+      setConnectingApp(providerName); // show loading state again
+      
+      const res = await fetch("/api/billing/start-trial", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" }
+      });
+
+      if (!res.ok) throw new Error("Failed to create trial payment order.");
+      
+      const orderData = await res.json();
+
+      const scriptLoaded = await loadRazorpayScript();
+      if (!scriptLoaded) throw new Error("Failed to load Razorpay.");
+
+      const options = {
+        key: orderData.keyId,
+        amount: orderData.amount,
+        currency: orderData.currency,
+        name: "NexDial CCOS",
+        description: "15-day Trial Activation (₹1 Auth)",
+        order_id: orderData.orderId,
+        handler: async function (response: any) {
+          try {
+            const verifyRes = await fetch("/api/billing/start-trial", {
+              method: "PUT",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(response)
+            });
+
+            if (!verifyRes.ok) throw new Error("Payment verification failed.");
+            
+            // Trial activated! Now actually create the integration
+            await handleConnect(providerName);
+          } catch (e: any) {
+            alert(e.message);
+          }
+        },
+        theme: { color: "#00C2FF" }
+      };
+
+      setConnectingApp(null);
+      const rzp = new (window as any).Razorpay(options);
+      rzp.on('payment.failed', () => alert("Payment failed"));
+      rzp.open();
+
+    } catch (e: any) {
+      alert(e.message);
+      setConnectingApp(null);
+    }
   };
 
   const copyToClipboard = () => {
