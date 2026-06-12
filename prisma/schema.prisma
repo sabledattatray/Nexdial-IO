@@ -75,6 +75,7 @@ model Workspace {
   users User[]
   leads Lead[]
   integrations Integration[]
+  routingRules RoutingRule[]
 
   @@map("workspaces")
 }
@@ -289,4 +290,22 @@ model WebhookLog {
 
   @@index([integrationId])
   @@map("webhook_logs")
+}
+
+model RoutingRule {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  name        String
+  priority    Int      @default(0)
+  isActive    Boolean  @default(true) @map("is_active")
+  conditions  Json     // e.g., [{ "field": "source", "operator": "equals", "value": "facebook" }]
+  actions     Json     // e.g., [{ "type": "assignTo", "value": "user_id" }, { "type": "addTag", "value": "Hot" }]
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@index([priority])
+  @@map("routing_rules")
 }

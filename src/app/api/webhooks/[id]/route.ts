@@ -31,6 +31,43 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
     const phone = payload.phone || payload.phone_number || payload.phoneNumber || "Unknown Phone";
     const email = payload.email || payload.email_address || null;
 
+    // --- ROUTING ENGINE ---
+    const rules = await prisma.routingRule.findMany({
+      where: { workspaceId: integration.workspaceId, isActive: true },
+      orderBy: { priority: "asc" }
+    });
+
+    let assignedToId: string | undefined;
+    const finalTags = [integration.provider];
+
+    for (const rule of rules) {
+      const conditions: any[] = (rule.conditions as any[]) || [];
+      const actions: any[] = (rule.actions as any[]) || [];
+      
+      let isMatch = true;
+      for (const cond of conditions) {
+        let valueToTest = "";
+        if (cond.field === "source") valueToTest = integration.provider;
+        else if (cond.field === "name") valueToTest = name;
+        else if (cond.field === "email") valueToTest = email || "";
+        
+        const testValue = valueToTest.toLowerCase();
+        const expectedValue = (cond.value || "").toLowerCase();
+
+        if (cond.operator === "equals" && testValue !== expectedValue) isMatch = false;
+        else if (cond.operator === "contains" && !testValue.includes(expectedValue)) isMatch = false;
+        else if (cond.operator === "not_equals" && testValue === expectedValue) isMatch = false;
+      }
+
+      if (isMatch && conditions.length > 0) {
+        for (const action of actions) {
+          if (action.type === "assignTo") assignedToId = action.value;
+          else if (action.type === "addTag") finalTags.push(action.value);
+        }
+        break; // Stop evaluating after first rule matches completely
+      }
+    }
+
     // Create the lead in CRM
     const lead = await prisma.lead.create({
       data: {
@@ -40,7 +77,8 @@ export async function POST(req: Request, context: { params: Promise<{ id: string
         email,
         source: "WEBSITE", 
         status: "NEW",
-        tags: [integration.provider]
+        tags: finalTags,
+        ...(assignedToId ? { assignedToId } : {})
       }
     });
 
