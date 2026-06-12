@@ -1,11 +1,12 @@
 import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
+import { seedOnboardingData } from "@/lib/onboardingSeeder";
 
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    const { name, email, password } = body;
+    const { name, email, password, seedDemoData, industry } = body;
 
     if (!email || !password || !name) {
       return NextResponse.json(
@@ -45,6 +46,16 @@ export async function POST(req: Request) {
         role: "ADMIN",
       },
     });
+
+    // Seed onboarding demo data if requested
+    if (seedDemoData) {
+      try {
+        await seedOnboardingData(user.id, industry || "real_estate");
+      } catch (seedError) {
+        console.error("Failed to seed onboarding demo data:", seedError);
+        // We continue since the user account was successfully created
+      }
+    }
 
     return NextResponse.json({
       success: true,

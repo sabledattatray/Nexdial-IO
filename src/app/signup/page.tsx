@@ -4,7 +4,7 @@ import React, { useState, Suspense } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Lock, Mail, User, Eye, EyeOff, Shield, CheckCircle2, AlertCircle, Loader2, ArrowLeft } from "lucide-react";
+import { Lock, Mail, User, Eye, EyeOff, Shield, CheckCircle2, AlertCircle, Loader2, ArrowLeft, Building2 } from "lucide-react";
 import { GoogleIcon } from "@/components/nexdial/components/GoogleSignIn";
 
 function SignupContent() {
@@ -19,6 +19,8 @@ function SignupContent() {
   const [googleLoading, setGoogleLoading] = useState(false);
   const [error, setError] = useState("");
   const [success, setSuccess] = useState(false);
+  const [industry, setIndustry] = useState("real_estate");
+  const [seedDemoData, setSeedDemoData] = useState(true);
 
   const handleSignupSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +31,7 @@ function SignupContent() {
       const res = await fetch("/api/auth/signup", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name, email, password }),
+        body: JSON.stringify({ name, email, password, seedDemoData, industry }),
       });
 
       const data = await res.json();
@@ -70,13 +72,14 @@ function SignupContent() {
   };
 
   if (success) {
+    const industryName = industry.replace("_", " ").replace(/\b\w/g, c => c.toUpperCase());
     return (
       <div className="relative w-full max-w-md bg-[#0F172A]/70 backdrop-blur-2xl border border-white/10 rounded-3xl p-8 shadow-2xl text-center transition-all duration-300">
         <div className="absolute top-0 right-0 w-32 h-32 bg-[#00E5A0]/10 rounded-full blur-3xl pointer-events-none" />
         <CheckCircle2 className="w-16 h-16 text-[#00E5A0] mx-auto mb-4 animate-bounce" />
         <h2 className="text-2xl font-bold text-white tracking-tight">Account Provisioned!</h2>
-        <p className="text-xs text-slate-450 mt-2 leading-relaxed">
-          Welcome to NexDial. Your workspace and administrator credentials have been securely configured. Autologging in now...
+        <p className="text-xs text-slate-400 mt-2 leading-relaxed">
+          Welcome to NexDial. Your workspace is configured and {seedDemoData ? `pre-populated with sample ${industryName} leads.` : "ready to use."} Autologging in now...
         </p>
         <Loader2 className="w-6 h-6 animate-spin text-[#00C2FF] mx-auto mt-6" />
       </div>
@@ -210,6 +213,43 @@ function SignupContent() {
                 {showPassword ? <EyeOff className="w-4 h-4" /> : <Eye className="w-4 h-4" />}
               </button>
             </div>
+          </div>
+
+          {/* Industry Selection */}
+          <div className="space-y-1.5">
+            <label className="text-[10px] uppercase tracking-wider text-slate-400 pl-1 font-semibold">
+              Your Industry
+            </label>
+            <div className="relative">
+              <Building2 className="absolute left-3.5 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-500" />
+              <select
+                value={industry}
+                onChange={(e) => setIndustry(e.target.value)}
+                disabled={loading || googleLoading}
+                className="w-full pl-10 pr-8 py-2.5 bg-[#081120] border border-white/10 text-slate-100 rounded-xl focus:outline-none focus:border-[#00C2FF] transition-colors appearance-none cursor-pointer"
+              >
+                <option value="real_estate">Real Estate Agencies</option>
+                <option value="marketing">Marketing Agencies</option>
+                <option value="education">Education Consultants</option>
+                <option value="healthcare">Healthcare Clinics</option>
+                <option value="insurance">Insurance Brokers</option>
+              </select>
+            </div>
+          </div>
+
+          {/* Seed Demo Data Checkbox */}
+          <div className="flex items-center gap-2.5 pl-1 py-1">
+            <input
+              type="checkbox"
+              id="seedDemoData"
+              checked={seedDemoData}
+              onChange={(e) => setSeedDemoData(e.target.checked)}
+              disabled={loading || googleLoading}
+              className="w-4 h-4 rounded border-white/10 bg-[#081120] text-[#00C2FF] focus:ring-[#00C2FF] focus:ring-opacity-25 transition-all cursor-pointer"
+            />
+            <label htmlFor="seedDemoData" className="text-[10.5px] text-slate-400 select-none cursor-pointer leading-normal">
+              Pre-populate workspace with realistic sample leads, calls, and follow-ups
+            </label>
           </div>
 
           {/* Submit button */}
