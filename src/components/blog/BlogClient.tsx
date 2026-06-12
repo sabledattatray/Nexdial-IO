@@ -26,12 +26,13 @@ export function BlogClient({
 
     const handleScrollAndPos = () => {
       // 1. Position Logic
+      if (placeholderRef.current) {
+        setSidebarLeft(placeholderRef.current.getBoundingClientRect().left);
+      }
+
       if (placeholderRef.current && gridRef.current && sidebarRef.current) {
         const gridRect = gridRef.current.getBoundingClientRect();
-        const placeholderRect = placeholderRef.current.getBoundingClientRect();
         
-        setSidebarLeft(placeholderRect.left);
-
         const absoluteGridTop = gridRect.top + window.scrollY;
         const absoluteGridBottom = gridRect.bottom + window.scrollY;
         const sidebarHeight = sidebarRef.current.offsetHeight;
