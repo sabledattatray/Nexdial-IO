@@ -25,6 +25,10 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No leads data provided." }, { status: 400 });
     }
 
+    if (!user.workspaceId) {
+      return NextResponse.json({ error: "Workspace assignment required to import leads." }, { status: 400 });
+    }
+
     // Prepare leads payload
     const leadsData = rawLeads.map((item: any) => {
       // Normalize source
@@ -44,6 +48,7 @@ export async function POST(req: Request) {
         email: item.email || null,
         source: source as any,
         status: "NEW" as const,
+        workspaceId: user.workspaceId,
         assignedToId: assignedId,
         tags: item.tags || ["Imported"],
       };
