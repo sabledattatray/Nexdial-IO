@@ -214,9 +214,9 @@ export function HeroSection() {
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.4, duration: 1, ease: [0.22, 1, 0.36, 1] }}
-            className="block mt-16 lg:mt-0 relative"
+            className="block mt-16 lg:mt-0 relative w-full min-w-0"
           >
-            <div className="relative">
+            <div className="relative w-full">
               {/* Main Dashboard Card */}
               <div className="glass-card-strong w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/30 border border-white/[0.08]">
                 {/* Browser Window Header */}
