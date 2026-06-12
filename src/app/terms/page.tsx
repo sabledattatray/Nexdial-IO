@@ -8,7 +8,9 @@ import Link from "next/link";
 export default function TermsPage() {
   const [activeSection, setActiveSection] = useState("agreement");
   const placeholderRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
   const [sidebarLeft, setSidebarLeft] = useState<number | null>(null);
+  const [sidebarTop, setSidebarTop] = useState<number>(112);
 
   const sections = [
     { id: "agreement",        label: "1. Agreement & Services" },
@@ -26,6 +28,10 @@ export default function TermsPage() {
       if (placeholderRef.current) {
         const rect = placeholderRef.current.getBoundingClientRect();
         setSidebarLeft(rect.left);
+      }
+      if (gridRef.current) {
+        const gridRect = gridRef.current.getBoundingClientRect();
+        setSidebarTop(gridRect.top + window.scrollY - window.scrollY);
       }
     };
     updateSidebarPos();
@@ -86,7 +92,7 @@ export default function TermsPage() {
         </AnimatedSection>
 
         {/* Content Body Grid */}
-        <div className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
+        <div ref={gridRef} className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
 
           {/* Placeholder: reserves grid column space for the fixed sidebar */}
           <div ref={placeholderRef} className="hidden lg:block w-[280px] shrink-0" />
@@ -97,10 +103,10 @@ export default function TermsPage() {
               className="hidden lg:block bg-white/[0.01] border border-white/[0.04] p-6 rounded-2xl backdrop-blur-md"
               style={{
                 position: "fixed",
-                top: "7rem",
+                top: sidebarTop,
                 left: sidebarLeft,
                 width: 260,
-                maxHeight: "calc(100vh - 8rem)",
+                maxHeight: `calc(100vh - ${sidebarTop}px - 1rem)`,
                 overflowY: "auto",
                 zIndex: 40,
               }}
