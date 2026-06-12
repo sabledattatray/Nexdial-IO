@@ -12,10 +12,9 @@ import {
   ExternalLink,
   ChevronRight,
   Share2,
-  Facebook,
-  Instagram,
-  Linkedin,
-  Twitter,
+  Users,
+  Camera,
+  Briefcase,
   Video
 } from "lucide-react";
 
@@ -357,7 +356,7 @@ export default function IntegrationsPage() {
                   <div className="bg-[#020610]/80 border border-white/5 hover:border-[#1877F2]/50 rounded-xl p-5 transition-colors group">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 rounded-lg bg-[#1877F2]/10 flex items-center justify-center">
-                        <Facebook className="w-5 h-5 text-[#1877F2]" />
+                        <Users className="w-5 h-5 text-[#1877F2]" />
                       </div>
                       <span className="text-[10px] font-bold tracking-wider text-green-400 bg-green-400/10 px-2 py-1 rounded">OFFICIAL</span>
                     </div>
@@ -372,7 +371,7 @@ export default function IntegrationsPage() {
                   <div className="bg-[#020610]/80 border border-white/5 hover:border-[#E1306C]/50 rounded-xl p-5 transition-colors group">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 rounded-lg bg-gradient-to-tr from-[#F56040] to-[#E1306C] flex items-center justify-center opacity-80">
-                        <Instagram className="w-5 h-5 text-white" />
+                        <Camera className="w-5 h-5 text-white" />
                       </div>
                       <span className="text-[10px] font-bold tracking-wider text-green-400 bg-green-400/10 px-2 py-1 rounded">OFFICIAL</span>
                     </div>
@@ -387,7 +386,7 @@ export default function IntegrationsPage() {
                   <div className="bg-[#020610]/80 border border-white/5 hover:border-[#0A66C2]/50 rounded-xl p-5 transition-colors group">
                     <div className="flex items-center justify-between mb-4">
                       <div className="w-10 h-10 rounded-lg bg-[#0A66C2]/10 flex items-center justify-center">
-                        <Linkedin className="w-5 h-5 text-[#0A66C2]" />
+                        <Briefcase className="w-5 h-5 text-[#0A66C2]" />
                       </div>
                       <span className="text-[10px] font-bold tracking-wider text-slate-400 bg-white/5 px-2 py-1 rounded">COMING SOON</span>
                     </div>
