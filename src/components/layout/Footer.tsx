@@ -158,7 +158,7 @@ export function Footer() {
               </a>
               <div className="flex items-start gap-3 text-sm text-[#94A3B8]">
                 <MapPin className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                <span className="text-xs text-[#64748B]">Badlapur East, Maharashtra, India 421503</span>
+                <span className="text-xs text-[#64748B]">Badlapur East, Dist- Thane, Maharashtra, India- 421503</span>
               </div>
             </div>
             <div className="flex gap-3">
