@@ -199,19 +199,19 @@ export function Navbar() {
                         transition={{ duration: 0.2, ease: "easeOut" }}
                         className="absolute top-full left-1/2 -translate-x-1/2 pt-4"
                       >
-                        <div className="glass-card-strong !bg-[#0F172A] p-6 min-w-[420px] shadow-2xl shadow-black/40">
-                          <div className={`grid ${link.megaMenu.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-6`}>
+                        <div className="glass-card-strong !bg-[#0F172A] p-5 min-w-[560px] shadow-2xl shadow-black/40">
+                          <div className={`grid ${link.megaMenu.length > 1 ? 'grid-cols-2' : 'grid-cols-1'} gap-5`}>
                             {link.megaMenu.map((group) => (
                               <div key={group.title}>
-                                <h4 className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-3 px-2">
+                                <h4 className="text-xs font-semibold text-[#64748B] uppercase tracking-wider mb-2 px-2">
                                   {group.title}
                                 </h4>
-                                <div className="space-y-1">
+                                <div className="space-y-0.5">
                                   {group.items.map((item) => (
                                     <Link
                                       key={item.label}
                                       href={item.href}
-                                      className="flex items-start gap-3 p-2.5 rounded-xl hover:bg-white/[0.04] transition-colors group/item"
+                                      className="flex items-start gap-2.5 p-2 rounded-xl hover:bg-white/[0.04] transition-colors group/item"
                                     >
                                       <div className="w-9 h-9 rounded-lg bg-gradient-to-br from-[#0057D9]/20 to-[#00C2FF]/10 flex items-center justify-center flex-shrink-0 group-hover/item:from-[#0057D9]/30 group-hover/item:to-[#00C2FF]/20 transition-all">
                                         <item.icon className="w-4.5 h-4.5 text-[#00C2FF]" />
