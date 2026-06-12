@@ -8,8 +8,6 @@ import { signOut } from "next-auth/react";
 const navItems = [
   { href: "/admin/clients", label: "Clients", icon: Users },
   { href: "/admin/billing", label: "Billing & Revenue", icon: IndianRupee },
-  { href: "/admin/broadcasts", label: "Broadcasts", icon: Radio },
-  { href: "/admin/audit", label: "System Audit", icon: Terminal },
 ];
 
 export default function AdminSidebar() {

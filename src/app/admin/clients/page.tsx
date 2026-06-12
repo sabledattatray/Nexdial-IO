@@ -245,62 +245,87 @@ export default function AdminClientsPage() {
                             
                             {w.onboardingData ? (
                               <div className="space-y-6">
-                                <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Registered Company Name</span>
-                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.companyName || "Not provided"}</span>
-                                  </div>
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Industry & Type</span>
-                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block">{w.onboardingData.industry || "N/A"} - {w.onboardingData.businessType || "N/A"}</span>
-                                  </div>
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Company Website</span>
-                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block truncate max-w-[200px]">{w.onboardingData.companyWebsite || "N/A"}</span>
-                                  </div>
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Location & Timezone</span>
-                                    <span className="text-sm text-slate-300 bg-white/5 px-3 py-1.5 rounded border border-white/10 inline-block truncate max-w-[200px]">{w.onboardingData.location || "N/A"} ({w.onboardingData.timeZone || "N/A"})</span>
-                                  </div>
-                                </div>
+                                <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                                  
+                                  {/* Column 1: Onboarding Details */}
+                                  <div className="space-y-4 col-span-1 lg:col-span-2">
+                                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2">Business Profile</h5>
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Company Name</span>
+                                        <span className="text-sm text-slate-300">{w.onboardingData.companyName || "Not provided"}</span>
+                                      </div>
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Industry</span>
+                                        <span className="text-sm text-slate-300">{w.onboardingData.industry || "N/A"} - {w.onboardingData.businessType || "N/A"}</span>
+                                      </div>
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Website</span>
+                                        <span className="text-sm text-slate-300 truncate max-w-[200px] block">{w.onboardingData.companyWebsite || "N/A"}</span>
+                                      </div>
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Location</span>
+                                        <span className="text-sm text-slate-300">{w.onboardingData.location || "N/A"} ({w.onboardingData.timeZone || "N/A"})</span>
+                                      </div>
+                                    </div>
 
-                                <div className="grid grid-cols-1 md:grid-cols-3 gap-6 pt-4 border-t border-white/5">
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Filter className="w-3 h-3" /> Lead Sources</span>
-                                    <div className="flex flex-wrap gap-1.5">
-                                      {w.onboardingData.leadSources && w.onboardingData.leadSources.length > 0 ? (
-                                        w.onboardingData.leadSources.map((source, i) => (
-                                          <span key={i} className="text-[10px] bg-indigo-500/10 text-indigo-300 border border-indigo-500/20 px-2 py-0.5 rounded-full">{source}</span>
-                                        ))
-                                      ) : (
-                                        <span className="text-xs text-slate-500 italic">None selected</span>
-                                      )}
+                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Goals</span>
+                                        <div className="flex flex-wrap gap-1.5">
+                                          {w.onboardingData.goals?.map((g: string, i: number) => (
+                                            <span key={i} className="text-[10px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded">{g}</span>
+                                          ))}
+                                        </div>
+                                      </div>
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Lead Sources</span>
+                                        <div className="flex flex-wrap gap-1.5">
+                                          {w.onboardingData.leadSources?.map((s: string, i: number) => (
+                                            <span key={i} className="text-[10px] text-slate-300 bg-white/5 border border-white/10 px-2 py-0.5 rounded">{s}</span>
+                                          ))}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1"><Target className="w-3 h-3" /> Core Goals</span>
-                                    <div className="flex flex-wrap gap-1.5">
-                                      {w.onboardingData.goals && w.onboardingData.goals.length > 0 ? (
-                                        w.onboardingData.goals.map((goal, i) => (
-                                          <span key={i} className="text-[10px] text-slate-300 bg-emerald-500/5 border border-emerald-500/10 px-2 py-0.5 rounded-full">{goal}</span>
-                                        ))
-                                      ) : (
-                                        <span className="text-xs text-slate-500 italic">None selected</span>
-                                      )}
+
+                                  {/* Column 2: Team Members & Billing */}
+                                  <div className="space-y-6">
+                                    <div>
+                                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Team Members</h5>
+                                      <div className="space-y-3">
+                                        {w.users?.map((u, i) => (
+                                          <div key={i} className="flex items-center gap-3">
+                                            {u.image ? (
+                                              <img src={u.image} alt="" className="w-8 h-8 rounded-full" />
+                                            ) : (
+                                              <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
+                                                <User className="w-4 h-4 text-slate-400" />
+                                              </div>
+                                            )}
+                                            <div className="flex flex-col">
+                                              <span className="text-xs font-medium text-slate-300">{u.name || "Unnamed"}</span>
+                                              <span className="text-[10px] text-slate-500">{u.email}</span>
+                                            </div>
+                                          </div>
+                                        ))}
+                                      </div>
                                     </div>
-                                  </div>
-                                  <div>
-                                    <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-2 flex items-center gap-1">Communication Channels</span>
-                                    <div className="flex flex-col gap-1">
-                                      {w.onboardingData.channels ? (
-                                        <>
-                                          {w.onboardingData.channels.whatsappNumber && <span className="text-xs text-slate-400">WhatsApp: <span className="text-white">{w.onboardingData.channels.whatsappNumber}</span></span>}
-                                          {w.onboardingData.channels.supportEmail && <span className="text-xs text-slate-400">Support: <span className="text-white">{w.onboardingData.channels.supportEmail}</span></span>}
-                                          {w.onboardingData.channels.callingNumber && <span className="text-xs text-slate-400">Calling: <span className="text-white">{w.onboardingData.channels.callingNumber}</span></span>}
-                                        </>
-                                      ) : (
-                                        <span className="text-xs text-slate-500 italic">No channels configured</span>
-                                      )}
+
+                                    <div>
+                                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Billing Status</h5>
+                                      <div className="bg-white/5 rounded-lg p-3 border border-white/10">
+                                        <div className="flex justify-between items-center mb-2">
+                                          <span className="text-xs text-slate-400">Current Plan</span>
+                                          <span className="text-xs font-bold text-[#00C2FF]">{w.plan}</span>
+                                        </div>
+                                        <div className="flex justify-between items-center">
+                                          <span className="text-xs text-slate-400">Estimated MRR</span>
+                                          <span className="text-xs font-bold text-emerald-400">
+                                            {w.plan === 'TRIAL' ? '₹0' : w.plan === 'SMALL' ? '₹2,500' : w.plan === 'MEDIUM' ? '₹5,000' : '₹10,000+'}
+                                          </span>
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
@@ -320,13 +345,20 @@ export default function AdminClientsPage() {
                                   )}
                                   {owner?.email && (
                                     <a 
-                                      href={`mailto:${owner.email}?subject=NexDial%20Subscription%20Reminder`}
+                                      href={`mailto:${owner.email}?subject=NexDial%20Support`}
                                       className="flex items-center gap-1.5 px-3 py-1.5 bg-yellow-500/10 hover:bg-yellow-500/20 text-yellow-500 border border-yellow-500/30 rounded text-xs font-bold transition-colors"
                                     >
                                       <CreditCard className="w-3.5 h-3.5" />
-                                      Payment Reminder
+                                      Email Client
                                     </a>
                                   )}
+                                  <button 
+                                    className="flex items-center gap-1.5 px-3 py-1.5 bg-purple-500/10 hover:bg-purple-500/20 text-purple-400 border border-purple-500/30 rounded text-xs font-bold transition-colors"
+                                    onClick={() => alert('Plan Override dialog opens here.')}
+                                  >
+                                    <Target className="w-3.5 h-3.5" />
+                                    Change Plan Manually
+                                  </button>
                                   {w.plan === 'TRIAL' && (
                                     <button 
                                       className="flex items-center gap-1.5 px-3 py-1.5 bg-[#00C2FF]/10 hover:bg-[#00C2FF]/20 text-[#00C2FF] border border-[#00C2FF]/30 rounded text-xs font-bold transition-colors"
