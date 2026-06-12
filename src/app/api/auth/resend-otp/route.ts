@@ -1,6 +1,7 @@
 // @ts-nocheck
 import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -36,17 +37,13 @@ export async function POST(req: Request) {
       data: { identifier: email.toLowerCase(), token: otp, expires },
     });
 
-    // In production, send via email provider
-    console.log(`\n\n[MOCK EMAIL SERVER] Resent Verification OTP for ${email.toLowerCase()}: ${otp}\n\n`);
-
-    // For testing on live servers without an email provider, we will return the OTP in the response
-    // Remove this in a real production environment once SendGrid/Resend is configured!
-    const isMockMode = process.env.NODE_ENV === "development" || !process.env.SMTP_HOST;
+    // Send email using Resend (falls back to mock if no API key is provided)
+    const emailResult = await sendVerificationEmail(email.toLowerCase(), otp);
 
     return NextResponse.json({ 
       success: true, 
       message: "OTP resent successfully",
-      mockOtp: isMockMode ? otp : undefined // Temporarily expose for testing
+      mockOtp: emailResult.mock ? otp : undefined // Temporarily expose for testing if no API key
     });
 
   } catch (error: any) {

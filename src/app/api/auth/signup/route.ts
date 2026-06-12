@@ -3,6 +3,7 @@ import { prisma } from "@/lib/prisma";
 import bcrypt from "bcryptjs";
 import { NextResponse } from "next/server";
 import { seedOnboardingData } from "@/lib/onboardingSeeder";
+import { sendVerificationEmail } from "@/lib/email";
 
 export async function POST(req: Request) {
   try {
@@ -70,8 +71,8 @@ export async function POST(req: Request) {
       }
     });
 
-    // 🚀 IN A PRODUCTION ENVIRONMENT, YOU WOULD EMAIL `otp` VIA SENDGRID/RESEND HERE
-    console.log(`\n\n[MOCK EMAIL SERVER] Verification OTP for ${email.toLowerCase()}: ${otp}\n\n`);
+    // Send email using Resend (falls back to mock if no API key is provided)
+    await sendVerificationEmail(email.toLowerCase(), otp);
 
     // Seed onboarding demo data if requested
     if (seedDemoData) {
