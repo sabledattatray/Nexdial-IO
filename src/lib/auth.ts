@@ -63,6 +63,13 @@ export const authOptions: NextAuthOptions = {
               email: user.email,
               name: user.name || "Google User",
               role: isSuperAdmin ? "ADMIN" : "VIEWER",
+              workspace: {
+                create: {
+                  name: `${user.name || "My"} Workspace`,
+                  plan: "TRIAL",
+                  status: "ACTIVE",
+                }
+              }
             },
           });
         }
@@ -74,20 +81,17 @@ export const authOptions: NextAuthOptions = {
       return true;
     },
     async jwt({ token, user }) {
-      if (user) {
-        token.role = (user as any).role;
-        token.id = user.id;
-        token.onboarded = (user as any).onboarded;
-      } else if (token.email) {
-        // Query database by email in case older cookies lack token.id
+      if (token.email) {
+        // Always fetch the freshest user data from the DB
         const dbUser = await prisma.user.findUnique({
           where: { email: token.email },
-          select: { id: true, onboarded: true, role: true },
+          select: { id: true, onboarded: true, role: true, workspaceId: true },
         });
         if (dbUser) {
           token.id = dbUser.id;
           token.onboarded = dbUser.onboarded;
           token.role = dbUser.role;
+          token.workspaceId = dbUser.workspaceId;
         }
       }
       return token;
@@ -97,6 +101,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
         (session.user as any).onboarded = token.onboarded;
+        (session.user as any).workspaceId = token.workspaceId;
       }
       return session;
     }
