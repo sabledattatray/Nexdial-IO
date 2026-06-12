@@ -3,37 +3,36 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { BookOpen, Code, Terminal, Server, Shield, Search, ArrowRight } from "lucide-react";
-import Link from "next/link";
+import { BookOpen, Code, Brain, Inbox, Search, ArrowRight } from "lucide-react";
 
 const articles = [
   {
-    category: "VoIP Telephony",
-    title: "Mapping Vicidial Campaign Trunks to Nexdial Route queues",
-    desc: "Configure Asterisk dynamic routing priorities to distribute incoming callers to active agent groups.",
-    icon: Server,
+    category: "Setup Guides",
+    title: "Connecting WhatsApp Business API & Website Forms",
+    desc: "Step-by-step instructions for linking your official WhatsApp Business account and routing website contact forms directly into your Unified Inbox.",
+    icon: Inbox,
     color: "#0057D9"
   },
   {
-    category: "Developer API",
-    title: "Securing Tenant authentication channels with OAuth 2.0 & JWT",
-    desc: "A developer guide to setting up custom single sign-on (SSO) domains per organization tenant.",
-    icon: Code,
+    category: "User Guides",
+    title: "Managing Sales Pipelines & Kanban Deal Stages",
+    desc: "Learn how to customize your visual pipeline columns, drag leads through sales stages, log call outcomes, and monitor conversion velocity.",
+    icon: BookOpen,
+    color: "#F59E0B"
+  },
+  {
+    category: "Automation & AI",
+    title: "Configuring the AI Next Best Action Recommendations",
+    desc: "A comprehensive guide on setting up automatic follow-up tasks, configuring urgency tags, and training the adaptive learning feedback loop.",
+    icon: Brain,
     color: "#8B5CF6"
   },
   {
-    category: "Compliance",
-    title: "Configuring Data Masking and HIPAA audit logging protocols",
-    desc: "Ensuring patient names, credit cards, and SSNs are masked from live call logs and transcript files.",
-    icon: Shield,
+    category: "Developer API",
+    title: "Using Webhooks & REST APIs to Sync Lead Activities",
+    desc: "Developer documentation for pushing custom lead payloads, updating contact records, and exporting CRM timeline activities programmatically.",
+    icon: Code,
     color: "#00E5A0"
-  },
-  {
-    category: "User Guides",
-    title: "Setting up AI Agent Copilot script templates inside agent panels",
-    desc: "Build drag-and-drop SOP paths using our workflow builder to assist agents during live customer calls.",
-    icon: BookOpen,
-    color: "#F59E0B"
   }
 ];
 
@@ -56,13 +55,13 @@ export default function KnowledgeCenterPage() {
         {/* Header */}
         <AnimatedSection className="text-center max-w-2xl mx-auto mb-12">
           <span className="text-xs font-semibold text-[#00C2FF] uppercase tracking-widest px-3 py-1 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            Nexdial Documentation
+            NexDial Help Center
           </span>
           <h1 className="text-4xl font-extrabold text-white mt-6">
-            Knowledge & <span className="gradient-text">Developer Center</span>
+            Knowledge & <span className="gradient-text">Documentation</span>
           </h1>
           <p className="text-[#94A3B8] text-sm mt-3">
-            Read technical whitepapers, developer APIs, setup guides, and administrative document files.
+            Read setup guides, API documents, and user manual pages to get the most out of your NexDial workspace.
           </p>
         </AnimatedSection>
 
@@ -72,7 +71,7 @@ export default function KnowledgeCenterPage() {
             <Search className="absolute left-4 top-3.5 w-5 h-5 text-[#64748B]" />
             <input
               type="text"
-              placeholder="Search API docs, user guides, or compliance specs..."
+              placeholder="Search guides, user docs, or API endpoints..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
               className="w-full pl-12 pr-4 py-3.5 rounded-xl bg-white/[0.02] border border-white/[0.08] focus:border-[#00C2FF] focus:outline-none text-sm text-white placeholder-[#475569] transition-all"
