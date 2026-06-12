@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import { useSession, signOut } from "next-auth/react";
 import { 
   LayoutDashboard, 
@@ -34,6 +34,7 @@ const navLinks = [
 
 export default function CRMLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
+  const router = useRouter();
   const { data: session } = useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isAddLeadModalOpen, setIsAddLeadModalOpen] = useState(false);
@@ -76,6 +77,13 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
     window.addEventListener("nexdial-avatar-change", loadAvatar);
     return () => window.removeEventListener("nexdial-avatar-change", loadAvatar);
   }, []);
+
+  // Redirect guard: if user is logged in but has not onboarded, redirect to /onboarding
+  useEffect(() => {
+    if (session && session.user && !(session.user as any).onboarded) {
+      router.replace("/onboarding");
+    }
+  }, [session, router]);
 
   // Close dropdowns on outside click
   useEffect(() => {

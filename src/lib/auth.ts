@@ -42,6 +42,7 @@ export const authOptions: NextAuthOptions = {
           name: user.name,
           email: user.email,
           role: user.role,
+          onboarded: user.onboarded,
         };
       }
     })
@@ -68,6 +69,7 @@ export const authOptions: NextAuthOptions = {
 
         user.id = dbUser.id;
         (user as any).role = dbUser.role;
+        (user as any).onboarded = dbUser.onboarded;
       }
       return true;
     },
@@ -75,6 +77,16 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.role = (user as any).role;
         token.id = user.id;
+        token.onboarded = (user as any).onboarded;
+      } else if (token.id) {
+        // Query database directly to get the freshest onboarded status
+        const dbUser = await prisma.user.findUnique({
+          where: { id: token.id as string },
+          select: { onboarded: true },
+        });
+        if (dbUser) {
+          token.onboarded = dbUser.onboarded;
+        }
       }
       return token;
     },
@@ -82,6 +94,7 @@ export const authOptions: NextAuthOptions = {
       if (session.user) {
         (session.user as any).role = token.role;
         (session.user as any).id = token.id;
+        (session.user as any).onboarded = token.onboarded;
       }
       return session;
     }

@@ -12,6 +12,8 @@ model User {
   email     String   @unique
   password  String?
   role      Role     @default(VIEWER)
+  onboarded Boolean  @default(false)
+  industry  String?
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
