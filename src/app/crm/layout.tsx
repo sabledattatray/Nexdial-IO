@@ -20,7 +20,8 @@ import {
   MessageSquare,
   Sparkles,
   Check,
-  BellOff
+  BellOff,
+  Blocks
 } from "lucide-react";
 import AddLeadModal from "@/components/crm/AddLeadModal";
 
@@ -29,6 +30,7 @@ const navLinks = [
   { name: "Pipeline", href: "/crm/pipeline", icon: KanbanSquare },
   { name: "Follow-ups", href: "/crm/follow-ups", icon: CalendarClock },
   { name: "Analytics", href: "/crm/dashboard", icon: LayoutDashboard },
+  { name: "Integrations", href: "/crm/integrations", icon: Blocks },
   { name: "Settings", href: "/crm/settings", icon: Settings },
 ];
 
