@@ -34,6 +34,9 @@ type Workspace = {
     users: number;
     leads: number;
   };
+  integrations?: { id: string; provider: string; status: string; lastSyncAt: string | null }[];
+  subscriptions?: any[];
+  transactions?: any[];
 };
 
 export default function AdminClientsPage() {
@@ -41,6 +44,8 @@ export default function AdminClientsPage() {
   const [isLoading, setIsLoading] = useState(true);
   const [search, setSearch] = useState("");
   const [expandedId, setExpandedId] = useState<string | null>(null);
+  const [filterPlan, setFilterPlan] = useState<string>("ALL");
+  const [filterStatus, setFilterStatus] = useState<string>("ALL");
 
   useEffect(() => {
     fetchWorkspaces();
@@ -82,10 +87,13 @@ export default function AdminClientsPage() {
     return "text-red-400 bg-red-400/10 border-red-400/20";
   };
 
-  const filteredWorkspaces = workspaces.filter(w => 
-    w.name.toLowerCase().includes(search.toLowerCase()) || 
-    w.users.some(u => u.email?.toLowerCase().includes(search.toLowerCase()))
-  );
+  const filteredWorkspaces = workspaces.filter(w => {
+    const matchesSearch = w.name.toLowerCase().includes(search.toLowerCase()) || 
+      w.users.some(u => u.email?.toLowerCase().includes(search.toLowerCase()));
+    const matchesPlan = filterPlan === "ALL" ? true : w.plan === filterPlan;
+    const matchesStatus = filterStatus === "ALL" ? true : w.status === filterStatus;
+    return matchesSearch && matchesPlan && matchesStatus;
+  });
 
   return (
     <div className="p-8 max-w-[1400px] mx-auto animate-in fade-in zoom-in-95 duration-200">
@@ -99,7 +107,7 @@ export default function AdminClientsPage() {
           </h1>
           <p className="text-slate-400 text-sm mt-1">Manage onboarded clients, monitor health scores, and troubleshoot via impersonation.</p>
         </div>
-        <div className="flex items-center gap-4">
+        <div className="flex items-center gap-4 flex-wrap">
           <div className="relative">
             <Search className="w-4 h-4 text-slate-400 absolute left-3 top-1/2 -translate-y-1/2" />
             <input 
@@ -110,6 +118,26 @@ export default function AdminClientsPage() {
               className="bg-[#020610] border border-white/10 rounded-lg pl-9 pr-4 py-2 text-sm text-white focus:outline-none focus:border-[#00C2FF] transition-colors w-64"
             />
           </div>
+          <select 
+            className="bg-[#020610] border border-white/10 rounded-lg px-4 py-2 text-sm text-slate-300 focus:outline-none focus:border-[#00C2FF]"
+            value={filterPlan}
+            onChange={(e) => setFilterPlan(e.target.value)}
+          >
+            <option value="ALL">All Plans</option>
+            <option value="TRIAL">Trial</option>
+            <option value="SMALL">Starter</option>
+            <option value="MEDIUM">Growth</option>
+            <option value="LARGE">Pro</option>
+          </select>
+          <select 
+            className="bg-[#020610] border border-white/10 rounded-lg px-4 py-2 text-sm text-slate-300 focus:outline-none focus:border-[#00C2FF]"
+            value={filterStatus}
+            onChange={(e) => setFilterStatus(e.target.value)}
+          >
+            <option value="ALL">All Statuses</option>
+            <option value="ACTIVE">Active</option>
+            <option value="SUSPENDED">Suspended</option>
+          </select>
           <button className="bg-[#00C2FF] hover:bg-[#00C2FF]/90 text-black px-4 py-2 rounded-lg text-sm font-bold flex items-center gap-2 transition-colors">
             <Plus className="w-4 h-4" /> New Client
           </button>
@@ -137,6 +165,7 @@ export default function AdminClientsPage() {
               ) : (
                 filteredWorkspaces.map((w) => {
                   const owner = w.users?.[0]; // Assume first ADMIN is the primary owner
+                  const ownerPhone = owner?.phone || w.onboardingData?.channels?.whatsappNumber || w.whatsappNumber;
                   
                   return (
                     <React.Fragment key={w.id}>
@@ -157,7 +186,7 @@ export default function AdminClientsPage() {
                                   {owner.name || "Unnamed"} {owner.jobTitle ? <span className="text-[10px] text-slate-500 ml-1">({owner.jobTitle})</span> : null}
                                 </span>
                                 <span className="text-[10px] text-slate-500 flex items-center gap-1"><Mail className="w-2.5 h-2.5" /> {owner.email}</span>
-                                {owner.phone && <span className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5"><Phone className="w-2.5 h-2.5" /> {owner.phone}</span>}
+                                {ownerPhone && <span className="text-[10px] text-slate-500 flex items-center gap-1 mt-0.5"><Phone className="w-2.5 h-2.5" /> {ownerPhone}</span>}
                               </div>
                             </div>
                           ) : (
@@ -172,10 +201,10 @@ export default function AdminClientsPage() {
                             <span className={`px-2 py-0.5 rounded text-[10px] font-bold tracking-wider border ${w.status === 'ACTIVE' ? 'bg-green-500/10 text-green-400 border-green-500/20' : 'bg-red-500/10 text-red-400 border-red-500/20'}`}>
                               {w.status}
                             </span>
-                            {w.plan === 'TRIAL' && w.trialEndsAt && (
+                            {w.plan === 'TRIAL' && (
                               <span className="text-[9px] text-slate-400 flex items-center gap-1 mt-1">
                                 <CalendarClock className="w-3 h-3 text-yellow-500" />
-                                {format(new Date(w.trialEndsAt), "MMM d, yyyy")}
+                                {format(w.trialEndsAt ? new Date(w.trialEndsAt) : new Date(new Date(w.createdAt).getTime() + 14 * 24 * 60 * 60 * 1000), "MMM d, yyyy")}
                               </span>
                             )}
                           </div>
@@ -220,8 +249,8 @@ export default function AdminClientsPage() {
                               <Mail className="w-4 h-4" />
                             </a>
                           )}
-                          {owner?.phone && (
-                            <a href={`https://wa.me/${owner.phone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="inline-block p-2 rounded-lg bg-white/5 hover:bg-[#25D366]/20 hover:text-[#25D366] text-slate-400 transition-colors" title="WhatsApp Client">
+                          {ownerPhone && (
+                            <a href={`https://wa.me/${ownerPhone.replace(/[^0-9]/g, '')}`} target="_blank" rel="noreferrer" className="inline-block p-2 rounded-lg bg-white/5 hover:bg-[#25D366]/20 hover:text-[#25D366] text-slate-400 transition-colors" title="WhatsApp Client">
                               <MessageCircle className="w-4 h-4" />
                             </a>
                           )}
@@ -269,7 +298,7 @@ export default function AdminClientsPage() {
                                       </div>
                                     </div>
 
-                                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+                                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
                                       <div>
                                         <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Goals</span>
                                         <div className="flex flex-wrap gap-1.5">
@@ -286,29 +315,51 @@ export default function AdminClientsPage() {
                                           ))}
                                         </div>
                                       </div>
+                                      <div>
+                                        <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Channels</span>
+                                        <div className="flex flex-col gap-1">
+                                          {w.onboardingData.channels ? (
+                                            <>
+                                              {w.onboardingData.channels.whatsappNumber && <span className="text-xs text-slate-400">WA: <span className="text-white">{w.onboardingData.channels.whatsappNumber}</span></span>}
+                                              {w.onboardingData.channels.callingNumber && <span className="text-xs text-slate-400">Call: <span className="text-white">{w.onboardingData.channels.callingNumber}</span></span>}
+                                            </>
+                                          ) : (
+                                            <span className="text-[10px] text-slate-500 italic">None</span>
+                                          )}
+                                        </div>
+                                      </div>
                                     </div>
                                   </div>
 
-                                  {/* Column 2: Team Members & Billing */}
+                                  {/* Column 2: Activity & Telemetry */}
                                   <div className="space-y-6">
                                     <div>
-                                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Team Members</h5>
-                                      <div className="space-y-3">
-                                        {w.users?.map((u, i) => (
-                                          <div key={i} className="flex items-center gap-3">
-                                            {u.image ? (
-                                              <img src={u.image} alt="" className="w-8 h-8 rounded-full" />
-                                            ) : (
-                                              <div className="w-8 h-8 rounded-full bg-slate-800 flex items-center justify-center">
-                                                <User className="w-4 h-4 text-slate-400" />
-                                              </div>
-                                            )}
-                                            <div className="flex flex-col">
-                                              <span className="text-xs font-medium text-slate-300">{u.name || "Unnamed"}</span>
-                                              <span className="text-[10px] text-slate-500">{u.email}</span>
-                                            </div>
-                                          </div>
-                                        ))}
+                                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Workspace Telemetry</h5>
+                                      <div className="grid grid-cols-2 gap-4">
+                                        <div>
+                                          <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Created Date</span>
+                                          <span className="text-xs text-white">{format(new Date(w.createdAt), "MMM d, yyyy")}</span>
+                                        </div>
+                                        <div>
+                                          <span className="block text-[10px] text-slate-500 uppercase tracking-wider font-bold mb-1">Last Login</span>
+                                          <span className="text-xs text-[#00C2FF]">{w.lastLoginAt ? formatDistanceToNow(new Date(w.lastLoginAt), { addSuffix: true }) : "Never"}</span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                    
+                                    <div>
+                                      <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2 mb-4">Connected Channels</h5>
+                                      <div className="flex flex-wrap gap-2">
+                                        {w.integrations && w.integrations.length > 0 ? (
+                                          w.integrations.map(int => (
+                                            <span key={int.id} className="text-xs px-2 py-1 bg-white/5 border border-white/10 rounded text-slate-300 capitalize flex items-center gap-2">
+                                              <div className={`w-2 h-2 rounded-full ${int.status === 'ACTIVE' ? 'bg-emerald-500' : 'bg-red-500'}`}></div>
+                                              {int.provider}
+                                            </span>
+                                          ))
+                                        ) : (
+                                          <span className="text-xs text-slate-500 italic">No integrations connected</span>
+                                        )}
                                       </div>
                                     </div>
 
@@ -319,22 +370,48 @@ export default function AdminClientsPage() {
                                           <span className="text-xs text-slate-400">Current Plan</span>
                                           <span className="text-xs font-bold text-[#00C2FF]">{w.plan}</span>
                                         </div>
-                                        <div className="flex justify-between items-center">
-                                          <span className="text-xs text-slate-400">Estimated MRR</span>
-                                          <span className="text-xs font-bold text-emerald-400">
-                                            {w.plan === 'TRIAL' ? '₹0' : w.plan === 'SMALL' ? '₹2,500' : w.plan === 'MEDIUM' ? '₹5,000' : '₹10,000+'}
-                                          </span>
-                                        </div>
+                                        {w.plan === 'TRIAL' && (
+                                          <div className="flex justify-between items-center mt-2 pt-2 border-t border-white/5">
+                                            <span className="text-[10px] text-slate-500">Trial Expires</span>
+                                            <span className="text-[10px] text-yellow-500 font-medium">
+                                              {format(w.trialEndsAt ? new Date(w.trialEndsAt) : new Date(new Date(w.createdAt).getTime() + 14 * 24 * 60 * 60 * 1000), "MMM d, yyyy")}
+                                            </span>
+                                          </div>
+                                        )}
                                       </div>
                                     </div>
+                                  </div>
+                                  
+                                  {/* Column 3: Payment History */}
+                                  <div className="space-y-4">
+                                    <h5 className="text-xs font-bold text-slate-400 uppercase tracking-widest border-b border-white/10 pb-2">Recent Transactions</h5>
+                                    {w.transactions && w.transactions.length > 0 ? (
+                                      <div className="space-y-2 max-h-[250px] overflow-y-auto pr-2">
+                                        {w.transactions.map((tx: any) => (
+                                          <div key={tx.id} className="p-3 bg-white/5 border border-white/10 rounded-lg flex items-center justify-between">
+                                            <div>
+                                              <span className="block text-white font-bold text-sm">₹{tx.amount}</span>
+                                              <span className="text-[10px] text-slate-400">{format(new Date(tx.createdAt), "MMM d, yyyy")}</span>
+                                            </div>
+                                            <span className={`px-2 py-0.5 rounded text-[10px] font-bold ${tx.status === 'SUCCESS' ? 'bg-emerald-500/10 text-emerald-400' : 'bg-red-500/10 text-red-400'}`}>
+                                              {tx.status}
+                                            </span>
+                                          </div>
+                                        ))}
+                                      </div>
+                                    ) : (
+                                      <div className="text-xs text-slate-500 italic p-4 text-center bg-white/5 rounded border border-white/10">
+                                        No transaction history.
+                                      </div>
+                                    )}
                                   </div>
                                 </div>
                                 
                                 {/* QUICK ACTIONS BAR */}
                                 <div className="mt-6 pt-4 border-t border-white/10 flex flex-wrap items-center gap-3">
-                                  {owner?.phone && (
+                                  {ownerPhone && (
                                     <a 
-                                      href={`https://wa.me/${owner.phone.replace(/[^0-9]/g, '')}`} 
+                                      href={`https://wa.me/${ownerPhone.replace(/[^0-9]/g, '')}`} 
                                       target="_blank" 
                                       rel="noreferrer"
                                       className="flex items-center gap-1.5 px-3 py-1.5 bg-[#25D366]/10 hover:bg-[#25D366]/20 text-[#25D366] border border-[#25D366]/30 rounded text-xs font-bold transition-colors"

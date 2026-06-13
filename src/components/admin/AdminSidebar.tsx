@@ -2,12 +2,17 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Shield, Users, IndianRupee, Radio, Terminal, Settings, LogOut, ExternalLink } from "lucide-react";
+import { Shield, Users, IndianRupee, Radio, Terminal, Settings, LogOut, ExternalLink, Activity, HeartPulse } from "lucide-react";
 import { signOut } from "next-auth/react";
 
 const navItems = [
+  { href: "/admin/dashboard", label: "Dashboard", icon: Shield },
   { href: "/admin/clients", label: "Clients", icon: Users },
+  { href: "/admin/success", label: "Customer Success", icon: HeartPulse },
   { href: "/admin/billing", label: "Billing & Revenue", icon: IndianRupee },
+  { href: "/admin/audit-logs", label: "System Logs", icon: Activity },
+  { href: "/admin/communications", label: "Communication Center", icon: Radio },
+  { href: "/admin/analytics", label: "SaaS Analytics", icon: Terminal },
 ];
 
 export default function AdminSidebar() {

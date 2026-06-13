@@ -24,6 +24,15 @@ export async function GET() {
             leads: true,
             integrations: true,
           }
+        },
+        integrations: { select: { id: true, provider: true, status: true, lastSyncAt: true } },
+        subscriptions: {
+          include: { plan: true },
+          orderBy: { createdAt: "desc" },
+        },
+        transactions: {
+          orderBy: { createdAt: "desc" },
+          take: 10,
         }
       },
       orderBy: { createdAt: "desc" }

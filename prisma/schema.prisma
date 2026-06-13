@@ -85,6 +85,9 @@ model Workspace {
   integrations Integration[]
   routingRules RoutingRule[]
   auditLogs    AuditLog[]
+  
+  subscriptions Subscription[]
+  transactions  Transaction[]
 
   @@map("workspaces")
 }
@@ -349,4 +352,72 @@ model Announcement {
 
   @@index([isPublished])
   @@map("announcements")
+}
+
+// =======================
+// BILLING & SUBSCRIPTION
+// =======================
+
+model SubscriptionPlan {
+  id          String   @id @default(cuid())
+  name        String
+  slug        String   @unique
+  monthlyPrice Float   @map("monthly_price")
+  yearlyPrice  Float?  @map("yearly_price")
+  isActive    Boolean  @default(true) @map("is_active")
+
+  maxUsers    Int?     @map("max_users")
+  maxContacts Int?     @map("max_contacts")
+  maxLeads    Int?     @map("max_leads")
+  maxPipelines Int?    @map("max_pipelines")
+
+  features    Json
+
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  subscriptions Subscription[]
+
+  @@map("subscription_plans")
+}
+
+model Subscription {
+  id          String   @id @default(cuid())
+
+  workspaceId String   @map("workspace_id")
+  planId      String   @map("plan_id")
+
+  status      String
+  startDate   DateTime @map("start_date")
+  endDate     DateTime? @map("end_date")
+
+  workspace   Workspace @relation(fields:[workspaceId], references:[id], onDelete: Cascade)
+  plan        SubscriptionPlan @relation(fields:[planId], references:[id])
+
+  createdAt   DateTime @default(now()) @map("created_at")
+
+  @@index([workspaceId])
+  @@index([planId])
+  @@map("subscriptions")
+}
+
+model Transaction {
+  id            String   @id @default(cuid())
+
+  workspaceId   String   @map("workspace_id")
+
+  amount        Float
+  currency      String   @default("INR")
+
+  status        String
+  paymentMethod String?  @map("payment_method")
+
+  invoiceNumber String?  @map("invoice_number")
+
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  workspace Workspace @relation(fields:[workspaceId], references:[id], onDelete: Cascade)
+
+  @@index([workspaceId])
+  @@map("transactions")
 }
