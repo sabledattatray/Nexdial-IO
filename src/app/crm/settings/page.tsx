@@ -381,7 +381,19 @@ export default function SettingsPage() {
       await fetch("/api/crm/sync-settings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ companyName })
+        body: JSON.stringify({ 
+          companyName, 
+          businessType, 
+          industry, 
+          companyWebsite, 
+          companySize, 
+          location, 
+          timeZone, 
+          businessPhone, 
+          brandName, 
+          brandTagline, 
+          brandColor 
+        })
       });
     } catch (e) {
       console.error("Failed to sync company name to db", e);
@@ -405,7 +417,13 @@ export default function SettingsPage() {
       await fetch("/api/crm/sync-settings", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ goals, leadSources })
+        body: JSON.stringify({ 
+          goals, 
+          leadSources, 
+          monthlyLeads, 
+          currentCrm, 
+          hearAboutUs 
+        })
       });
     } catch (e) {
       console.error("Failed to sync goals to db", e);
