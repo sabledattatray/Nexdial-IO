@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useRef } from "react";
-import { ChevronRight, ArrowLeft, User, Calendar, Clock } from "lucide-react";
+import { ChevronRight, ArrowLeft, User, Calendar, Clock, BadgeCheck } from "lucide-react";
 import Link from "next/link";
 
 export function BlogClient({ 
@@ -208,7 +208,10 @@ export function BlogClient({
                 <div>
                   <h4 className="text-white font-bold text-base mb-1 flex items-center gap-2">
                     Written by {article.author === "Datta Sable" ? (
-                      <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                      <span className="flex items-center gap-1.5">
+                        <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                        <BadgeCheck className="w-4 h-4 text-[#00C2FF] fill-[#00C2FF]/10" />
+                      </span>
                     ) : article.author}
                   </h4>
                   <p className="text-sm text-slate-400 leading-relaxed">
@@ -257,7 +260,10 @@ export function BlogClient({
               <div>
                 <h4 className="text-white font-bold text-base mb-1 flex items-center gap-2">
                   Written by {article.author === "Datta Sable" ? (
-                    <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                    <span className="flex items-center gap-1.5">
+                      <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                      <BadgeCheck className="w-4 h-4 text-[#00C2FF] fill-[#00C2FF]/10" />
+                    </span>
                   ) : article.author}
                 </h4>
                 <p className="text-sm text-slate-400 leading-relaxed">
