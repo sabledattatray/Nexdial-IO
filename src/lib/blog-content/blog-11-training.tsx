@@ -9,7 +9,7 @@ export const salesTrainingPlaybooks: BlogPost = {
   author: "Datta Sable",
   category: "Sales Leadership",
   readTime: "11 min read",
-  schemaImage: "/images/blog/sales_training_playbooks_1781468808118.png",
+  schemaImage: "/images/blog/sales_training_playbooks.png",
   sections: [
     { id: "the-shadowing-problem", label: "The Problem with 'Shadowing'" },
     { id: "tribal-knowledge", label: "The Danger of Tribal Knowledge" },

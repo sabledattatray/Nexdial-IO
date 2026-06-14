@@ -9,7 +9,7 @@ export const poorPipeline: BlogPost = {
   author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "13 min read",
-  schemaImage: "/images/blog/poor_pipeline_1781468789394.png",
+  schemaImage: "/images/blog/poor_pipeline.png",
   sections: [
     { id: "the-silent-killer", label: "The Silent Killer of Revenue" },
     { id: "warning-sign-1", label: "Warning Sign 1: The Bloated Pipeline" },

@@ -9,7 +9,7 @@ export const realEstateCrm: BlogPost = {
   author: "Datta Sable",
   category: "Industry Deep Dive",
   readTime: "12 min read",
-  schemaImage: "/images/blog/real_estate_crm_1781468775946.png",
+  schemaImage: "/images/blog/real_estate_crm.png",
   sections: [
     { id: "the-brokerage-blindspot", label: "The Brokerage Blindspot" },
     { id: "the-tyranny-of-the-diary", label: "The Tyranny of the Diary" },

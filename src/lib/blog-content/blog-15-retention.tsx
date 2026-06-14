@@ -9,7 +9,7 @@ export const badSalesProcess: BlogPost = {
   author: "Datta Sable",
   category: "Sales Leadership",
   readTime: "11 min read",
-  schemaImage: "/images/blog/bad_sales_process_1781468853766.png",
+  schemaImage: "/images/blog/bad_sales_process.png",
   sections: [
     { id: "the-retention-illusion", label: "The Compensation Illusion" },
     { id: "admin-heavy-cultures", label: "Admin-Heavy Cultures" },

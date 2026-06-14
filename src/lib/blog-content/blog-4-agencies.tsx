@@ -9,7 +9,7 @@ export const agenciesCrm: BlogPost = {
   author: "Datta Sable",
   category: "Agency Growth",
   readTime: "13 min read",
-  schemaImage: "/images/blog/agencies_crm_1781468028589.png",
+  schemaImage: "/images/blog/agencies_crm.png",
   sections: [
     { id: "the-agency-chaos", label: "The Classic Agency Chaos" },
     { id: "the-onboarding-disaster", label: "The Onboarding Disaster" },

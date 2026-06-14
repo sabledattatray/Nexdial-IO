@@ -9,7 +9,7 @@ export const shortenSalesCycle: BlogPost = {
   author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "12 min read",
-  schemaImage: "/images/blog/shorten_sales_cycle_1781468820059.png",
+  schemaImage: "/images/blog/shorten_sales_cycle.png",
   sections: [
     { id: "the-cost-of-time", label: "The Hidden Cost of Time" },
     { id: "tactic-1-micro-commitments", label: "Tactic 1: Enforcing Micro-Commitments" },

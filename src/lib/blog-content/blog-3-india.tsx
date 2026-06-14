@@ -9,7 +9,7 @@ export const leadTrackingIndia: BlogPost = {
   author: "Datta Sable",
   category: "Local Business",
   readTime: "11 min read",
-  schemaImage: "/images/blog/lead_tracking_india_1781468014973.png",
+  schemaImage: "/images/blog/lead_tracking_india.png",
   sections: [
     { id: "the-indian-market-shift", label: "The Shift in the Indian Market" },
     { id: "the-legacy-crm-problem", label: "The Legacy Software Problem" },

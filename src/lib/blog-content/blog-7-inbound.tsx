@@ -9,7 +9,7 @@ export const deathOfColdCalling: BlogPost = {
   author: "Datta Sable",
   category: "Inbound Marketing",
   readTime: "11 min read",
-  schemaImage: "/images/blog/death_of_cold_calling_1781468751694.png",
+  schemaImage: "/images/blog/death_of_cold_calling.png",
   sections: [
     { id: "the-math-is-broken", label: "The Math of Outbound is Broken" },
     { id: "the-inbound-philosophy", label: "The Inbound Philosophy" },

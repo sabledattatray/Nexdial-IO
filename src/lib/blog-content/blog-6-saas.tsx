@@ -9,7 +9,7 @@ export const b2bSaasConversion: BlogPost = {
   author: "Datta Sable",
   category: "B2B Sales",
   readTime: "12 min read",
-  schemaImage: "/images/blog/b2b_saas_conversion_1781468739046.png",
+  schemaImage: "/images/blog/b2b_saas_conversion.png",
   sections: [
     { id: "the-freemium-fallacy", label: "The Freemium Fallacy" },
     { id: "time-to-value", label: "Time-to-Value (TTV)" },

@@ -9,7 +9,7 @@ export const sevenTouchSequence: BlogPost = {
   author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "11 min read",
-  schemaImage: "/images/blog/seven_touch_sequence_1781468840915.png",
+  schemaImage: "/images/blog/seven_touch_sequence.png",
   sections: [
     { id: "the-myth-of-annoying", label: "The Myth of 'Annoying' the Prospect" },
     { id: "the-value-driven-framework", label: "The Value-Driven Framework" },

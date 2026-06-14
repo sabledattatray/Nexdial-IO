@@ -9,7 +9,7 @@ export const whatsappCrmAlternative: BlogPost = {
   author: "Datta Sable",
   category: "Lead Tracking",
   readTime: "12 min read",
-  schemaImage: "/images/blog/whatsapp_crm_blog_1781467993683.png",
+  schemaImage: "/images/blog/whatsapp_crm_blog.png",
   sections: [
     { id: "the-whatsapp-illusion", label: "The WhatsApp Speed Illusion" },
     { id: "the-spreadsheet-nightmare", label: "The Spreadsheet Nightmare" },

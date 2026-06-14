@@ -9,7 +9,7 @@ export const salesFollowUpStrategy: BlogPost = {
   author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "14 min read",
-  schemaImage: "/images/blog/sales_strategy_blog_1781468004560.png",
+  schemaImage: "/images/blog/sales_strategy_blog.png",
   sections: [
     { id: "the-myth-of-the-one-call-close", label: "The Myth of the One-Call Close" },
     { id: "the-psychology-of-silence", label: "The Psychology of Silence" },

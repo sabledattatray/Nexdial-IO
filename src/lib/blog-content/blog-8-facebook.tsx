@@ -9,7 +9,7 @@ export const facebookLeadAds: BlogPost = {
   author: "Datta Sable",
   category: "Marketing Automation",
   readTime: "10 min read",
-  schemaImage: "/images/blog/facebook_lead_ads_1781468764943.png",
+  schemaImage: "/images/blog/facebook_lead_ads.png",
   sections: [
     { id: "the-junk-lead-myth", label: "The 'Junk Lead' Myth" },
     { id: "the-frictionless-problem", label: "The Danger of Frictionless Forms" },

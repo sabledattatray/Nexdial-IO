@@ -9,7 +9,7 @@ export const omnichannelCrm: BlogPost = {
   author: "Datta Sable",
   category: "Technology",
   readTime: "10 min read",
-  schemaImage: "/images/blog/omnichannel_crm_1781468830942.png",
+  schemaImage: "/images/blog/omnichannel_crm.png",
   sections: [
     { id: "the-fragmented-experience", label: "The Fragmented Experience" },
     { id: "the-cost-of-context-switching", label: "The Cost of Context Switching" },

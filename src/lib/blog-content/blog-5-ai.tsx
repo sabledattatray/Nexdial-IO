@@ -9,7 +9,7 @@ export const aiContactCenter: BlogPost = {
   author: "Datta Sable",
   category: "Technology",
   readTime: "10 min read",
-  schemaImage: "/images/blog/ai_contact_center_1781468041927.png",
+  schemaImage: "/images/blog/ai_contact_center.png",
   sections: [
     { id: "ai-is-not-science-fiction", label: "AI is No Longer Science Fiction" },
     { id: "the-death-of-dumb-chatbots", label: "The Death of 'Dumb' Chatbots" },
