@@ -25,7 +25,7 @@ const outfit = Outfit({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://nexdial-xi.vercel.app"),
+  metadataBase: new URL("https://nexdial.io"),
   title: {
     default: "NexDial — Unified Business Communication Inbox & CRM",
     template: "%s | NexDial",
