@@ -6,7 +6,7 @@ import { authOptions } from "@/lib/auth";
 export async function POST(req: Request) {
   try {
     const session = await getServerSession(authOptions);
-    if (!session?.user?.id || (session.user as any).role !== "ADMIN") {
+    if (!session || !session.user || !(session.user as any).id || (session.user as any).role !== "ADMIN") {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
@@ -24,7 +24,7 @@ export async function POST(req: Request) {
     await prisma.auditLog.create({
       data: {
         action: `BROADCAST_QUEUED_${channel}`,
-        adminId: session.user.id,
+        adminId: (session.user as any).id,
         details: {
           audience,
           subject: subject || null,

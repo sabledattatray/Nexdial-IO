@@ -165,7 +165,7 @@ export default function AdminClientsPage() {
               ) : (
                 filteredWorkspaces.map((w) => {
                   const owner = w.users?.[0]; // Assume first ADMIN is the primary owner
-                  const ownerPhone = owner?.phone || w.onboardingData?.channels?.whatsappNumber || w.whatsappNumber;
+                  const ownerPhone = owner?.phone || w.onboardingData?.channels?.whatsappNumber || (w as any).whatsappNumber;
                   
                   return (
                     <React.Fragment key={w.id}>

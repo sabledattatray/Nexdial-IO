@@ -187,7 +187,7 @@ export default function AdminBillingPage() {
                 <Tooltip 
                   contentStyle={{ backgroundColor: '#0f172a', borderColor: 'rgba(255,255,255,0.1)', borderRadius: '8px' }}
                   itemStyle={{ color: '#10B981' }}
-                  formatter={(value: number) => [`₹${value}`, 'Revenue']}
+                  formatter={(value: any) => [`₹${value}`, 'Revenue']}
                 />
                 <Area 
                   type="monotone" 

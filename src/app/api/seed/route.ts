@@ -87,8 +87,6 @@ export async function GET() {
               status: "ACTIVE",
               startDate: new Date(),
               endDate: new Date(new Date().setFullYear(new Date().getFullYear() + 1)),
-              currentPeriodStart: new Date(),
-              currentPeriodEnd: new Date(new Date().setMonth(new Date().getMonth() + 1)),
             }
           });
 
