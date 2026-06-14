@@ -14,7 +14,7 @@ export const aiContactCenters: BlogPost = {
   author: "Nisha P.",
   category: "Engineering",
   readTime: "8 min read",
-  schemaImage: "https://nexdial.io/blog-ai-engineering.png",
+  schemaImage: "/images/blog/ai_contact_center.png",
   sections: [
     { id: "the-shift", label: "The Shift from Analytics to Action" },
     { id: "real-time-voice", label: "Real-time Voice AI and Transcription" },

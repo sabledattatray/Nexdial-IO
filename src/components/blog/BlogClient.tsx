@@ -130,6 +130,18 @@ export function BlogClient({
           </div>
         </header>
 
+        {article.schemaImage && (
+          <div className="relative w-full h-[400px] md:h-[500px] mb-12 rounded-2xl overflow-hidden border border-white/10 group">
+            <div className="absolute inset-0 bg-gradient-to-t from-[#081120] to-transparent z-10" />
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img 
+              src={article.schemaImage} 
+              alt={article.title}
+              className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          </div>
+        )}
+
         {sections.length > 0 ? (
           <div ref={gridRef} className="grid lg:grid-cols-[280px_1fr] gap-12 items-start">
             <div ref={placeholderRef} className="hidden lg:block w-[280px] shrink-0" />

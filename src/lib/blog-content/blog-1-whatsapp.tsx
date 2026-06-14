@@ -14,7 +14,7 @@ export const whatsappCrmAlternative: BlogPost = {
   author: "Datta Sable",
   category: "Lead Tracking",
   readTime: "8 min read",
-  schemaImage: "https://nexdial.io/blog-whatsapp-crm.png",
+  schemaImage: "/images/blog/whatsapp_crm_blog.png",
   sections: [
     { id: "the-whatsapp-trap", label: "The WhatsApp Trap" },
     { id: "limitations-of-excel", label: "Limitations of Excel" },

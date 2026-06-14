@@ -14,7 +14,7 @@ export const modernAgenciesCrm: BlogPost = {
   author: "Datta Sable",
   category: "Small Business",
   readTime: "7 min read",
-  schemaImage: "https://nexdial.io/blog-agencies.png",
+  schemaImage: "/images/blog/agencies_crm.png",
   sections: [
     { id: "the-agency-bottleneck", label: "The Agency Bottleneck" },
     { id: "why-spreadsheets-break", label: "Why Spreadsheets Break at Scale" },

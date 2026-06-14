@@ -14,7 +14,7 @@ export const salesFollowUpStrategy: BlogPost = {
   author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "7 min read",
-  schemaImage: "https://nexdial.io/blog-sales-strategy.png",
+  schemaImage: "/images/blog/sales_strategy_blog.png",
   sections: [
     { id: "the-fortune-is-in-the-follow-up", label: "The Fortune is in the Follow-up" },
     { id: "speed-to-lead", label: "Speed to Lead: The 5-Minute Rule" },

@@ -14,7 +14,7 @@ export const leadTrackingIndia: BlogPost = {
   author: "Nisha P.",
   category: "Sales Strategy",
   readTime: "6 min read",
-  schemaImage: "https://nexdial.io/blog-lead-tracking-india.png",
+  schemaImage: "/images/blog/lead_tracking_india.png",
   sections: [
     { id: "local-challenges", label: "Local Tracking Challenges in India" },
     { id: "aggregation-problem", label: "The Aggregation Problem: Justdial, IndiaMART, and Meta" },
