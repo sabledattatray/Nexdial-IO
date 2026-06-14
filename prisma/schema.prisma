@@ -72,7 +72,7 @@ model Workspace {
   status      String    @default("ACTIVE") // ACTIVE, SUSPENDED
   razorpayId  String?
   trialEndsAt DateTime?
-  
+
   // Metrics
   healthScore Int       @default(100) @map("health_score")
   lastLoginAt DateTime? @map("last_login_at")
@@ -80,12 +80,12 @@ model Workspace {
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
 
-  users User[]
-  leads Lead[]
+  users        User[]
+  leads        Lead[]
   integrations Integration[]
   routingRules RoutingRule[]
   auditLogs    AuditLog[]
-  
+
   subscriptions Subscription[]
   transactions  Transaction[]
 
@@ -121,9 +121,9 @@ model User {
   sessions Session[]
 
   // Relations
-  calls         Call[]
-  activities    Activity[]
-  assignedLeads Lead[]     @relation("AssignedLeads")
+  calls            Call[]
+  activities       Activity[]
+  assignedLeads    Lead[]     @relation("AssignedLeads")
   restaurantOrders Order[]
 
   @@map("users")
@@ -283,16 +283,16 @@ model AIRecommendation {
 model Integration {
   id          String    @id @default(cuid())
   workspaceId String    @map("workspace_id")
-  provider    String    // "facebook", "instagram", "tiktok", "custom"
+  provider    String // "facebook", "instagram", "tiktok", "custom"
   status      String    @default("ACTIVE") // ACTIVE, ERROR, PAUSED
   secretKey   String?   @unique @map("secret_key")
-  credentials Json?     // To store { accessToken, pageId, etc }
+  credentials Json? // To store { accessToken, pageId, etc }
   leadsCount  Int       @default(0) @map("leads_count")
   lastSyncAt  DateTime? @map("last_sync_at")
   createdAt   DateTime  @default(now()) @map("created_at")
   updatedAt   DateTime  @updatedAt @map("updated_at")
 
-  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  workspace   Workspace    @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
   webhookLogs WebhookLog[]
 
   @@index([workspaceId])
@@ -304,7 +304,7 @@ model WebhookLog {
   id            String   @id @default(cuid())
   integrationId String   @map("integration_id")
   payload       Json
-  status        String   // "SUCCESS", "ERROR"
+  status        String // "SUCCESS", "ERROR"
   errorMessage  String?  @map("error_message")
   createdAt     DateTime @default(now()) @map("created_at")
 
@@ -320,8 +320,8 @@ model RoutingRule {
   name        String
   priority    Int      @default(0)
   isActive    Boolean  @default(true) @map("is_active")
-  conditions  Json     // e.g., [{ "field": "source", "operator": "equals", "value": "facebook" }]
-  actions     Json     // e.g., [{ "type": "assignTo", "value": "user_id" }, { "type": "addTag", "value": "Hot" }]
+  conditions  Json // e.g., [{ "field": "source", "operator": "equals", "value": "facebook" }]
+  actions     Json // e.g., [{ "type": "assignTo", "value": "user_id" }, { "type": "addTag", "value": "Hot" }]
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
@@ -334,13 +334,13 @@ model RoutingRule {
 
 model AuditLog {
   id          String   @id @default(cuid())
-  action      String   // e.g., "PLAN_UPGRADE", "WORKSPACE_SUSPENDED", "IMPERSONATION_STARTED"
+  action      String // e.g., "PLAN_UPGRADE", "WORKSPACE_SUSPENDED", "IMPERSONATION_STARTED"
   adminId     String?  @map("admin_id") // ID of the super admin who performed the action
   workspaceId String?  @map("workspace_id")
-  details     Json?    // Optional payload describing the action
+  details     Json? // Optional payload describing the action
   createdAt   DateTime @default(now()) @map("created_at")
 
-  workspace   Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
+  workspace Workspace? @relation(fields: [workspaceId], references: [id], onDelete: SetNull)
 
   @@index([workspaceId])
   @@index([adminId])
@@ -366,22 +366,22 @@ model Announcement {
 // =======================
 
 model SubscriptionPlan {
-  id          String   @id @default(cuid())
-  name        String
-  slug        String   @unique
+  id           String  @id @default(cuid())
+  name         String
+  slug         String  @unique
   monthlyPrice Float   @map("monthly_price")
   yearlyPrice  Float?  @map("yearly_price")
-  isActive    Boolean  @default(true) @map("is_active")
+  isActive     Boolean @default(true) @map("is_active")
 
-  maxUsers    Int?     @map("max_users")
-  maxContacts Int?     @map("max_contacts")
-  maxLeads    Int?     @map("max_leads")
-  maxPipelines Int?    @map("max_pipelines")
+  maxUsers     Int? @map("max_users")
+  maxContacts  Int? @map("max_contacts")
+  maxLeads     Int? @map("max_leads")
+  maxPipelines Int? @map("max_pipelines")
 
-  features    Json
+  features Json
 
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
 
   subscriptions Subscription[]
 
@@ -389,19 +389,19 @@ model SubscriptionPlan {
 }
 
 model Subscription {
-  id          String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  workspaceId String   @map("workspace_id")
-  planId      String   @map("plan_id")
+  workspaceId String @map("workspace_id")
+  planId      String @map("plan_id")
 
-  status      String
-  startDate   DateTime @map("start_date")
-  endDate     DateTime? @map("end_date")
+  status    String
+  startDate DateTime  @map("start_date")
+  endDate   DateTime? @map("end_date")
 
-  workspace   Workspace @relation(fields:[workspaceId], references:[id], onDelete: Cascade)
-  plan        SubscriptionPlan @relation(fields:[planId], references:[id])
+  workspace Workspace        @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  plan      SubscriptionPlan @relation(fields: [planId], references: [id])
 
-  createdAt   DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
   @@index([workspaceId])
   @@index([planId])
@@ -409,21 +409,21 @@ model Subscription {
 }
 
 model Transaction {
-  id            String   @id @default(cuid())
+  id String @id @default(cuid())
 
-  workspaceId   String   @map("workspace_id")
+  workspaceId String @map("workspace_id")
 
-  amount        Float
-  currency      String   @default("INR")
+  amount   Float
+  currency String @default("INR")
 
   status        String
-  paymentMethod String?  @map("payment_method")
+  paymentMethod String? @map("payment_method")
 
-  invoiceNumber String?  @map("invoice_number")
+  invoiceNumber String? @map("invoice_number")
 
-  createdAt     DateTime @default(now()) @map("created_at")
+  createdAt DateTime @default(now()) @map("created_at")
 
-  workspace Workspace @relation(fields:[workspaceId], references:[id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
 
   @@index([workspaceId])
   @@map("transactions")
@@ -434,70 +434,70 @@ model Transaction {
 // =======================
 
 model Table {
-  id          String   @id @default(cuid())
-  workspaceId String   @map("workspace_id")
+  id          String @id @default(cuid())
+  workspaceId String @map("workspace_id")
   number      String
-  capacity    Int      @default(2)
-  status      String   @default("AVAILABLE") // AVAILABLE, OCCUPIED, RESERVED
-  
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  capacity    Int    @default(2)
+  status      String @default("AVAILABLE") // AVAILABLE, OCCUPIED, RESERVED
 
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  orders      Order[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  orders    Order[]
 
   @@index([workspaceId])
   @@map("tables")
 }
 
 model MenuCategory {
-  id          String   @id @default(cuid())
-  workspaceId String   @map("workspace_id")
+  id          String @id @default(cuid())
+  workspaceId String @map("workspace_id")
   name        String
-  order       Int      @default(0)
+  order       Int    @default(0)
 
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  items       MenuItem[]
+  workspace Workspace  @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  items     MenuItem[]
 
   @@index([workspaceId])
   @@map("menu_categories")
 }
 
 model MenuItem {
-  id            String   @id @default(cuid())
-  categoryId    String   @map("category_id")
-  name          String
-  description   String?  @db.Text
-  price         Float
-  isAvailable   Boolean  @default(true) @map("is_available")
-  imageUrl      String?  @map("image_url")
-  
-  category      MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
-  orderItems    OrderItem[]
+  id          String  @id @default(cuid())
+  categoryId  String  @map("category_id")
+  name        String
+  description String? @db.Text
+  price       Float
+  isAvailable Boolean @default(true) @map("is_available")
+  imageUrl    String? @map("image_url")
+
+  category   MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems OrderItem[]
 
   @@index([categoryId])
   @@map("menu_items")
 }
 
 model Order {
-  id          String   @id @default(cuid())
-  workspaceId String   @map("workspace_id")
-  tableId     String?  @map("table_id")
-  waiterId    String?  @map("waiter_id")
-  
-  status      String   @default("OPEN") // OPEN, SERVED, PAID, CANCELLED
-  subtotal    Float    @default(0.0)
-  tax         Float    @default(0.0)
-  tip         Float    @default(0.0)
-  total       Float    @default(0.0)
-  
-  createdAt   DateTime @default(now()) @map("created_at")
-  updatedAt   DateTime @updatedAt @map("updated_at")
+  id          String  @id @default(cuid())
+  workspaceId String  @map("workspace_id")
+  tableId     String? @map("table_id")
+  waiterId    String? @map("waiter_id")
 
-  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
-  table       Table?    @relation(fields: [tableId], references: [id], onDelete: SetNull)
-  waiter      User?     @relation(fields: [waiterId], references: [id], onDelete: SetNull)
-  items       OrderItem[]
+  status   String @default("OPEN") // OPEN, SERVED, PAID, CANCELLED
+  subtotal Float  @default(0.0)
+  tax      Float  @default(0.0)
+  tip      Float  @default(0.0)
+  total    Float  @default(0.0)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  workspace Workspace   @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  table     Table?      @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  waiter    User?       @relation(fields: [waiterId], references: [id], onDelete: SetNull)
+  items     OrderItem[]
 
   @@index([workspaceId])
   @@index([tableId])
@@ -506,18 +506,58 @@ model Order {
 }
 
 model OrderItem {
-  id          String   @id @default(cuid())
-  orderId     String   @map("order_id")
-  menuItemId  String   @map("menu_item_id")
-  
-  quantity    Int      @default(1)
-  priceAtTime Float    @map("price_at_time") // Snapshot of price when ordered
+  id         String @id @default(cuid())
+  orderId    String @map("order_id")
+  menuItemId String @map("menu_item_id")
+
+  quantity    Int     @default(1)
+  priceAtTime Float   @map("price_at_time") // Snapshot of price when ordered
   notes       String?
-  
-  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
-  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+
+  order    Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
 
   @@index([orderId])
   @@index([menuItemId])
   @@map("order_items")
+}
+
+// =======================
+// INDUSTRY CONFIGURATION
+// =======================
+
+model IndustryCategory {
+  id           String   @id @default(cuid())
+  name         String
+  description  String?
+  displayOrder Int      @default(0) @map("display_order")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+
+  industries Industry[]
+
+  @@map("industry_categories")
+}
+
+model Industry {
+  id                String   @id @default(cuid())
+  categoryId        String   @map("category_id")
+  name              String
+  slug              String   @unique
+  icon              String   @default("Briefcase")
+  isPopular         Boolean  @default(false) @map("is_popular")
+  pipelineStages    String[] @map("pipeline_stages")
+  leadSources       String[] @map("lead_sources")
+  defaultTags       String[] @map("default_tags")
+  aiPrompts         Json?    @map("ai_prompts")
+  emailTemplates    Json?    @map("email_templates")
+  whatsappTemplates Json?    @map("whatsapp_templates")
+  createdAt         DateTime @default(now()) @map("created_at")
+  updatedAt         DateTime @updatedAt @map("updated_at")
+
+  category IndustryCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+
+  @@index([categoryId])
+  @@index([isPopular])
+  @@map("industries")
 }

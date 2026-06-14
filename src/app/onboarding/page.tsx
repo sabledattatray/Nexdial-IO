@@ -31,6 +31,7 @@ import {
   Award,
   MessageSquare
 } from "lucide-react";
+import IndustrySelector from "@/components/crm/IndustrySelector";
 
 // Razorpay script removed since onboarding is now free
 
@@ -396,18 +397,20 @@ function OnboardingContent() {
 
             <div className="space-y-1">
               <label className="text-[10px] uppercase font-bold text-slate-400">Industry *</label>
-              <select 
+              <IndustrySelector 
                 value={industry}
-                onChange={(e) => setIndustry(e.target.value)}
-                className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
-              >
-                <option value="real_estate">Real Estate Agencies</option>
-                <option value="hotel_restaurant">Hotel / Restaurant</option>
-                <option value="marketing">Marketing Agencies</option>
-                <option value="education">Education Consultants</option>
-                <option value="healthcare">Healthcare Clinics</option>
-                <option value="insurance">Insurance Brokers</option>
-              </select>
+                onChange={(slug, ind) => {
+                  setIndustry(slug);
+                  if (ind) {
+                    if (ind.pipelineStages && ind.pipelineStages.length > 0) {
+                      setPipelineStages(ind.pipelineStages);
+                    }
+                    if (ind.leadSources && ind.leadSources.length > 0) {
+                      setLeadSources(ind.leadSources);
+                    }
+                  }
+                }}
+              />
             </div>
 
             <div className="space-y-1">
