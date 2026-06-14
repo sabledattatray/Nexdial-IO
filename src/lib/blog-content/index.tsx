@@ -2,8 +2,8 @@ import { BlogPost } from "./types";
 import { whatsappCrmAlternative } from "./blog-1-whatsapp";
 import { salesFollowUpStrategy } from "./blog-2-sales";
 import { leadTrackingIndia } from "./blog-3-india";
-import { agenciesCrm } from "./blog-4-agencies";
-import { aiContactCenter } from "./blog-5-ai";
+import { modernAgenciesCrm } from "./blog-4-agencies";
+import { aiContactCenters } from "./blog-5-ai";
 import { b2bSaasConversion } from "./blog-6-saas";
 import { deathOfColdCalling } from "./blog-7-inbound";
 import { facebookLeadAds } from "./blog-8-facebook";
@@ -19,8 +19,8 @@ export const ARTICLES: Record<string, BlogPost> = {
   "whatsapp-crm-alternative": whatsappCrmAlternative,
   "sales-follow-up-strategy": salesFollowUpStrategy,
   "lead-tracking-software-india": leadTrackingIndia,
-  "crm-for-agencies": agenciesCrm,
-  "ai-contact-center-automation": aiContactCenter,
+  "crm-for-agencies": modernAgenciesCrm,
+  "ai-contact-center-automation": aiContactCenters,
   "b2b-saas-sales-cadence-conversion": b2bSaasConversion,
   "inbound-lead-management-vs-cold-calling": deathOfColdCalling,
   "native-facebook-lead-ads-integration": facebookLeadAds,
