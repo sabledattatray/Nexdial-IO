@@ -6,7 +6,7 @@ export const facebookLeadAds: BlogPost = {
   title: "Stop Wasting Money on Facebook Lead Ads: The Ultimate CRM Webhook Setup",
   excerpt: "Facebook Lead Ads are incredibly cheap, but they produce notorious 'junk' leads if you don't process them correctly. Learn how to use CRM webhooks and instant automation to filter, qualify, and close social media traffic.",
   date: "June 17, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Marketing Automation",
   readTime: "10 min read",
   schemaImage: "/images/blog/facebook_lead_ads_1781468764943.png",

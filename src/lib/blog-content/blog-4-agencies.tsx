@@ -6,7 +6,7 @@ export const agenciesCrm: BlogPost = {
   title: "Why Modern Marketing Agencies Need a Dedicated CRM Ecosystem",
   excerpt: "If your digital marketing or creative agency is managing client onboarding, sales pipelines, and project delivery using a chaotic mix of Slack, Trello, and Google Docs, you are stunting your growth. Here is why you need a unified agency ecosystem.",
   date: "June 13, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Agency Growth",
   readTime: "13 min read",
   schemaImage: "/images/blog/agencies_crm_1781468028589.png",

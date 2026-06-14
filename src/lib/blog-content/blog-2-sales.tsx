@@ -6,7 +6,7 @@ export const salesFollowUpStrategy: BlogPost = {
   title: "The Ultimate Sales Follow-Up Strategy: Why 80% of Sales Require 5 Continuous Follow-Ups",
   excerpt: "Most salespeople quit after two unanswered emails. The data says you shouldn't stop until touch point number seven. Dive deep into the psychology, metrics, and automation required to master the modern B2B sales follow-up.",
   date: "June 11, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "14 min read",
   schemaImage: "/images/blog/sales_strategy_blog_1781468004560.png",

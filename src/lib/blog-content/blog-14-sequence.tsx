@@ -6,7 +6,7 @@ export const sevenTouchSequence: BlogPost = {
   title: "The 7-Touch Sales Sequence That Actually Converts",
   excerpt: "Most reps send two emails and quit. Learn the exact 14-day, 7-touch omnichannel sequence used by elite B2B sales teams to pierce through executive noise and secure high-value meetings.",
   date: "June 23, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "11 min read",
   schemaImage: "/images/blog/seven_touch_sequence_1781468840915.png",

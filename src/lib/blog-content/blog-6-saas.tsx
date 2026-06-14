@@ -6,7 +6,7 @@ export const b2bSaasConversion: BlogPost = {
   title: "The B2B SaaS Playbook: Converting Free Trials into Enterprise Contracts",
   excerpt: "Offering a free trial is easy. Actually converting those users into paying, long-term enterprise clients requires psychological mapping, behavioral tracking, and a rigorous, automated sales pipeline.",
   date: "June 15, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "B2B Sales",
   readTime: "12 min read",
   schemaImage: "/images/blog/b2b_saas_conversion_1781468739046.png",

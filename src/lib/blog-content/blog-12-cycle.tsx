@@ -6,7 +6,7 @@ export const shortenSalesCycle: BlogPost = {
   title: "3 Proven Tactics to Shorten Your B2B Sales Cycle by 30%",
   excerpt: "Long sales cycles tie up capital, burn out reps, and increase the chance of losing a deal to a competitor. Implement these three operational tactics to drastically accelerate your time-to-close.",
   date: "June 21, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "12 min read",
   schemaImage: "/images/blog/shorten_sales_cycle_1781468820059.png",

@@ -6,7 +6,7 @@ export const poorPipeline: BlogPost = {
   title: "5 Warning Signs Your Sales Pipeline is Slowly Bleeding Revenue",
   excerpt: "A leaky sales pipeline doesn't happen overnight. It is a slow, structural degradation. Learn how to diagnose pipeline rot before it permanently damages your quarterly revenue targets.",
   date: "June 19, 2026",
-  author: "Nisha P.",
+  author: "Datta Sable",
   category: "Sales Strategy",
   readTime: "13 min read",
   schemaImage: "/images/blog/poor_pipeline_1781468789394.png",
