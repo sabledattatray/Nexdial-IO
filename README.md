@@ -1,33 +1,35 @@
-# Nexdial — AI-Powered Enterprise Contact Center Operating System
+# Nexdial — AI-Powered Enterprise Contact Center & CRM Operating System
 
-Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** combined with premium BPO services. Built for modern enterprises, it merges advanced CRM pipelines, high-velocity predictive outbound dialers, real-time voice AI agents, auto-QA transcription, and a white-labeled multi-tenant administration cockpit into a single, unified visual dashboard.
+Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** and **Intelligent CRM**. Built for modern enterprises, it merges advanced CRM pipelines, highly customizable industry-specific workflows, real-time voice AI agents, and specialized modules (like a fully functional Restaurant POS) into a single, unified visual dashboard.
 
 ---
 
 ## 🚀 Key Features & Capabilities
 
-### 1. Unified Dialer Operations Console
-* **Dialer Modes**: Supports Predictive (dynamic pacing algorithm), Power (consecutive list calling), Progressive (calls when agent is idle), and Preview dialing modes.
-* **WebRTC Softphone**: Real-time browser-based calling with equalized audio meters and instant call wrap-up ACW controls.
-* **Supervisor HUD Interceptor**: Managers can monitor live calls, whisper coaching tips directly to agent dashboards without customer knowledge, or barge-in to merge into a 3-way conference.
+### 1. Dynamic Industry CRM System
+* **50+ Pre-Configured Industries**: From Digital Marketing and Real Estate to Healthcare and Manufacturing, the system dynamically seeds industry-specific pipelines and workflows.
+* **Intelligent Onboarding**: Beautiful custom `<IndustrySelector>` and `<BusinessTypeSelector>` UIs automatically tailor the workspace setup and inject industry-specific lead stages during signup.
+* **Workspace Settings Cockpit**: Configure branding, lead sources, integrations, and company profiles per workspace.
 
-### 2. Conversational Voice AI Copilot
+### 2. Specialized Modules (e.g., Restaurant POS)
+* **Live Table Management**: Real-time visual layout of available vs. occupied tables.
+* **Order & Menu System**: Add categories and items directly to bills. Waiters and admins can fire orders from a tablet-friendly interface.
+* **Billing & Checkout**: Seamless invoice generation and final bill settlement.
+* **Staff Access**: Dedicated `WAITER` and `ADMIN` role management locked to specific tenant workspaces.
+
+### 3. Unified Dialer Operations Console
+* **Dialer Modes**: Supports Predictive (dynamic pacing algorithm), Power, Progressive, and Preview dialing modes.
+* **WebRTC Softphone**: Real-time browser-based calling with equalized audio meters and instant call wrap-up controls.
+* **Supervisor HUD**: Managers can monitor live calls, whisper coaching tips, or barge-in to merge into a 3-way conference.
+
+### 4. Conversational Voice AI Copilot
 * **Real-Time Speech-to-Text**: High-accuracy transcription streams during live voice conversations.
-* **RAG SOP Integration**: Queries documentation databases using semantic vector lookups to display answers and dynamic scripts directly on the representative's screen.
-* **Sentiment Analysis**: Tracks customer tone and sentiment metrics dynamically based on active conversation steps.
+* **RAG SOP Integration**: Queries documentation databases using semantic vector lookups to display dynamic scripts on the agent's screen.
 
-### 3. Integrated Enterprise CRM Suite
-* **Interactive Kanban Board**: Manage leads, follow-up queues, and deals with localized Indian Rupee (`₹`) pricing markers.
-* **Unified Profile Cards**: 360-degree customer details, historical contact logs, and post-call disposition summaries.
-* **Excel Reports**: Download formatted audit metrics, agent scorecards, connect logs, and campaign summaries directly.
-
-### 4. Multi-Tenant SaaS Architecture
-* **White-Labeling**: Provision isolated organizations with custom domains, billing schedules, and custom brand configurations.
-* **Billing Cockpit**: Tracks subscriptions, seat limits, and pre-paid SIP carrier outlays via Stripe connectors.
-
-### 5. Interactive Operations Map
-* Visualizes operational branches PAN India (Navi Mumbai HQ, Pune Baner, Ashoknagar, Bengaluru, Chennai, Hyderabad, Lucknow, and Kolkata).
-* Draws connection telemetry lines between branches and Navi Mumbai HQ on a fully responsive coordinate-locked India SVG layout.
+### 5. Robust Cloud Infrastructure
+* **Multi-Tenant SaaS Architecture**: Built on top of Prisma with strict `workspaceId` row-level isolation and role-based access control.
+* **Authentication**: Integrated NextAuth with Google SSO and credential-based secure sign-in.
+* **Database Optimization**: Uses Postgres connection pooling (`@prisma/adapter-pg`) to handle high-concurrency websocket and API data streams without exhausting limits.
 
 ---
 
@@ -35,11 +37,11 @@ Nexdial is a next-generation, cloud-native **Contact Center Operating System (CC
 
 * **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
 * **Library**: [React 19](https://react.dev/)
-* **Styling**: Tailwind CSS v4 & custom glassmorphism layers
+* **Database & ORM**: PostgreSQL (via Supabase) + [Prisma ORM](https://www.prisma.io/) with Edge adapter pooling
+* **Authentication**: [NextAuth.js v4](https://next-auth.js.org/)
+* **Styling**: Tailwind CSS v4 & Custom glassmorphism aesthetic
 * **Animations**: [Framer Motion](https://www.framer.com/motion/)
 * **Icons**: [Lucide React](https://lucide.dev/)
-* **Charts**: [Recharts](https://recharts.org/)
-* **Telephony**: WebRTC dynamic audio interfaces
 
 ---
 
@@ -47,24 +49,20 @@ Nexdial is a next-generation, cloud-native **Contact Center Operating System (CC
 
 ```bash
 nexdial/
+├── prisma/
+│   ├── schema.prisma         # Database models (User, Workspace, Leads, Tables, Orders)
+│   └── seed-industries.ts    # Seed script for 50+ industry templates
 ├── src/
-│   ├── app/                      # Next.js page routers & layout metadata
-│   │   ├── about/                # About page (leadership and national Vi awards)
-│   │   ├── admin/                # Super-Admin tenant dashboards
-│   │   ├── blog/                 # Platform articles
-│   │   ├── clients/              # Client roster metrics
-│   │   ├── dialer/               # Unified agent dialer portal
-│   │   ├── faqs/                 # General & CRM FAQs
-│   │   ├── pricing/              # Interactive outlay quote estimators (Rupee formatted)
-│   │   ├── privacy/              # GDPR compliance documents (Table of Contents)
-│   │   ├── security/             # SRTP, TLS & namespace security outlines
-│   │   ├── sitemap/              # HTML sitemap layout
-│   │   └── terms/                # TCPA compliance terms
-│   └── components/
-│       ├── home/                 # Main landing components (Hero, map, contact grid)
-│       ├── layout/               # Global Navbar & Footer logo reskins
-│       └── nexdial/              # Embedded Dialer App modules & mock systems
-└── package.json                  # Dependencies & execution scripts
+│   ├── app/                  # Next.js App Router endpoints
+│   │   ├── api/              # Secure REST APIs (auth, crm, restaurant POS, industries)
+│   │   ├── crm/              # Main CRM application dashboard and sub-modules
+│   │   ├── login/            # Authentication portals
+│   │   └── signup/           # Interactive multi-step onboarding
+│   ├── components/           # Reusable UI architecture
+│   │   ├── crm/              # Specialized CRM UI (IndustrySelector, Kanban, etc.)
+│   │   └── home/             # Landing page components
+│   └── lib/                  # Core utilities (Prisma client, NextAuth configuration)
+└── package.json              # Dependencies
 ```
 
 ---
@@ -72,7 +70,7 @@ nexdial/
 ## 💻 Getting Started
 
 ### Prerequisites
-Make sure you have Node.js 18+ and npm installed.
+Make sure you have Node.js 18+ and npm installed. You will also need a PostgreSQL database.
 
 ### Setup Instructions
 
@@ -87,26 +85,35 @@ Make sure you have Node.js 18+ and npm installed.
    npm install
    ```
 
-3. **Run the development server**:
+3. **Configure Environment Variables**:
+   Create a `.env` file with your database string and NextAuth secrets:
+   ```env
+   DATABASE_URL="postgresql://user:password@host:5432/db"
+   NEXTAUTH_SECRET="your-secret"
+   NEXTAUTH_URL="http://localhost:3000"
+   ```
+
+4. **Initialize Database & Seed**:
+   ```bash
+   npx prisma generate
+   npx prisma db push
+   npx tsx prisma/seed-industries.ts
+   ```
+
+5. **Run the development server**:
    ```bash
    npm run dev
    ```
    Open [http://localhost:3000](http://localhost:3000) with your browser to view the application.
-
-4. **Verify TypeScript & Production Build**:
-   ```bash
-   npx tsc --noEmit
-   npm run build
-   ```
 
 ---
 
 ## 🔒 Security & Compliance
 
 Nexdial complies with key global standards for secure communication and operations:
-* **HIPAA**: Offers Business Associate Agreements (BAAs), automatic data masking, and call logs scrubbing.
+* **Tenant Isolation**: Deep schema-level isolation using `workspaceId` parameters.
+* **Authentication**: Hardened OAuth 2.0 flows and BCrypt password hashing.
 * **SOC2 Type II**: Continuous vulnerability scanning, audit logs, and secure access permissions.
-* **GDPR**: EU isolated storage clusters and local sovereignty data zones.
 * **SIP Security**: SRTP and DTLS encryption for WebRTC call channels to protect against eavesdropping.
 
 ---
