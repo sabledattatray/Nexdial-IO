@@ -7,9 +7,12 @@ export const dynamic = "force-dynamic";
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await getAuthenticatedSession();
 
-  // Protect the entire /admin path
-  if (!session || !session.user || (session.user as any).role !== "ADMIN") {
-    redirect("/crm"); // Redirect non-admins to their CRM dashboard
+  const superAdmins = ["sabledattatray@gmail.com"];
+  const isSuperAdmin = session?.user?.email && superAdmins.includes(session.user.email.toLowerCase());
+
+  // Protect the entire /admin path (Only allow Super Admins)
+  if (!isSuperAdmin) {
+    redirect("/crm"); // Redirect non-super-admins to their CRM dashboard
   }
 
   return (

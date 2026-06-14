@@ -5,7 +5,7 @@ import { getAuthenticatedSession } from "@/lib/auth";
 export async function GET() {
   try {
     const session = await getAuthenticatedSession();
-    if (!session?.user || (session.user as any).role !== "ADMIN") {
+    if (!session?.user || session?.user?.email?.toLowerCase() !== "sabledattatray@gmail.com") {
       return new NextResponse("Unauthorized", { status: 401 });
     }
     const logs = await prisma.auditLog.findMany({

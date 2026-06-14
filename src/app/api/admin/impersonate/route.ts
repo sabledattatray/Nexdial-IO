@@ -6,7 +6,7 @@ import { getAuthenticatedSession } from "@/lib/auth";
 export async function POST(req: Request) {
   try {
     const session = await getAuthenticatedSession();
-    if (!session || !session.user || (session.user as any).role !== "ADMIN") {
+    if (!session || !session.user || session?.user?.email?.toLowerCase() !== "sabledattatray@gmail.com") {
       return new NextResponse("Unauthorized", { status: 401 });
     }
 
