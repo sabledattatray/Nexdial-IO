@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
+import IndustrySelector from "@/components/crm/IndustrySelector";
 import { 
   User, 
   Mail, 
@@ -911,18 +912,10 @@ export default function SettingsPage() {
 
                     <div className="space-y-1">
                       <label className="text-[10px] uppercase font-bold text-slate-400 pl-1">Industry</label>
-                      <select 
+                      <IndustrySelector 
                         value={industry}
-                        onChange={(e) => setIndustry(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#050A15] border border-white/5 rounded-xl text-xs text-white focus:outline-none"
-                      >
-                        <option value="real_estate">Real Estate Agencies</option>
-                        <option value="hotel_restaurant">Hotel / Restaurant</option>
-                        <option value="marketing">Marketing Agencies</option>
-                        <option value="education">Education Consultants</option>
-                        <option value="healthcare">Healthcare Clinics</option>
-                        <option value="insurance">Insurance Brokers</option>
-                      </select>
+                        onChange={(slug) => setIndustry(slug)}
+                      />
                     </div>
 
                     <div className="space-y-1">
