@@ -165,4 +165,4 @@ export default function AboutPage() {
     </div>
   );
 }
-export const revalidate = 86400;
+
