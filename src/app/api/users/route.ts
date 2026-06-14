@@ -64,10 +64,13 @@ export async function POST(req: Request) {
     const normRole = (role || "").toLowerCase();
     if (normRole.includes("admin") || normRole.includes("manager")) {
       dbRole = "ADMIN";
+    } else if (normRole.includes("waiter") || normRole.includes("staff")) {
+      dbRole = "WAITER";
     }
 
     const user = await prisma.user.create({
       data: {
+        workspaceId: session.user.workspaceId,
         name,
         email: email.toLowerCase(),
         password: hashedPassword,
