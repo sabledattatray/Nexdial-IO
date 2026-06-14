@@ -37,7 +37,7 @@ interface TeamMember {
 }
 
 export default function SettingsPage() {
-  const { data: session, status } = useSession();
+  const { data: session, status, update } = useSession();
   const [mounted, setMounted] = useState(false);
   const [activeTab, setActiveTab] = useState<"profile" | "company" | "goals_sources" | "pipeline" | "channels" | "team" | "ai_alerts" | "subscription">("profile");
 
@@ -395,6 +395,9 @@ export default function SettingsPage() {
           brandColor 
         })
       });
+      // Force NextAuth to fetch the updated industry from the database
+      // so the UI updates immediately without needing a full logout.
+      await update();
     } catch (e) {
       console.error("Failed to sync company name to db", e);
     }

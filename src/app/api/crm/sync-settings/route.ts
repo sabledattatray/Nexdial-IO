@@ -40,6 +40,13 @@ export async function POST(req: Request) {
       }
     });
 
+    if (body.industry) {
+      await prisma.user.update({
+        where: { id: sessionUser.id },
+        data: { industry: body.industry }
+      });
+    }
+
     return NextResponse.json({ success: true });
   } catch (error) {
     console.error("Sync Settings Error:", error);
