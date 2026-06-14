@@ -128,7 +128,7 @@ export const salesFollowUpStrategy: BlogPost = {
       </p>
 
       <p className="mt-8 italic text-slate-400">
-        <em>Want to read more about advanced sales psychology and engineering robust systems? Visit my personal blog at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+        <em>Want to read more about the intersection of data and human execution? Read my deep dive on <a href="https://dattasable.com/blog/psychology-of-high-fidelity-dashboard-design" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Exploring the Psychology of High-Fidelity Dashboard Design</a> to see how we build systems that drive action.</em>
       </p>
 
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">

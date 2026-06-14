@@ -98,7 +98,7 @@ export const aiContactCenters: BlogPost = {
       </p>
 
       <p className="mt-8 italic text-slate-400">
-        <em>Interested in the engineering behind AI architectures? Read more about how we build these systems at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+        <em>Interested in the engineering behind AI architectures? Read my deep dive on <a href="https://dattasable.com/blog/mastering-autonomous-ai-agents-workflows-2026" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Mastering Autonomous Intelligence and the Evolution of Agentic Workflows in 2026</a>.</em>
       </p>
 
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">

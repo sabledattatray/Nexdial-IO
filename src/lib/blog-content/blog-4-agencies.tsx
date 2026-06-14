@@ -110,7 +110,7 @@ export const modernAgenciesCrm: BlogPost = {
       </p>
 
       <p className="mt-8 italic text-slate-400">
-        <em>If you enjoyed this breakdown, you can find more of my thoughts on agency scaling and engineering systems at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+        <em>If you enjoyed this breakdown, you can learn how we orchestrated technical ecosystems at scale in my case study: <a href="https://dattasable.com/blog/case-study-n8n-automated-authority-scaling" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Architecting the 'Auto-Operator' via n8n Orchestration</a>.</em>
       </p>
 
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">

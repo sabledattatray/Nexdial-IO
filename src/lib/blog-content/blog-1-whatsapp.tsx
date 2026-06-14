@@ -136,7 +136,7 @@ export const whatsappCrmAlternative: BlogPost = {
       </p>
 
       <p className="mt-8 italic text-slate-400">
-        <em>Looking for more in-depth strategies on scaling your startup operations? Check out my personal blog at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a> for deep dives into tech, engineering, and CRM architecture.</em>
+        <em>Looking for more in-depth strategies on replacing manual Excel chaos with automated systems? Check out my case study: <a href="https://dattasable.com/blog/case-study-workflow-automation-roi" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Automating 400+ Manual MIS Hours for Global Logistics Stakeholders</a>.</em>
       </p>
 
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
