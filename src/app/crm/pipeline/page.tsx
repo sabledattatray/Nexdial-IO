@@ -105,7 +105,7 @@ export default function PipelinePage() {
 
     return (
       <div
-        className="flex-shrink-0 w-72 xl:w-full flex flex-col bg-[#0A1628] rounded-xl border border-white/5 h-full overflow-hidden"
+        className="flex-shrink-0 w-[340px] flex flex-col bg-[#0A1628] rounded-xl border border-white/5 h-full overflow-hidden"
         onDragOver={handleDragOver}
         onDrop={(e) => handleDrop(e, statusId)}
       >
@@ -135,12 +135,25 @@ export default function PipelinePage() {
                 <div className="absolute inset-0 bg-black/20 flex items-center justify-center rounded-lg z-10" />
               )}
               <div className="flex items-start justify-between mb-2">
-                <Link
-                  href={`/crm/leads/${lead.id}`}
-                  className="font-bold text-sm text-white hover:text-[#00C2FF] transition-colors"
-                >
-                  {lead.name}
-                </Link>
+                <div className="flex flex-col gap-1">
+                  <div className="flex items-center gap-2">
+                    <Link
+                      href={`/crm/leads/${lead.id}`}
+                      className="font-bold text-sm text-white hover:text-[#00C2FF] transition-colors"
+                    >
+                      {lead.name}
+                    </Link>
+                    {lead.aiScore !== undefined && (
+                      <span className={`text-[9px] font-bold px-1.5 py-0.5 rounded flex items-center gap-0.5 ${
+                        lead.aiScore >= 80 ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' : 
+                        lead.aiScore >= 50 ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' : 
+                        'bg-red-500/10 text-red-400 border border-red-500/20'
+                      }`}>
+                        AI {lead.aiScore}
+                      </span>
+                    )}
+                  </div>
+                </div>
                 <div className="relative">
                   <button 
                     onClick={(e) => {
@@ -318,7 +331,7 @@ export default function PipelinePage() {
         </div>
       ) : (
         <div className="flex-1 overflow-x-auto pb-4 custom-scrollbar">
-          <div className="flex h-full gap-3 items-start min-w-max xl:min-w-0 xl:w-full xl:grid xl:grid-cols-6 px-1">
+          <div className="flex h-full gap-4 items-start min-w-max px-1">
             {STATUSES.map((s) => (
               <KanbanColumn key={s.id} statusId={s.id} statusName={s.name} color={s.color} />
             ))}

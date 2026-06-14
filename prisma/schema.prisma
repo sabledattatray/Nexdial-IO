@@ -152,6 +152,11 @@ model Lead {
   assignedTo   User?     @relation("AssignedLeads", fields: [assignedToId], references: [id], onDelete: SetNull)
   followUpDate DateTime? @map("follow_up_date")
   notes        String[]
+  
+  // AI Integration
+  aiScore      Int?      @map("ai_score")
+  aiCertainty  Int?      @default(100) @map("ai_certainty")
+
   createdAt    DateTime  @default(now()) @map("created_at")
   updatedAt    DateTime  @updatedAt @map("updated_at")
 

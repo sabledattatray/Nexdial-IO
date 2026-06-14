@@ -8,6 +8,7 @@ import {
   auditLeadCleanliness,
   calculateLeadMomentum
 } from "@/lib/crmUtils";
+import { calculateLeadScore } from "@/lib/ai-scoring";
 
 
 /**
@@ -121,9 +122,14 @@ export async function GET(req: Request) {
       const nextAction = calculateNextBestAction(lead);
       const suggestedFollowUp = calculateSuggestedFollowUp(lead);
       const cleanlinessWarnings = auditLeadCleanliness(lead, !!isDup);
+      
+      // Phase 2 AI Integration
+      const aiScoreData = calculateLeadScore(lead, lead.activities || [], lead.calls || []);
 
       return {
         ...lead,
+        aiScore: lead.aiScore ?? aiScoreData.score,
+        aiCertainty: lead.aiCertainty ?? aiScoreData.certainty,
         healthScore: health.score,
         healthCategory: health.category,
         momentumScore: momentum.score,
@@ -186,6 +192,8 @@ export async function POST(req: Request) {
       return NextResponse.json({ error: "No workspace" }, { status: 400 });
     }
 
+    const initialAiData = calculateLeadScore({ source: source as any, status: "NEW" });
+
     const lead = await prisma.lead.create({
       data: {
         workspaceId: dbUser.workspaceId,
@@ -195,6 +203,8 @@ export async function POST(req: Request) {
         source: source as any,
         status: "NEW",
         assignedToId: assignedId,
+        aiScore: initialAiData.score,
+        aiCertainty: initialAiData.certainty,
       },
     });
 

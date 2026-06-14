@@ -23,7 +23,7 @@ export async function generateMetadata({
   if (!article) return {};
 
   return {
-    title: `${article.title} | NexDial Blog`,
+    title: article.title,
     description: article.description,
     keywords: article.keywords,
     alternates: {

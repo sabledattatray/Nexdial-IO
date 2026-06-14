@@ -47,7 +47,17 @@ export async function GET(
       );
     }
 
-    return NextResponse.json(lead);
+    // Phase 2 AI Integration
+    const { calculateLeadScore, generateNextBestAction } = await import("@/lib/ai-scoring");
+    const aiScoreData = calculateLeadScore(lead, lead.activities || [], lead.calls || []);
+    const nextBestAction = generateNextBestAction(lead, lead.activities || []);
+
+    return NextResponse.json({
+      ...lead,
+      aiScore: lead.aiScore ?? aiScoreData.score,
+      aiCertainty: lead.aiCertainty ?? aiScoreData.certainty,
+      nextBestAction,
+    });
   } catch (error) {
     console.error("GET Lead error:", error);
     return NextResponse.json({ error: "Internal Server Error" }, { status: 500 });

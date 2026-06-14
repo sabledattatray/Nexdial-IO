@@ -282,7 +282,7 @@ export default function LeadProfilePage({ params }: { params: Promise<{ id: stri
           <div className="flex-1 overflow-y-auto p-6 space-y-6 custom-scrollbar">
             
             {/* AI Summary Box */}
-            <div className="bg-gradient-to-r from-[#0057D9]/20 to-[#00C2FF]/10 border border-[#00C2FF]/20 rounded-xl p-5 mb-6 relative overflow-hidden shadow-lg shadow-[#00C2FF]/5">
+            <div className="bg-gradient-to-r from-[#0057D9]/20 to-[#00C2FF]/10 border border-[#00C2FF]/20 rounded-xl p-5 mb-4 relative overflow-hidden shadow-lg shadow-[#00C2FF]/5">
               <div className="flex items-center gap-2 mb-2.5">
                 <Sparkles className="w-4 h-4 text-[#00C2FF] animate-pulse" />
                 <span className="text-xs font-bold text-white uppercase tracking-wider">AI Lead Interaction Summary</span>
@@ -291,6 +291,35 @@ export default function LeadProfilePage({ params }: { params: Promise<{ id: stri
                 {aiSummary}
               </p>
             </div>
+
+            {/* AI Next Best Action */}
+            {lead.nextBestAction && (
+              <div className={`rounded-xl p-5 mb-6 border flex gap-4 ${
+                lead.nextBestAction.urgency === 'HIGH' ? 'bg-red-500/10 border-red-500/30' :
+                lead.nextBestAction.urgency === 'MEDIUM' ? 'bg-amber-500/10 border-amber-500/30' :
+                'bg-emerald-500/10 border-emerald-500/30'
+              }`}>
+                <div className="shrink-0 mt-0.5">
+                  <Flame className={`w-5 h-5 ${
+                    lead.nextBestAction.urgency === 'HIGH' ? 'text-red-400' :
+                    lead.nextBestAction.urgency === 'MEDIUM' ? 'text-amber-400' :
+                    'text-emerald-400'
+                  }`} />
+                </div>
+                <div>
+                  <h4 className="text-sm font-bold text-white mb-1">AI Next Best Action</h4>
+                  <p className="text-sm text-slate-300">{lead.nextBestAction.action}</p>
+                  <div className="mt-3 flex gap-2">
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-black/20 text-slate-400">
+                      Channel: {lead.nextBestAction.channel}
+                    </span>
+                    <span className="text-[10px] font-mono uppercase tracking-wider px-2 py-0.5 rounded bg-black/20 text-slate-400">
+                      Urgency: {lead.nextBestAction.urgency}
+                    </span>
+                  </div>
+                </div>
+              </div>
+            )}
 
             {leadActivities.map((act: any, i: number) => (
               <div key={act.id} className="relative pl-8">
