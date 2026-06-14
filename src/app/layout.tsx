@@ -88,6 +88,29 @@ export default function RootLayout({
       className={`${inter.variable} ${spaceGrotesk.variable} ${outfit.variable} h-full antialiased`}
       suppressHydrationWarning
     >
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              try {
+                window.localStorage.getItem('test');
+                window.sessionStorage.getItem('test');
+              } catch (e) {
+                // Mock storage to prevent iframe SecurityErrors
+                const mockStorage = {
+                  _data: {},
+                  setItem: function(id, val) { return this._data[id] = String(val); },
+                  getItem: function(id) { return this._data.hasOwnProperty(id) ? this._data[id] : null; },
+                  removeItem: function(id) { return delete this._data[id]; },
+                  clear: function() { return this._data = {}; }
+                };
+                Object.defineProperty(window, 'localStorage', { value: mockStorage });
+                Object.defineProperty(window, 'sessionStorage', { value: mockStorage });
+              }
+            `
+          }}
+        />
+      </head>
       <body
         className="min-h-full flex flex-col"
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
