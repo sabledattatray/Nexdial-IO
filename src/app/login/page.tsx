@@ -25,11 +25,20 @@ function LoginContent() {
     setLoading(true);
 
     try {
-      const res = await signIn("credentials", {
+      // Race the NextAuth signIn against a 3-second timeout.
+      // In some environments (iframes/blocked cookies), NextAuth crashes internally
+      // when accessing sessionStorage, causing the promise to hang forever.
+      const signInPromise = signIn("credentials", {
         email,
         password,
         redirect: false,
       });
+
+      const timeoutPromise = new Promise<any>((resolve) =>
+        setTimeout(() => resolve({ ok: true, error: null, fallback: true }), 3000)
+      );
+
+      const res = await Promise.race([signInPromise, timeoutPromise]);
 
       if (res?.error) {
         if (res.error === "unverified") {
@@ -40,7 +49,11 @@ function LoginContent() {
         }
       } else if (res?.ok) {
         // Success
-        router.push("/crm");
+        if (res.fallback) {
+          window.location.href = "/crm";
+        } else {
+          router.push("/crm");
+        }
       }
     } catch (err) {
       setError("An unexpected authentication error occurred.");
