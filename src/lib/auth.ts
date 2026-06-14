@@ -91,13 +91,14 @@ export const authOptions: NextAuthOptions = {
         if (token.email) {
           const dbUser = await prisma.user.findUnique({
             where: { email: token.email },
-            select: { id: true, onboarded: true, role: true, workspaceId: true },
+            select: { id: true, onboarded: true, role: true, workspaceId: true, industry: true },
           });
           if (dbUser) {
             token.id = dbUser.id;
             token.onboarded = dbUser.onboarded;
             token.role = dbUser.role;
             token.workspaceId = dbUser.workspaceId;
+            token.industry = dbUser.industry;
           }
         }
       }
@@ -109,6 +110,7 @@ export const authOptions: NextAuthOptions = {
         (session.user as any).id = token.id;
         (session.user as any).onboarded = token.onboarded;
         (session.user as any).workspaceId = token.workspaceId;
+        (session.user as any).industry = token.industry;
       }
       return session;
     }

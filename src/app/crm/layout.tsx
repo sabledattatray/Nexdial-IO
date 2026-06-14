@@ -55,7 +55,6 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
-  const [industry, setIndustry] = useState<string | null>(null);
 
   const [notifications, setNotifications] = useState([
     {
@@ -115,20 +114,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
       }
     };
 
-    const fetchUserData = async () => {
-      try {
-        const res = await fetch("/api/users");
-        if (res.ok) {
-          const data = await res.json();
-          setIndustry(data.industry || null);
-        }
-      } catch (e) {
-        console.error("Failed to fetch user data", e);
-      }
-    };
-
     fetchAnnouncement();
-    fetchUserData();
   }, [session]);
 
   const dismissAnnouncement = () => {
@@ -171,6 +157,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
   });
   
   const headerTitle = currentLink?.name || 'Overview';
+  const industry = (session?.user as any)?.industry;
 
   return (
     <div className="flex h-screen bg-[#081120] text-slate-200 font-sans">
