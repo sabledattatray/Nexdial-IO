@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     }
 
     const orders = await prisma.order.findMany({
-      where: { workspaceId: session.user.workspaceId },
+      where: { workspaceId: session.user.workspaceId as string },
       orderBy: { updatedAt: "desc" },
       include: {
         table: true,
@@ -41,7 +41,7 @@ export async function POST(req: Request) {
       const { orderId, tax, tip } = body;
       
       const order = await prisma.order.findUnique({
-        where: { id: orderId, workspaceId: session.user.workspaceId }
+        where: { id: orderId, workspaceId: session.user.workspaceId as string }
       });
 
       if (!order) {

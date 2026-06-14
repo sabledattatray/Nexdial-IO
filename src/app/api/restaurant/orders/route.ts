@@ -16,7 +16,7 @@ export async function POST(req: Request) {
       const { tableId } = body;
       const order = await prisma.order.create({
         data: {
-          workspaceId: session.user.workspaceId,
+          workspaceId: session.user.workspaceId as string,
           tableId,
           status: "OPEN",
           subtotal: 0,

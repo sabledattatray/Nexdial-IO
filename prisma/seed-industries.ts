@@ -1,5 +1,4 @@
-import { PrismaClient } from "@prisma/client";
-const prisma = new PrismaClient();
+import { prisma } from "../src/lib/prisma";
 
 const categories = [
   {
@@ -9,7 +8,7 @@ const categories = [
       { name: "SaaS / B2B Software", slug: "saas-b2b", icon: "MonitorSmartphone", isPopular: true, pipelineStages: ["Lead", "Discovery Call", "Demo Scheduled", "Demo Completed", "Proposal Sent", "Negotiation", "Closed Won", "Closed Lost"] },
       { name: "IT Services & Managed IT", slug: "it-services", icon: "Server", pipelineStages: ["Lead", "Consultation", "Tech Audit", "Proposal", "Contract Sent", "Onboarding", "Closed Lost"] },
       { name: "Cybersecurity", slug: "cybersecurity", icon: "Shield", pipelineStages: ["Lead", "Security Assessment", "Proposal", "Contract", "Implementation", "Closed Lost"] },
-      { name: "Web & App Development", slug: "web-app-dev", icon: "Code", isPopular: true, pipelineStages: ["Lead", "Discovery", "Wireframing", "Development", "UAT", "Launch", "Closed Lost"] },
+      { name: "Web & App Development", slug: "web-app-dev", icon: "Code", pipelineStages: ["Lead", "Discovery", "Wireframing", "Development", "UAT", "Launch", "Closed Lost"] },
       { name: "AI & Machine Learning", slug: "ai-ml", icon: "BrainCircuit", pipelineStages: ["Lead", "Use Case Discovery", "Proof of Concept", "Proposal", "Deployment", "Closed Lost"] },
     ]
   },
@@ -71,8 +70,8 @@ const categories = [
     name: "Hospitality & Travel",
     displayOrder: 7,
     industries: [
-      { name: "Hotels & Resorts", slug: "hotels", icon: "Hotel", isPopular: true, pipelineStages: ["Lead", "Inquiry", "Quotation Sent", "Booking Confirmed", "Checked In", "Checked Out", "Cancelled"] },
-      { name: "Travel Agencies", slug: "travel-agencies", icon: "Plane", isPopular: true, pipelineStages: ["Lead", "Itinerary Sent", "Deposit Paid", "Trip Confirmed", "Trip Completed", "Lost"] },
+      { name: "Hotels & Resorts", slug: "hotels", icon: "Hotel", pipelineStages: ["Lead", "Inquiry", "Quotation Sent", "Booking Confirmed", "Checked In", "Checked Out", "Cancelled"] },
+      { name: "Travel Agencies", slug: "travel-agencies", icon: "Plane", pipelineStages: ["Lead", "Itinerary Sent", "Deposit Paid", "Trip Confirmed", "Trip Completed", "Lost"] },
       { name: "Event Management", slug: "events", icon: "CalendarDays", pipelineStages: ["Lead", "Requirements Gathering", "Venue Sourcing", "Proposal", "Contract Signed", "Event Execution", "Lost"] },
       { name: "Restaurants & Catering", slug: "restaurants", icon: "Utensils", pipelineStages: ["Inquiry", "Tasting Scheduled", "Menu Finalized", "Deposit Paid", "Event Completed", "Lost"] },
     ]
@@ -93,7 +92,7 @@ const categories = [
     industries: [
       { name: "Wealth Management & Advising", slug: "wealth-management", icon: "LineChart", isPopular: true, pipelineStages: ["Lead", "Intro Call", "Portfolio Review", "Proposal", "Account Opened", "Lost"] },
       { name: "Accounting & Tax Services", slug: "accounting", icon: "Calculator", pipelineStages: ["Lead", "Consultation", "Document Collection", "Filing", "Completed", "Lost"] },
-      { name: "Insurance Brokerage", slug: "insurance", icon: "ShieldAlert", isPopular: true, pipelineStages: ["Lead", "Risk Assessment", "Quote Sent", "Policy Bound", "Renewed", "Lost"] },
+      { name: "Insurance Brokerage", slug: "insurance", icon: "ShieldAlert", pipelineStages: ["Lead", "Risk Assessment", "Quote Sent", "Policy Bound", "Renewed", "Lost"] },
       { name: "Mortgage Brokering", slug: "mortgages", icon: "Home", pipelineStages: ["Lead", "Pre-Approval", "Application Submitted", "Underwriting", "Funded", "Lost"] },
       { name: "Venture Capital & PE", slug: "vc-pe", icon: "PieChart", pipelineStages: ["Lead", "Pitch Deck Review", "Partner Meeting", "Due Diligence", "Term Sheet", "Funded", "Passed"] },
     ]
@@ -102,7 +101,7 @@ const categories = [
     name: "Legal",
     displayOrder: 10,
     industries: [
-      { name: "Corporate Law Firm", slug: "corporate-law", icon: "Scale", isPopular: true, pipelineStages: ["Lead", "Initial Consultation", "Conflict Check", "Retainer Signed", "Active Case", "Closed"] },
+      { name: "Corporate Law Firm", slug: "corporate-law", icon: "Scale", pipelineStages: ["Lead", "Initial Consultation", "Conflict Check", "Retainer Signed", "Active Case", "Closed"] },
       { name: "Family Law", slug: "family-law", icon: "Users", pipelineStages: ["Lead", "Consultation", "Retainer Signed", "Mediation", "Court", "Closed"] },
       { name: "Immigration Law", slug: "immigration-law", icon: "Passport", pipelineStages: ["Lead", "Case Evaluation", "Document Gathering", "Application Filed", "Approved", "Denied"] },
       { name: "Personal Injury Law", slug: "personal-injury", icon: "Stethoscope", pipelineStages: ["Lead", "Intake", "Investigation", "Demand Letter", "Settlement", "Litigation", "Closed"] },
@@ -112,7 +111,7 @@ const categories = [
     name: "Manufacturing",
     displayOrder: 11,
     industries: [
-      { name: "Industrial Manufacturing", slug: "industrial-mfg", icon: "Factory", pipelineStages: ["Lead", "Specs Shared", "Prototype", "Bulk Order", "Production", "Delivered", "Lost"] },
+      { name: "Industrial Manufacturing", slug: "industrial-mfg", icon: "Factory", isPopular: true, pipelineStages: ["Lead", "Specs Shared", "Prototype", "Bulk Order", "Production", "Delivered", "Lost"] },
       { name: "Food & Beverage Production", slug: "fb-production", icon: "Coffee", pipelineStages: ["Lead", "Samples Sent", "Vendor Approval", "PO Received", "Delivered", "Lost"] },
       { name: "Apparel & Textiles", slug: "apparel-mfg", icon: "Scissors", pipelineStages: ["Lead", "Design Received", "Sample Approved", "Bulk Production", "Shipped", "Lost"] },
     ]
@@ -130,7 +129,7 @@ const categories = [
     name: "Automotive",
     displayOrder: 13,
     industries: [
-      { name: "Car Dealerships", slug: "car-dealership", icon: "Car", isPopular: true, pipelineStages: ["Lead", "Test Drive Scheduled", "Test Drive Completed", "Financing", "Sold", "Lost"] },
+      { name: "Car Dealerships", slug: "car-dealership", icon: "Car", pipelineStages: ["Lead", "Test Drive Scheduled", "Test Drive Completed", "Financing", "Sold", "Lost"] },
       { name: "Auto Repair & Services", slug: "auto-repair", icon: "Wrench", pipelineStages: ["Lead", "Estimate Given", "Approved", "In Shop", "Ready for Pickup", "Paid"] },
       { name: "Car Rentals", slug: "car-rentals", icon: "Key", pipelineStages: ["Inquiry", "Quote", "Reserved", "Picked Up", "Returned", "Lost"] },
     ]
@@ -166,7 +165,7 @@ const categories = [
     displayOrder: 17,
     industries: [
       { name: "Telecommunications", slug: "telecom", icon: "PhoneCall", pipelineStages: ["Lead", "Site Survey", "Quote", "Contract", "Installation", "Active", "Lost"] },
-      { name: "Solar & Renewable Energy", slug: "solar", icon: "Sun", isPopular: true, pipelineStages: ["Lead", "Energy Audit", "Quote Sent", "Financing Approved", "Installation", "Completed", "Lost"] },
+      { name: "Solar & Renewable Energy", slug: "solar", icon: "Sun", pipelineStages: ["Lead", "Energy Audit", "Quote Sent", "Financing Approved", "Installation", "Completed", "Lost"] },
     ]
   },
   {
@@ -191,11 +190,11 @@ async function main() {
   console.log("Seeding Industries...");
   
   // Clear existing
-  await prisma.industry.deleteMany();
-  await prisma.industryCategory.deleteMany();
+  await (prisma as any).industry.deleteMany();
+  await (prisma as any).industryCategory.deleteMany();
 
   for (const cat of categories) {
-    const category = await prisma.industryCategory.create({
+    const category = await (prisma as any).industryCategory.create({
       data: {
         name: cat.name,
         displayOrder: cat.displayOrder,
@@ -203,7 +202,7 @@ async function main() {
     });
 
     for (const ind of cat.industries) {
-      await prisma.industry.create({
+      await (prisma as any).industry.create({
         data: {
           categoryId: category.id,
           name: ind.name,

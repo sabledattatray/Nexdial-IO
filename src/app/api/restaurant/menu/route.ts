@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     }
 
     const categories = await prisma.menuCategory.findMany({
-      where: { workspaceId: session.user.workspaceId },
+      where: { workspaceId: session.user.workspaceId as string },
       orderBy: { order: "asc" },
       include: {
         items: {
@@ -40,7 +40,7 @@ export async function POST(req: Request) {
       const { name } = body;
       const category = await prisma.menuCategory.create({
         data: {
-          workspaceId: session.user.workspaceId,
+          workspaceId: session.user.workspaceId as string,
           name,
         },
       });
@@ -82,7 +82,7 @@ export async function DELETE(req: Request) {
 
     if (action === "deleteCategory") {
       await prisma.menuCategory.deleteMany({
-        where: { id, workspaceId: session.user.workspaceId },
+        where: { id, workspaceId: session.user.workspaceId as string },
       });
     } else if (action === "deleteItem") {
       await prisma.menuItem.delete({

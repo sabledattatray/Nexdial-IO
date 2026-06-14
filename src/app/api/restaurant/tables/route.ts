@@ -10,7 +10,7 @@ export async function GET(req: Request) {
     }
 
     const tables = await prisma.table.findMany({
-      where: { workspaceId: session.user.workspaceId },
+      where: { workspaceId: session.user.workspaceId as string },
       orderBy: { number: "asc" },
       include: {
         orders: {
@@ -39,7 +39,7 @@ export async function POST(req: Request) {
 
     const newTable = await prisma.table.create({
       data: {
-        workspaceId: session.user.workspaceId,
+        workspaceId: session.user.workspaceId as string,
         number,
         capacity: capacity ? parseInt(capacity) : 2,
       },
@@ -63,7 +63,7 @@ export async function PATCH(req: Request) {
     const { id, status } = body;
 
     const updatedTable = await prisma.table.updateMany({
-      where: { id, workspaceId: session.user.workspaceId },
+      where: { id, workspaceId: session.user.workspaceId as string },
       data: { status },
     });
 
@@ -87,7 +87,7 @@ export async function DELETE(req: Request) {
     if (!id) return NextResponse.json({ error: "Missing ID" }, { status: 400 });
 
     await prisma.table.deleteMany({
-      where: { id, workspaceId: session.user.workspaceId },
+      where: { id, workspaceId: session.user.workspaceId as string },
     });
 
     return NextResponse.json({ success: true });
