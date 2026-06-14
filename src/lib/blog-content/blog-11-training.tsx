@@ -1,82 +1,112 @@
 /* eslint-disable react/no-unescaped-entities */
 import { BlogPost } from "./types";
-import { CheckCircle } from "lucide-react";
+import { CheckCircle, BookOpen, GraduationCap, Users } from "lucide-react";
 
 export const salesTrainingPlaybooks: BlogPost = {
-  title: "How to Train Your New Sales Reps in 48 Hours Using Pre-Built Playbooks",
-  excerpt: "Onboarding new sales hires shouldn't take three months. Discover how to use CRM-integrated playbooks to get your new reps closing deals by their first Friday.",
+  title: "Why Your New Sales Reps Are Failing (And How Playbooks Fix It)",
+  excerpt: "The traditional 'shadowing' method of onboarding new sales reps is highly inefficient. Learn how to digitize your company's proprietary sales knowledge into interactive playbooks built directly into your CRM.",
   date: "June 20, 2026",
   author: "Datta Sable",
-  category: "Sales Strategy",
-  readTime: "7 min read",
-  schemaImage: "/images/blog/sales_training_playbooks.png",
+  category: "Sales Leadership",
+  readTime: "11 min read",
+  schemaImage: "/images/blog/sales_training_playbooks_1781468808118.png",
   sections: [
-    { id: "the-ramp-up-problem", label: "The Ramp-Up Nightmare" },
-    { id: "pre-built-playbooks", label: "The Playbook Solution" },
-    { id: "scripting-success", label: "Scripting the Success" },
-    { id: "wrap-up", label: "Bottom Line" }
+    { id: "the-shadowing-problem", label: "The Problem with 'Shadowing'" },
+    { id: "tribal-knowledge", label: "The Danger of Tribal Knowledge" },
+    { id: "digitizing-the-playbook", label: "Digitizing the Playbook" },
+    { id: "crm-integrated-training", label: "CRM-Integrated Training" },
+    { id: "measuring-ramp-time", label: "Measuring Ramp Time" },
+    { id: "wrap-up", label: "Conclusion & Final Thoughts" }
   ],
   content: (
     <>
-      <h2 id="the-ramp-up-problem" className="scroll-mt-28">The Ramp-Up Nightmare</h2>
+      <h2 id="the-shadowing-problem" className="scroll-mt-28">The Problem with "Shadowing"</h2>
       <p>
-        We've all been there. You just hired a promising new sales rep. You're paying them a solid base salary, and you're excited for them to start crushing their quota. But right now? They're basically useless.
-      </p>
-
-      <p>
-        The traditional sales onboarding process is a nightmare. It usually involves making the new hire shadow your senior reps for three weeks, reading a bunch of outdated PDF manuals, and practicing pitches in awkward role-play sessions. Best case scenario? It takes them three months to fully ramp up and start generating positive ROI.
+        If you ask most sales directors how they onboard a brand-new junior sales rep, the answer is almost universally the same: "We have them shadow our top performer, Dave, for two weeks." 
       </p>
 
       <p>
-        For a fast-moving startup or local business, burning 90 days of payroll just to train someone is unacceptable. You need a system that gets them dialing and closing by their first Friday.
-      </p>
-
-      <h2 id="pre-built-playbooks" className="scroll-mt-28">The Playbook Solution</h2>
-      <p>
-        The secret to hyper-fast onboarding isn't better classroom training—it's building the training directly into your CRM. We call these <strong>Pre-Built Playbooks</strong>.
+        On paper, this sounds like a great idea. Dave is closing $1M a year; obviously, the new rep should watch him work. In reality, "shadowing" is a fundamentally flawed training methodology that destroys productivity. 
       </p>
 
       <p>
-        Instead of expecting a new hire to memorize your entire sales process, you bake the process into the software. When they open a lead card in your CRM, the system shouldn't just show them a phone number. It should explicitly tell them what to do next.
+        First, Dave is a salesperson, not a teacher. He operates on instinct. When a prospect raises an objection, Dave intuitively knows exactly how to respond based on 5 years of domain expertise. If you ask Dave to explain *why* he said what he said, he usually can't articulate the underlying framework. Second, you are actively distracting your highest-grossing employee. By forcing Dave to babysit a junior rep, you are pulling him away from closing high-ticket deals, which directly impacts your quarterly revenue.
       </p>
 
-      <ul>
-        <li>If the lead is marked "New," the CRM prompts: <em>"Call immediately. Use Introduction Script A."</em></li>
-        <li>If the prospect says "Send me more info," the rep clicks a single button that auto-generates the exact follow-up email your top performers use.</li>
-        <li>If the lead goes cold, the system automatically enrolls them in a 7-day re-engagement sequence.</li>
-      </ul>
-
+      <h2 id="tribal-knowledge" className="scroll-mt-28">The Danger of Tribal Knowledge</h2>
       <p>
-        By removing the guesswork, you remove the anxiety. The new rep doesn't have to figure out what to say or when to call—they just execute the plays you've already proven to work.
-      </p>
-
-      <h2 id="scripting-success" className="scroll-mt-28">Scripting the Success</h2>
-      <p>
-        I know what you're thinking: "But I don't want my reps sounding like robots reading a script!"
+        When you rely entirely on shadowing, your company's intellectual property is locked inside the brains of a few key individuals. This is called "Tribal Knowledge." 
       </p>
 
       <p>
-        Here's the truth: your top performers are already using scripts. They just memorized them. Providing a battle-tested script to a new hire doesn't make them robotic; it gives them a safety net while they learn your product. Once they understand the core value proposition, they will naturally start injecting their own personality into the pitch. 
+        If Dave quits tomorrow to join a competitor, he takes the entire sales framework with him. The junior reps who were relying on him are suddenly left completely rudderless. They don't know how to handle the "Your product is too expensive" objection because Dave used to just handle it for them.
       </p>
 
-      <h2 id="wrap-up" className="scroll-mt-28">Bottom Line</h2>
       <p>
-        Stop relying on tribal knowledge and slow shadowing. Systematize your sales process inside your CRM, build explicit playbooks for every scenario, and watch your new hires hit their quotas in record time.
+        To build a truly scalable, resilient organization, you must extract that tribal knowledge and codify it into a structural, repeatable asset. You need a Sales Playbook.
       </p>
 
-      <p className="mt-8 italic text-slate-400">
-        <em>Looking for the technical infrastructure behind building automated workflows? Read my breakdown: <a href="https://dattasable.com/blog/building-modular-ai-workflow-systems" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Building Modular AI Workflow Systems for Scale</a>.</em>
-      </p>
-
-      <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
-        <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
-          <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Onboard reps in days, not months.
+      <div className="bg-[#0A1628]/60 p-6 rounded-xl border border-[#00C2FF]/20 my-8">
+        <h4 className="text-[#00C2FF] font-bold mb-3 flex items-center gap-2">
+          <BookOpen className="w-5 h-5" /> What is a Playbook?
         </h4>
-        <p className="text-sm text-slate-300 mb-4">
-          NexDial allows you to build standardized pipelines and email templates so your new hires can start selling on day one.
+        <p className="text-sm text-slate-300">
+          A modern sales playbook is not a dusty 50-page PDF sitting on a shared Google Drive that nobody ever reads. It is a living, breathing digital document. It contains exact word-for-word cold call scripts, email templates for every stage of the funnel, objection-handling matrices, and competitive battle cards detailing exactly how your product stacks up against your three biggest rivals.
         </p>
-        <a href="/signup" className="inline-flex items-center justify-center px-4 py-2 bg-[#00C2FF] text-[#081120] text-sm font-bold rounded-lg hover:bg-[#00E5A0] transition-colors">
-          Start Your Free Trial
+      </div>
+
+      <h2 id="digitizing-the-playbook" className="scroll-mt-28">Digitizing the Playbook</h2>
+      <p>
+        The mistake most companies make is separating the training material from the execution environment. If a rep is on a live phone call and faces a sudden objection regarding integration capabilities, they do not have time to open a new tab, log into an intranet portal, find the training PDF, scroll to page 34, and read the answer. The moment of hesitation will kill the deal.
+      </p>
+
+      <p>
+        Your playbook must be digitized and fully integrated into the software where the rep actually works: the CRM.
+      </p>
+
+      <h2 id="crm-integrated-training" className="scroll-mt-28">CRM-Integrated Training</h2>
+      <p>
+        When a new lead card drops into the visual pipeline, the CRM should contextually surface the necessary training materials right next to the lead data. 
+      </p>
+
+      <p>
+        If the lead is marked as "Healthcare Industry," the CRM should automatically display the Healthcare Battlecard, highlighting the specific compliance features the rep needs to pitch. If the rep moves the lead to the "Proposal Sent" stage, the CRM should instantly provide the three approved follow-up email templates specifically designed for that stage. 
+      </p>
+
+      <p>
+        This is "Just-In-Time" learning. You are feeding the junior rep the exact information they need, precisely at the moment they need to execute it. This completely eliminates the anxiety of "What do I say next?" and allows a rep with only 2 weeks of experience to sound like a seasoned industry veteran.
+      </p>
+
+      <h2 id="measuring-ramp-time" className="scroll-mt-28">Measuring Ramp Time</h2>
+      <p>
+        The ultimate metric of a successful onboarding process is "Ramp Time"—how many days it takes a new hire to close their first deal and achieve full quota capacity. 
+      </p>
+
+      <p>
+        When a company relies on shadowing, average ramp time in B2B SaaS is typically 3 to 6 months. By deploying a CRM-integrated digital playbook, organizations regularly reduce their ramp time to under 45 days. By drastically cutting the time it takes to get a rep profitable, you fundamentally change the economics of scaling your sales floor.
+      </p>
+
+      <h2 id="wrap-up" className="scroll-mt-28">Conclusion & Final Thoughts</h2>
+      <p>
+        Stop treating sales training as an informal, unstructured event. Your company's sales methodology is a proprietary asset that must be documented, digitized, and injected directly into your reps' daily workflow. Give your new hires the exact scripts and templates they need to win, and watch your onboarding costs plummet while your team's confidence skyrockets.
+      </p>
+
+      <p className="mt-12 italic text-slate-400 bg-white/[0.02] p-6 rounded-xl border border-white/[0.05]">
+        <em>If you want to see how we build robust documentation systems and dashboards to track rep performance, read my breakdown: <a href="https://dattasable.com/blog/strategic-bi-guide-india-2026" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline font-bold">The 2026 Strategic BI Guide</a>.</em>
+      </p>
+
+      <div className="my-12 p-8 bg-gradient-to-br from-[#0A1628] to-[#0A1628]/40 border border-[#00C2FF]/30 rounded-2xl relative overflow-hidden">
+        <div className="absolute top-0 right-0 p-8 opacity-10 pointer-events-none">
+          <GraduationCap className="w-32 h-32 text-[#00C2FF]" />
+        </div>
+        <h4 className="text-white font-bold mb-4 text-xl flex items-center gap-3">
+          <CheckCircle className="w-6 h-6 text-[#00C2FF]" /> Onboard reps faster.
+        </h4>
+        <p className="text-base text-slate-300 mb-8 max-w-2xl leading-relaxed">
+          NexDial allows sales leaders to build automated templates, scripts, and workflows directly into the visual pipeline, ensuring every new rep executes the perfect follow-up sequence from day one.
+        </p>
+        <a href="/signup" className="inline-flex items-center justify-center px-6 py-3 bg-[#00C2FF] text-[#081120] text-sm font-bold rounded-lg hover:bg-[#00E5A0] transition-colors shadow-[0_0_20px_rgba(0,194,255,0.3)] hover:shadow-[0_0_30px_rgba(0,229,160,0.5)]">
+          Start Your Free Trial Today
         </a>
       </div>
     </>
