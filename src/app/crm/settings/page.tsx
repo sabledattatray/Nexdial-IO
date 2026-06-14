@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react";
 import { useSession, signOut } from "next-auth/react";
 import IndustrySelector from "@/components/crm/IndustrySelector";
+import BusinessTypeSelector from "@/components/crm/BusinessTypeSelector";
 import { 
   User, 
   Mail, 
@@ -895,19 +896,12 @@ export default function SettingsPage() {
                       />
                     </div>
 
-                    <div className="space-y-1">
+                    <div className="space-y-1 z-50">
                       <label className="text-[10px] uppercase font-bold text-slate-400 pl-1">Business Type</label>
-                      <select 
+                      <BusinessTypeSelector 
                         value={businessType}
-                        onChange={(e) => setBusinessType(e.target.value)}
-                        className="w-full px-3 py-2 bg-[#050A15] border border-white/5 rounded-xl text-xs text-white focus:outline-none"
-                      >
-                        <option value="Agency">Agency</option>
-                        <option value="SaaS">SaaS/Product</option>
-                        <option value="Enterprise">Enterprise</option>
-                        <option value="Healthcare">Healthcare Provider</option>
-                        <option value="Consulting">Consulting/Education</option>
-                      </select>
+                        onChange={(val) => setBusinessType(val)}
+                      />
                     </div>
 
                     <div className="space-y-1">
