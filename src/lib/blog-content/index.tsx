@@ -15,7 +15,7 @@ import { omnichannelCrm } from "./blog-13-omnichannel";
 import { sevenTouchSequence } from "./blog-14-sequence";
 import { fiveSignsBadProcess } from "./blog-15-bad-process";
 
-export const blogs: Record<string, BlogPost> = {
+export const ARTICLES: Record<string, BlogPost> = {
   "whatsapp-crm-alternative": whatsappCrmAlternative,
   "sales-follow-up-strategy": salesFollowUpStrategy,
   "lead-tracking-software-india": leadTrackingIndia,
