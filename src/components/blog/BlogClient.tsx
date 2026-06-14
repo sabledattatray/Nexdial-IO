@@ -196,13 +196,25 @@ export function BlogClient({
 
               {/* Author Card */}
               <div className="mt-16 p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
-                <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
-                  <User className="w-5 h-5 text-[#00C2FF]" />
-                </div>
+                {article.author === "Datta Sable" ? (
+                  <img src="/datta.png" alt="Datta Sable" className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
+                ) : article.author === "Nisha P." ? (
+                  <img src="/nisha.png" alt="Nisha P." className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
+                ) : (
+                  <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
+                    <User className="w-5 h-5 text-[#00C2FF]" />
+                  </div>
+                )}
                 <div>
-                  <h4 className="text-white font-bold text-base mb-1">Written by {article.author}</h4>
+                  <h4 className="text-white font-bold text-base mb-1 flex items-center gap-2">
+                    Written by {article.author === "Datta Sable" ? (
+                      <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                    ) : article.author}
+                  </h4>
                   <p className="text-sm text-slate-400 leading-relaxed">
-                    Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems.
+                    {article.author === "Datta Sable"
+                      ? "Founder & CEO at NexDial. Documenting modern sales architecture, enterprise workflow automation, and the systems required to scale revenue."
+                      : "Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems."}
                   </p>
                 </div>
               </div>
@@ -233,13 +245,25 @@ export function BlogClient({
 
             {/* Author Card */}
             <div className="mt-16 max-w-[800px] p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
-              <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
-                <User className="w-5 h-5 text-[#00C2FF]" />
-              </div>
+              {article.author === "Datta Sable" ? (
+                <img src="/datta.png" alt="Datta Sable" className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
+              ) : article.author === "Nisha P." ? (
+                <img src="/nisha.png" alt="Nisha P." className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
+              ) : (
+                <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
+                  <User className="w-5 h-5 text-[#00C2FF]" />
+                </div>
+              )}
               <div>
-                <h4 className="text-white font-bold text-base mb-1">Written by {article.author}</h4>
+                <h4 className="text-white font-bold text-base mb-1 flex items-center gap-2">
+                  Written by {article.author === "Datta Sable" ? (
+                    <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline transition-all">Datta Sable</a>
+                  ) : article.author}
+                </h4>
                 <p className="text-sm text-slate-400 leading-relaxed">
-                  Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems.
+                  {article.author === "Datta Sable"
+                    ? "Founder & CEO at NexDial. Documenting modern sales architecture, enterprise workflow automation, and the systems required to scale revenue."
+                    : "Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems."}
                 </p>
               </div>
             </div>
