@@ -1,5 +1,7 @@
 # Nexdial — AI-Powered Enterprise Contact Center & CRM Operating System
 
+🌍 **Live Platform:** [https://nexdial.io](https://nexdial.io)
+
 ![Homepage](./public/Screen%20Shots/homepage.png)
 
 Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** and **Intelligent CRM**. Built for modern enterprises, it merges advanced CRM pipelines, highly customizable industry-specific workflows, real-time voice AI agents, and specialized modules (like a fully functional Restaurant POS) into a single, unified visual dashboard.
