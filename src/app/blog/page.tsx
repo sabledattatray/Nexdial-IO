@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { Calendar, User, ArrowRight, BookOpen } from "lucide-react";
+import { Calendar, User, ArrowRight, ArrowLeft, BookOpen } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "NexDial Blog — CRM for Small Businesses & WhatsApp Alternatives",
@@ -19,7 +19,22 @@ import { ARTICLES } from "@/lib/blog-content";
 
 const posts = Object.entries(ARTICLES).map(([slug, post]) => ({ slug, ...post }));
 
-export default function BlogPage() {
+export default async function BlogPage({
+  searchParams,
+}: {
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>
+}) {
+  const resolvedParams = await searchParams;
+  const currentPage = Number(resolvedParams.page) || 1;
+  const POSTS_PER_PAGE = 6;
+  
+  const totalPosts = posts.length;
+  const totalPages = Math.ceil(totalPosts / POSTS_PER_PAGE);
+  const startIndex = (currentPage - 1) * POSTS_PER_PAGE;
+  const endIndex = startIndex + POSTS_PER_PAGE;
+  
+  const currentPosts = posts.slice(startIndex, endIndex);
+
   return (
     <div className="relative min-h-screen bg-[#081120] pt-28 pb-20 overflow-hidden font-sans">
       {/* Background gradients */}
@@ -44,7 +59,7 @@ export default function BlogPage() {
 
         {/* Posts Grid */}
         <main className="grid md:grid-cols-3 gap-8">
-          {posts.map((post) => (
+          {currentPosts.map((post) => (
             <article 
               key={post.slug} 
               className="bg-[#0A1628]/45 border border-white/5 rounded-2xl p-6 h-full flex flex-col justify-between group hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/80 transition-all duration-300 shadow-xl hover:shadow-2xl shadow-black/10"
@@ -84,6 +99,41 @@ export default function BlogPage() {
             </article>
           ))}
         </main>
+
+        {/* Pagination */}
+        {totalPages > 1 && (
+          <div className="mt-16 flex items-center justify-center gap-4">
+            {currentPage > 1 ? (
+              <Link 
+                href={`/blog?page=${currentPage - 1}`}
+                className="px-6 py-2 rounded-lg border border-white/10 bg-[#0A1628] text-white text-sm font-bold hover:border-[#00C2FF]/40 transition-colors flex items-center gap-2"
+              >
+                <ArrowLeft className="w-4 h-4" /> Previous
+              </Link>
+            ) : (
+              <span className="px-6 py-2 rounded-lg border border-white/5 bg-[#0A1628]/50 text-slate-500 text-sm font-bold flex items-center gap-2 cursor-not-allowed">
+                <ArrowLeft className="w-4 h-4" /> Previous
+              </span>
+            )}
+            
+            <span className="text-sm font-mono text-slate-400">
+              Page {currentPage} of {totalPages}
+            </span>
+
+            {currentPage < totalPages ? (
+              <Link 
+                href={`/blog?page=${currentPage + 1}`}
+                className="px-6 py-2 rounded-lg border border-white/10 bg-[#0A1628] text-white text-sm font-bold hover:border-[#00C2FF]/40 transition-colors flex items-center gap-2"
+              >
+                Next <ArrowRight className="w-4 h-4" />
+              </Link>
+            ) : (
+              <span className="px-6 py-2 rounded-lg border border-white/5 bg-[#0A1628]/50 text-slate-500 text-sm font-bold flex items-center gap-2 cursor-not-allowed">
+                Next <ArrowRight className="w-4 h-4" />
+              </span>
+            )}
+          </div>
+        )}
 
       </div>
     </div>

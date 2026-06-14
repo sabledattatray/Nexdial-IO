@@ -6,11 +6,17 @@ import Link from "next/link";
 
 export function BlogClient({ 
   article, 
-  sections, 
+  sections,
+  prevPost,
+  nextPost,
+  relatedPosts,
   children 
 }: { 
   article: any, 
   sections: { id: string, label: string }[],
+  prevPost: { slug: string, title: string } | null,
+  nextPost: { slug: string, title: string } | null,
+  relatedPosts: any[],
   children: React.ReactNode 
 }) {
   const [activeSection, setActiveSection] = useState(sections[0]?.id || "");
@@ -183,15 +189,126 @@ export function BlogClient({
               </aside>
             )}
 
-            <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-sm prose-p:leading-relaxed prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:space-y-2 prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:space-y-2 prose-strong:text-[#00C2FF] text-slate-300">
-              {children}
-            </article>
+            <div className="w-full">
+              <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-sm prose-p:leading-relaxed prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:space-y-2 prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:space-y-2 prose-strong:text-[#00C2FF] text-slate-300">
+                {children}
+              </article>
+
+              {/* Author Card */}
+              <div className="mt-16 p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
+                <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
+                  <User className="w-5 h-5 text-[#00C2FF]" />
+                </div>
+                <div>
+                  <h4 className="text-white font-bold text-base mb-1">Written by {article.author}</h4>
+                  <p className="text-sm text-slate-400 leading-relaxed">
+                    Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems.
+                  </p>
+                </div>
+              </div>
+
+              {/* Next / Prev Navigation */}
+              <div className="mt-8 pt-8 border-t border-white/5 grid grid-cols-2 gap-4">
+                {prevPost ? (
+                  <Link href={`/blog/${prevPost.slug}`} className="group p-4 bg-[#0A1628]/30 rounded-xl border border-white/5 hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/60 transition-all text-left flex flex-col items-start gap-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 flex items-center gap-1"><ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Previous Article</span>
+                    <span className="text-sm font-bold text-white group-hover:text-[#00C2FF] line-clamp-2 transition-colors">{prevPost.title}</span>
+                  </Link>
+                ) : <div />}
+                
+                {nextPost ? (
+                  <Link href={`/blog/${nextPost.slug}`} className="group p-4 bg-[#0A1628]/30 rounded-xl border border-white/5 hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/60 transition-all text-right flex flex-col items-end gap-2">
+                    <span className="text-[10px] uppercase font-bold text-slate-500 flex items-center gap-1">Next Article <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /></span>
+                    <span className="text-sm font-bold text-white group-hover:text-[#00C2FF] line-clamp-2 transition-colors">{nextPost.title}</span>
+                  </Link>
+                ) : <div />}
+              </div>
+            </div>
           </div>
         ) : (
-          <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-sm prose-p:leading-relaxed prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:space-y-2 prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:space-y-2 prose-strong:text-[#00C2FF] text-slate-300 max-w-[800px]">
-            {children}
-          </article>
+          <div className="w-full">
+            <article className="prose prose-invert max-w-none prose-headings:text-white prose-headings:font-bold prose-h2:text-xl prose-h2:mt-10 prose-h2:mb-4 prose-p:text-sm prose-p:leading-relaxed prose-p:mb-6 prose-ul:list-disc prose-ul:pl-6 prose-ul:mb-6 prose-ul:space-y-2 prose-ol:list-decimal prose-ol:pl-6 prose-ol:mb-6 prose-ol:space-y-2 prose-strong:text-[#00C2FF] text-slate-300 max-w-[800px]">
+              {children}
+            </article>
+
+            {/* Author Card */}
+            <div className="mt-16 max-w-[800px] p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
+              <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
+                <User className="w-5 h-5 text-[#00C2FF]" />
+              </div>
+              <div>
+                <h4 className="text-white font-bold text-base mb-1">Written by {article.author}</h4>
+                <p className="text-sm text-slate-400 leading-relaxed">
+                  Growth and technology researcher sharing insights on modern sales architecture, automation, and building scalable ecosystems.
+                </p>
+              </div>
+            </div>
+
+            {/* Next / Prev Navigation */}
+            <div className="mt-8 pt-8 max-w-[800px] border-t border-white/5 grid grid-cols-2 gap-4">
+              {prevPost ? (
+                <Link href={`/blog/${prevPost.slug}`} className="group p-4 bg-[#0A1628]/30 rounded-xl border border-white/5 hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/60 transition-all text-left flex flex-col items-start gap-2">
+                  <span className="text-[10px] uppercase font-bold text-slate-500 flex items-center gap-1"><ArrowLeft className="w-3 h-3 group-hover:-translate-x-1 transition-transform" /> Previous Article</span>
+                  <span className="text-sm font-bold text-white group-hover:text-[#00C2FF] line-clamp-2 transition-colors">{prevPost.title}</span>
+                </Link>
+              ) : <div />}
+              
+              {nextPost ? (
+                <Link href={`/blog/${nextPost.slug}`} className="group p-4 bg-[#0A1628]/30 rounded-xl border border-white/5 hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/60 transition-all text-right flex flex-col items-end gap-2">
+                  <span className="text-[10px] uppercase font-bold text-slate-500 flex items-center gap-1">Next Article <ChevronRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" /></span>
+                  <span className="text-sm font-bold text-white group-hover:text-[#00C2FF] line-clamp-2 transition-colors">{nextPost.title}</span>
+                </Link>
+              ) : <div />}
+            </div>
+          </div>
         )}
+
+        {/* Related Posts Grid */}
+        {relatedPosts && relatedPosts.length > 0 && (
+          <div className="mt-24 pt-16 border-t border-white/5">
+            <h2 className="text-2xl font-bold text-white mb-8">Related Articles</h2>
+            <div className="grid md:grid-cols-3 gap-8">
+              {relatedPosts.map((post) => (
+                <article 
+                  key={post.slug} 
+                  className="bg-[#0A1628]/45 border border-white/5 rounded-2xl p-6 h-full flex flex-col justify-between group hover:border-[#00C2FF]/20 hover:bg-[#0A1628]/80 transition-all duration-300 shadow-xl"
+                >
+                  <div className="space-y-4">
+                    <div className="flex justify-between items-center text-[10px] uppercase font-bold text-slate-500">
+                      <span className="text-[#00C2FF] bg-[#00C2FF]/5 px-2 py-0.5 rounded border border-[#00C2FF]/10">{post.category}</span>
+                      <span className="flex items-center gap-1 font-mono">
+                        <Calendar className="w-3.5 h-3.5" />
+                        {post.date}
+                      </span>
+                    </div>
+                    
+                    <h3 className="text-lg font-bold text-white group-hover:text-[#00C2FF] transition-colors duration-200 leading-snug">
+                      <Link href={`/blog/${post.slug}`} className="hover:underline">
+                        {post.title}
+                      </Link>
+                    </h3>
+                    <p className="text-xs text-slate-400 leading-relaxed line-clamp-3">
+                      {post.excerpt}
+                    </p>
+                  </div>
+
+                  <div className="mt-8 pt-4 border-t border-white/5 flex items-center justify-between text-xs font-semibold text-slate-400">
+                    <span className="flex items-center gap-1.5">
+                      <User className="w-3.5 h-3.5 text-slate-500" />
+                      {post.author}
+                    </span>
+                    <Link 
+                      href={`/blog/${post.slug}`}
+                      className="flex items-center gap-1 text-[#00C2FF] group-hover:text-white transition-colors duration-200 font-bold"
+                    >
+                      Read
+                      <ChevronRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
+                    </Link>
+                  </div>
+                </article>
+              ))}
+            </div>
+          </div>
       </div>
     </div>
   );
