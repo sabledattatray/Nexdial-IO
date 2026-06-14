@@ -93,7 +93,7 @@ export default function AboutPage() {
                 
                 <div className="pt-6 border-t border-white/[0.05]">
                   <a 
-                    href="https://dattasable.com" 
+                    href="https://dattasable.com/blog" 
                     target="_blank" 
                     rel="noopener noreferrer" 
                     className="inline-flex items-center gap-2 text-sm font-bold text-white bg-white/5 hover:bg-white/10 px-6 py-3 rounded-xl border border-white/10 transition-colors"
