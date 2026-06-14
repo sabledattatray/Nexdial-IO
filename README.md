@@ -1,5 +1,7 @@
 # Nexdial — AI-Powered Enterprise Contact Center & CRM Operating System
 
+![Homepage](./public/Screen%20Shots/homepage.png)
+
 Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** and **Intelligent CRM**. Built for modern enterprises, it merges advanced CRM pipelines, highly customizable industry-specific workflows, real-time voice AI agents, and specialized modules (like a fully functional Restaurant POS) into a single, unified visual dashboard.
 
 ---
@@ -7,17 +9,20 @@ Nexdial is a next-generation, cloud-native **Contact Center Operating System (CC
 ## 🚀 Key Features & Capabilities
 
 ### 1. Dynamic Industry CRM System
+![CRM Inbox](./public/Screen%20Shots/CRM_Inbox.png)
 * **50+ Pre-Configured Industries**: From Digital Marketing and Real Estate to Healthcare and Manufacturing, the system dynamically seeds industry-specific pipelines and workflows.
 * **Intelligent Onboarding**: Beautiful custom `<IndustrySelector>` and `<BusinessTypeSelector>` UIs automatically tailor the workspace setup and inject industry-specific lead stages during signup.
 * **Workspace Settings Cockpit**: Configure branding, lead sources, integrations, and company profiles per workspace.
 
 ### 2. Specialized Modules (e.g., Restaurant POS)
+![Hotel Billing](./public/Screen%20Shots/Hotel_Billing.png)
 * **Live Table Management**: Real-time visual layout of available vs. occupied tables.
 * **Order & Menu System**: Add categories and items directly to bills. Waiters and admins can fire orders from a tablet-friendly interface.
 * **Billing & Checkout**: Seamless invoice generation and final bill settlement.
 * **Staff Access**: Dedicated `WAITER` and `ADMIN` role management locked to specific tenant workspaces.
 
 ### 3. Unified Dialer Operations Console
+![CRM Analytics](./public/Screen%20Shots/CRM_Analytics.png)
 * **Dialer Modes**: Supports Predictive (dynamic pacing algorithm), Power, Progressive, and Preview dialing modes.
 * **WebRTC Softphone**: Real-time browser-based calling with equalized audio meters and instant call wrap-up controls.
 * **Supervisor HUD**: Managers can monitor live calls, whisper coaching tips, or barge-in to merge into a 3-way conference.
