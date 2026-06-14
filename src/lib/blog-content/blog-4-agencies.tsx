@@ -109,6 +109,10 @@ export const modernAgenciesCrm: BlogPost = {
         By migrating from static spreadsheets to a visually intuitive, specialized CRM, you will stop leaking high-value leads. You will follow up with prospects exactly when you promise to, you will track your projected revenue with total clarity, and you will ultimately close more high-ticket retainers.
       </p>
 
+      <p className="mt-8 italic text-slate-400">
+        <em>If you enjoyed this breakdown, you can find more of my thoughts on agency scaling and engineering systems at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+      </p>
+
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
         <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
           <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Upgrade your agency's sales engine.

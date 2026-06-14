@@ -135,6 +135,10 @@ export const whatsappCrmAlternative: BlogPost = {
         You do not need to abandon the communication channels your customers love; you just need to organize them. By centralizing your operations, enforcing follow-up discipline, and automating manual data entry, you empower your sales team to do what they do best: close deals.
       </p>
 
+      <p className="mt-8 italic text-slate-400">
+        <em>Looking for more in-depth strategies on scaling your startup operations? Check out my personal blog at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a> for deep dives into tech, engineering, and CRM architecture.</em>
+      </p>
+
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
         <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
           <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Ready to harden your sales pipeline?

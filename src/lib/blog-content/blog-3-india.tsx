@@ -113,6 +113,10 @@ export const leadTrackingIndia: BlogPost = {
         By adopting a lightweight, unified lead tracking system, you aggregate your lead sources into one manageable dashboard. You empower your sales team to call leads within minutes, log their activities instantly, and execute follow-ups with military precision.
       </p>
 
+      <p className="mt-8 italic text-slate-400">
+        <em>For more insights into scaling technology infrastructure and local business growth, check out my technical articles at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+      </p>
+
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
         <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
           <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Dominate Your Local Market

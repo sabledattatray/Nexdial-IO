@@ -127,6 +127,10 @@ export const salesFollowUpStrategy: BlogPost = {
         However, you cannot execute this strategy without the right infrastructure. If your team is relying on spreadsheets and sticky notes, they will inevitably drop the ball.
       </p>
 
+      <p className="mt-8 italic text-slate-400">
+        <em>Want to read more about advanced sales psychology and engineering robust systems? Visit my personal blog at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+      </p>
+
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
         <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
           <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Stop losing leads to poor follow-ups.

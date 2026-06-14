@@ -97,6 +97,10 @@ export const aiContactCenters: BlogPost = {
         Those who refuse to adapt, forcing their agents to manually transcribe notes and manage their pipelines in static spreadsheets, will find themselves outpaced by competitors who can respond faster and with more context. The future belongs to the augmented agent.
       </p>
 
+      <p className="mt-8 italic text-slate-400">
+        <em>Interested in the engineering behind AI architectures? Read more about how we build these systems at <a href="https://dattasable.com" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">dattasable.com</a>.</em>
+      </p>
+
       <div className="my-8 p-6 bg-[#0A1628] border border-[#00C2FF]/20 rounded-2xl">
         <h4 className="text-white font-bold mb-2 text-base flex items-center gap-2">
           <CheckCircle className="w-5 h-5 text-[#00C2FF]" /> Future-proof your sales team.
