@@ -81,13 +81,16 @@ export default function AboutPage() {
                 
                 <div className="space-y-6 text-[#94A3B8] text-base leading-relaxed">
                   <p>
-                    Over the years, I've watched countless organizations hit an artificial growth ceiling simply because their communication infrastructure was fundamentally broken. Sales reps were spending 40% of their day updating spreadsheets. Customer support was constantly context-switching between WhatsApp phones and disjointed email inboxes. Revenue was leaking from the pipeline not because the product was bad, but because the follow-up process was chaotic.
+                    As a Business Intelligence Expert and Data Strategy Consultant, I spent years building enterprise-grade reporting solutions for major financial institutions (like HDFC Bank) and scaling startups. Through that experience, I watched countless organizations hit an artificial growth ceiling simply because their core communication infrastructure was fundamentally broken.
                   </p>
                   <p>
-                    <strong className="text-white font-semibold">I built NexDial to eradicate that chaos.</strong>
+                    Sales reps were spending 40% of their day manually updating spreadsheets. Customer support was constantly context-switching between WhatsApp, dialers, and disjointed email inboxes. <strong>Revenue was leaking from the pipeline not because the product was bad, but because the follow-up process was chaotic.</strong>
                   </p>
                   <p>
-                    Our mission is to provide small and mid-sized enterprises with the same rigorous, automated, high-velocity sales architecture that multi-billion dollar tech companies use. By centralizing every customer interaction into a single visual pipeline and leveraging AI to dictate the next best action, we allow your team to stop doing admin work and start doing what actually matters: closing deals and serving customers.
+                    <strong className="text-white font-semibold">I built NexDial to eradicate that chaos through automation-first design.</strong>
+                  </p>
+                  <p>
+                    Our mission is to provide small and mid-sized enterprises with the same rigorous, high-fidelity data architecture that multi-billion dollar companies use. By centralizing every customer interaction into a single visual pipeline and leveraging algorithmic precision to dictate the next best action, we allow your team to stop doing admin work and start doing what actually matters: closing deals and serving customers with absolute decision clarity.
                   </p>
                 </div>
                 
