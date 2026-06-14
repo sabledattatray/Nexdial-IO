@@ -17,7 +17,7 @@ export const metadata: Metadata = {
 
 import { ARTICLES } from "@/lib/blog-content";
 
-const posts = Object.values(ARTICLES);
+const posts = Object.entries(ARTICLES).map(([slug, post]) => ({ slug, ...post }));
 
 export default function BlogPage() {
   return (
