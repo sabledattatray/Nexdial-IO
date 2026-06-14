@@ -26,6 +26,9 @@ export async function generateMetadata({
     title: `${article.title} | NexDial Blog`,
     description: article.description,
     keywords: article.keywords,
+    alternates: {
+      canonical: `/blog/${resolvedParams.slug}`,
+    },
     openGraph: {
       type: "article",
       title: article.title,

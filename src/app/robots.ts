@@ -8,6 +8,10 @@ export default function robots(): MetadataRoute.Robots {
       disallow: [
         "/admin/",
         "/api/",
+        "/test-payment/",
+        "/onboarding/",
+        "/client-portal/",
+        "/supervisor/",
       ],
     },
     sitemap: "https://nexdial.io/sitemap.xml",

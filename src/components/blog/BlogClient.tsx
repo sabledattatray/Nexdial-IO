@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ChevronRight, ArrowLeft, User, Calendar, Clock, BadgeCheck } from "lucide-react";
 import Link from "next/link";
+import Image from "next/image";
 
 export function BlogClient({ 
   article, 
@@ -197,9 +198,9 @@ export function BlogClient({
               {/* Author Card */}
               <div className="mt-16 p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
                 {article.author === "Datta Sable" ? (
-                  <img src="/datta.png" alt="Datta Sable" className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
+                  <Image src="/datta.png" alt="Datta Sable" width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
                 ) : article.author === "Nisha P." ? (
-                  <img src="/nisha.png" alt="Nisha P." className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
+                  <Image src="/nisha.png" alt="Nisha P." width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
                 ) : (
                   <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
                     <User className="w-5 h-5 text-[#00C2FF]" />
@@ -249,9 +250,9 @@ export function BlogClient({
             {/* Author Card */}
             <div className="mt-16 max-w-[800px] p-6 bg-[#0A1628]/45 border border-white/5 rounded-2xl flex items-start gap-4">
               {article.author === "Datta Sable" ? (
-                <img src="/datta.png" alt="Datta Sable" className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
+                <Image src="/datta.png" alt="Datta Sable" width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30 shadow-[0_0_15px_rgba(0,194,255,0.2)]" />
               ) : article.author === "Nisha P." ? (
-                <img src="/nisha.png" alt="Nisha P." className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
+                <Image src="/nisha.png" alt="Nisha P." width={48} height={48} className="w-12 h-12 rounded-full object-cover shrink-0 border border-[#00C2FF]/30" />
               ) : (
                 <div className="w-12 h-12 rounded-full bg-[#00C2FF]/10 flex items-center justify-center shrink-0 border border-[#00C2FF]/20">
                   <User className="w-5 h-5 text-[#00C2FF]" />
