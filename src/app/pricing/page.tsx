@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
-import { Check, HelpCircle, Info, Zap, Brain, Inbox } from "lucide-react";
+import { Check, HelpCircle, Info, Zap, Brain, Inbox, ShieldCheck } from "lucide-react";
 import Link from "next/link";
 
 const plans = [
@@ -377,6 +377,24 @@ export default function PricingPage() {
                   <Zap className="w-4 h-4" />
                   Start Your Free Trial
                 </Link>
+              </div>
+
+              {/* Trust & Security Badges */}
+              <div className="mt-6 flex flex-col items-center justify-center gap-3">
+                <div className="flex items-center gap-1.5 text-[10px] font-bold text-[#00E5A0] uppercase tracking-widest bg-[#00E5A0]/10 px-3 py-1 rounded-full border border-[#00E5A0]/20">
+                  <ShieldCheck className="w-3.5 h-3.5" />
+                  <span>Guaranteed Secure Checkout</span>
+                </div>
+                <div className="flex items-center gap-3 opacity-60 grayscale hover:grayscale-0 transition-all duration-300">
+                  {/* SVG for Visa, Mastercard, Stripe etc. can be simulated with text/icons if assets aren't present */}
+                  <span className="text-xs font-bold text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">VISA</span>
+                  <span className="text-xs font-bold text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">Mastercard</span>
+                  <span className="text-xs font-bold text-white bg-white/10 px-2 py-0.5 rounded border border-white/20">Amex</span>
+                  <span className="text-xs font-bold text-white bg-[#635BFF]/80 px-2 py-0.5 rounded border border-white/20">Stripe</span>
+                </div>
+                <p className="text-[9px] text-[#64748B] text-center max-w-[250px]">
+                  Payments are processed securely via Stripe with 256-bit SSL encryption. We do not store your credit card details.
+                </p>
               </div>
             </div>
           </div>
