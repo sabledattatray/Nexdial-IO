@@ -1,4 +1,7 @@
 import nodemailer from "nodemailer";
+import { Resend } from "resend";
+
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 
 // Initialize Nodemailer transporter if SMTP settings exist
 const transporter = process.env.SMTP_HOST
@@ -14,18 +17,13 @@ const transporter = process.env.SMTP_HOST
   : null;
 
 export async function sendVerificationEmail(email: string, otp: string) {
-  // If no SMTP host is provided, we fall back to logging it in the console (Mock Mode)
-  if (!transporter) {
+  // If no SMTP host and no Resend API is provided, we fall back to logging it in the console (Mock Mode)
+  if (!transporter && !resend) {
     console.log(`\n\n[MOCK EMAIL SERVER] Verification OTP for ${email}: ${otp}\n\n`);
     return { success: true, mock: true };
   }
 
-  try {
-    const info = await transporter.sendMail({
-      from: `"NexDial" <${process.env.SMTP_USER}>`,
-      to: email,
-      subject: "Your NexDial Verification Code",
-      html: `
+  const htmlContent = `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaec; border-radius: 10px; background-color: #ffffff;">
           <h2 style="color: #0F172A; text-align: center; font-size: 24px; margin-bottom: 20px;">Welcome to NexDial!</h2>
           <p style="color: #475569; font-size: 16px; line-height: 1.5; text-align: center;">
@@ -44,13 +42,30 @@ export async function sendVerificationEmail(email: string, otp: string) {
             &copy; ${new Date().getFullYear()} NexDial. All rights reserved.
           </p>
         </div>
-      `,
-    });
+      `;
 
-    console.log("Message sent: %s", info.messageId);
-    return { success: true, data: info };
+  try {
+    if (resend) {
+      const data = await resend.emails.send({
+        from: process.env.EMAIL_FROM || "onboarding@resend.dev",
+        to: email,
+        subject: "Your NexDial Verification Code",
+        html: htmlContent,
+      });
+      console.log("Message sent via Resend:", data);
+      return { success: true, data };
+    } else if (transporter) {
+      const info = await transporter.sendMail({
+        from: `"NexDial" <${process.env.SMTP_USER}>`,
+        to: email,
+        subject: "Your NexDial Verification Code",
+        html: htmlContent,
+      });
+      console.log("Message sent via Nodemailer: %s", info.messageId);
+      return { success: true, data: info };
+    }
   } catch (error) {
-    console.error("Failed to send email via Nodemailer:", error);
+    console.error("Failed to send email:", error);
     return { success: false, error };
   }
 }
