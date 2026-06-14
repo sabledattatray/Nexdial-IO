@@ -94,6 +94,8 @@ model Workspace {
   menuCategories MenuCategory[]
   orders         Order[]
 
+  conversations  Conversation[]
+
   @@map("workspaces")
 }
 
@@ -125,6 +127,7 @@ model User {
   activities       Activity[]
   assignedLeads    Lead[]     @relation("AssignedLeads")
   restaurantOrders Order[]
+  sentMessages     Message[]
 
   @@map("users")
 }
@@ -165,6 +168,7 @@ model Lead {
   activities        Activity[]
   followUps         FollowUp[]
   aiRecommendations AIRecommendation[]
+  conversations     Conversation[]
 
   // Performance Indexes
   @@index([status])
@@ -175,6 +179,55 @@ model Lead {
   @@index([phone])
   @@index([email])
   @@map("leads")
+}
+
+// =======================
+// MESSAGING & INBOX
+// =======================
+
+model Conversation {
+  id          String   @id @default(cuid())
+  leadId      String   @map("lead_id") @db.Uuid
+  workspaceId String   @map("workspace_id")
+  channel     String   @default("WHATSAPP") // WHATSAPP, SMS, EMAIL
+  status      String   @default("OPEN")     // OPEN, CLOSED, SNOOZED
+  unreadCount Int      @default(0) @map("unread_count")
+  lastMessageAt DateTime @default(now()) @map("last_message_at")
+  
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  lead      Lead      @relation(fields: [leadId], references: [id], onDelete: Cascade)
+  workspace Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  messages  Message[]
+
+  @@unique([leadId, channel]) // One active conversation per channel per lead
+  @@index([workspaceId, status])
+  @@index([lastMessageAt])
+  @@map("conversations")
+}
+
+model Message {
+  id             String   @id @default(cuid())
+  conversationId String   @map("conversation_id")
+  direction      String   // INBOUND, OUTBOUND
+  content        String   @db.Text
+  type           String   @default("TEXT") // TEXT, IMAGE, DOCUMENT, TEMPLATE
+  status         String   @default("SENT") // SENT, DELIVERED, READ, FAILED, RECEIVED
+  
+  metaId         String?  @unique @map("meta_id") // Meta's official WhatsApp message ID
+  senderId       String?  @map("sender_id")       // If outbound, which User sent it?
+
+  createdAt      DateTime @default(now()) @map("created_at")
+  updatedAt      DateTime @updatedAt @map("updated_at")
+
+  conversation Conversation @relation(fields: [conversationId], references: [id], onDelete: Cascade)
+  sender       User?        @relation(fields: [senderId], references: [id], onDelete: SetNull)
+
+  @@index([conversationId])
+  @@index([status])
+  @@index([createdAt])
+  @@map("messages")
 }
 
 enum LeadSource {

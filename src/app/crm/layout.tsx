@@ -31,8 +31,9 @@ import {
 import AddLeadModal from "@/components/crm/AddLeadModal";
 
 const navLinks = [
-  { name: "Inbox", href: "/crm", icon: Inbox },
+  { name: "Leads", href: "/crm", icon: Inbox },
   { name: "Pipeline", href: "/crm/pipeline", icon: KanbanSquare },
+  { name: "WhatsApp", href: "/crm/inbox", icon: MessageSquare },
   { name: "Follow-ups", href: "/crm/follow-ups", icon: CalendarClock },
   { name: "Analytics", href: "/crm/dashboard", icon: LayoutDashboard },
   { name: "Integrations", href: "/crm/integrations", icon: Blocks },
