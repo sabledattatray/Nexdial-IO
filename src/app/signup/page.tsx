@@ -224,6 +224,7 @@ function SignupContent() {
                 className="w-full pl-10 pr-8 py-2.5 bg-[#081120] border border-white/10 text-slate-100 rounded-xl focus:outline-none focus:border-[#00C2FF] transition-colors appearance-none cursor-pointer"
               >
                 <option value="real_estate">Real Estate Agencies</option>
+                <option value="hotel_restaurant">Hotel / Restaurant</option>
                 <option value="marketing">Marketing Agencies</option>
                 <option value="education">Education Consultants</option>
                 <option value="healthcare">Healthcare Clinics</option>

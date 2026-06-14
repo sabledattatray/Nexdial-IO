@@ -89,6 +89,11 @@ model Workspace {
   subscriptions Subscription[]
   transactions  Transaction[]
 
+  // Restaurant Relations
+  tables         Table[]
+  menuCategories MenuCategory[]
+  orders         Order[]
+
   @@map("workspaces")
 }
 
@@ -119,6 +124,7 @@ model User {
   calls         Call[]
   activities    Activity[]
   assignedLeads Lead[]     @relation("AssignedLeads")
+  restaurantOrders Order[]
 
   @@map("users")
 }
@@ -127,6 +133,7 @@ enum Role {
   ADMIN
   SALES
   VIEWER
+  WAITER
 }
 
 model Lead {
@@ -420,4 +427,97 @@ model Transaction {
 
   @@index([workspaceId])
   @@map("transactions")
+}
+
+// =======================
+// RESTAURANT / HOTEL MODELS
+// =======================
+
+model Table {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  number      String
+  capacity    Int      @default(2)
+  status      String   @default("AVAILABLE") // AVAILABLE, OCCUPIED, RESERVED
+  
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  orders      Order[]
+
+  @@index([workspaceId])
+  @@map("tables")
+}
+
+model MenuCategory {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  name        String
+  order       Int      @default(0)
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  items       MenuItem[]
+
+  @@index([workspaceId])
+  @@map("menu_categories")
+}
+
+model MenuItem {
+  id            String   @id @default(cuid())
+  categoryId    String   @map("category_id")
+  name          String
+  description   String?  @db.Text
+  price         Float
+  isAvailable   Boolean  @default(true) @map("is_available")
+  imageUrl      String?  @map("image_url")
+  
+  category      MenuCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  orderItems    OrderItem[]
+
+  @@index([categoryId])
+  @@map("menu_items")
+}
+
+model Order {
+  id          String   @id @default(cuid())
+  workspaceId String   @map("workspace_id")
+  tableId     String?  @map("table_id")
+  waiterId    String?  @map("waiter_id")
+  
+  status      String   @default("OPEN") // OPEN, SERVED, PAID, CANCELLED
+  subtotal    Float    @default(0.0)
+  tax         Float    @default(0.0)
+  tip         Float    @default(0.0)
+  total       Float    @default(0.0)
+  
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  workspace   Workspace @relation(fields: [workspaceId], references: [id], onDelete: Cascade)
+  table       Table?    @relation(fields: [tableId], references: [id], onDelete: SetNull)
+  waiter      User?     @relation(fields: [waiterId], references: [id], onDelete: SetNull)
+  items       OrderItem[]
+
+  @@index([workspaceId])
+  @@index([tableId])
+  @@index([waiterId])
+  @@map("orders")
+}
+
+model OrderItem {
+  id          String   @id @default(cuid())
+  orderId     String   @map("order_id")
+  menuItemId  String   @map("menu_item_id")
+  
+  quantity    Int      @default(1)
+  priceAtTime Float    @map("price_at_time") // Snapshot of price when ordered
+  notes       String?
+  
+  order       Order    @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  menuItem    MenuItem @relation(fields: [menuItemId], references: [id], onDelete: Restrict)
+
+  @@index([orderId])
+  @@index([menuItemId])
+  @@map("order_items")
 }

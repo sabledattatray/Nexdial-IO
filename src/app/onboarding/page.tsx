@@ -402,6 +402,7 @@ function OnboardingContent() {
                 className="w-full px-3 py-2 bg-[#060D1A] border border-white/10 rounded-xl text-xs focus:outline-none focus:border-[#00C2FF]"
               >
                 <option value="real_estate">Real Estate Agencies</option>
+                <option value="hotel_restaurant">Hotel / Restaurant</option>
                 <option value="marketing">Marketing Agencies</option>
                 <option value="education">Education Consultants</option>
                 <option value="healthcare">Healthcare Clinics</option>

@@ -896,6 +896,7 @@ export default function SettingsPage() {
                         className="w-full px-3 py-2 bg-[#050A15] border border-white/5 rounded-xl text-xs text-white focus:outline-none"
                       >
                         <option value="real_estate">Real Estate Agencies</option>
+                        <option value="hotel_restaurant">Hotel / Restaurant</option>
                         <option value="marketing">Marketing Agencies</option>
                         <option value="education">Education Consultants</option>
                         <option value="healthcare">Healthcare Clinics</option>

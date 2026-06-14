@@ -22,7 +22,11 @@ import {
   Check,
   BellOff,
   Blocks,
-  Radio
+  Radio,
+  Utensils,
+  Receipt,
+  Users,
+  ListOrdered
 } from "lucide-react";
 import AddLeadModal from "@/components/crm/AddLeadModal";
 
@@ -35,6 +39,13 @@ const navLinks = [
   { name: "Settings", href: "/crm/settings", icon: Settings },
 ];
 
+const restaurantNavLinks = [
+  { name: "Tables & Orders", href: "/crm/restaurant/tables", icon: Utensils },
+  { name: "Menu", href: "/crm/restaurant/menu", icon: ListOrdered },
+  { name: "Billing", href: "/crm/restaurant/billing", icon: Receipt },
+  { name: "Staff", href: "/crm/restaurant/staff", icon: Users },
+];
+
 export default function CRMLayout({ children }: { children: React.ReactNode }) {
   const pathname = usePathname();
   const router = useRouter();
@@ -44,6 +55,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [isProfileOpen, setIsProfileOpen] = useState(false);
   const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [industry, setIndustry] = useState<string | null>(null);
 
   const [notifications, setNotifications] = useState([
     {
@@ -102,7 +114,21 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
         console.error("Failed to fetch announcement", e);
       }
     };
+
+    const fetchUserData = async () => {
+      try {
+        const res = await fetch("/api/users");
+        if (res.ok) {
+          const data = await res.json();
+          setIndustry(data.industry || null);
+        }
+      } catch (e) {
+        console.error("Failed to fetch user data", e);
+      }
+    };
+
     fetchAnnouncement();
+    fetchUserData();
   }, [session]);
 
   const dismissAnnouncement = () => {
@@ -137,7 +163,7 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
     ? user.name.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2) 
     : "U";
 
-  const currentLink = navLinks.find(l => {
+  const currentLink = [...navLinks, ...restaurantNavLinks].find(l => {
     if (l.href === '/crm') {
       return pathname === '/crm' || pathname.startsWith('/crm/leads');
     }
@@ -180,6 +206,31 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
               </Link>
             );
           })}
+
+          {industry === "hotel_restaurant" && (
+            <>
+              <div className="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                Restaurant POS
+              </div>
+              {restaurantNavLinks.map((link) => {
+                const isActive = pathname === link.href || pathname.startsWith(link.href);
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium ${
+                      isActive
+                        ? "bg-[#00C2FF]/10 text-[#00C2FF] border border-[#00C2FF]/20"
+                        : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                    }`}
+                  >
+                    <link.icon className={`w-4 h-4 ${isActive ? "text-[#00C2FF]" : "text-slate-400"}`} />
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </>
+          )}
         </nav>
 
         <div className="p-4 border-t border-white/10 space-y-2">
@@ -236,6 +287,32 @@ export default function CRMLayout({ children }: { children: React.ReactNode }) {
                   </Link>
                 );
               })}
+
+              {industry === "hotel_restaurant" && (
+                <>
+                  <div className="pt-4 pb-1 px-3 text-[10px] font-bold text-slate-500 uppercase tracking-wider">
+                    Restaurant POS
+                  </div>
+                  {restaurantNavLinks.map((link) => {
+                    const isActive = pathname === link.href || pathname.startsWith(link.href);
+                    return (
+                      <Link
+                        key={link.name}
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className={`flex items-center gap-3 px-3 py-2.5 rounded-lg transition-colors text-sm font-medium ${
+                          isActive
+                            ? "bg-[#00C2FF]/10 text-[#00C2FF] border border-[#00C2FF]/20"
+                            : "text-slate-400 hover:text-white hover:bg-white/5 border border-transparent"
+                        }`}
+                      >
+                        <link.icon className={`w-4 h-4 ${isActive ? "text-[#00C2FF]" : "text-slate-400"}`} />
+                        {link.name}
+                      </Link>
+                    );
+                  })}
+                </>
+              )}
             </nav>
             <div className="p-4 border-t border-white/10 space-y-2">
               {(user as any)?.role === "ADMIN" && (
