@@ -62,15 +62,6 @@ export const metadata: Metadata = {
     description:
       "A lightweight CRM and unified customer inbox replacing scattered WhatsApp and Excel workflows.",
   },
-  icons: {
-    icon: [
-      { url: "/icon", type: "image/png", sizes: "512x512" },
-      { url: "/icon", type: "image/png", sizes: "32x32" },
-      { url: "/icon", type: "image/png", sizes: "16x16" },
-    ],
-    apple: [{ url: "/apple-icon", type: "image/png", sizes: "180x180" }],
-    shortcut: "/icon",
-  },
   manifest: "/manifest.json",
   robots: {
     index: true,
