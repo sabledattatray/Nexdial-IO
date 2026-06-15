@@ -3,8 +3,7 @@ import { Inter, Space_Grotesk, Outfit } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { QueryProvider } from "@/components/providers/QueryProvider";
-import { AuthProvider } from "@/components/providers/AuthProvider";
+import { AppProviders } from "@/components/providers/AppProviders";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -119,13 +118,11 @@ export default function RootLayout({
         style={{ fontFamily: "var(--font-inter), system-ui, sans-serif" }}
         suppressHydrationWarning
       >
-        <AuthProvider>
-          <QueryProvider>
-            <Navbar />
-            <main className="flex-1">{children}</main>
-            <Footer />
-          </QueryProvider>
-        </AuthProvider>
+        <AppProviders>
+          <Navbar />
+          <main className="flex-1">{children}</main>
+          <Footer />
+        </AppProviders>
       </body>
     </html>
   );

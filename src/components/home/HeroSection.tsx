@@ -147,7 +147,7 @@ const sourceIcons: Record<string, typeof PhoneCall> = {
   Manual: Users,
 };
 
-export function HeroSection() {
+function CrmDashboardPreview() {
   const [isReady, setIsReady] = useState(false);
   const [activeTab, setActiveTab] = useState<"inbox" | "pipeline" | "followups">("inbox");
   const [highlightedLead, setHighlightedLead] = useState(0);
@@ -167,6 +167,325 @@ export function HeroSection() {
     return () => clearInterval(interval);
   }, [isReady]);
 
+  return (
+    <div className="glass-card-strong relative z-10 w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/50 border border-white/[0.08] animate-shine">
+      {/* Browser Window Header */}
+      <div className="flex items-center gap-3 mb-4">
+        <div className="flex gap-1.5">
+          <div className="w-3 h-3 rounded-full bg-[#EF4444]" />
+          <div className="w-3 h-3 rounded-full bg-[#F59E0B]" />
+          <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
+        </div>
+        <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
+          <span className="text-[10px] text-[#64748B]">app.nexdial.io/crm</span>
+        </div>
+      </div>
+
+      {/* Tab Bar */}
+      <div className="flex border-b border-white/5 mb-4 text-[11px] font-semibold text-[#64748B] w-full">
+        <button 
+          onClick={() => setActiveTab("inbox")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "inbox" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+        >
+          <Inbox className="w-3.5 h-3.5 text-[#00C2FF]" />
+          Inbox
+        </button>
+        <button 
+          onClick={() => setActiveTab("pipeline")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "pipeline" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+        >
+          <BarChart3 className="w-3.5 h-3.5 text-[#00E5A0]" />
+          Pipeline
+        </button>
+        <button 
+          onClick={() => setActiveTab("followups")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "followups" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+        >
+          <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
+          Follow-ups
+        </button>
+      </div>
+
+      {/* Content */}
+      <div className="min-h-[360px] flex flex-col justify-between">
+        {!isReady ? (
+          <div className="space-y-2.5">
+            {/* KPIs */}
+            <div className="grid grid-cols-3 gap-3 mb-3">
+              {[
+                { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
+                { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
+                { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
+              ].map((stat) => (
+                <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
+                  <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                  <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                    {stat.value}
+                  </p>
+                  <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
+                </div>
+              ))}
+            </div>
+
+            {/* Lead List */}
+            <div className="space-y-2">
+              {mockLeads.map((lead, idx) => {
+                const SourceIcon = sourceIcons[lead.source];
+                return (
+                  <div 
+                    key={lead.name} 
+                    className={`p-3 rounded-xl border ${
+                      idx === 0 
+                        ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
+                        : "bg-white/[0.02] border-white/[0.05]"
+                    }`}
+                  >
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-3">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                          {lead.name.charAt(0)}
+                        </div>
+                        <div>
+                          <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                          <div className="flex items-center gap-2 mt-0.5">
+                            <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                              <SourceIcon className="w-2.5 h-2.5" />
+                              {lead.source}
+                            </span>
+                            <span className="text-[9px] text-[#475569]">•</span>
+                            <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex items-center gap-2">
+                        <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                          {lead.status.replace("_", " ")}
+                        </span>
+                        <div className="text-right">
+                          <div className="text-[8px] text-[#64748B]">Health</div>
+                          <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                            {lead.health}%
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* AI Suggestion Bar */}
+            <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
+              <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0" />
+              <span className="text-[10px] text-[#00E5A0] font-medium">
+                AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+              </span>
+            </div>
+          </div>
+        ) : (
+          <AnimatePresence mode="wait">
+            {activeTab === "inbox" && (
+              <motion.div
+                key="inbox-tab"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-2.5"
+              >
+                {/* KPIs */}
+                <div className="grid grid-cols-3 gap-3 mb-3">
+                  {[
+                    { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
+                    { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
+                    { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
+                  ].map((stat) => (
+                    <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
+                      <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                      <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                        {stat.value}
+                      </p>
+                      <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Lead List */}
+                <div className="space-y-2">
+                  {mockLeads.map((lead, idx) => {
+                    const SourceIcon = sourceIcons[lead.source];
+                    return (
+                      <div 
+                        key={lead.name} 
+                        className={`p-3 rounded-xl border ${
+                          idx === highlightedLead 
+                            ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
+                            : "bg-white/[0.02] border-white/[0.05]"
+                        }`}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-3">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                              {lead.name.charAt(0)}
+                            </div>
+                            <div>
+                              <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                              <div className="flex items-center gap-2 mt-0.5">
+                                <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                                  <SourceIcon className="w-2.5 h-2.5" />
+                                  {lead.source}
+                                </span>
+                                <span className="text-[9px] text-[#475569]">•</span>
+                                <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2">
+                            <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                              {lead.status.replace("_", " ")}
+                            </span>
+                            <div className="text-right">
+                              <div className="text-[8px] text-[#64748B]">Health</div>
+                              <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                                {lead.health}%
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+
+                {/* AI Suggestion Bar */}
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
+                  <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] animate-pulse flex-shrink-0" />
+                  <span className="text-[10px] text-[#00E5A0] font-medium">
+                    AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+                  </span>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "pipeline" && (
+              <motion.div
+                key="pipeline-tab"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-4"
+              >
+                {/* Pipeline Columns */}
+                <div className="overflow-x-auto scrollbar-none -mx-2 px-2">
+                  <div className="grid grid-cols-4 gap-2 min-w-[440px] lg:min-w-0">
+                    {[
+                      { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
+                      { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
+                      { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
+                      { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
+                    ].map((col) => (
+                      <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
+                        <div className="flex items-center justify-between mb-2">
+                          <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
+                          <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
+                        </div>
+                        <div className="space-y-1.5">
+                          {col.leads.map((lead) => (
+                            <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
+                              {lead}
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Conversion Funnel */}
+                <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3">
+                  <span className="text-[9px] font-bold uppercase text-[#64748B] tracking-wider">Conversion Funnel</span>
+                  <div className="space-y-2 mt-2">
+                    {[
+                      { stage: "New → Contacted", rate: "75%", width: "75%" },
+                      { stage: "Contacted → Interested", rate: "67%", width: "67%" },
+                      { stage: "Interested → Converted", rate: "42%", width: "42%" },
+                    ].map((step) => (
+                      <div key={step.stage} className="space-y-1">
+                        <div className="flex justify-between text-[9px]">
+                          <span className="text-[#94A3B8]">{step.stage}</span>
+                          <span className="text-[#00E5A0] font-bold">{step.rate}</span>
+                        </div>
+                        <div className="h-1 bg-white/[0.04] rounded-full overflow-hidden">
+                          <div className="h-full bg-gradient-to-r from-[#0057D9] to-[#00C2FF] rounded-full" style={{ width: step.width }} />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "followups" && (
+              <motion.div
+                key="followups-tab"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -10 }}
+                transition={{ duration: 0.2 }}
+                className="space-y-4"
+              >
+                {/* Today's Follow-ups */}
+                <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3.5">
+                  <div className="flex items-center justify-between mb-3">
+                    <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                      <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
+                      Today&apos;s Follow-ups
+                    </span>
+                    <span className="text-[9px] text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-2 py-0.5 rounded-full">3 overdue</span>
+                  </div>
+                  <div className="space-y-2">
+                    {[
+                      { name: "Arjun Mehta", time: "10:30 AM", type: "Call back", status: "overdue", color: "#EF4444" },
+                      { name: "Sarah Jenkins", time: "2:00 PM", type: "Send proposal", status: "upcoming", color: "#00C2FF" },
+                      { name: "Priya Sharma", time: "4:30 PM", type: "WhatsApp follow-up", status: "upcoming", color: "#00C2FF" },
+                      { name: "Michael Chen", time: "11:00 AM", type: "Schedule demo", status: "overdue", color: "#EF4444" },
+                      { name: "Lisa Wong", time: "5:00 PM", type: "Quote follow-up", status: "upcoming", color: "#00C2FF" },
+                    ].map((fu) => (
+                      <div key={fu.name} className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
+                        <div className="flex items-center gap-2.5">
+                          <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: fu.color }} />
+                          <div>
+                            <p className="text-[10px] font-bold text-white">{fu.name}</p>
+                            <p className="text-[8px] text-[#64748B]">{fu.type}</p>
+                          </div>
+                        </div>
+                        <div className="text-right">
+                          <p className="text-[9px] font-bold" style={{ color: fu.color }}>{fu.time}</p>
+                          <p className={`text-[7px] uppercase font-bold tracking-wider ${fu.status === "overdue" ? "text-[#EF4444]" : "text-[#64748B]"}`}>{fu.status}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Auto-suggest */}
+                <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#8B5CF6]/5 border border-[#8B5CF6]/15">
+                  <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6] animate-pulse flex-shrink-0" />
+                  <span className="text-[10px] text-[#8B5CF6] font-medium">
+                    Auto-suggested: Set follow-up for Michael Chen tomorrow at 11 AM
+                  </span>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        )}
+      </div>
+    </div>
+  );
+}
+
+export function HeroSection() {
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20" style={{ fontFamily: "var(--font-outfit)" }}>
       {/* Background Layers */}
@@ -252,327 +571,12 @@ export function HeroSection() {
               className="relative w-full group animate-scale-in opacity-0 hover:scale-[1.01] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
               style={{ animationDelay: "400ms" }}
             >
-
               {/* Ambient Glow */}
               <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-tr from-[#0057D9]/20 via-[#00C2FF]/10 to-[#00E5A0]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
-              {/* Main Dashboard Card */}
-              <div className="glass-card-strong relative z-10 w-full max-w-full overflow-hidden p-6 rounded-2xl shadow-2xl shadow-black/50 border border-white/[0.08] animate-shine">
-                {/* Browser Window Header */}
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-[#EF4444]" />
-                    <div className="w-3 h-3 rounded-full bg-[#F59E0B]" />
-                    <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
-                  </div>
-                  <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
-                    <span className="text-[10px] text-[#64748B]">app.nexdial.io/crm</span>
-                  </div>
-                </div>
-
-                {/* Tab Bar */}
-                <div className="flex border-b border-white/5 mb-4 text-[11px] font-semibold text-[#64748B] w-full">
-                  <button 
-                    onClick={() => setActiveTab("inbox")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "inbox" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
-                  >
-                    <Inbox className="w-3.5 h-3.5 text-[#00C2FF]" />
-                    Inbox
-                  </button>
-                  <button 
-                    onClick={() => setActiveTab("pipeline")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "pipeline" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
-                  >
-                    <BarChart3 className="w-3.5 h-3.5 text-[#00E5A0]" />
-                    Pipeline
-                  </button>
-                  <button 
-                    onClick={() => setActiveTab("followups")}
-                    className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "followups" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
-                  >
-                    <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                    Follow-ups
-                  </button>
-                </div>
-
-                {/* Content */}
-                <div className="min-h-[360px] flex flex-col justify-between">
-                  {!isReady ? (
-                    <div className="space-y-2.5">
-                      {/* KPIs */}
-                      <div className="grid grid-cols-3 gap-3 mb-3">
-                        {[
-                          { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
-                          { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
-                          { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
-                        ].map((stat) => (
-                          <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
-                            <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
-                            <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                              {stat.value}
-                            </p>
-                            <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
-                          </div>
-                        ))}
-                      </div>
-
-                      {/* Lead List */}
-                      <div className="space-y-2">
-                        {mockLeads.map((lead, idx) => {
-                          const SourceIcon = sourceIcons[lead.source];
-                          return (
-                            <div 
-                              key={lead.name} 
-                              className={`p-3 rounded-xl border ${
-                                idx === 0 
-                                  ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
-                                  : "bg-white/[0.02] border-white/[0.05]"
-                              }`}
-                            >
-                              <div className="flex items-center justify-between">
-                                <div className="flex items-center gap-3">
-                                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
-                                    {lead.name.charAt(0)}
-                                  </div>
-                                  <div>
-                                    <p className="text-[11px] font-bold text-white">{lead.name}</p>
-                                    <div className="flex items-center gap-2 mt-0.5">
-                                      <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
-                                        <SourceIcon className="w-2.5 h-2.5" />
-                                        {lead.source}
-                                      </span>
-                                      <span className="text-[9px] text-[#475569]">•</span>
-                                      <span className="text-[9px] text-[#475569]">{lead.time}</span>
-                                    </div>
-                                  </div>
-                                </div>
-                                <div className="flex items-center gap-2">
-                                  <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
-                                    {lead.status.replace("_", " ")}
-                                  </span>
-                                  <div className="text-right">
-                                    <div className="text-[8px] text-[#64748B]">Health</div>
-                                    <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
-                                      {lead.health}%
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          );
-                        })}
-                      </div>
-
-                      {/* AI Suggestion Bar */}
-                      <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
-                        <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0" />
-                        <span className="text-[10px] text-[#00E5A0] font-medium">
-                          AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
-                        </span>
-                      </div>
-                    </div>
-                  ) : (
-                    <AnimatePresence mode="wait">
-                      {activeTab === "inbox" && (
-                      <motion.div
-                        key="inbox-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-2.5"
-                      >
-                        {/* KPIs */}
-                        <div className="grid grid-cols-3 gap-3 mb-3">
-                          {[
-                            { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
-                            { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
-                            { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
-                          ].map((stat) => (
-                            <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
-                              <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
-                              <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
-                                {stat.value}
-                              </p>
-                              <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
-                            </div>
-                          ))}
-                        </div>
-
-                        {/* Lead List */}
-                        <div className="space-y-2">
-                          {mockLeads.map((lead, idx) => {
-                            const SourceIcon = sourceIcons[lead.source];
-                            return (
-                              <div 
-                                key={lead.name} 
-                                className={`p-3 rounded-xl border ${
-                                  idx === highlightedLead 
-                                    ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
-                                    : "bg-white/[0.02] border-white/[0.05]"
-                                }`}
-                              >
-                                <div className="flex items-center justify-between">
-                                  <div className="flex items-center gap-3">
-                                    <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
-                                      {lead.name.charAt(0)}
-                                    </div>
-                                    <div>
-                                      <p className="text-[11px] font-bold text-white">{lead.name}</p>
-                                      <div className="flex items-center gap-2 mt-0.5">
-                                        <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
-                                          <SourceIcon className="w-2.5 h-2.5" />
-                                          {lead.source}
-                                        </span>
-                                        <span className="text-[9px] text-[#475569]">•</span>
-                                        <span className="text-[9px] text-[#475569]">{lead.time}</span>
-                                      </div>
-                                    </div>
-                                  </div>
-                                  <div className="flex items-center gap-2">
-                                    <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
-                                      {lead.status.replace("_", " ")}
-                                    </span>
-                                    <div className="text-right">
-                                      <div className="text-[8px] text-[#64748B]">Health</div>
-                                      <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
-                                        {lead.health}%
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              </div>
-                            );
-                          })}
-                        </div>
-
-                        {/* AI Suggestion Bar */}
-                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
-                          <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] animate-pulse flex-shrink-0" />
-                          <span className="text-[10px] text-[#00E5A0] font-medium">
-                            AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
-                          </span>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeTab === "pipeline" && (
-                      <motion.div
-                        key="pipeline-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-4"
-                      >
-                        {/* Pipeline Columns */}
-                        <div className="overflow-x-auto scrollbar-none -mx-2 px-2">
-                          <div className="grid grid-cols-4 gap-2 min-w-[440px] lg:min-w-0">
-                            {[
-                              { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
-                              { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
-                              { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
-                              { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
-                            ].map((col) => (
-                              <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
-                                <div className="flex items-center justify-between mb-2">
-                                  <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
-                                  <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
-                                </div>
-                                <div className="space-y-1.5">
-                                  {col.leads.map((lead) => (
-                                    <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
-                                      {lead}
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Conversion Funnel */}
-                        <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3">
-                          <span className="text-[9px] font-bold uppercase text-[#64748B] tracking-wider">Conversion Funnel</span>
-                          <div className="space-y-2 mt-2">
-                            {[
-                              { stage: "New → Contacted", rate: "75%", width: "75%" },
-                              { stage: "Contacted → Interested", rate: "67%", width: "67%" },
-                              { stage: "Interested → Converted", rate: "42%", width: "42%" },
-                            ].map((step) => (
-                              <div key={step.stage} className="space-y-1">
-                                <div className="flex justify-between text-[9px]">
-                                  <span className="text-[#94A3B8]">{step.stage}</span>
-                                  <span className="text-[#00E5A0] font-bold">{step.rate}</span>
-                                </div>
-                                <div className="h-1 bg-white/[0.04] rounded-full overflow-hidden">
-                                  <div className="h-full bg-gradient-to-r from-[#0057D9] to-[#00C2FF] rounded-full" style={{ width: step.width }} />
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-                      </motion.div>
-                    )}
-
-                    {activeTab === "followups" && (
-                      <motion.div
-                        key="followups-tab"
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: -10 }}
-                        transition={{ duration: 0.2 }}
-                        className="space-y-4"
-                      >
-                        {/* Today's Follow-ups */}
-                        <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3.5">
-                          <div className="flex items-center justify-between mb-3">
-                            <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
-                              <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                              Today&apos;s Follow-ups
-                            </span>
-                            <span className="text-[9px] text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-2 py-0.5 rounded-full">3 overdue</span>
-                          </div>
-                          <div className="space-y-2">
-                            {[
-                              { name: "Arjun Mehta", time: "10:30 AM", type: "Call back", status: "overdue", color: "#EF4444" },
-                              { name: "Sarah Jenkins", time: "2:00 PM", type: "Send proposal", status: "upcoming", color: "#00C2FF" },
-                              { name: "Priya Sharma", time: "4:30 PM", type: "WhatsApp follow-up", status: "upcoming", color: "#00C2FF" },
-                              { name: "Michael Chen", time: "11:00 AM", type: "Schedule demo", status: "overdue", color: "#EF4444" },
-                              { name: "Lisa Wong", time: "5:00 PM", type: "Quote follow-up", status: "upcoming", color: "#00C2FF" },
-                            ].map((fu) => (
-                              <div key={fu.name} className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
-                                <div className="flex items-center gap-2.5">
-                                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: fu.color }} />
-                                  <div>
-                                    <p className="text-[10px] font-bold text-white">{fu.name}</p>
-                                    <p className="text-[8px] text-[#64748B]">{fu.type}</p>
-                                  </div>
-                                </div>
-                                <div className="text-right">
-                                  <p className="text-[9px] font-bold" style={{ color: fu.color }}>{fu.time}</p>
-                                  <p className={`text-[7px] uppercase font-bold tracking-wider ${fu.status === "overdue" ? "text-[#EF4444]" : "text-[#64748B]"}`}>{fu.status}</p>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
-                        </div>
-
-                        {/* Auto-suggest */}
-                        <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#8B5CF6]/5 border border-[#8B5CF6]/15">
-                          <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6] animate-pulse flex-shrink-0" />
-                          <span className="text-[10px] text-[#8B5CF6] font-medium">
-                            Auto-suggested: Set follow-up for Michael Chen tomorrow at 11 AM
-                          </span>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  )}
+              <CrmDashboardPreview />
             </div>
           </div>
-        </div>
-      </div>
         </div>
       </div>
     </section>
