@@ -148,16 +148,24 @@ const sourceIcons: Record<string, typeof PhoneCall> = {
 };
 
 export function HeroSection() {
+  const [isReady, setIsReady] = useState(false);
   const [activeTab, setActiveTab] = useState<"inbox" | "pipeline" | "followups">("inbox");
   const [highlightedLead, setHighlightedLead] = useState(0);
 
+  useEffect(() => {
+    // Defer heavy framer-motion compilation and intervals to ensure initial paint is unblocked
+    const timer = setTimeout(() => setIsReady(true), 300);
+    return () => clearTimeout(timer);
+  }, []);
+
   // Cycle highlighted lead
   useEffect(() => {
+    if (!isReady) return;
     const interval = setInterval(() => {
       setHighlightedLead((prev) => (prev + 1) % mockLeads.length);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [isReady]);
 
   return (
     <section className="relative min-h-screen flex items-center overflow-hidden pt-20" style={{ fontFamily: "var(--font-outfit)" }}>
@@ -289,8 +297,83 @@ export function HeroSection() {
 
                 {/* Content */}
                 <div className="min-h-[360px] flex flex-col justify-between">
-                  <AnimatePresence mode="wait">
-                    {activeTab === "inbox" && (
+                  {!isReady ? (
+                    <div className="space-y-2.5">
+                      {/* KPIs */}
+                      <div className="grid grid-cols-3 gap-3 mb-3">
+                        {[
+                          { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
+                          { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
+                          { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
+                        ].map((stat) => (
+                          <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
+                            <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                            <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
+                              {stat.value}
+                            </p>
+                            <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
+                          </div>
+                        ))}
+                      </div>
+
+                      {/* Lead List */}
+                      <div className="space-y-2">
+                        {mockLeads.map((lead, idx) => {
+                          const SourceIcon = sourceIcons[lead.source];
+                          return (
+                            <div 
+                              key={lead.name} 
+                              className={`p-3 rounded-xl border ${
+                                idx === 0 
+                                  ? "bg-[#0057D9]/10 border-[#0057D9]/30 shadow-[0_0_20px_rgba(0,87,217,0.1)]" 
+                                  : "bg-white/[0.02] border-white/[0.05]"
+                              }`}
+                            >
+                              <div className="flex items-center justify-between">
+                                <div className="flex items-center gap-3">
+                                  <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                                    {lead.name.charAt(0)}
+                                  </div>
+                                  <div>
+                                    <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                                    <div className="flex items-center gap-2 mt-0.5">
+                                      <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                                        <SourceIcon className="w-2.5 h-2.5" />
+                                        {lead.source}
+                                      </span>
+                                      <span className="text-[9px] text-[#475569]">•</span>
+                                      <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div className="flex items-center gap-2">
+                                  <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                                    {lead.status.replace("_", " ")}
+                                  </span>
+                                  <div className="text-right">
+                                    <div className="text-[8px] text-[#64748B]">Health</div>
+                                    <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                                      {lead.health}%
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+
+                      {/* AI Suggestion Bar */}
+                      <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
+                        <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0" />
+                        <span className="text-[10px] text-[#00E5A0] font-medium">
+                          AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+                        </span>
+                      </div>
+                    </div>
+                  ) : (
+                    <AnimatePresence mode="wait">
+                      {activeTab === "inbox" && (
                       <motion.div
                         key="inbox-tab"
                         initial={{ opacity: 0, y: 10 }}
@@ -485,6 +568,7 @@ export function HeroSection() {
                       </motion.div>
                     )}
                   </AnimatePresence>
+                  )}
             </div>
           </div>
         </div>
