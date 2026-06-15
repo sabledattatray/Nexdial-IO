@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/animations/AnimatedSection";
-import { Mail, Phone, MessageSquare, Calendar, Send, ShieldCheck, CheckCircle, ArrowRight, Building, MapPin } from "lucide-react";
+import { Mail, Phone, MessageSquare, Calendar, Send, ShieldCheck, CheckCircle, ArrowRight, MapPin } from "lucide-react";
 
 export function ContactSection() {
   const [activeTab, setActiveTab] = useState<"message" | "demo">("message");

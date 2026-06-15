@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Zap, ArrowRight, Sparkles, Inbox, Users, CalendarCheck, BarChart3, PhoneCall, MessageSquare } from "lucide-react";
 import Link from "next/link";
@@ -137,7 +137,7 @@ export function HeroSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="animate-fade-in-up opacity-0">
+          <div>
             {/* Badge */}
             <div
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0057D9]/10 border border-[#0057D9]/20 mb-8 animate-scale-in opacity-0"

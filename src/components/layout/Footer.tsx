@@ -12,7 +12,6 @@ import {
   Clock,
   Star,
   Zap,
-  Inbox,
   ChevronUp,
 } from "lucide-react";
 
