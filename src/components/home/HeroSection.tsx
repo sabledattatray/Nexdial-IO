@@ -16,73 +16,109 @@ function ParticleField() {
 
     let width = 0;
     let height = 0;
+    let animId: number;
+    let isCleanedUp = false;
+    let resizeHandler: (() => void) | null = null;
 
-    const resize = () => {
+    const start = () => {
+      if (isCleanedUp) return;
+
       width = canvas.offsetWidth;
       height = canvas.offsetHeight;
       canvas.width = width * window.devicePixelRatio;
       canvas.height = height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+
+      const resize = () => {
+        width = canvas.offsetWidth;
+        height = canvas.offsetHeight;
+        canvas.width = width * window.devicePixelRatio;
+        canvas.height = height * window.devicePixelRatio;
+        ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+      };
+      resizeHandler = resize;
+      window.addEventListener("resize", resize);
+
+      const particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number; color: string }[] = [];
+      const colors = ["#0057D9", "#00C2FF", "#00E5A0"];
+
+      for (let i = 0; i < 60; i++) {
+        particles.push({
+          x: Math.random() * width,
+          y: Math.random() * height,
+          vx: (Math.random() - 0.5) * 0.3,
+          vy: (Math.random() - 0.5) * 0.3,
+          size: Math.random() * 2 + 0.5,
+          opacity: Math.random() * 0.5 + 0.1,
+          color: colors[Math.floor(Math.random() * colors.length)],
+        });
+      }
+
+      const animate = () => {
+        if (isCleanedUp) return;
+        ctx.clearRect(0, 0, width, height);
+
+        particles.forEach((p, i) => {
+          p.x += p.vx;
+          p.y += p.vy;
+
+          if (p.x < 0 || p.x > width) p.vx *= -1;
+          if (p.y < 0 || p.y > height) p.vy *= -1;
+
+          ctx.beginPath();
+          ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
+          ctx.fillStyle = p.color;
+          ctx.globalAlpha = p.opacity;
+          ctx.fill();
+
+          for (let j = i + 1; j < particles.length; j++) {
+            const dx = p.x - particles[j].x;
+            const dy = p.y - particles[j].y;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist < 150) {
+              ctx.beginPath();
+              ctx.moveTo(p.x, p.y);
+              ctx.lineTo(particles[j].x, particles[j].y);
+              ctx.strokeStyle = p.color;
+              ctx.globalAlpha = (1 - dist / 150) * 0.08;
+              ctx.lineWidth = 0.5;
+              ctx.stroke();
+            }
+          }
+        });
+
+        ctx.globalAlpha = 1;
+        animId = requestAnimationFrame(animate);
+      };
+
+      animate();
     };
-    resize();
-    window.addEventListener("resize", resize);
 
-    const particles: { x: number; y: number; vx: number; vy: number; size: number; opacity: number; color: string }[] = [];
-    const colors = ["#0057D9", "#00C2FF", "#00E5A0"];
+    let idleId: number | null = null;
+    let timeoutId: ReturnType<typeof setTimeout> | null = null;
 
-    for (let i = 0; i < 60; i++) {
-      particles.push({
-        x: Math.random() * width,
-        y: Math.random() * height,
-        vx: (Math.random() - 0.5) * 0.3,
-        vy: (Math.random() - 0.5) * 0.3,
-        size: Math.random() * 2 + 0.5,
-        opacity: Math.random() * 0.5 + 0.1,
-        color: colors[Math.floor(Math.random() * colors.length)],
-      });
+    if (typeof window !== "undefined") {
+      if ("requestIdleCallback" in window) {
+        idleId = (window as any).requestIdleCallback(() => start(), { timeout: 1000 });
+      } else {
+        timeoutId = setTimeout(start, 200);
+      }
     }
 
-    let animId: number;
-    const animate = () => {
-      ctx.clearRect(0, 0, width, height);
-
-      particles.forEach((p, i) => {
-        p.x += p.vx;
-        p.y += p.vy;
-
-        if (p.x < 0 || p.x > width) p.vx *= -1;
-        if (p.y < 0 || p.y > height) p.vy *= -1;
-
-        ctx.beginPath();
-        ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
-        ctx.fillStyle = p.color;
-        ctx.globalAlpha = p.opacity;
-        ctx.fill();
-
-        for (let j = i + 1; j < particles.length; j++) {
-          const dx = p.x - particles[j].x;
-          const dy = p.y - particles[j].y;
-          const dist = Math.sqrt(dx * dx + dy * dy);
-          if (dist < 150) {
-            ctx.beginPath();
-            ctx.moveTo(p.x, p.y);
-            ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = p.color;
-            ctx.globalAlpha = (1 - dist / 150) * 0.08;
-            ctx.lineWidth = 0.5;
-            ctx.stroke();
-          }
-        }
-      });
-
-      ctx.globalAlpha = 1;
-      animId = requestAnimationFrame(animate);
-    };
-    animate();
-
     return () => {
-      window.removeEventListener("resize", resize);
-      cancelAnimationFrame(animId);
+      isCleanedUp = true;
+      if (idleId !== null && "cancelIdleCallback" in window) {
+        (window as any).cancelIdleCallback(idleId);
+      }
+      if (timeoutId !== null) {
+        clearTimeout(timeoutId);
+      }
+      if (resizeHandler) {
+        window.removeEventListener("resize", resizeHandler);
+      }
+      if (animId) {
+        cancelAnimationFrame(animId);
+      }
     };
   }, []);
 

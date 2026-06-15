@@ -1,20 +1,38 @@
 import { Suspense } from "react";
 import dynamic from "next/dynamic";
 import { HeroSection } from "@/components/home/HeroSection";
-import { TrustIndicators } from "@/components/home/TrustIndicators";
-import { LiveStatistics } from "@/components/home/LiveStatistics";
-import { ServicesShowcase } from "@/components/home/ServicesShowcase";
-import { PlatformOverview } from "@/components/home/PlatformOverview";
 
-/* ── Below-the-fold sections: lazy-loaded to reduce initial JS bundle ── */
+/* ── Below-the-fold sections: lazy-loaded to reduce initial JS bundle & hydration blocking ── */
+const TrustIndicators = dynamic(
+  () => import("@/components/home/TrustIndicators").then((m) => m.TrustIndicators),
+  { ssr: true }
+);
+
+const LiveStatistics = dynamic(
+  () => import("@/components/home/LiveStatistics").then((m) => m.LiveStatistics),
+  { ssr: true }
+);
+
+const ServicesShowcase = dynamic(
+  () => import("@/components/home/ServicesShowcase").then((m) => m.ServicesShowcase),
+  { ssr: true }
+);
+
+const PlatformOverview = dynamic(
+  () => import("@/components/home/PlatformOverview").then((m) => m.PlatformOverview),
+  { ssr: true }
+);
+
 const CaseStudies = dynamic(
   () => import("@/components/home/CaseStudies").then((m) => m.CaseStudies),
   { ssr: true }
 );
+
 const GlobalPresence = dynamic(
   () => import("@/components/home/GlobalPresence").then((m) => m.GlobalPresence),
   { ssr: true }
 );
+
 const ContactSection = dynamic(
   () => import("@/components/home/ContactSection").then((m) => m.ContactSection),
   { ssr: true }
@@ -28,16 +46,25 @@ export default function Home() {
       
       {/* Above-the-fold — eagerly loaded for fast FCP/LCP */}
       <HeroSection />
-      <TrustIndicators />
-      <LiveStatistics />
+      
+      <Suspense>
+        <TrustIndicators />
+      </Suspense>
+      <Suspense>
+        <LiveStatistics />
+      </Suspense>
 
       {/* Below-the-fold — deferred rendering via content-visibility */}
-      <section className="content-auto">
-        <ServicesShowcase />
-      </section>
-      <section className="content-auto">
-        <PlatformOverview />
-      </section>
+      <Suspense>
+        <section className="content-auto">
+          <ServicesShowcase />
+        </section>
+      </Suspense>
+      <Suspense>
+        <section className="content-auto">
+          <PlatformOverview />
+        </section>
+      </Suspense>
       <Suspense>
         <section className="content-auto">
           <CaseStudies />
