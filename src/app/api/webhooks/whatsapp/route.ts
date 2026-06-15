@@ -45,10 +45,23 @@ export async function POST(req: Request) {
 
               // 1. Find the workspace using the integration or a default for now.
               // In production, we look up `Integration` where phoneNumberId matches.
-              // For now, we will fallback to the first active workspace for testing.
-              const workspace = await prisma.workspace.findFirst({
-                where: { status: "ACTIVE" }
+              // For now, we will fallback to the workspace of the test account getnexdial@gmail.com,
+              // or the first active workspace for testing.
+              let workspace = await prisma.workspace.findFirst({
+                where: {
+                  users: {
+                    some: {
+                      email: "getnexdial@gmail.com"
+                    }
+                  }
+                }
               });
+
+              if (!workspace) {
+                workspace = await prisma.workspace.findFirst({
+                  where: { status: "ACTIVE" }
+                });
+              }
 
               if (!workspace) continue;
 
