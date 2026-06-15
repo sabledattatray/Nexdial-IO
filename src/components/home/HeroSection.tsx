@@ -14,9 +14,14 @@ function ParticleField() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    let width = 0;
+    let height = 0;
+
     const resize = () => {
-      canvas.width = canvas.offsetWidth * window.devicePixelRatio;
-      canvas.height = canvas.offsetHeight * window.devicePixelRatio;
+      width = canvas.offsetWidth;
+      height = canvas.offsetHeight;
+      canvas.width = width * window.devicePixelRatio;
+      canvas.height = height * window.devicePixelRatio;
       ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
     };
     resize();
@@ -27,8 +32,8 @@ function ParticleField() {
 
     for (let i = 0; i < 60; i++) {
       particles.push({
-        x: Math.random() * canvas.offsetWidth,
-        y: Math.random() * canvas.offsetHeight,
+        x: Math.random() * width,
+        y: Math.random() * height,
         vx: (Math.random() - 0.5) * 0.3,
         vy: (Math.random() - 0.5) * 0.3,
         size: Math.random() * 2 + 0.5,
@@ -39,14 +44,14 @@ function ParticleField() {
 
     let animId: number;
     const animate = () => {
-      ctx.clearRect(0, 0, canvas.offsetWidth, canvas.offsetHeight);
+      ctx.clearRect(0, 0, width, height);
 
       particles.forEach((p, i) => {
         p.x += p.vx;
         p.y += p.vy;
 
-        if (p.x < 0 || p.x > canvas.offsetWidth) p.vx *= -1;
-        if (p.y < 0 || p.y > canvas.offsetHeight) p.vy *= -1;
+        if (p.x < 0 || p.x > width) p.vx *= -1;
+        if (p.y < 0 || p.y > height) p.vy *= -1;
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.size, 0, Math.PI * 2);
@@ -132,19 +137,17 @@ export function HeroSection() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6 py-20 w-full">
         <div className="grid lg:grid-cols-2 gap-12 items-center">
           {/* Left Content */}
-          <div className="animate-fade-in-up">
+          <div className="animate-fade-in-up opacity-0">
             {/* Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ delay: 0.2, duration: 0.5 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0057D9]/10 border border-[#0057D9]/20 mb-8"
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#0057D9]/10 border border-[#0057D9]/20 mb-8 animate-scale-in opacity-0"
+              style={{ animationDelay: "200ms" }}
             >
               <Sparkles className="w-4 h-4 text-[#00C2FF]" />
               <span className="text-sm font-medium text-[#00C2FF]">
                 Built for Small Businesses — Simple, Powerful CRM
               </span>
-            </motion.div>
+            </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-semibold leading-[1.08] tracking-tight mb-6">
@@ -154,22 +157,18 @@ export function HeroSection() {
             </h1>
 
             {/* Subheadline */}
-            <motion.p
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6, duration: 0.6 }}
-              className="text-lg lg:text-xl text-[#94A3B8] leading-relaxed mb-10 max-w-xl"
+            <p
+              className="text-lg lg:text-xl text-[#94A3B8] leading-relaxed mb-10 max-w-xl animate-fade-in-up opacity-0"
+              style={{ animationDelay: "400ms" }}
             >
               Unified inbox for calls, WhatsApp, forms &amp; manual entries.
               Track every lead, automate follow-ups, and close more deals — all in one place.
-            </motion.p>
+            </p>
 
             {/* CTA Buttons */}
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.8, duration: 0.5 }}
-              className="flex flex-col sm:flex-row gap-4 mb-12"
+            <div
+              className="flex flex-col sm:flex-row gap-4 mb-12 animate-fade-in-up opacity-0"
+              style={{ animationDelay: "600ms" }}
             >
               <Link
                 href="/signup"
@@ -185,14 +184,12 @@ export function HeroSection() {
               >
                 See How It Works
               </Link>
-            </motion.div>
+            </div>
 
             {/* Trust Bar */}
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 1, duration: 0.6 }}
-              className="flex items-center gap-6 text-sm text-[#64748B]"
+            <div
+              className="flex items-center gap-6 text-sm text-[#64748B] animate-fade-in-up opacity-0"
+              style={{ animationDelay: "800ms" }}
             >
               <div className="flex items-center gap-2">
                 <div className="w-2 h-2 rounded-full bg-[#22C55E] animate-pulse" />
@@ -202,18 +199,16 @@ export function HeroSection() {
               <div>2-Min Setup</div>
               <div className="w-px h-4 bg-white/10" />
               <div>No Credit Card</div>
-            </motion.div>
+            </div>
           </div>
 
           {/* Right — CRM Inbox Preview */}
           <div className="block mt-16 lg:mt-0 relative w-full min-w-0">
-            <motion.div
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              whileHover={{ scale: 1.02 }}
-              transition={{ delay: 0.4, duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="relative w-full group"
+            <div
+              className="relative w-full group animate-scale-in opacity-0 hover:scale-[1.01] transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)]"
+              style={{ animationDelay: "400ms" }}
             >
+
               {/* Ambient Glow */}
               <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-tr from-[#0057D9]/20 via-[#00C2FF]/10 to-[#00E5A0]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
@@ -454,10 +449,10 @@ export function HeroSection() {
                       </motion.div>
                     )}
                   </AnimatePresence>
-                </div>
-              </div>
-            </motion.div>
+            </div>
           </div>
+        </div>
+      </div>
         </div>
       </div>
     </section>

@@ -81,7 +81,7 @@ export function ContactSection() {
                   <Mail className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Email Support</p>
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Email Support</p>
                   <a href="mailto:info@nexdial.io" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
                     info@nexdial.io
                   </a>
@@ -94,8 +94,8 @@ export function ContactSection() {
                   <Phone className="w-5 h-5" />
                 </div>
                 <div>
-                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B]">Phone Support</p>
-                  <a href="tel:+918010803756" className="text-sm font-extrabold text-white hover:text-[#00E5A0] transition-colors mt-1 block">
+                  <p className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8]">Phone Support</p>
+                  <a href="tel:+918010803756" className="text-sm font-extrabold text-white hover:text-[#00C2FF] transition-colors mt-1 block">
                     +91 8010803756
                   </a>
                 </div>
@@ -108,7 +108,7 @@ export function ContactSection() {
                     <MessageSquare className="w-5 h-5" />
                   </div>
                   <div>
-                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#64748B] flex items-center gap-1.5">
+                    <p className="text-[10px] font-bold uppercase tracking-wider text-[#94A3B8] flex items-center gap-1.5">
                       WhatsApp Support
                       <span className="flex h-2 w-2 relative">
                         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22C55E] opacity-75"></span>
@@ -126,9 +126,9 @@ export function ContactSection() {
 
             {/* Address Card */}
             <div className="space-y-3 pt-6 border-t border-white/[0.06] relative z-10">
-              <h4 className="text-[10px] uppercase font-bold text-[#64748B] tracking-widest ml-1">
+              <h3 className="text-[10px] uppercase font-bold text-[#94A3B8] tracking-widest ml-1">
                 Our Office
-              </h4>
+              </h3>
               <div className="relative p-5 rounded-xl bg-white/[0.02] border border-white/[0.04] flex gap-4 items-start overflow-hidden group hover:border-[#00C2FF]/20 transition-all duration-300 shadow-md">
                 <div className="absolute left-0 top-0 w-1 h-full bg-gradient-to-b from-[#00E5A0] to-[#00C2FF]" />
                 <div className="w-11 h-11 rounded-lg bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex items-center justify-center text-[#00E5A0] flex-shrink-0">
@@ -158,7 +158,7 @@ export function ContactSection() {
                 className={`flex-1 py-3 text-center text-sm font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
                   activeTab === "message"
                     ? "bg-[#0057D9] text-white border border-[#0057D9]/50 shadow-[0_0_10px_rgba(0,87,217,0.3)]"
-                    : "text-[#64748B] hover:text-white"
+                    : "text-[#94A3B8] hover:text-white"
                 }`}
               >
                 <Send className="w-4 h-4" />
@@ -169,7 +169,7 @@ export function ContactSection() {
                 className={`flex-1 py-3 text-center text-sm font-semibold rounded-lg transition-all duration-300 flex items-center justify-center gap-2 ${
                   activeTab === "demo"
                     ? "bg-[#0057D9] text-white border border-[#0057D9]/50 shadow-[0_0_10px_rgba(0,87,217,0.3)]"
-                    : "text-[#64748B] hover:text-white"
+                    : "text-[#94A3B8] hover:text-white"
                 }`}
               >
                 <Calendar className="w-4 h-4" />
@@ -314,7 +314,7 @@ export function ContactSection() {
                   ) : (
                     <div className="space-y-6">
                       <div>
-                        <h4 className="text-sm font-bold text-white mb-1">Select Date</h4>
+                        <h3 className="text-sm font-bold text-white mb-1">Select Date</h3>
                         <div className="grid grid-cols-3 gap-3 mt-3">
                           {calendarDates.map((d) => (
                             <button
@@ -329,7 +329,7 @@ export function ContactSection() {
                                   : "bg-white/[0.02] border-white/[0.06] text-[#94A3B8] hover:border-white/[0.12]"
                               }`}
                             >
-                              <p className="text-[10px] uppercase font-semibold text-[#64748B]">{d.day}</p>
+                              <p className="text-[10px] uppercase font-semibold text-[#94A3B8]">{d.day}</p>
                               <p className="text-lg font-bold mt-1">{d.date}</p>
                             </button>
                           ))}
@@ -337,7 +337,7 @@ export function ContactSection() {
                       </div>
 
                       <div>
-                        <h4 className="text-sm font-bold text-white mb-1">Select Available Time Slot</h4>
+                        <h3 className="text-sm font-bold text-white mb-1">Select Available Time Slot</h3>
                         <div className="grid grid-cols-3 gap-2.5 mt-3">
                           {calendarDates
                             .find((d) => d.date === selectedDate)

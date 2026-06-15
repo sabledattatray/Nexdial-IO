@@ -252,11 +252,11 @@ export function Footer() {
         {/* Bottom Bar */}
         <div className="pt-8 border-t border-white/[0.04] flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex flex-col sm:flex-row items-center gap-2 sm:gap-4">
-            <p className="text-xs text-[#475569]">
+            <p className="text-xs text-[#94A3B8]">
               © {currentYear} Nexdial. All rights reserved.
             </p>
-            <span className="hidden sm:inline text-[#334155] text-xs">|</span>
-            <div className="text-xs text-[#475569] flex items-center flex-wrap gap-1.5">
+            <span className="hidden sm:inline text-[#475569] text-xs">|</span>
+            <div className="text-xs text-[#94A3B8] flex items-center flex-wrap gap-1.5">
               <span>Designed & Engineered by</span>
               <a 
                 href="https://dattasable.com" 
@@ -270,13 +270,13 @@ export function Footer() {
             </div>
           </div>
           <div className="flex items-center gap-6">
-            <Link href="/privacy" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
+            <Link href="/privacy" className="text-xs text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
               Privacy
             </Link>
-            <Link href="/terms" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
+            <Link href="/terms" className="text-xs text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
               Terms
             </Link>
-            <Link href="/sitemap" className="text-xs text-[#475569] hover:text-[#94A3B8] transition-colors">
+            <Link href="/sitemap" className="text-xs text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
               Sitemap
             </Link>
           </div>
