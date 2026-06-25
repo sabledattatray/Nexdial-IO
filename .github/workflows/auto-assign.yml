@@ -1,0 +1,21 @@
+name: Auto Assign Issues
+
+on:
+  issues:
+    types: [opened]
+
+jobs:
+  assign:
+    name: Auto Assign Creator
+    runs-on: ubuntu-latest
+    steps:
+      - name: Assign issue to creator
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.addAssignees({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              assignees: ['sabledattatray']
+            })
