@@ -7,74 +7,60 @@ import { ArrowUpRight, TrendingUp, Users, Clock, Percent, ShieldCheck } from "lu
 
 const cases = [
   {
-    id: "realestate",
-    category: "Real Estate Agency",
-    title: "Apex Realty Closes 40% More Deals with Structured Lead Tracking",
-    description: "Apex Realty transitioned from scattered WhatsApp chats and messy spreadsheets to NexDial's Unified Inbox. By centralizing every property inquiry and tracking communications in one place, their agents instantly boosted client engagement and closed more property listings.",
+    id: "sales-mis",
+    category: "Sales",
+    title: "Sales MIS Dashboard (Demo Project)",
+    description: "A complete automated workflow taking raw CRM export data and transforming it into a dynamic, interactive Excel dashboard with zero manual copy-pasting.",
     metrics: [
-      { label: "Closed Deals Lift", value: "+40%", icon: TrendingUp, color: "#0057D9" },
-      { label: "Average Response Time", value: "< 5 min", icon: Clock, color: "#00C2FF" },
-      { label: "Saved Hours Per Agent", value: "12 hrs/wk", icon: Users, color: "#00E5A0" },
+      { label: "Data Consolidation", value: "Automated", icon: TrendingUp, color: "#0057D9" },
+      { label: "Primary Tool", value: "Excel", icon: ShieldCheck, color: "#00C2FF" },
+      { label: "Manual Effort", value: "Removed", icon: Clock, color: "#00E5A0" },
     ],
     bgGradient: "from-[#0057D9]/10 via-[#00C2FF]/5 to-transparent",
     borderGlow: "rgba(0, 194, 255, 0.2)",
     accentColor: "#00C2FF",
   },
   {
-    id: "agency",
-    category: "Marketing Agency",
-    title: "PixelCraft Media Achieves 3x Faster Client Response Speed",
-    description: "With multi-channel lead capture from landing page forms and social media ad webhooks, PixelCraft Media centralized client leads in NexDial. Instant notifications allow their sales team to follow up within 2 minutes of initial submission, maximizing ad campaign ROI.",
+    id: "kpi-dashboard",
+    category: "Management",
+    title: "Management KPI Dashboard (Illustrative Demo)",
+    description: "An executive summary dashboard combining data from finance, operations, and HR into one reliable, refreshable view for decision-makers.",
     metrics: [
-      { label: "Follow-up Velocity", value: "3.5x Faster", icon: Clock, color: "#8B5CF6" },
-      { label: "Ad Lead Conversion", value: "+28%", icon: TrendingUp, color: "#EC4899" },
-      { label: "Lead Attrition Rate", value: "-40%", icon: Percent, color: "#00E5A0" },
+      { label: "Data Sources", value: "Multiple", icon: Users, color: "#8B5CF6" },
+      { label: "Refresh Process", value: "1-Click", icon: ArrowUpRight, color: "#EC4899" },
+      { label: "Visualizations", value: "Dynamic", icon: TrendingUp, color: "#00E5A0" },
     ],
     bgGradient: "from-[#8B5CF6]/10 via-[#EC4899]/5 to-transparent",
     borderGlow: "rgba(139, 92, 246, 0.2)",
     accentColor: "#8B5CF6",
   },
   {
-    id: "education",
-    category: "Education Consultancy",
-    title: "Global Prep Academy Eliminates Missed Follow-ups, Hitting 55% Conversion",
-    description: "Managing hundreds of student enrollment inquiries was chaotic until Global Prep Academy implemented NexDial's Follow-up Engine. Reminders are auto-scheduled, ensuring advisors keep in touch regularly throughout the application timeline.",
+    id: "inventory",
+    category: "Operations",
+    title: "Inventory Reporting System (Prototype)",
+    description: "A Power Query driven solution to clean and merge daily stock reports from various warehouses, highlighting stock-outs and aging inventory.",
     metrics: [
-      { label: "Final Conversion Rate", value: "55%", icon: Percent, color: "#00E5A0" },
-      { label: "Missed Follow-ups", value: "0", icon: ShieldCheck, color: "#0057D9" },
-      { label: "Team Productivity", value: "+45%", icon: Users, color: "#00C2FF" },
+      { label: "Technology", value: "Power Query", icon: ShieldCheck, color: "#00E5A0" },
+      { label: "File Merging", value: "Automated", icon: TrendingUp, color: "#0057D9" },
+      { label: "Error Rate", value: "Minimized", icon: ShieldCheck, color: "#00C2FF" },
     ],
     bgGradient: "from-[#00E5A0]/10 via-[#0057D9]/5 to-transparent",
     borderGlow: "rgba(0, 229, 160, 0.2)",
     accentColor: "#00E5A0",
   },
   {
-    id: "healthcare",
-    category: "Healthcare Clinic",
-    title: "Aura Dental Care Cuts Patient No-Show Rates by 60% with Auto Reminders",
-    description: "Managing patient appointment confirmations was time-consuming until Aura Dental Care connected their scheduler to NexDial. Automated WhatsApp alerts and follow-ups are sent out daily, keeping calendars filled and reducing administrative work.",
+    id: "monthly-mis",
+    category: "Finance",
+    title: "Automated Monthly MIS (Sample Workflow)",
+    description: "A structured Excel template that ingests Trial Balance data and automatically updates P&L, Balance Sheet, and variance analysis reports.",
     metrics: [
-      { label: "No-Show Rate Drop", value: "-60%", icon: Percent, color: "#06B6D4" },
-      { label: "Recall Patient Bookings", value: "+35%", icon: TrendingUp, color: "#00E5A0" },
-      { label: "Admin Staff Hours Saved", value: "10 hrs/wk", icon: Clock, color: "#8B5CF6" },
+      { label: "Reporting Cycle", value: "Monthly", icon: Clock, color: "#06B6D4" },
+      { label: "Structure", value: "Standardized", icon: ShieldCheck, color: "#00E5A0" },
+      { label: "Formulas", value: "Dynamic", icon: TrendingUp, color: "#8B5CF6" },
     ],
     bgGradient: "from-[#06B6D4]/10 via-[#00C2FF]/5 to-transparent",
     borderGlow: "rgba(6, 182, 212, 0.2)",
     accentColor: "#06B6D4",
-  },
-  {
-    id: "ecommerce",
-    category: "E-commerce Brand",
-    title: "TrendVibe Retail Recovers 22% of Abandoned Carts in 14 Days",
-    description: "TrendVibe connected their Shopify checkout system to NexDial's lead dashboard. Agents are instantly notified of abandoned checkouts, launching quick follow-ups to answer questions and capture sales that would have been lost.",
-    metrics: [
-      { label: "Cart Recovery Rate", value: "22%", icon: Percent, color: "#EC4899" },
-      { label: "Sales Conversion Lift", value: "+15%", icon: TrendingUp, color: "#00E5A0" },
-      { label: "Support Resolution Speed", value: "94%", icon: ShieldCheck, color: "#0057D9" },
-    ],
-    bgGradient: "from-[#EC4899]/10 via-[#8B5CF6]/5 to-transparent",
-    borderGlow: "rgba(236, 72, 153, 0.2)",
-    accentColor: "#EC4899",
   }
 ];
 
@@ -92,13 +78,13 @@ export function CaseStudies() {
         <div className="flex flex-col lg:flex-row lg:items-end justify-between mb-16">
           <AnimatedSection className="max-w-2xl">
             <p className="text-sm font-semibold text-[#00C2FF] uppercase tracking-widest mb-4">
-              Success Stories
+              Featured Work
             </p>
             <h2 className="section-title text-white mb-4">
-              Loved by <span className="gradient-text">Growing Businesses</span>
+              Explore Our <span className="gradient-text">Portfolio</span>
             </h2>
             <p className="text-[#64748B] text-lg">
-              Explore how small businesses use NexDial to streamline operations, cut response times, and close more deals.
+              Take a look at sample workflows and demo projects that demonstrate our approach to data management and automation.
             </p>
           </AnimatedSection>
         </div>
@@ -147,7 +133,7 @@ export function CaseStudies() {
                             }
                           >
                             <span>{c.category}</span>
-                            {c.id === "realestate" && (
+                            {c.id === "sales-mis" && (
                               <span
                                 className="text-[6.5px] sm:text-[8px] px-1 py-0.5 rounded-full font-extrabold uppercase tracking-wider scale-95"
                                 style={{
@@ -156,7 +142,7 @@ export function CaseStudies() {
                                   border: `1px solid ${isActive ? `${c.accentColor}30` : "rgba(255, 255, 255, 0.08)"}`
                                 }}
                               >
-                                Most Popular
+                                Popular
                               </span>
                             )}
                           </button>
@@ -174,14 +160,14 @@ export function CaseStudies() {
  
                   <div>
                     <a
-                      href="/request-demo"
+                      href="/portfolio"
                       className="inline-flex items-center justify-center gap-1.5 font-semibold rounded-full px-4 py-2 sm:px-5 sm:py-2.5 text-[11px] sm:text-xs transition-all duration-200 hover:scale-[1.02] active:scale-[0.98] cursor-pointer"
                       style={{
                         backgroundColor: activeCase.accentColor,
-                        color: activeCase.id === 'education' ? '#081120' : '#ffffff'
+                        color: activeCase.id === 'monthly-mis' ? '#081120' : '#ffffff'
                       }}
                     >
-                      <span>Start Your Success Story</span>
+                      <span>View Full Portfolio</span>
                       <ArrowUpRight className="w-3.5 h-3.5 stroke-[2.5]" />
                     </a>
                   </div>
@@ -190,7 +176,7 @@ export function CaseStudies() {
                 {/* Metrics Right */}
                 <div className="flex flex-col justify-center gap-3 sm:gap-5 lg:border-l lg:border-white/[0.08] lg:pl-10 min-w-0 w-full">
                   <h4 className="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-[#64748B]">
-                    Key Performance Indicators
+                    Project Highlights
                   </h4>
                   <div className="space-y-2 sm:space-y-2.5">
                     {activeCase.metrics.map((metric, i) => (
@@ -214,7 +200,7 @@ export function CaseStudies() {
                           </div>
                         </div>
                         <span
-                          className="text-lg sm:text-xl lg:text-2xl font-bold tracking-tight metric-number flex-shrink-0 ml-2"
+                          className="text-sm sm:text-base lg:text-lg font-bold tracking-tight metric-number flex-shrink-0 ml-2"
                           style={{ color: metric.color }}
                         >
                           {metric.value}

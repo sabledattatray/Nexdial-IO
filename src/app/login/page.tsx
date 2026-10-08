@@ -91,16 +91,16 @@ function LoginContent() {
         {/* Brand identity */}
         <div className="space-y-2">
           <div className="inline-flex items-center gap-2">
-            <div className="px-2 py-0.5 rounded bg-indigo-950/20 text-[#818CF8] border border-indigo-500/10 text-[9px] font-mono font-bold flex items-center gap-1 uppercase">
+            <div className="px-2 py-0.5 rounded bg-[#00C2FF]/10 text-[#00C2FF] border border-[#00C2FF]/20 text-[9px] font-mono font-bold flex items-center gap-1 uppercase">
               <Shield className="w-3 h-3" />
-              Nexdial Secure Gateway
+              Client Workspace Gateway
             </div>
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-tight">
             Portal Authorization
           </h1>
           <p className="text-xs text-slate-400 leading-relaxed">
-            Sign in to access your unified CRM directories, client workspaces, and campaign dialer interfaces.
+            Sign in to access your custom data dashboards, automated workflows, and business intelligence reports.
           </p>
         </div>
 
@@ -198,7 +198,7 @@ function LoginContent() {
             ) : (
               <>
                 <Key className="w-4 h-4 text-slate-200" />
-                <span>Sign In to CRM Portal</span>
+                <span>Sign In to Client Portal</span>
               </>
             )}
           </button>
@@ -207,9 +207,9 @@ function LoginContent() {
         {/* Signup redirect */}
         <div className="text-center pt-2">
           <p className="text-[11px] text-slate-400">
-            Don't have an account?{" "}
-            <Link href="/signup" className="text-[#00C2FF] hover:underline font-bold transition-all">
-              Start Free Trial
+            Need a custom solution?{" "}
+            <Link href="/#contact" className="text-[#00C2FF] hover:underline font-bold transition-all">
+              Book a Consultation
             </Link>
           </p>
         </div>

@@ -32,68 +32,65 @@ import {
 
 const navLinks = [
   {
-    label: "Product",
-    href: "/solutions",
+    label: "Services",
+    href: "/services",
     megaMenu: [
       {
-        title: "Core Features",
+        title: "Core Services",
         items: [
-          { label: "Unified Inbox", href: "/solutions#inbox", icon: Inbox, desc: "All leads in one central feed" },
-          { label: "Lead Management", href: "/solutions#leads", icon: Users, desc: "Full profiles, tags & history" },
-          { label: "Pipeline View", href: "/crm/pipeline", icon: Kanban, desc: "Visual Kanban board for deals" },
-          { label: "Follow-Up Engine", href: "/solutions#followups", icon: CalendarCheck, desc: "Never miss a follow-up again" },
+          { label: "Advanced Excel", href: "/services/advanced-excel", icon: FileText, desc: "Complex formulas & modeling" },
+          { label: "MIS Reporting", href: "/services/mis-reporting", icon: BarChart3, desc: "Daily & weekly structures" },
+          { label: "Excel Dashboards", href: "/services/excel-dashboards", icon: LayoutDashboard, desc: "Interactive KPIs" },
         ],
       },
       {
-        title: "Tools",
+        title: "Data & Automation",
         items: [
-          { label: "CRM Workspace", href: "/crm", icon: LayoutDashboard, desc: "Interactive sales CRM dashboard" },
-          { label: "Call Logging", href: "/solutions#calls", icon: PhoneCall, desc: "Track every call with outcomes" },
-          { label: "Smart Dashboard", href: "/crm/dashboard", icon: BarChart3, desc: "Actionable business insights" },
+          { label: "Data Cleaning", href: "/services/data-cleaning", icon: Shield, desc: "Format & consolidate" },
+          { label: "VBA Macros", href: "/services/vba-automation", icon: Zap, desc: "Button-driven workflows" },
+          { label: "Power BI", href: "/services/power-bi", icon: BarChart3, desc: "Next-level visualization" },
         ],
       },
     ],
   },
   {
-    label: "Resources",
-    href: "/blog",
+    label: "Use Cases",
+    href: "/use-cases",
     megaMenu: [
       {
-        title: "Learn",
+        title: "By Department",
         items: [
-          { label: "Blog", href: "/blog", icon: BookOpen, desc: "Tips & insights for small businesses" },
-          { label: "Knowledge Center", href: "/knowledge-center", icon: BookOpen, desc: "Guides & documentation" },
-          { label: "FAQs", href: "/faqs", icon: HelpCircle, desc: "Common questions answered" },
+          { label: "For Finance", href: "/use-cases/finance", icon: Briefcase, desc: "P&L, Balance Sheets" },
+          { label: "For Operations", href: "/use-cases/operations", icon: Users, desc: "Inventory & Logistics" },
+          { label: "For Sales", href: "/use-cases/sales", icon: Kanban, desc: "Targets & Achievements" },
         ],
       },
       {
-        title: "Library",
+        title: "Resources",
         items: [
-          { label: "Case Studies", href: "/case-studies", icon: FileText, desc: "Real metrics & conversion studies" },
-          { label: "Success Stories", href: "/success-stories", icon: Award, desc: "Customer testimonials & wins" },
-          { label: "Downloads Desk", href: "/resources", icon: Download, desc: "E-Books, playbooks & guides" },
+          { label: "Portfolio", href: "/portfolio", icon: BookOpen, desc: "Sample workflows" },
+          { label: "Contact Us", href: "/contact", icon: Mail, desc: "Get a free quote" },
         ],
       },
     ],
   },
   {
-    label: "Company",
-    href: "/about",
+    label: "Industries",
+    href: "/industries",
     megaMenu: [
       {
-        title: "About",
+        title: "By Sector",
         items: [
-          { label: "About Us", href: "/about", icon: Building2, desc: "Our story, mission & locations" },
-          { label: "Contact Us", href: "/contact", icon: Mail, desc: "Get in touch with support & sales" },
-          { label: "Careers", href: "/careers", icon: Briefcase, desc: "Open positions in India & remote" },
+          { label: "Healthcare", href: "/industries/healthcare", icon: Shield, desc: "Compliance & Patient Data" },
+          { label: "E-commerce", href: "/industries/ecommerce", icon: LayoutDashboard, desc: "Sales & Inventory Analytics" },
+          { label: "Real Estate", href: "/industries/real-estate", icon: Building2, desc: "Property & Lead Tracking" },
         ],
       },
       {
-        title: "Relations",
+        title: "Specialized",
         items: [
-          { label: "Client Roster", href: "/clients", icon: Users, desc: "Trusted by 1,000+ businesses" },
-          { label: "Partners", href: "/partners", icon: Handshake, desc: "Platform integrators & partners" },
-          { label: "Security & Trust", href: "/security", icon: Shield, desc: "Data compliance & security standards" },
+          { label: "Financial Services", href: "/industries/financial", icon: Briefcase, desc: "Auditing & Tax Reporting" },
+          { label: "Manufacturing", href: "/industries/manufacturing", icon: Kanban, desc: "Supply Chain Dashboards" },
         ],
       },
     ],
@@ -159,7 +156,7 @@ export function Navbar() {
                   Nexdial<sup className="inline-flex items-center justify-center w-[14px] h-[14px] ml-0.5 rounded-full border border-white text-white text-[9px] font-light shadow-[0_0_8px_rgba(255,255,255,0.2)]">R</sup>
                 </span>
                 <span className="text-[8.5px] text-[#64748B] font-medium tracking-widest uppercase leading-none mt-1.5">
-                  Unified Communication Inbox
+                  Data & Business Automation
                 </span>
               </div>
             </Link>
@@ -246,21 +243,20 @@ export function Navbar() {
               ))}
             </div>
 
-            {/* CTA Buttons */}
             <div className="hidden lg:flex items-center gap-3">
               <Link
                 href="/login"
                 className="text-sm font-medium text-[#94A3B8] hover:text-white transition-colors px-4 py-2 flex items-center gap-1.5"
               >
                 <LogIn className="w-4 h-4" />
-                Login
+                Client Login
               </Link>
               <Link
-                href="/signup"
+                href="/contact"
                 className="btn-primary text-sm !py-2.5 !px-5 flex items-center gap-2"
               >
                 <Zap className="w-4 h-4" />
-                Start Free Trial
+                Get Free Quote
               </Link>
             </div>
 
@@ -334,14 +330,14 @@ export function Navbar() {
                     onClick={() => setMobileOpen(false)}
                     className="btn-secondary w-full text-center block text-sm"
                   >
-                    Login to CRM
+                    Client Login
                   </Link>
                   <Link
-                    href="/signup"
+                    href="/contact"
                     onClick={() => setMobileOpen(false)}
                     className="btn-primary w-full text-center block text-sm"
                   >
-                    Start Free Trial
+                    Get Free Quote
                   </Link>
                 </div>
               </div>

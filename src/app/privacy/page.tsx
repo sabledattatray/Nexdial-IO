@@ -180,10 +180,10 @@ export default function PrivacyPage() {
                 1. Who We Are &amp; Scope of This Policy
               </h2>
               <p>
-                NexDial (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a SaaS CRM platform designed for Indian small and medium businesses. We provide lead management, WhatsApp inbox, sales pipeline, call logging, and AI-powered follow-up tools.
+                NexDial (&quot;we&quot;, &quot;us&quot;, &quot;our&quot;) is a B2B Data, Excel, and Business Automation service provider designed for businesses globally. We provide custom dashboarding, automated reporting, data cleaning, and BI solutions.
               </p>
               <p>
-                This Privacy Policy applies to all users of NexDial — including business owners who sign up (&quot;Workspace Admins&quot;), their team members (&quot;Agents&quot;), and the leads/contacts stored within the platform (&quot;End Contacts&quot;). It covers all data processed through our website, onboarding flow, CRM dashboard, and APIs.
+                This Privacy Policy applies to all users of NexDial — including clients who engage our services (&quot;Clients&quot;), their team members, and the data processed on their behalf. It covers all data processed through our website, forms, and tools.
               </p>
               <div className="p-4 rounded-xl bg-white/[0.02] border border-[#00E5A0]/20 flex gap-3 items-start text-xs text-[#94A3B8]">
                 <CheckCircle2 className="w-4 h-4 text-[#00E5A0] shrink-0 mt-0.5" />
@@ -210,24 +210,24 @@ export default function PrivacyPage() {
                 <li>Google OAuth profile data (if you sign in with Google)</li>
               </ul>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">B. Onboarding Configuration Data</h3>
-              <p>During onboarding we collect workspace preferences:</p>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">B. Project & Requirement Data</h3>
+              <p>During initial consultation and onboarding we collect:</p>
               <ul className="list-disc pl-6 space-y-1.5">
-                <li>Business goals and selected lead sources (WhatsApp, Website, Facebook, etc.)</li>
-                <li>Sales pipeline stage names</li>
-                <li>WhatsApp Business number(s) and support email addresses</li>
-                <li>AI & alert notification preferences</li>
+                <li>Business goals, pain points, and process bottlenecks</li>
+                <li>Sample data formats and structures</li>
+                <li>Current software stack details</li>
+                <li>Reporting preferences and KPIs</li>
               </ul>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">C. CRM & Lead Data</h3>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">C. Client Data Processing</h3>
               <p>
-                Data you or your team enters into NexDial about your business contacts (leads):
+                Data you securely share with us for processing, cleaning, or dashboarding:
               </p>
               <ul className="list-disc pl-6 space-y-1.5">
-                <li>Contact name, phone number, email, company, tags</li>
-                <li>Lead status, pipeline stage, assigned agent</li>
-                <li>Call logs, activity timeline, notes, follow-up reminders</li>
-                <li>WhatsApp conversation history (displayed in inbox)</li>
+                <li>Raw Excel, CSV, or database exports</li>
+                <li>System-generated reports</li>
+                <li>Confidential business metrics</li>
+                <li>We process this data strictly within secure environments as per Non-Disclosure Agreements (NDAs).</li>
               </ul>
 
               <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">D. Payment & Billing Data</h3>
@@ -258,13 +258,12 @@ export default function PrivacyPage() {
               </h2>
               <p>We use your data strictly to provide and improve the NexDial service:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Deliver the Service:</strong> Power your CRM dashboard, lead inbox, pipeline, and team features.</li>
-                <li><strong>Authentication:</strong> Verify your identity on login via NextAuth (email/password or Google OAuth).</li>
-                <li><strong>Billing:</strong> Process your ₹1 mandate authorization and monthly subscription renewals via Razorpay.</li>
-                <li><strong>AI Features:</strong> Use your lead interaction data to generate AI-powered follow-up suggestions and lead scores. This processing happens within our platform — your data is never shared with external AI providers for training.</li>
-                <li><strong>Notifications:</strong> Send you email alerts for follow-up reminders, payment receipts, and trial expiry warnings.</li>
-                <li><strong>Support:</strong> Respond to your help requests and diagnose technical issues.</li>
-                <li><strong>Product Improvement:</strong> Analyze aggregated, anonymized usage patterns to improve the platform.</li>
+                <li><strong>Deliver the Service:</strong> Build and deliver custom automated solutions, dashboards, and reports.</li>
+                <li><strong>Authentication:</strong> Verify your identity on login to our client portal (if applicable).</li>
+                <li><strong>Billing:</strong> Process payments for our services securely via Razorpay or bank transfer.</li>
+                <li><strong>Communication:</strong> Send you project updates, delivery files, and meeting invitations.</li>
+                <li><strong>Support:</strong> Respond to your requests and troubleshoot deployed tools.</li>
+                <li><strong>Product Improvement:</strong> Analyze aggregated usage to improve our service offerings.</li>
               </ul>
               <p>We do <strong>not</strong> use your data for advertising, profiling for third-party marketing, or selling to data brokers.</p>
             </section>
@@ -282,19 +281,16 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc pl-6 space-y-3">
                 <li>
-                  <strong>Supabase / PostgreSQL (Database):</strong> Your workspace data, leads, and CRM records are stored in a secure PostgreSQL database hosted on Supabase (AWS infrastructure, ap-southeast-1 region).
+                  <strong>Cloud Storage:</strong> Your project files and data are stored in secure cloud environments (e.g., AWS, Microsoft Azure, Google Cloud) with strict access controls.
                 </li>
                 <li>
-                  <strong>Razorpay (Payments):</strong> Payment processing and e-mandate management. Razorpay is PCI-DSS Level 1 certified and RBI regulated. We share only the minimum data required to create and manage your subscription.
+                  <strong>Razorpay (Payments):</strong> Payment processing. Razorpay is PCI-DSS Level 1 certified. We share only the minimum data required.
                 </li>
                 <li>
-                  <strong>Google (OAuth):</strong> If you use &quot;Sign in with Google,&quot; Google shares your name, email, and profile picture with us. We do not share your NexDial data back with Google beyond standard OAuth tokens.
+                  <strong>Microsoft/Google (OAuth):</strong> If you use &quot;Sign in with Google/Microsoft,&quot; standard OAuth data is shared.
                 </li>
                 <li>
-                  <strong>Vercel (Hosting):</strong> Our application is deployed on Vercel&apos;s edge network. Vercel may process request logs containing IP addresses per their own privacy policy.
-                </li>
-                <li>
-                  <strong>Meta / WhatsApp Business API:</strong> When you connect a WhatsApp Business number, messages flow through Meta&apos;s API. Message content is subject to Meta&apos;s privacy policy.
+                  <strong>Vercel (Hosting):</strong> Our application is deployed on Vercel&apos;s edge network.
                 </li>
               </ul>
               <p>We disclose data to authorities only if required by law, court order, or to protect NexDial from fraud.</p>
@@ -313,10 +309,10 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Encryption in Transit:</strong> All data between your browser and NexDial servers is encrypted via HTTPS/TLS 1.3.</li>
-                <li><strong>Encryption at Rest:</strong> Database storage is encrypted at rest by Supabase.</li>
-                <li><strong>Password Security:</strong> Passwords are hashed using bcrypt (never stored in plain text).</li>
-                <li><strong>Access Control:</strong> Role-based access control (ADMIN / AGENT) ensures team members only access data relevant to their role.</li>
-                <li><strong>No Card Storage:</strong> We never store your payment card details — all payment data is handled by Razorpay&apos;s PCI-certified vault.</li>
+                <li><strong>Encryption at Rest:</strong> Client data files are encrypted at rest using industry-standard protocols.</li>
+                <li><strong>Password Security:</strong> Passwords are hashed using bcrypt.</li>
+                <li><strong>Access Control:</strong> Strict internal access policies ensure only authorized analysts can view your specific project data.</li>
+                <li><strong>No Card Storage:</strong> We never store your payment card details.</li>
               </ul>
             </section>
 
@@ -329,11 +325,11 @@ export default function PrivacyPage() {
                 6. Data Retention &amp; Deletion
               </h2>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Active subscription:</strong> Your workspace data (leads, contacts, pipeline, call logs) is retained for the duration of your active subscription.</li>
-                <li><strong>After cancellation:</strong> We retain your data for 30 days after subscription cancellation, giving you time to export. After 30 days, workspace data is permanently deleted.</li>
-                <li><strong>Inactive trial accounts:</strong> If no subscription is started after the 15-day trial, your account data is deleted after 60 days of inactivity.</li>
-                <li><strong>Activity logs &amp; system logs:</strong> Retained for 90 days for debugging and security purposes, then purged.</li>
-                <li><strong>Billing records:</strong> Invoices and payment references are retained for 7 years as required by Indian GST and accounting regulations.</li>
+                <li><strong>Active Projects:</strong> Your data is retained securely for the duration of the project or ongoing retainer.</li>
+                <li><strong>Post-Delivery:</strong> We retain project data for 30 days after final delivery for revisions, after which raw client data is permanently deleted unless a specific archival agreement is in place.</li>
+                <li><strong>Inquiries:</strong> Information from contact forms is kept to maintain communication history.</li>
+                <li><strong>Activity logs:</strong> Retained for debugging and security purposes, then purged.</li>
+                <li><strong>Billing records:</strong> Invoices and payment references are retained for 7 years as required by regulations.</li>
               </ul>
             </section>
 
@@ -350,13 +346,12 @@ export default function PrivacyPage() {
               </p>
               <ul className="list-disc pl-6 space-y-2">
                 <li><strong>Access:</strong> Request a copy of all personal data we hold about you.</li>
-                <li><strong>Correction:</strong> Update or correct inaccurate data via your Settings page or by emailing us.</li>
-                <li><strong>Deletion:</strong> Request full deletion of your account and all associated data. We will process deletion within 7 business days.</li>
-                <li><strong>Export:</strong> Request an export of your lead and contact data in CSV format from the CRM Settings page.</li>
-                <li><strong>Withdraw Consent:</strong> Cancel your subscription and Razorpay mandate at any time. Withdrawal does not affect data already processed.</li>
+                <li><strong>Correction:</strong> Update or correct inaccurate data by emailing us.</li>
+                <li><strong>Deletion:</strong> Request full deletion of your project data from our active systems.</li>
+                <li><strong>Withdraw Consent:</strong> Cancel your ongoing retainer at any time.</li>
               </ul>
               <p>
-                To exercise any of these rights, visit your <strong>CRM Settings → Account</strong> page or contact us at <a href="mailto:privacy@nexdial.io" className="text-[#00C2FF] hover:underline">privacy@nexdial.io</a>. We will respond within 7 business days.
+                To exercise any of these rights, contact us at <a href="mailto:privacy@nexdial.io" className="text-[#00C2FF] hover:underline">privacy@nexdial.io</a>. We will respond within 7 business days.
               </p>
             </section>
 

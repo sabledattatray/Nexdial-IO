@@ -9,28 +9,23 @@ import {
 } from "lucide-react";
 
 const clientTypes = [
-  { name: "Real Estate Agencies", icon: Home, color: "#00E5A0" },
-  { name: "Marketing Agencies", icon: Megaphone, color: "#00C2FF" },
-  { name: "Education Consultants", icon: GraduationCap, color: "#8B5CF6" },
-  { name: "Healthcare Clinics", icon: Stethoscope, color: "#EF4444" },
-  { name: "Insurance Brokers", icon: Shield, color: "#3B82F6" },
-  { name: "Legal Firms", icon: Scale, color: "#F59E0B" },
-  { name: "Travel Agencies", icon: Compass, color: "#EC4899" },
-  { name: "Event Planners", icon: Calendar, color: "#10B981" },
-  { name: "Auto Dealers", icon: Car, color: "#6366F1" },
-  { name: "Fitness Studios", icon: Dumbbell, color: "#F43F5E" },
-  { name: "Home Services", icon: Wrench, color: "#84CC16" },
-  { name: "Financial Advisors", icon: Briefcase, color: "#06B6D4" },
-  { name: "SaaS Companies", icon: Laptop, color: "#A855F7" },
-  { name: "E-Commerce Stores", icon: ShoppingBag, color: "#F97316" },
-  { name: "Recruitment Firms", icon: Users, color: "#14B8A6" },
+  { name: "Small Businesses", icon: Home, color: "#00E5A0" },
+  { name: "Operations Teams", icon: Megaphone, color: "#00C2FF" },
+  { name: "Finance & Accounting", icon: GraduationCap, color: "#8B5CF6" },
+  { name: "Sales Teams", icon: Stethoscope, color: "#EF4444" },
+  { name: "HR Departments", icon: Shield, color: "#3B82F6" },
+  { name: "Startups", icon: Scale, color: "#F59E0B" },
+  { name: "MIS & Reporting", icon: Compass, color: "#EC4899" },
+  { name: "Business Owners", icon: Calendar, color: "#10B981" },
+  { name: "Consultants", icon: Car, color: "#6366F1" },
+  { name: "Agencies", icon: Dumbbell, color: "#F43F5E" },
 ];
 
 const trustBadges = [
-  { name: "1,000+ Businesses", desc: "Active Workspaces", icon: TrendingUp, color: "#00E5A0" },
-  { name: "4.8★ Rating", desc: "Customer Satisfaction", icon: Star, color: "#F59E0B" },
-  { name: "99.9% Uptime", desc: "WebRTC Telephony", icon: Activity, color: "#00C2FF" },
-  { name: "GDPR Compliant", desc: "TRAI & ISO Aligned", icon: ShieldCheck, color: "#8B5CF6" },
+  { name: "Business-Focused", desc: "Practical Solutions", icon: TrendingUp, color: "#00E5A0" },
+  { name: "Automation-First", desc: "Save Time & Effort", icon: Star, color: "#F59E0B" },
+  { name: "Structured Work", desc: "Maintainable Files", icon: Activity, color: "#00C2FF" },
+  { name: "Confidential", desc: "Secure Data Handling", icon: ShieldCheck, color: "#8B5CF6" },
 ];
 
 export function TrustIndicators() {
@@ -45,10 +40,10 @@ export function TrustIndicators() {
         <AnimatedSection className="text-center mb-12">
           <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/[0.03] border border-white/[0.06] mb-4">
             <Sparkles className="w-3.5 h-3.5 text-[#00C2FF]" />
-            <span className="text-[10px] font-semibold text-[#CBD5E1] uppercase tracking-wider">Universal Adaptability</span>
+            <span className="text-[10px] font-semibold text-[#CBD5E1] uppercase tracking-wider">Industries & Teams</span>
           </div>
           <p className="text-sm font-semibold text-[#64748B] uppercase tracking-widest">
-            Trusted by 1,000+ small businesses across industries
+            Empowering data-driven teams across the business
           </p>
         </AnimatedSection>
 

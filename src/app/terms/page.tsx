@@ -16,10 +16,10 @@ export default function TermsPage() {
 
   const sections = [
     { id: "agreement",        label: "1. Agreement & Services" },
-    { id: "trial-billing",    label: "2. Trial, Billing & Mandate" },
-    { id: "cancellation",     label: "3. Cancellation & Refunds" },
+    { id: "billing",          label: "2. Project Fees & Retainers" },
+    { id: "cancellation",     label: "3. Cancellation & Delivery" },
     { id: "acceptable-use",   label: "4. Acceptable Use" },
-    { id: "whatsapp",         label: "5. WhatsApp Business Rules" },
+    { id: "confidentiality",  label: "5. Data Handling & Confidentiality" },
     { id: "intellectual-property", label: "6. Intellectual Property" },
     { id: "liability",        label: "7. Liability & Indemnity" },
     { id: "governing-law",    label: "8. Governing Law & Disputes" },
@@ -112,7 +112,7 @@ export default function TermsPage() {
             Terms &amp; <span className="gradient-text">Conditions</span>
           </h1>
           <p className="text-[#94A3B8] text-base mt-4">
-            These Terms of Service govern your use of NexDial — an AI-powered CRM and WhatsApp communication platform for Indian small and medium businesses. By signing up and completing the onboarding process, you agree to these terms.
+            These Terms of Service govern your use of NexDial — a Data, Excel, and Business Automation service provider. By engaging our services, you agree to these terms.
           </p>
           <div className="flex items-center gap-4 mt-6 text-xs text-[#64748B] font-mono">
             <span>DOCUMENT ID: NEXDIAL-TOS-2026-V1</span>
@@ -180,77 +180,57 @@ export default function TermsPage() {
                 1. Agreement &amp; Services
               </h2>
               <p>
-                By creating a NexDial account, completing the onboarding wizard, or using any feature of the NexDial platform, you ("User" or "Business") agree to be bound by these Terms. NexDial ("we", "us", "our") is a SaaS product operated by NexDial Technologies, India.
+                By engaging NexDial for custom dashboards, data cleaning, VBA macros, or BI solutions ("the Service"), you ("Client" or "Business") agree to be bound by these Terms.
               </p>
               <p>
-                NexDial provides a cloud-based CRM platform including lead management, WhatsApp Business inbox, sales pipeline (Kanban), call logging, AI-powered lead scoring, automated follow-up reminders, team collaboration tools, and analytics dashboards — collectively referred to as "the Service."
-              </p>
-              <p>
-                We reserve the right to update, modify, or discontinue any feature of the Service with reasonable notice. Continued use after updates constitutes acceptance of the revised terms.
+                We reserve the right to update, modify, or discontinue any feature of our service model with reasonable notice.
               </p>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 2. Trial, Billing & Mandate */}
-            <section id="trial-billing" className="space-y-4 scroll-mt-28">
+            {/* 2. Project Fees & Retainers */}
+            <section id="billing" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <CreditCard className="w-5 h-5 text-[#00C2FF]" />
-                2. Trial Period, Billing &amp; Razorpay e-Mandate
+                2. Project Fees &amp; Retainers
               </h2>
 
-              <div className="p-4 rounded-xl bg-[#0057D9]/10 border border-[#0057D9]/20 space-y-2 text-xs">
-                <p className="font-bold text-[#60A5FA] flex items-center gap-1.5">
-                  <CreditCard className="w-4 h-4" /> ₹1 MANDATE AUTHORIZATION — WHAT THIS MEANS
-                </p>
-                <p className="text-slate-300">
-                  During onboarding, we collect a fully refundable ₹1 authorization charge via Razorpay to establish a secure auto-pay e-mandate (NACH mandate). This ₹1 is a verification-only charge — not a subscription fee. It confirms your payment method is valid and sets up recurring billing consent as required by RBI guidelines.
-                </p>
-              </div>
-
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">Free Trial</h3>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">Fixed-Fee Projects</h3>
               <p>
-                Upon successful mandate setup, your workspace is activated for a <strong>15-day free trial</strong> with full access to all NexDial features including calling, lead scoring, WhatsApp inbox, and team management. No additional charges occur during this period.
+                For custom dashboard development and data automation tools, we charge a fixed project fee. Typically, 50% is due upfront to commence work, and 50% is due upon final delivery and acceptance.
               </p>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider">Post-Trial Auto-Renewal</h3>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">Monthly Retainers</h3>
               <p>
-                After your 15-day trial expires, your plan automatically renews monthly at the rate corresponding to your business size:
-              </p>
-              <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Starter / Small Business (Solo – 10 users):</strong> ₹499/month</li>
-                <li><strong>Professional / Medium Business (11 – 50 users):</strong> ₹599/month</li>
-                <li><strong>Growth Engine (51+ users, AI features):</strong> ₹999/month</li>
-              </ul>
-              <p>
-                You will receive an email reminder <strong>3 days before your trial ends</strong> with your upcoming plan details. The auto-debit will occur via the Razorpay e-mandate you authorized during onboarding.
+                For ongoing MIS reporting and BI maintenance, we offer monthly retainers. Retainers are billed at the beginning of each calendar month.
               </p>
 
-              <h3 className="text-white font-semibold text-xs uppercase tracking-wider">Failed Payments</h3>
+              <h3 className="text-white font-semibold text-xs uppercase tracking-wider mt-4">Late Payments</h3>
               <p>
-                If a monthly auto-debit fails (insufficient funds, expired card, etc.), your workspace access will be restricted after a 3-day grace period. You will receive email notifications to update your payment method via the Razorpay dashboard.
+                Invoices are due within 15 days of receipt. Late payments may result in a suspension of ongoing services and support until the balance is cleared.
               </p>
             </section>
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 3. Cancellation & Refunds */}
+            {/* 3. Cancellation & Delivery */}
             <section id="cancellation" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <RefreshCw className="w-5 h-5 text-[#00C2FF]" />
-                3. Cancellation &amp; Refund Policy
+                3. Cancellation &amp; Delivery Policy
               </h2>
               <p>
-                You may cancel your subscription at any time — no questions asked.
+                You may cancel a monthly retainer with 30 days written notice.
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li><strong>Cancel during trial:</strong> Cancel before day 15 and you will never be charged beyond the ₹1 mandate authorization. The ₹1 is non-refundable as it covers payment gateway processing costs.</li>
-                <li><strong>Cancel after first billing:</strong> Your access continues until the end of the paid billing cycle. No prorated refunds are issued for partial months.</li>
-                <li><strong>How to cancel:</strong> Log in to your Razorpay dashboard and cancel the active mandate, or contact us at <a href="mailto:support@nexdial.io" className="text-[#00C2FF] hover:underline">support@nexdial.io</a> and we will process cancellation within 24 hours.</li>
+                <li><strong>Project Cancellation:</strong> If a fixed-fee project is cancelled by the client before completion, NexDial retains the upfront deposit to cover hours worked.</li>
+                <li><strong>Delivery Revisions:</strong> Fixed-fee projects include a specified number of revision rounds. Additional scope changes will be billed at an hourly rate.</li>
+                <li><strong>Refunds:</strong> Due to the custom nature of our data engineering work, payments are non-refundable once work has commenced.</li>
               </ul>
               <div className="p-4 rounded-xl bg-[#00E5A0]/10 border border-[#00E5A0]/20 flex gap-3 items-start text-xs text-[#94A3B8]">
                 <CheckCircle2 className="w-4 h-4 text-[#00E5A0] shrink-0 mt-0.5" />
-                <span>We do not lock you in. Cancel anytime from your Razorpay dashboard or by emailing support. No hidden fees, no cancellation penalty.</span>
+                <span>We pride ourselves on delivery. If the final tool does not meet the agreed-upon technical specifications, we will fix it at no additional cost.</span>
               </div>
             </section>
 
@@ -264,12 +244,9 @@ export default function TermsPage() {
               </h2>
               <p>You agree not to use NexDial to:</p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>Send unsolicited bulk messages (spam) via WhatsApp or email to contacts who have not opted in.</li>
-                <li>Store, process, or transmit any unlawful, defamatory, or fraudulent content.</li>
-                <li>Impersonate any person or entity or falsely represent your business identity.</li>
-                <li>Attempt to reverse-engineer, copy, scrape, or clone any part of the NexDial platform.</li>
-                <li>Use the platform to conduct illegal business activities under Indian law.</li>
-                <li>Share your account credentials with unauthorized parties outside your registered organization.</li>
+                <li>Provide false or misleading data files that result in legal liability.</li>
+                <li>Request automation tools designed to conduct unlawful activities (e.g., unauthorized data scraping).</li>
+                <li>Resell our custom tools as your own SaaS product without a white-label agreement.</li>
               </ul>
               <p>
                 Violation of this policy may result in immediate account suspension without refund and, where applicable, reporting to relevant authorities.
@@ -278,20 +255,19 @@ export default function TermsPage() {
 
             <div className="h-px bg-white/[0.06]" />
 
-            {/* 5. WhatsApp Business Rules */}
-            <section id="whatsapp" className="space-y-4 scroll-mt-28">
+            {/* 5. Data Handling & Confidentiality */}
+            <section id="confidentiality" className="space-y-4 scroll-mt-28">
               <h2 className="text-lg font-bold text-white flex items-center gap-2 border-b border-white/[0.04] pb-3">
                 <MessageSquare className="w-5 h-5 text-[#00C2FF]" />
-                5. WhatsApp Business Usage Rules
+                5. Data Handling &amp; Confidentiality
               </h2>
               <p>
-                NexDial integrates with the WhatsApp Business API. By using the WhatsApp channel features, you additionally agree to comply with <a href="https://www.whatsapp.com/legal/business-policy/" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Meta's WhatsApp Business Policy</a> and <a href="https://www.whatsapp.com/legal/commerce-policy/" target="_blank" rel="noopener noreferrer" className="text-[#00C2FF] hover:underline">Commerce Policy</a>.
+                We understand that we process your highly sensitive business data.
               </p>
               <ul className="list-disc pl-6 space-y-2">
-                <li>You must only message contacts who have explicitly opted in to receive messages from your business.</li>
-                <li>Message templates must be pre-approved by Meta/WhatsApp before use in bulk campaigns.</li>
-                <li>You are responsible for your own WhatsApp Business Account (WABA) compliance. NexDial is not liable for account bans or restrictions imposed by Meta.</li>
-                <li>NexDial does not store the content of WhatsApp messages beyond what is necessary to display your conversation history in the inbox.</li>
+                <li>We treat all client data as strictly confidential and are happy to sign custom Non-Disclosure Agreements (NDAs).</li>
+                <li>We will never share, sell, or distribute your raw data, reports, or business models to third parties.</li>
+                <li>We securely delete client source files 30 days after project completion, unless an ongoing retainer requires data retention.</li>
               </ul>
             </section>
 
@@ -304,10 +280,10 @@ export default function TermsPage() {
                 6. Intellectual Property &amp; Licenses
               </h2>
               <p>
-                NexDial retains all intellectual property rights in the platform, including but not limited to the software, UI/UX design, CRM database schema, AI lead-scoring algorithms, and branding. The NexDial name, logo, and product names are trademarks of NexDial Technologies.
+                NexDial retains intellectual property rights to the underlying macro code, automation scripts, and BI templates we develop, unless a specific "Work for Hire" buyout is agreed upon.
               </p>
               <p>
-                You are granted a limited, non-exclusive, non-transferable, revocable license to access and use the Service for your internal business operations. Your data (leads, contacts, pipeline records, call logs) remains your property. We do not claim ownership over your business data.
+                You are granted a perpetual, non-exclusive license to use the delivered tools internally. You own 100% of the data processed by these tools.
               </p>
             </section>
 

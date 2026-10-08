@@ -8,11 +8,6 @@ const TrustIndicators = dynamic(
   { ssr: true }
 );
 
-const LiveStatistics = dynamic(
-  () => import("@/components/home/LiveStatistics").then((m) => m.LiveStatistics),
-  { ssr: true }
-);
-
 const ServicesShowcase = dynamic(
   () => import("@/components/home/ServicesShowcase").then((m) => m.ServicesShowcase),
   { ssr: true }
@@ -28,8 +23,8 @@ const CaseStudies = dynamic(
   { ssr: true }
 );
 
-const GlobalPresence = dynamic(
-  () => import("@/components/home/GlobalPresence").then((m) => m.GlobalPresence),
+const GlobalOperationsMap = dynamic(
+  () => import("@/components/home/GlobalOperationsMap").then((m) => m.GlobalOperationsMap),
   { ssr: true }
 );
 
@@ -50,9 +45,6 @@ export default function Home() {
       <Suspense>
         <TrustIndicators />
       </Suspense>
-      <Suspense>
-        <LiveStatistics />
-      </Suspense>
 
       {/* Below-the-fold — deferred rendering via content-visibility */}
       <Suspense>
@@ -70,11 +62,13 @@ export default function Home() {
           <CaseStudies />
         </section>
       </Suspense>
+      
       <Suspense>
         <section className="content-auto">
-          <GlobalPresence />
+          <GlobalOperationsMap />
         </section>
       </Suspense>
+
       <Suspense>
         <section className="content-auto">
           <ContactSection />

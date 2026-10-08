@@ -47,24 +47,23 @@ const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
 
 const footerLinks = {
   product: [
-    { label: "Unified Inbox", href: "/solutions#inbox" },
-    { label: "Lead Management", href: "/solutions#leads" },
-    { label: "Pipeline View", href: "/crm/pipeline" },
-    { label: "Follow-Up Engine", href: "/solutions#followups" },
-    { label: "Dashboard", href: "/crm/dashboard" },
-    { label: "Call Logging", href: "/solutions#calls" },
+    { label: "Advanced Excel", href: "/services/advanced-excel" },
+    { label: "MIS Reporting", href: "/services/mis-reporting" },
+    { label: "Excel Dashboards", href: "/services/excel-dashboards" },
+    { label: "Data Cleaning", href: "/services/data-cleaning" },
+    { label: "VBA & Macros", href: "/services/vba-automation" },
+    { label: "Power BI", href: "/services/power-bi" },
   ],
   resources: [
-    { label: "Blog", href: "/blog" },
-    { label: "Knowledge Center", href: "/knowledge-center" },
-    { label: "FAQs", href: "/faqs" },
-    { label: "Pricing", href: "/pricing" },
-    { label: "Book a Demo", href: "/request-demo" },
+    { label: "Finance Teams", href: "/use-cases/finance" },
+    { label: "Operations", href: "/use-cases/operations" },
+    { label: "Sales & Marketing", href: "/use-cases/sales" },
+    { label: "HR & Admin", href: "/use-cases/hr" },
   ],
   company: [
     { label: "About Us", href: "/about" },
     { label: "Contact", href: "/contact" },
-    { label: "Careers", href: "/careers" },
+    { label: "Portfolio", href: "/portfolio" },
     { label: "Privacy Policy", href: "/privacy" },
     { label: "Terms of Service", href: "/terms" },
   ],
@@ -78,9 +77,9 @@ const socialLinks = [
 ];
 
 const badges = [
-  { icon: Shield, label: "GDPR Compliant" },
-  { icon: Clock, label: "99.9% Uptime" },
-  { icon: Star, label: "4.8★ Rated" },
+  { icon: Shield, label: "Confidential Data" },
+  { icon: Clock, label: "Fast Turnaround" },
+  { icon: Star, label: "Expert Solutions" },
 ];
 
 export function Footer() {
@@ -114,16 +113,15 @@ export function Footer() {
             <div className="absolute inset-0 bg-gradient-to-r from-[#0057D9]/10 via-transparent to-[#00C2FF]/10" />
             <div className="relative z-10">
               <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-4">
-                Ready to Stop Losing Leads?
+                Ready to Stop Wrestling with Spreadsheets?
               </h2>
               <p className="text-[#94A3B8] text-lg mb-8 max-w-2xl mx-auto">
-                Join 1,000+ small businesses that track every customer conversation
-                and never miss a follow-up with NexDial.
+                Let our experts build automated data solutions that save you hours of manual work every week.
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center">
-                <Link href="/signup" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
+                <Link href="/contact" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
                   <Zap className="w-5 h-5" />
-                  Start Free Trial
+                  Get a Quote
                 </Link>
                 <Link href="/contact" className="btn-secondary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
                   <Phone className="w-5 h-5" />
@@ -149,14 +147,12 @@ export function Footer() {
                   Nexdial<sup className="inline-flex items-center justify-center w-[14px] h-[14px] ml-0.5 rounded-full border border-white text-white text-[9px] font-light shadow-[0_0_8px_rgba(255,255,255,0.2)]">R</sup>
                 </span>
                 <span className="text-[8.5px] text-[#94A3B8] font-medium tracking-widest uppercase leading-none mt-1.5">
-                  Unified Communication Inbox
+                  Data & Business Automation
                 </span>
               </div>
             </Link>
             <p className="text-[#94A3B8] text-sm leading-relaxed mb-6 max-w-sm">
-              The simplest CRM for small businesses who manage customers via
-              WhatsApp, calls, and forms. Track every lead, automate follow-ups,
-              and close more deals.
+              Expert Excel, Data, and Reporting solutions for modern businesses. Stop wrestling with messy spreadsheets and start making data-driven decisions.
             </p>
             <div className="space-y-3 mb-6">
               <a href="tel:+918010803756" className="flex items-center gap-3 text-sm text-[#94A3B8] hover:text-[#00C2FF] transition-colors">
@@ -189,7 +185,7 @@ export function Footer() {
           {/* Link Columns */}
           <div>
             <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-              Product
+              Services
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.product.map((link) => (
@@ -204,7 +200,7 @@ export function Footer() {
 
           <div>
             <h3 className="text-xs font-semibold text-white uppercase tracking-wider mb-4">
-              Resources
+              Use Cases
             </h3>
             <ul className="space-y-2.5">
               {footerLinks.resources.map((link) => (

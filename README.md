@@ -1,132 +1,70 @@
-# Nexdial — AI-Powered Enterprise Contact Center & CRM Operating System
+# 🚀 Nexdial Data Automation Portal
 
-🌍 **Live Platform:** [https://nexdial.io](https://nexdial.io)
+Welcome to the **Nexdial Data Automation Portal** – a cutting-edge web platform tailored for businesses looking to automate their data infrastructure, streamline their Excel reporting, and consolidate manual databases into high-performance, interactive dashboards.
 
-![Homepage](./public/Screen%20Shots/homepage.png)
+Built with performance, stunning aesthetics, and modern web standards in mind.
 
-Nexdial is a next-generation, cloud-native **Contact Center Operating System (CCOS)** and **Intelligent CRM**. Built for modern enterprises, it merges advanced CRM pipelines, highly customizable industry-specific workflows, real-time voice AI agents, and specialized modules (like a fully functional Restaurant POS) into a single, unified visual dashboard.
-
----
-
-## 🚀 Key Features & Capabilities
-
-### 1. Dynamic Industry CRM System
-![CRM Inbox](./public/Screen%20Shots/CRM_Inbox.png)
-* **50+ Pre-Configured Industries**: From Digital Marketing and Real Estate to Healthcare and Manufacturing, the system dynamically seeds industry-specific pipelines and workflows.
-* **Intelligent Onboarding**: Beautiful custom `<IndustrySelector>` and `<BusinessTypeSelector>` UIs automatically tailor the workspace setup and inject industry-specific lead stages during signup.
-* **Workspace Settings Cockpit**: Configure branding, lead sources, integrations, and company profiles per workspace.
-
-### 2. Specialized Modules (e.g., Restaurant POS)
-![Hotel Billing](./public/Screen%20Shots/Hotel_Billing.png)
-* **Live Table Management**: Real-time visual layout of available vs. occupied tables.
-* **Order & Menu System**: Add categories and items directly to bills. Waiters and admins can fire orders from a tablet-friendly interface.
-* **Billing & Checkout**: Seamless invoice generation and final bill settlement.
-* **Staff Access**: Dedicated `WAITER` and `ADMIN` role management locked to specific tenant workspaces.
-
-### 3. Unified Dialer Operations Console
-![CRM Analytics](./public/Screen%20Shots/CRM_Analytics.png)
-* **Dialer Modes**: Supports Predictive (dynamic pacing algorithm), Power, Progressive, and Preview dialing modes.
-* **WebRTC Softphone**: Real-time browser-based calling with equalized audio meters and instant call wrap-up controls.
-* **Supervisor HUD**: Managers can monitor live calls, whisper coaching tips, or barge-in to merge into a 3-way conference.
-
-### 4. Conversational Voice AI Copilot
-* **Real-Time Speech-to-Text**: High-accuracy transcription streams during live voice conversations.
-* **RAG SOP Integration**: Queries documentation databases using semantic vector lookups to display dynamic scripts on the agent's screen.
-
-### 5. Robust Cloud Infrastructure
-* **Multi-Tenant SaaS Architecture**: Built on top of Prisma with strict `workspaceId` row-level isolation and role-based access control.
-* **Authentication**: Integrated NextAuth with Google SSO and credential-based secure sign-in.
-* **Database Optimization**: Uses Postgres connection pooling (`@prisma/adapter-pg`) to handle high-concurrency websocket and API data streams without exhausting limits.
+![Nexdial Tech Stack](https://img.shields.io/badge/Next.js-15-black?style=flat-square&logo=next.js)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=flat-square&logo=typescript)
+![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4.0-38B2AC?style=flat-square&logo=tailwind-css)
+![Framer Motion](https://img.shields.io/badge/Framer_Motion-12-purple?style=flat-square&logo=framer)
+![Prisma](https://img.shields.io/badge/Prisma-ORM-2D3748?style=flat-square&logo=prisma)
 
 ---
 
-## 🛠️ Technology Stack
+## ✨ Key Features
 
-* **Framework**: [Next.js 16 (App Router)](https://nextjs.org/)
-* **Library**: [React 19](https://react.dev/)
-* **Database & ORM**: PostgreSQL (via Supabase) + [Prisma ORM](https://www.prisma.io/) with Edge adapter pooling
-* **Authentication**: [NextAuth.js v4](https://next-auth.js.org/)
-* **Styling**: Tailwind CSS v4 & Custom glassmorphism aesthetic
-* **Animations**: [Framer Motion](https://www.framer.com/motion/)
-* **Icons**: [Lucide React](https://lucide.dev/)
+- **Dark Mode Glassmorphism UI**: A highly premium, tech-forward interface featuring mesh gradients, frosted glass panels, and stunning CSS animations.
+- **Interactive Global Operations Map**: Real-time visualization of worldwide data nodes (Mumbai, New York, London, Tokyo, etc.) built with `react-simple-maps`.
+- **Dynamic Data Dashboards**: A mocked live view of active pipelines, rows processed, and automated anomaly detection.
+- **Comprehensive Lead Capture**: Specialized consultation forms designed to capture essential client parameters (Data Volume, Primary Interests: SQL, Power BI, VBA).
+- **Mega Navigation**: Extensive, accessible routing across Industries, Solutions, Use Cases, and Resources.
+- **Server-Side Rendered (SSR) & Optimized**: Built entirely on Next.js App Router for instant load times and optimal SEO.
 
----
+## 🛠️ Tech Stack
 
-## 📂 Project Structure
+- **Framework**: [Next.js](https://nextjs.org/) (App Router, React 19)
+- **Styling**: [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations**: [Framer Motion](https://www.framer.com/motion/) & [GSAP](https://gsap.com/)
+- **Database ORM**: [Prisma](https://www.prisma.io/)
+- **Icons**: [Lucide React](https://lucide.dev/)
+- **Maps**: [React Simple Maps](https://www.react-simple-maps.io/)
+
+## 🚀 Getting Started
+
+To run this project locally, clone the repository and install the dependencies:
 
 ```bash
-nexdial/
-├── prisma/
-│   ├── schema.prisma         # Database models (User, Workspace, Leads, Tables, Orders)
-│   └── seed-industries.ts    # Seed script for 50+ industry templates
-├── src/
-│   ├── app/                  # Next.js App Router endpoints
-│   │   ├── api/              # Secure REST APIs (auth, crm, restaurant POS, industries)
-│   │   ├── crm/              # Main CRM application dashboard and sub-modules
-│   │   ├── login/            # Authentication portals
-│   │   └── signup/           # Interactive multi-step onboarding
-│   ├── components/           # Reusable UI architecture
-│   │   ├── crm/              # Specialized CRM UI (IndustrySelector, Kanban, etc.)
-│   │   └── home/             # Landing page components
-│   └── lib/                  # Core utilities (Prisma client, NextAuth configuration)
-└── package.json              # Dependencies
+# 1. Clone the repository
+git clone https://github.com/sabledattatray/nexdial.git
+cd nexdial
+
+# 2. Install dependencies
+npm install
+
+# 3. Setup your environment variables
+# Copy .env.example to .env and fill in the details
+cp .env.example .env
+
+# 4. Generate Prisma Client
+npx prisma generate
+
+# 5. Start the development server
+npm run dev
 ```
 
----
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 💻 Getting Started
+## 📦 Deployment on Vercel
 
-### Prerequisites
-Make sure you have Node.js 18+ and npm installed. You will also need a PostgreSQL database.
+This project is fully optimized for **Vercel** deployment.
 
-### Setup Instructions
-
-1. **Clone the repository**:
-   ```bash
-   git clone https://github.com/sabledattatray/nexdial.git
-   cd nexdial
-   ```
-
-2. **Install dependencies**:
-   ```bash
-   npm install
-   ```
-
-3. **Configure Environment Variables**:
-   Create a `.env` file with your database string and NextAuth secrets:
-   ```env
-   DATABASE_URL="postgresql://user:password@host:5432/db"
-   NEXTAUTH_SECRET="your-secret"
-   NEXTAUTH_URL="http://localhost:3000"
-   ```
-
-4. **Initialize Database & Seed**:
-   ```bash
-   npx prisma generate
-   npx prisma db push
-   npx tsx prisma/seed-industries.ts
-   ```
-
-5. **Run the development server**:
-   ```bash
-   npm run dev
-   ```
-   Open [http://localhost:3000](http://localhost:3000) with your browser to view the application.
+1. Push your code to a GitHub repository.
+2. Import the project into Vercel.
+3. Ensure the Build Command is set to `npm run build` (or `prisma generate && next build` if using DB features).
+4. Add your Environment Variables in the Vercel dashboard.
+5. Click **Deploy**. Vercel will automatically handle the SSR edge functions and static asset optimization!
 
 ---
 
-## 🔒 Security & Compliance
-
-Nexdial complies with key global standards for secure communication and operations:
-* **Tenant Isolation**: Deep schema-level isolation using `workspaceId` parameters.
-* **Authentication**: Hardened OAuth 2.0 flows and BCrypt password hashing.
-* **SOC2 Type II**: Continuous vulnerability scanning, audit logs, and secure access permissions.
-* **SIP Security**: SRTP and DTLS encryption for WebRTC call channels to protect against eavesdropping.
-
----
-
-## 📝 License & Attribution
-
-© 2026 Nexdial. All rights reserved.
-
-Made for **High Performance** by [Datta Sable](https://dattasable.com).
+*Designed and developed for Nexdial Data Consultancy.*

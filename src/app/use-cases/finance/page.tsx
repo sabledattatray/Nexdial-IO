@@ -22,19 +22,19 @@ const icons = {
 
 const features = [
   {
-    "title": "One-Time Projects",
-    "desc": "Fixed-fee quotes for dashboards, tools, and macro development.",
-    "icon": "CheckSquare"
+    "title": "Automated Reconciliation",
+    "desc": "Match thousands of transactions across bank statements and ledgers instantly.",
+    "icon": "FileText"
   },
   {
-    "title": "Monthly Retainers",
-    "desc": "Ongoing support for MIS reporting, data cleaning, and BI maintenance.",
-    "icon": "Calendar"
+    "title": "Budget vs. Actuals",
+    "desc": "Dynamic variance reporting that highlights areas needing immediate attention.",
+    "icon": "TrendingDown"
   },
   {
-    "title": "Free Consultation",
-    "desc": "We always start with a free discovery call to scope your exact requirements.",
-    "icon": "PhoneCall"
+    "title": "Cash Flow Forecasting",
+    "desc": "Predictive models that help you manage liquidity with confidence.",
+    "icon": "LineChart"
   }
 ];
 
@@ -50,13 +50,13 @@ export default function Page() {
         {/* Page Header */}
         <AnimatedSection className="text-center max-w-4xl mx-auto mb-24 mt-10">
           <span className="text-xs font-bold text-[#00C2FF] uppercase tracking-widest px-4 py-1.5 rounded-full bg-[#00C2FF]/10 border border-[#00C2FF]/20">
-            Value-Driven Investments
+            Precision, Speed, and Compliance
           </span>
           <h1 className="text-4xl sm:text-5xl lg:text-7xl font-extrabold text-white mt-8 leading-tight tracking-tight">
-            Transparent <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C2FF] to-[#00E5A0]">Pricing</span>
+            Solutions for Finance <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#00C2FF] to-[#00E5A0]">Teams</span>
           </h1>
           <p className="text-[#94A3B8] text-lg sm:text-xl mt-8 leading-relaxed max-w-3xl mx-auto font-light">
-            We do not believe in hidden fees or open-ended hourly billing that punishes efficiency. We offer project-based pricing and monthly retainers tailored to the complexity of your data needs.
+            Finance teams are the backbone of any organization, yet they are often bogged down by manual reconciliation and month-end reporting. We automate P&L generation, balance sheet consolidation, and variance analysis.
           </p>
           <div className="mt-10 flex justify-center gap-4">
             <a href="/contact" className="btn-primary text-base !py-3.5 !px-8 flex items-center justify-center gap-2">
@@ -90,9 +90,9 @@ export default function Page() {
         {/* CTA Section */}
         <AnimatedSection className="glass-card-strong p-10 lg:p-16 text-center rounded-[2.5rem] relative overflow-hidden border-t border-[#00C2FF]/20">
           <div className="absolute inset-0 bg-gradient-to-b from-[#00C2FF]/5 to-transparent pointer-events-none" />
-          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 tracking-tight">Ready to Get a Quote?</h3>
+          <h3 className="text-2xl sm:text-3xl font-bold text-white mb-6 tracking-tight">Upgrade Your Finance Operations</h3>
           <p className="text-[#94A3B8] text-base max-w-2xl mx-auto mb-10 leading-relaxed">
-            Let's talk about your business requirements and we will provide a transparent, fixed-fee proposal for your next project.
+            Empower your finance team to focus on analysis rather than data entry. Let's automate your financial reporting.
           </p>
           <a href="/contact" className="inline-flex items-center gap-2 btn-primary !py-3.5 !px-8">
             <Zap className="w-5 h-5" />

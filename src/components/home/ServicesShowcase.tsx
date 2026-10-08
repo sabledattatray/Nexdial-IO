@@ -3,58 +3,74 @@
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
 import {
-  Inbox,
-  Users,
-  CalendarCheck,
-  Kanban,
-  PhoneCall,
-  BarChart3,
+  FileSpreadsheet,
+  BarChart,
+  PieChart,
+  Database,
+  Settings,
+  Zap,
+  Code,
+  LineChart,
   ArrowRight,
 } from "lucide-react";
 import Link from "next/link";
 
 const features = [
   {
-    icon: Inbox,
-    title: "Unified Inbox",
-    description: "All customer interactions from WhatsApp, website forms, phone calls, and emails in one central feed.",
+    icon: FileSpreadsheet,
+    title: "Advanced Excel Solutions",
+    description: "Complex formulas, dynamic modeling, and workbook redesign to reduce errors and improve reliability.",
     color: "#0057D9",
-    href: "/solutions#inbox",
+    href: "/services/advanced-excel",
   },
   {
-    icon: Users,
-    title: "Lead Management",
-    description: "Build complete profiles with custom tags, notes, communication history, and contact details for every lead.",
+    icon: BarChart,
+    title: "MIS & Management Reporting",
+    description: "Daily, weekly, and monthly MIS structures tailored for operations, sales, and finance teams.",
     color: "#00C2FF",
-    href: "/solutions#leads",
+    href: "/services/mis-reporting",
   },
   {
-    icon: CalendarCheck,
-    title: "Follow-Up Engine",
-    description: "Never miss a deal. Get automatic reminders, scheduled tasks, and intelligent suggestions for next steps.",
+    icon: PieChart,
+    title: "Excel Dashboards",
+    description: "Interactive KPI dashboards that turn complex tables into clear, actionable management views.",
     color: "#00E5A0",
-    href: "/solutions#followups",
+    href: "/services/excel-dashboard",
   },
   {
-    icon: Kanban,
-    title: "Pipeline View",
-    description: "Drag-and-drop Kanban board to visualize deal stages, track sales health, and manage lead status effortlessly.",
+    icon: Database,
+    title: "Data Cleaning & Management",
+    description: "Standardize formatting, handle missing data, and consolidate messy files into structured datasets.",
     color: "#8B5CF6",
-    href: "/crm/pipeline",
+    href: "/services/data-cleaning",
   },
   {
-    icon: PhoneCall,
-    title: "Call Logging",
-    description: "Track every inbound and outbound call, record outcomes, set follow-ups, and log notes in one click.",
+    icon: Settings,
+    title: "Excel Automation",
+    description: "Automate repetitive calculations, template updates, and report generation processes.",
     color: "#F59E0B",
-    href: "/solutions#calls",
+    href: "/services/excel-automation",
   },
   {
-    icon: BarChart3,
-    title: "Smart Dashboard",
-    description: "Get actionable business insights with conversion metrics, response speeds, and team activity analytics.",
+    icon: Zap,
+    title: "Power Query Solutions",
+    description: "Automated data import, transformation, and consolidation workflows from multiple sources.",
     color: "#EC4899",
-    href: "/crm/dashboard",
+    href: "/services/power-query",
+  },
+  {
+    icon: Code,
+    title: "VBA & Macro Automation",
+    description: "Custom macros for button-driven workflows, formatting, and complex data processing.",
+    color: "#10B981",
+    href: "/services/vba-automation",
+  },
+  {
+    icon: LineChart,
+    title: "Power BI Dashboards",
+    description: "Next-level data visualization with Power BI for robust, shareable business intelligence.",
+    color: "#F43F5E",
+    href: "/services/power-bi",
   },
 ];
 
@@ -66,17 +82,17 @@ export function ServicesShowcase() {
       <div className="relative z-10 max-w-[1400px] mx-auto px-6">
         <AnimatedSection className="text-center mb-16">
           <p className="text-sm font-semibold text-[#00E5A0] uppercase tracking-widest mb-4">
-            Core Features
+            Services
           </p>
           <h2 className="section-title text-white mb-4">
-            Everything You Need to <span className="gradient-text">Close More Deals</span>
+            From Raw Data to <span className="gradient-text">Decision-Ready Reporting</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            NexDial replaces messy spreadsheets and disjointed tools with a simple, unified inbox and CRM designed for small business growth.
+            Explore how we help businesses transform messy spreadsheets into automated, structured solutions.
           </p>
         </AnimatedSection>
 
-        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.06}>
+        <StaggerContainer className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6" staggerDelay={0.06}>
           {features.map((feature) => (
             <StaggerItem key={feature.title}>
               <Link href={feature.href}>
@@ -107,7 +123,7 @@ export function ServicesShowcase() {
                     </p>
 
                     <div className="flex items-center gap-1.5 text-xs font-medium text-[#0057D9] group-hover:text-[#00C2FF] transition-colors">
-                      Learn more
+                      Explore service
                       <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
                     </div>
                   </div>

@@ -125,12 +125,12 @@ function ParticleField() {
   return <canvas ref={canvasRef} className="absolute inset-0 w-full h-full" />;
 }
 
-// Mock inbox lead data for the dashboard preview
+// Mock data for the dashboard preview
 const mockLeads = [
-  { name: "Arjun Mehta", source: "WhatsApp", status: "NEW", phone: "+91 98765 43210", time: "2 min ago", health: 92 },
-  { name: "Sarah Jenkins", source: "Form", status: "CONTACTED", phone: "+1 555-0142", time: "15 min ago", health: 78 },
-  { name: "Priya Sharma", source: "Call", status: "INTERESTED", phone: "+91 87654 32109", time: "1 hr ago", health: 85 },
-  { name: "Michael Chen", source: "Manual", status: "IN_PROGRESS", phone: "+65 9012 3456", time: "3 hrs ago", health: 64 },
+  { name: "Sales DB Sync", source: "SQL", status: "NEW", phone: "+91 98765 43210", time: "2 min ago", health: 92 },
+  { name: "HR Payroll Export", source: "Excel", status: "CONTACTED", phone: "+1 555-0142", time: "15 min ago", health: 78 },
+  { name: "Marketing API", source: "API", status: "INTERESTED", phone: "+91 87654 32109", time: "1 hr ago", health: 85 },
+  { name: "Inventory DB", source: "CSV", status: "IN_PROGRESS", phone: "+65 9012 3456", time: "3 hrs ago", health: 64 },
 ];
 
 const statusColors: Record<string, string> = {
@@ -141,15 +141,15 @@ const statusColors: Record<string, string> = {
 };
 
 const sourceIcons: Record<string, typeof PhoneCall> = {
-  WhatsApp: MessageSquare,
-  Form: Inbox,
-  Call: PhoneCall,
-  Manual: Users,
+  SQL: MessageSquare,
+  Excel: Inbox,
+  API: PhoneCall,
+  CSV: Users,
 };
 
-function CrmDashboardPreview() {
+function DataDashboardPreview() {
   const [isReady, setIsReady] = useState(false);
-  const [activeTab, setActiveTab] = useState<"inbox" | "pipeline" | "followups">("inbox");
+  const [activeTab, setActiveTab] = useState<"overview" | "analytics" | "reports">("overview");
   const [highlightedLead, setHighlightedLead] = useState(0);
 
   useEffect(() => {
@@ -177,32 +177,32 @@ function CrmDashboardPreview() {
           <div className="w-3 h-3 rounded-full bg-[#22C55E]" />
         </div>
         <div className="flex-1 h-6 rounded-md bg-white/[0.04] flex items-center px-3 border border-white/5">
-          <span className="text-[10px] text-[#64748B]">app.nexdial.io/crm</span>
+          <span className="text-sm text-[#64748B]">app.nexdial.io/dashboard</span>
         </div>
       </div>
 
       {/* Tab Bar */}
-      <div className="flex border-b border-white/5 mb-4 text-[11px] font-semibold text-[#64748B] w-full">
+      <div className="flex border-b border-white/5 mb-4 text-base font-semibold text-[#64748B] w-full">
         <button 
-          onClick={() => setActiveTab("inbox")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "inbox" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+          onClick={() => setActiveTab("overview")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "overview" ? "border-[#00C2FF] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
         >
           <Inbox className="w-3.5 h-3.5 text-[#00C2FF]" />
-          Inbox
+          Overview
         </button>
         <button 
-          onClick={() => setActiveTab("pipeline")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "pipeline" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+          onClick={() => setActiveTab("analytics")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "analytics" ? "border-[#00E5A0] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
         >
           <BarChart3 className="w-3.5 h-3.5 text-[#00E5A0]" />
-          Pipeline
+          Analytics
         </button>
         <button 
-          onClick={() => setActiveTab("followups")}
-          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "followups" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
+          onClick={() => setActiveTab("reports")}
+          className={`flex-1 flex items-center justify-center gap-1.5 py-2.5 border-b-2 transition-all duration-300 ${activeTab === "reports" ? "border-[#8B5CF6] text-white bg-white/[0.02]" : "border-transparent hover:text-white"}`}
         >
           <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
-          Follow-ups
+          Reports
         </button>
       </div>
 
@@ -213,16 +213,16 @@ function CrmDashboardPreview() {
             {/* KPIs */}
             <div className="grid grid-cols-3 gap-3 mb-3">
               {[
-                { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
-                { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
-                { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
+                { label: "Data Processed", value: "4.2M", color: "from-[#0057D9] to-[#00C2FF]", change: "Rows this week" },
+                { label: "Pipelines Active", value: "18", color: "from-[#F59E0B] to-[#FBBF24]", change: "Running smoothly" },
+                { label: "Errors Prevented", value: "3,142", color: "from-[#00E5A0] to-[#00C896]", change: "+12% ↑" },
               ].map((stat) => (
                 <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
-                  <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                  <p className="text-sm text-[#64748B] mb-1">{stat.label}</p>
                   <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
                     {stat.value}
                   </p>
-                  <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
+                  <p className="text-xs text-[#94A3B8] mt-0.5">{stat.change}</p>
                 </div>
               ))}
             </div>
@@ -242,28 +242,28 @@ function CrmDashboardPreview() {
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                        <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-sm font-bold text-white">
                           {lead.name.charAt(0)}
                         </div>
                         <div>
-                          <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                          <p className="text-base font-bold text-white">{lead.name}</p>
                           <div className="flex items-center gap-2 mt-0.5">
-                            <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                            <span className="flex items-center gap-1 text-xs text-[#64748B]">
                               <SourceIcon className="w-2.5 h-2.5" />
                               {lead.source}
                             </span>
-                            <span className="text-[9px] text-[#475569]">•</span>
-                            <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                            <span className="text-xs text-[#475569]">•</span>
+                            <span className="text-xs text-[#475569]">{lead.time}</span>
                           </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2">
-                        <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                        <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
                           {lead.status.replace("_", " ")}
                         </span>
                         <div className="text-right">
-                          <div className="text-[8px] text-[#64748B]">Health</div>
-                          <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                          <div className="text-[11px] text-[#64748B]">Health</div>
+                          <div className={`text-sm font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
                             {lead.health}%
                           </div>
                         </div>
@@ -277,16 +277,16 @@ function CrmDashboardPreview() {
             {/* AI Suggestion Bar */}
             <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
               <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] flex-shrink-0" />
-              <span className="text-[10px] text-[#00E5A0] font-medium">
-                AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+              <span className="text-sm text-[#00E5A0] font-medium">
+                AI suggests: Optimize SQL query in "Inventory DB" to save 12s per run
               </span>
             </div>
           </div>
         ) : (
           <AnimatePresence mode="wait">
-            {activeTab === "inbox" && (
+            {activeTab === "overview" && (
               <motion.div
-                key="inbox-tab"
+                key="overview-tab"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -296,16 +296,16 @@ function CrmDashboardPreview() {
                 {/* KPIs */}
                 <div className="grid grid-cols-3 gap-3 mb-3">
                   {[
-                    { label: "New Leads", value: "24", color: "from-[#0057D9] to-[#00C2FF]", change: "+8 today" },
-                    { label: "Pending Follow-ups", value: "12", color: "from-[#F59E0B] to-[#FBBF24]", change: "3 overdue" },
-                    { label: "Converted", value: "156", color: "from-[#00E5A0] to-[#00C896]", change: "+18% ↑" },
+                    { label: "Data Processed", value: "4.2M", color: "from-[#0057D9] to-[#00C2FF]", change: "Rows this week" },
+                    { label: "Pipelines Active", value: "18", color: "from-[#F59E0B] to-[#FBBF24]", change: "Running smoothly" },
+                    { label: "Errors Prevented", value: "3,142", color: "from-[#00E5A0] to-[#00C896]", change: "+12% ↑" },
                   ].map((stat) => (
                     <div key={stat.label} className="bg-white/[0.03] border border-white/[0.06] rounded-xl p-3 shadow-inner">
-                      <p className="text-[10px] text-[#64748B] mb-1">{stat.label}</p>
+                      <p className="text-sm text-[#64748B] mb-1">{stat.label}</p>
                       <p className={`text-lg font-bold bg-gradient-to-r ${stat.color} bg-clip-text text-transparent`} style={{ fontFamily: "var(--font-space-grotesk)" }}>
                         {stat.value}
                       </p>
-                      <p className="text-[9px] text-[#94A3B8] mt-0.5">{stat.change}</p>
+                      <p className="text-xs text-[#94A3B8] mt-0.5">{stat.change}</p>
                     </div>
                   ))}
                 </div>
@@ -325,28 +325,28 @@ function CrmDashboardPreview() {
                       >
                         <div className="flex items-center justify-between">
                           <div className="flex items-center gap-3">
-                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-[10px] font-bold text-white">
+                            <div className="w-8 h-8 rounded-full bg-gradient-to-br from-[#0057D9] to-[#00C2FF] flex items-center justify-center text-sm font-bold text-white">
                               {lead.name.charAt(0)}
                             </div>
                             <div>
-                              <p className="text-[11px] font-bold text-white">{lead.name}</p>
+                              <p className="text-base font-bold text-white">{lead.name}</p>
                               <div className="flex items-center gap-2 mt-0.5">
-                                <span className="flex items-center gap-1 text-[9px] text-[#64748B]">
+                                <span className="flex items-center gap-1 text-xs text-[#64748B]">
                                   <SourceIcon className="w-2.5 h-2.5" />
                                   {lead.source}
                                 </span>
-                                <span className="text-[9px] text-[#475569]">•</span>
-                                <span className="text-[9px] text-[#475569]">{lead.time}</span>
+                                <span className="text-xs text-[#475569]">•</span>
+                                <span className="text-xs text-[#475569]">{lead.time}</span>
                               </div>
                             </div>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className={`text-[8px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
+                            <span className={`text-[11px] font-bold px-2 py-0.5 rounded-full ${statusColors[lead.status]}`}>
                               {lead.status.replace("_", " ")}
                             </span>
                             <div className="text-right">
-                              <div className="text-[8px] text-[#64748B]">Health</div>
-                              <div className={`text-[10px] font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
+                              <div className="text-[11px] text-[#64748B]">Health</div>
+                              <div className={`text-sm font-bold ${lead.health >= 80 ? "text-[#00E5A0]" : lead.health >= 60 ? "text-[#F59E0B]" : "text-[#EF4444]"}`}>
                                 {lead.health}%
                               </div>
                             </div>
@@ -360,16 +360,16 @@ function CrmDashboardPreview() {
                 {/* AI Suggestion Bar */}
                 <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#00E5A0]/5 border border-[#00E5A0]/15">
                   <Sparkles className="w-3.5 h-3.5 text-[#00E5A0] animate-pulse flex-shrink-0" />
-                  <span className="text-[10px] text-[#00E5A0] font-medium">
-                    AI suggests: Call Arjun Mehta now — high intent detected from WhatsApp inquiry
+                  <span className="text-sm text-[#00E5A0] font-medium">
+                    AI suggests: Optimize SQL query in "Inventory DB" to save 12s per run
                   </span>
                 </div>
               </motion.div>
             )}
 
-            {activeTab === "pipeline" && (
+            {activeTab === "analytics" && (
               <motion.div
-                key="pipeline-tab"
+                key="analytics-tab"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -380,20 +380,20 @@ function CrmDashboardPreview() {
                 <div className="overflow-x-auto scrollbar-none -mx-2 px-2">
                   <div className="grid grid-cols-4 gap-2 min-w-[440px] lg:min-w-0">
                     {[
-                      { stage: "New", count: 24, color: "#00C2FF", leads: ["Arjun M.", "Lisa W.", "Rahul K."] },
-                      { stage: "Contacted", count: 18, color: "#8B5CF6", leads: ["Sarah J.", "Mike C."] },
-                      { stage: "Interested", count: 12, color: "#F59E0B", leads: ["Priya S.", "Tom H.", "Ana L."] },
-                      { stage: "Converted", count: 8, color: "#00E5A0", leads: ["David R.", "Nisha P."] },
+                      { stage: "Raw Data", count: 14, color: "#00C2FF", items: ["Q3_Sales.csv", "HR_Export.xlsx", "API_Logs.json"] },
+                      { stage: "Cleaning", count: 5, color: "#8B5CF6", items: ["Deduplication", "Format Fixes"] },
+                      { stage: "Modeling", count: 8, color: "#F59E0B", items: ["Star Schema", "DAX Measures", "Power Query"] },
+                      { stage: "Visualized", count: 12, color: "#00E5A0", items: ["Exec Dash", "Inventory DB"] },
                     ].map((col) => (
                       <div key={col.stage} className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-2.5">
                         <div className="flex items-center justify-between mb-2">
-                          <span className="text-[9px] font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
-                          <span className="text-[9px] font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
+                          <span className="text-xs font-bold uppercase tracking-wider" style={{ color: col.color }}>{col.stage}</span>
+                          <span className="text-xs font-bold text-white bg-white/[0.06] px-1.5 py-0.5 rounded">{col.count}</span>
                         </div>
                         <div className="space-y-1.5">
-                          {col.leads.map((lead) => (
-                            <div key={lead} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-[9px] text-[#CBD5E1] font-medium">
-                              {lead}
+                          {col.items.map((item) => (
+                            <div key={item} className="bg-white/[0.03] border border-white/[0.04] rounded-lg p-2 text-xs text-[#CBD5E1] font-medium">
+                              {item}
                             </div>
                           ))}
                         </div>
@@ -404,15 +404,15 @@ function CrmDashboardPreview() {
 
                 {/* Conversion Funnel */}
                 <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3">
-                  <span className="text-[9px] font-bold uppercase text-[#64748B] tracking-wider">Conversion Funnel</span>
+                  <span className="text-[11px] font-bold uppercase text-[#64748B] tracking-wider">Data Processing Funnel</span>
                   <div className="space-y-2 mt-2">
                     {[
-                      { stage: "New → Contacted", rate: "75%", width: "75%" },
-                      { stage: "Contacted → Interested", rate: "67%", width: "67%" },
-                      { stage: "Interested → Converted", rate: "42%", width: "42%" },
+                      { stage: "Raw Data → Cleaned", rate: "99.8%", width: "99.8%" },
+                      { stage: "Cleaned → Modeled", rate: "100%", width: "100%" },
+                      { stage: "Modeled → Dashboards", rate: "100%", width: "100%" },
                     ].map((step) => (
                       <div key={step.stage} className="space-y-1">
-                        <div className="flex justify-between text-[9px]">
+                        <div className="flex justify-between text-xs">
                           <span className="text-[#94A3B8]">{step.stage}</span>
                           <span className="text-[#00E5A0] font-bold">{step.rate}</span>
                         </div>
@@ -426,9 +426,9 @@ function CrmDashboardPreview() {
               </motion.div>
             )}
 
-            {activeTab === "followups" && (
+            {activeTab === "reports" && (
               <motion.div
-                key="followups-tab"
+                key="reports-tab"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -10 }}
@@ -438,31 +438,31 @@ function CrmDashboardPreview() {
                 {/* Today's Follow-ups */}
                 <div className="bg-white/[0.02] border border-white/[0.05] rounded-xl p-3.5">
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-[10px] font-bold text-white flex items-center gap-1.5">
+                    <span className="text-sm font-bold text-white flex items-center gap-1.5">
                       <CalendarCheck className="w-3.5 h-3.5 text-[#8B5CF6]" />
-                      Today&apos;s Follow-ups
+                      Recent Automations
                     </span>
-                    <span className="text-[9px] text-[#F59E0B] font-bold bg-[#F59E0B]/10 px-2 py-0.5 rounded-full">3 overdue</span>
+                    <span className="text-xs text-[#00E5A0] font-bold bg-[#00E5A0]/10 px-2 py-0.5 rounded-full">All Systems Normal</span>
                   </div>
                   <div className="space-y-2">
                     {[
-                      { name: "Arjun Mehta", time: "10:30 AM", type: "Call back", status: "overdue", color: "#EF4444" },
-                      { name: "Sarah Jenkins", time: "2:00 PM", type: "Send proposal", status: "upcoming", color: "#00C2FF" },
-                      { name: "Priya Sharma", time: "4:30 PM", type: "WhatsApp follow-up", status: "upcoming", color: "#00C2FF" },
-                      { name: "Michael Chen", time: "11:00 AM", type: "Schedule demo", status: "overdue", color: "#EF4444" },
-                      { name: "Lisa Wong", time: "5:00 PM", type: "Quote follow-up", status: "upcoming", color: "#00C2FF" },
+                      { name: "Daily Sales Consolidation", time: "10:30 AM", type: "VBA Script", status: "success", color: "#00E5A0" },
+                      { name: "Inventory Sync", time: "2:00 PM", type: "API Integration", status: "running", color: "#00C2FF" },
+                      { name: "Financial MIS Report", time: "4:30 PM", type: "Power BI Refresh", status: "scheduled", color: "#8B5CF6" },
+                      { name: "HR Data Cleaning", time: "11:00 AM", type: "Python Script", status: "success", color: "#00E5A0" },
+                      { name: "Weekly Performance Dash", time: "5:00 PM", type: "Excel Macro", status: "scheduled", color: "#F59E0B" },
                     ].map((fu) => (
                       <div key={fu.name} className="flex items-center justify-between p-2.5 rounded-lg bg-white/[0.02] border border-white/[0.04]">
                         <div className="flex items-center gap-2.5">
                           <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: fu.color }} />
                           <div>
-                            <p className="text-[10px] font-bold text-white">{fu.name}</p>
-                            <p className="text-[8px] text-[#64748B]">{fu.type}</p>
+                            <p className="text-sm font-bold text-white">{fu.name}</p>
+                            <p className="text-xs text-[#64748B]">{fu.type}</p>
                           </div>
                         </div>
                         <div className="text-right">
-                          <p className="text-[9px] font-bold" style={{ color: fu.color }}>{fu.time}</p>
-                          <p className={`text-[7px] uppercase font-bold tracking-wider ${fu.status === "overdue" ? "text-[#EF4444]" : "text-[#64748B]"}`}>{fu.status}</p>
+                          <p className="text-xs font-bold" style={{ color: fu.color }}>{fu.time}</p>
+                          <p className={`text-[10px] uppercase font-bold tracking-wider ${fu.status === "overdue" ? "text-[#EF4444]" : "text-[#64748B]"}`}>{fu.status}</p>
                         </div>
                       </div>
                     ))}
@@ -472,8 +472,8 @@ function CrmDashboardPreview() {
                 {/* Auto-suggest */}
                 <div className="flex items-center gap-2 p-2.5 rounded-xl bg-[#8B5CF6]/5 border border-[#8B5CF6]/15">
                   <Sparkles className="w-3.5 h-3.5 text-[#8B5CF6] animate-pulse flex-shrink-0" />
-                  <span className="text-[10px] text-[#8B5CF6] font-medium">
-                    Auto-suggested: Set follow-up for Michael Chen tomorrow at 11 AM
+                  <span className="text-sm text-[#8B5CF6] font-medium">
+                    Auto-suggested: Optimize SQL query in "Inventory Sync" to save 12s per run
                   </span>
                 </div>
               </motion.div>
@@ -484,6 +484,7 @@ function CrmDashboardPreview() {
     </div>
   );
 }
+
 
 export function HeroSection() {
   return (
@@ -508,14 +509,14 @@ export function HeroSection() {
             >
               <Sparkles className="w-4 h-4 text-[#00C2FF]" />
               <span className="text-sm font-medium text-[#00C2FF]">
-                Built for Small Businesses — Simple, Powerful CRM
+                Built for Fast-Growing Businesses — Simple, Powerful Data
               </span>
             </div>
 
             {/* Headline */}
             <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-[4.2rem] font-semibold leading-[1.08] tracking-tight mb-6">
               <span className="gradient-text-hero">
-                Never Lose a Customer Conversation Again
+                Never Let Messy Data Slow You Down Again
               </span>
             </h1>
 
@@ -574,7 +575,7 @@ export function HeroSection() {
               {/* Ambient Glow */}
               <div className="absolute -inset-10 rounded-[3rem] bg-gradient-to-tr from-[#0057D9]/20 via-[#00C2FF]/10 to-[#00E5A0]/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none" />
               
-              <CrmDashboardPreview />
+              <DataDashboardPreview />
             </div>
           </div>
         </div>

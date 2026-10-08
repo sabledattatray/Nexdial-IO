@@ -2,48 +2,59 @@
 
 import { motion } from "framer-motion";
 import { AnimatedSection, StaggerContainer, StaggerItem } from "@/components/animations/AnimatedSection";
+import Link from "next/link";
 import {
-  Download,
-  Inbox,
-  CalendarDays,
-  LineChart,
+  MessageSquare,
+  Search,
+  FileCode2,
+  TestTube2,
+  CheckCircle,
   ArrowRight,
 } from "lucide-react";
 
 const steps = [
   {
     step: "01",
-    icon: Download,
-    title: "Omnichannel Lead Capture",
-    description: "Leads are instantly collected from website forms, WhatsApp messages, phone calls, CSV imports, or our custom API. Never let a high-value prospect slip through the cracks again.",
-    details: ["WhatsApp Webhook", "Custom Form Builders", "CSV Lead Importer", "Developer API"],
+    icon: MessageSquare,
+    title: "Tell us the problem",
+    description: "Share your current workflow, messy spreadsheets, or reporting bottlenecks with us.",
+    details: ["Discovery Call", "Data Assessment", "Goal Definition"],
     color: "#0057D9",
-    className: "md:col-span-2 lg:col-span-2",
+    className: "md:col-span-1 lg:col-span-1",
   },
   {
     step: "02",
-    icon: Inbox,
-    title: "Unified Workspace",
-    description: "Every inquiry drops into a single, clean interface.",
-    details: ["Real-time Sync", "Custom Lead Statuses"],
+    icon: Search,
+    title: "We review your requirement",
+    description: "We analyze your data structure to determine the most robust and efficient automation approach.",
+    details: ["Feasibility Check", "Tool Selection"],
     color: "#00C2FF",
     className: "md:col-span-1 lg:col-span-1",
   },
   {
     step: "03",
-    icon: CalendarDays,
-    title: "Automated Follow-ups",
-    description: "Schedule tasks and set visual notifications.",
-    details: ["Drag-and-drop Kanban", "Smart Alerts"],
+    icon: FileCode2,
+    title: "We define the solution",
+    description: "We outline the architecture, deliverables, and timelines before writing any code.",
+    details: ["Project Scope", "Mockups/Prototypes"],
     color: "#8B5CF6",
     className: "md:col-span-1 lg:col-span-1",
   },
   {
     step: "04",
-    icon: LineChart,
-    title: "Advanced Analytics",
-    description: "Analyze response times, conversion funnels, and agent performance from a centralized dashboard. Optimize your engine with data.",
-    details: ["Conversion Funnels", "Response Time Audit", "Daily Reports"],
+    icon: TestTube2,
+    title: "We build and test",
+    description: "Our experts develop your dashboard or automation, rigorously testing with real scenarios.",
+    details: ["Iterative Development", "Quality Assurance"],
+    color: "#F59E0B",
+    className: "md:col-span-1 lg:col-span-1",
+  },
+  {
+    step: "05",
+    icon: CheckCircle,
+    title: "We deliver and support",
+    description: "We hand over the final product with clear documentation, providing ongoing support as needed.",
+    details: ["Training Session", "Documentation", "Ongoing Maintenance"],
     color: "#00E5A0",
     className: "md:col-span-2 lg:col-span-2",
   },
@@ -60,10 +71,10 @@ export function PlatformOverview() {
             How It Works
           </p>
           <h2 className="section-title text-white mb-4">
-            From First Contact to <span className="gradient-text">Closed Deal</span>
+            A Transparent, <span className="gradient-text">Proven Process</span>
           </h2>
           <p className="section-subtitle mx-auto">
-            NexDial makes managing your sales process incredibly simple. Here is how it streamlines your day-to-day operations.
+            We follow a structured approach to ensure your data project is delivered accurately, on time, and without surprises.
           </p>
         </AnimatedSection>
 
@@ -120,10 +131,10 @@ export function PlatformOverview() {
 
         <div className="mt-16 text-center">
           <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-white/[0.03] border border-white/[0.06]">
-            <span className="text-xs text-[#94A3B8] font-medium">Ready to see it in action?</span>
-            <a href="/request-demo" className="text-xs font-bold text-[#00C2FF] hover:text-[#00E5A0] flex items-center gap-1 transition-colors">
-              Get Started Now <ArrowRight className="w-3 h-3" />
-            </a>
+            <span className="text-xs text-[#94A3B8] font-medium">Have a reporting or data problem?</span>
+            <Link href="/contact" className="text-xs font-bold text-[#00C2FF] hover:text-[#00E5A0] flex items-center gap-1 transition-colors">
+              Tell Us What You Need <ArrowRight className="w-3 h-3" />
+            </Link>
           </div>
         </div>
       </div>
